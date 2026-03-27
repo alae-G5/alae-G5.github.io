@@ -239,10 +239,46 @@ nav .links a:hover {
     font-weight: 600;
     text-decoration: none;
 }
+</style>
+</head>
 
-   <script>
+<body>
+
+<nav>
+    <div class="logo">AlaeAI News</div>
+    <div class="links">
+        <a href="index.html">Home</a>
+        <a href="news.html">News</a>
+        <a href="tools.html">Tools</a>
+    </div>
+</nav>
+
+<h1 class="page-title">Tech & AI News</h1>
+
+<div class="category-bar">
+    <div class="category-tab active" data-category="all">All</div>
+    <div class="category-tab" data-category="ai">AI</div>
+    <div class="category-tab" data-category="tech">Tech</div>
+    <div class="category-tab" data-category="science">Science</div>
+    <div class="category-tab" data-category="space">Space</div>
+    <div class="category-tab" data-category="programming">Programming</div>
+</div>
+
+<div class="top-controls">
+    <button id="refresh-btn">⟳ Refresh</button>
+    <div id="dark-toggle">🌙</div>
+</div>
+
+<div class="trending-box">
+    <div class="trending-title">🔥 Trending</div>
+    <div id="trending-list"></div>
+</div>
+
+<div id="news-container"></div>
+
+<script>
 /* -----------------------------------------------------------
-   DARK MODE SYSTEM (works on ALL pages)
+   DARK MODE SYSTEM
 ----------------------------------------------------------- */
 function applyTheme() {
     const saved = localStorage.getItem("theme");
@@ -257,7 +293,6 @@ function applyTheme() {
 
 document.addEventListener("DOMContentLoaded", () => {
     applyTheme();
-
     document.getElementById("dark-toggle").addEventListener("click", () => {
         const isDark = document.body.classList.toggle("dark-mode");
         localStorage.setItem("theme", isDark ? "dark" : "light");
@@ -266,7 +301,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* -----------------------------------------------------------
-   3‑PROXY FAILOVER SYSTEM (unlimited)
+   3‑PROXY FAILOVER SYSTEM
 ----------------------------------------------------------- */
 async function fetchWithFallback(url) {
     const proxies = [
@@ -278,40 +313,33 @@ async function fetchWithFallback(url) {
     for (const proxy of proxies) {
         try {
             const res = await fetch(proxy);
-            if (res.ok) {
-                return await res.text();
-            }
-        } catch (e) {
-            console.warn("Proxy failed:", proxy);
-        }
+            if (res.ok) return await res.text();
+        } catch {}
     }
-
-    throw new Error("All proxies failed for: " + url);
+    throw new Error("All proxies failed");
 }
 
 /* -----------------------------------------------------------
    CATEGORY DETECTION
 ----------------------------------------------------------- */
-function detectCategory(text, source) {
+function detectCategory(text) {
     text = text.toLowerCase();
-
-    if (text.includes("ai") || text.includes("artificial intelligence")) return "ai";
-    if (text.includes("space") || text.includes("nasa") || text.includes("spacex")) return "space";
-    if (text.includes("science") || text.includes("research")) return "science";
-    if (text.includes("programming") || text.includes("developer") || text.includes("javascript")) return "programming";
-
+    if (text.includes("ai")) return "ai";
+    if (text.includes("space") || text.includes("nasa")) return "space";
+    if (text.includes("science")) return "science";
+    if (text.includes("programming") || text.includes("developer")) return "programming";
     return "tech";
 }
 
 /* -----------------------------------------------------------
-   FALLBACK IMAGE BUILDER
+   FALLBACK IMAGE
 ----------------------------------------------------------- */
 function buildFallbackImage(category) {
     return `https://dummyimage.com/600x400/1a1a1a/ffffff&text=${category.toUpperCase()}`;
 }
 
 /* -----------------------------------------------------------
-   EXTRACT IMAGE FROM RSS ITEM
+   EXTRACT IMAGE
 ----------------------------------------------------------- */
 function extractImageFromItem(item) {
     const media = item.querySelector("media\\:content, content");
@@ -353,7 +381,6 @@ async function loadNews() {
 
     container.innerHTML = "<p>Loading real news…</p>";
     trendingList.innerHTML = "";
-    statusText.textContent = "";
 
     allArticles = [];
     renderedCount = 0;
@@ -363,7 +390,6 @@ async function loadNews() {
     for (const url of sources) {
         try {
             const text = await fetchWithFallback(url);
-
             const parser = new DOMParser();
             const xml = parser.parseFromString(text, "text/xml");
             const items = xml.querySelectorAll("item");
@@ -373,29 +399,15 @@ async function loadNews() {
                 const description = item.querySelector("description")?.textContent?.trim() || "No description";
                 const link = item.querySelector("link")?.textContent?.trim() || "#";
 
-                const combined = title + " " + description;
-                const category = detectCategory(combined, url);
-
+                const category = detectCategory(title + " " + description);
                 let image = extractImageFromItem(item);
-                const hasRealImage = !!image;
-
                 if (!image) image = buildFallbackImage(category);
 
-                allArticles.push({
-                    title,
-                    description,
-                    link,
-                    category,
-                    image,
-                    hasRealImage
-                });
+                allArticles.push({ title, description, link, category, image });
             });
-        } catch (err) {
-            console.warn("Source failed:", url);
-        }
+        } catch {}
     }
 
-    /* Remove duplicates */
     const seen = new Set();
     allArticles = allArticles.filter(a => {
         if (seen.has(a.title)) return false;
@@ -403,19 +415,13 @@ async function loadNews() {
         return true;
     });
 
-    /* TRENDING */
     const trending = allArticles.slice(0, 8);
     trending.forEach(a => {
         const card = document.createElement("div");
         card.className = "trending-card";
         card.style.cursor = "pointer";
         card.onclick = () => window.open(a.link, "_blank");
-
-        card.innerHTML = `
-            <strong>${a.title}</strong>
-            <div style="font-size:12px;opacity:0.7;">${a.category.toUpperCase()}</div>
-        `;
-
+        card.innerHTML = `<strong>${a.title}</strong><div style="font-size:12px;opacity:0.7;">${a.category.toUpperCase()}</div>`;
         trendingList.appendChild(card);
     });
 
@@ -436,42 +442,28 @@ function getFilteredArticles() {
 ----------------------------------------------------------- */
 function renderMoreArticles() {
     const container = document.getElementById("news-container");
-    const statusText = document.getElementById("status-text");
-
     const filtered = getFilteredArticles();
     const nextSlice = filtered.slice(renderedCount, renderedCount + CHUNK_SIZE);
 
     nextSlice.forEach(a => {
         const card = document.createElement("div");
         card.className = "news-card";
-
         card.innerHTML = `
-            <div class="news-image">
-                <img src="${a.image}">
-            </div>
+            <div class="news-image"><img src="${a.image}"></div>
             <div class="news-card-content">
                 <div class="news-meta">${a.category.toUpperCase()}</div>
                 <h3>${a.title}</h3>
                 <p>${a.description}</p>
                 <a href="${a.link}" target="_blank">Read more →</a>
-            </div>
-        `;
-
+            </div>`;
         container.appendChild(card);
     });
 
     renderedCount += nextSlice.length;
-
-    if (renderedCount >= filtered.length) {
-        statusText.textContent = "You reached the end.";
-    } else {
-        statusText.textContent = "Scroll to load more…";
-    }
-
     isLoadingMore = false;
 }
 
-   /* -----------------------------------------------------------
+/* -----------------------------------------------------------
    CATEGORY BUTTONS
 ----------------------------------------------------------- */
 document.querySelectorAll(".category-tab").forEach(tab => {
@@ -483,8 +475,6 @@ document.querySelectorAll(".category-tab").forEach(tab => {
         renderedCount = 0;
 
         document.getElementById("news-container").innerHTML = "";
-        document.getElementById("status-text").textContent = "";
-
         renderMoreArticles();
     });
 });
@@ -494,11 +484,7 @@ document.querySelectorAll(".category-tab").forEach(tab => {
 ----------------------------------------------------------- */
 window.addEventListener("scroll", () => {
     if (isLoadingMore) return;
-
-    const scrollPosition = window.innerHeight + window.scrollY;
-    const threshold = document.body.offsetHeight - 400;
-
-    if (scrollPosition >= threshold) {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 400) {
         isLoadingMore = true;
         renderMoreArticles();
     }
