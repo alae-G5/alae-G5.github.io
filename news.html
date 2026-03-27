@@ -33,6 +33,34 @@
 }
 
 /* -----------------------------------------------------------
+   AUTO THEME (OPTION C)
+----------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: var(--bg-dark);
+        color: var(--text-dark);
+    }
+    body::before {
+        background:
+            radial-gradient(circle at 0% 0%, rgba(197,139,59,0.22), transparent 55%),
+            radial-gradient(circle at 100% 100%, rgba(80,90,140,0.35), transparent 60%),
+            linear-gradient(145deg, #05060a, #10131c);
+    }
+}
+@media (prefers-color-scheme: light) {
+    body {
+        background: var(--bg-light);
+        color: var(--text-light);
+    }
+    body::before {
+        background:
+            linear-gradient(135deg, rgba(255,255,255,0.9), rgba(245,239,230,0.95)),
+            radial-gradient(circle at 0% 0%, rgba(197,139,59,0.18), transparent 55%),
+            radial-gradient(circle at 100% 100%, rgba(0,0,0,0.06), transparent 55%);
+    }
+}
+
+/* -----------------------------------------------------------
    GLOBAL STYLES
 ----------------------------------------------------------- */
 * {
@@ -42,33 +70,14 @@
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
-    background: var(--bg-light);
-    color: var(--text-light);
     transition: background 0.4s ease, color 0.4s ease;
 }
 
-body.dark-mode {
-    background: var(--bg-dark);
-    color: var(--text-dark);
-}
-
-/* Background texture */
 body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background:
-        linear-gradient(135deg, rgba(255,255,255,0.9), rgba(245,239,230,0.95)),
-        radial-gradient(circle at 0% 0%, rgba(197,139,59,0.18), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(0,0,0,0.06), transparent 55%);
     z-index: -2;
-}
-
-body.dark-mode::before {
-    background:
-        radial-gradient(circle at 0% 0%, rgba(197,139,59,0.22), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(80,90,140,0.35), transparent 60%),
-        linear-gradient(145deg, #05060a, #10131c);
 }
 
 /* -----------------------------------------------------------
@@ -87,9 +96,11 @@ nav {
     border-bottom: 1px solid rgba(0,0,0,0.04);
 }
 
-body.dark-mode nav {
-    background: rgba(10,12,18,0.9);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+@media (prefers-color-scheme: dark) {
+    nav {
+        background: rgba(10,12,18,0.9);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
 }
 
 nav h1 {
@@ -122,22 +133,6 @@ nav a:hover::after {
     width: 100%;
 }
 
-#theme-toggle {
-    padding: 8px 16px;
-    border-radius: 999px;
-    border: 1px solid rgba(0,0,0,0.08);
-    background: rgba(255,255,255,0.9);
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-body.dark-mode #theme-toggle {
-    background: rgba(15,17,25,0.95);
-    border-color: rgba(255,255,255,0.12);
-    color: var(--text-dark);
-}
-
 /* -----------------------------------------------------------
    PAGE LAYOUT
 ----------------------------------------------------------- */
@@ -165,7 +160,6 @@ h2 {
     margin-bottom: 20px;
 }
 
-/* CATEGORY TABS */
 .category-tabs {
     display: flex;
     gap: 14px;
@@ -193,7 +187,6 @@ h2 {
     transform: translateY(-3px);
 }
 
-/* REFRESH BUTTON */
 #refresh-btn {
     padding: 8px 18px;
     border-radius: 999px;
@@ -228,9 +221,11 @@ h2 {
     animation: fadeIn 0.6s ease;
 }
 
-body.dark-mode .trending-box {
-    background: var(--card-dark);
-    border-color: var(--border-dark);
+@media (prefers-color-scheme: dark) {
+    .trending-box {
+        background: var(--card-dark);
+        border-color: var(--border-dark);
+    }
 }
 
 .trending-header {
@@ -268,9 +263,11 @@ body.dark-mode .trending-box {
     transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
 
-body.dark-mode .trending-card {
-    background: rgba(18,20,30,0.95);
-    border-color: rgba(255,255,255,0.06);
+@media (prefers-color-scheme: dark) {
+    .trending-card {
+        background: rgba(18,20,30,0.95);
+        border-color: rgba(255,255,255,0.06);
+    }
 }
 
 .trending-card:hover {
@@ -283,15 +280,6 @@ body.dark-mode .trending-card {
     height: 60px;
     border-radius: 10px;
     overflow: hidden;
-    background:
-        radial-gradient(circle at 0% 0%, rgba(197,139,59,0.25), transparent 60%),
-        radial-gradient(circle at 100% 100%, rgba(0,0,0,0.08), transparent 60%);
-}
-
-body.dark-mode .trending-thumb {
-    background:
-        radial-gradient(circle at 0% 0%, rgba(197,139,59,0.35), transparent 60%),
-        radial-gradient(circle at 100% 100%, rgba(40,50,90,0.6), transparent 60%);
 }
 
 .trending-thumb img {
@@ -342,10 +330,12 @@ body.dark-mode .trending-thumb {
     box-shadow: 0 16px 32px rgba(0,0,0,0.16);
 }
 
-body.dark-mode .news-card {
-    background: var(--card-dark);
-    border-color: var(--border-dark);
-    box-shadow: 0 14px 32px rgba(0,0,0,0.55);
+@media (prefers-color-scheme: dark) {
+    .news-card {
+        background: var(--card-dark);
+        border-color: var(--border-dark);
+        box-shadow: 0 14px 32px rgba(0,0,0,0.55);
+    }
 }
 
 .news-image {
@@ -359,21 +349,6 @@ body.dark-mode .news-card {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-/* Fallback gradient image */
-.news-image.fallback {
-    background:
-        radial-gradient(circle at 0% 0%, rgba(197,139,59,0.35), transparent 60%),
-        radial-gradient(circle at 100% 100%, rgba(0,0,0,0.08), transparent 60%),
-        linear-gradient(135deg, #f8f1e4, #f0e2cf);
-}
-
-body.dark-mode .news-image.fallback {
-    background:
-        radial-gradient(circle at 0% 0%, rgba(197,139,59,0.45), transparent 60%),
-        radial-gradient(circle at 100% 100%, rgba(40,50,90,0.7), transparent 60%),
-        linear-gradient(135deg, #05060a, #151821);
 }
 
 .news-card-content {
@@ -440,9 +415,11 @@ footer {
     border-top: 1px solid rgba(0,0,0,0.06);
 }
 
-body.dark-mode footer {
-    background: rgba(8,10,16,0.95);
-    border-top-color: rgba(255,255,255,0.08);
+@media (prefers-color-scheme: dark) {
+    footer {
+        background: rgba(8,10,16,0.95);
+        border-top-color: rgba(255,255,255,0.08);
+    }
 }
 </style>
 </head>
@@ -459,7 +436,7 @@ body.dark-mode footer {
         <a href="contact.html">Contact</a>
         <a href="about.html">About</a>
     </div>
-    <button id="theme-toggle">🌙 Dark Mode</button>
+    <button id="refresh-btn">⟳ Refresh</button>
 </nav>
 
 <div class="page">
@@ -502,36 +479,12 @@ body.dark-mode footer {
 
 <script>
 /* -----------------------------------------------------------
-   THEME SYSTEM
------------------------------------------------------------ */
-const THEME_KEY = "alaeai-theme";
-
-function applyTheme() {
-    const saved = localStorage.getItem(THEME_KEY);
-    if (saved === "dark") {
-        document.body.classList.add("dark-mode");
-        document.getElementById("theme-toggle").textContent = "☀️ Light Mode";
-    } else {
-        document.body.classList.remove("dark-mode");
-        document.getElementById("theme-toggle").textContent = "🌙 Dark Mode";
-    }
-}
-
-applyTheme();
-
-document.getElementById("theme-toggle").addEventListener("click", () => {
-    const isDark = document.body.classList.toggle("dark-mode");
-    localStorage.setItem(THEME_KEY, isDark ? "dark" : "light");
-    applyTheme();
-});
-
-/* -----------------------------------------------------------
    NEWS SYSTEM
 ----------------------------------------------------------- */
 let allArticles = [];
 let currentCategory = "all";
 let renderedCount = 0;
-const CHUNK_SIZE = 4; // Your choice
+const CHUNK_SIZE = 4;
 let isLoadingMore = false;
 
 const SOURCES_URL = "https://raw.githubusercontent.com/Alae-G5/Alae-G5.github.io/main/sources.json";
@@ -560,11 +513,10 @@ function detectCategory(text, sourceUrl) {
     if (t.includes("research") || t.includes("study") || t.includes("biology") || t.includes("physics") || t.includes("chemistry") || t.includes("scientist")) {
         return "science";
     }
-    if (t.includes("developer") || t.includes("programming") || t.includes("code") || t.includes("software") || t.includes("github") || t    if (t.includes("developer") || t.includes("programming") || t.includes("code") || t.includes("software") || t.includes("github") || t.includes("javascript") || t.includes("python")) {
+    if (t.includes("developer") || t.includes("programming") || t.includes("code") || t.includes("software") || t.includes("github") || t.includes("javascript") || t.includes("python")) {
         return "programming";
     }
 
-    // Source-based fallback
     if (host.includes("techcrunch") || host.includes("theverge") || host.includes("engadget") || host.includes("cnet") || host.includes("gizmodo") || host.includes("techspot")) {
         return "tech";
     }
@@ -624,243 +576,3 @@ async function loadSources() {
         return json.sources || [];
     } catch (err) {
         console.error("Failed to load sources.json", err);
-        return [];
-    }
-}
-
-/* -----------------------------------------------------------
-   LOAD NEWS
------------------------------------------------------------ */
-async function loadNews() {
-    const container = document.getElementById("news-container");
-    const trendingList = document.getElementById("trending-list");
-    const statusText = document.getElementById("status-text");
-
-    container.innerHTML = "<p>Loading...</p>";
-    trendingList.innerHTML = "";
-    statusText.textContent = "";
-
-    allArticles = [];
-    renderedCount = 0;
-
-    const sources = await loadSources();
-
-    for (const url of sources) {
-        try {
-            const response = await fetch(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`);
-            const text = await response.text();
-
-            const parser = new DOMParser();
-            const xml = parser.parseFromString(text, "text/xml");
-            const items = xml.querySelectorAll("item");
-
-            items.forEach(item => {
-                const title = item.querySelector("title")?.textContent?.trim() || "No title";
-                const description = item.querySelector("description")?.textContent?.trim() || "No description";
-                const link = item.querySelector("link")?.textContent?.trim() || "#";
-
-                const combined = title + " " + description;
-                const category = detectCategory(combined, url);
-
-                let image = extractImageFromItem(item);
-                const hasRealImage = !!image;
-
-                if (!image) image = buildFallbackImage(category);
-
-                allArticles.push({
-                    title,
-                    description,
-                    link,
-                    category,
-                    image,
-                    hasRealImage,
-                    source: url
-                });
-            });
-        } catch (err) {
-            console.warn("Source failed:", url);
-        }
-    }
-
-    /* -----------------------------------------------------------
-       REMOVE DUPLICATES (MODE B)
-    ----------------------------------------------------------- */
-    const seenTitles = new Set();
-    const seenLinks = new Set();
-
-    allArticles = allArticles.filter(a => {
-        if (seenTitles.has(a.title) || seenLinks.has(a.link)) return false;
-        seenTitles.add(a.title);
-        seenLinks.add(a.link);
-        return true;
-    });
-
-    /* -----------------------------------------------------------
-       TRENDING
-    ----------------------------------------------------------- */
-    const trending = allArticles.slice(0, 8);
-    trending.forEach(a => {
-        const card = document.createElement("div");
-        card.className = "trending-card";
-        card.onclick = () => window.open(a.link, "_blank");
-
-        const thumb = document.createElement("div");
-        thumb.className = "trending-thumb";
-
-        if (a.hasRealImage) {
-            const img = document.createElement("img");
-            img.src = a.image;
-            thumb.appendChild(img);
-        }
-
-        const info = document.createElement("div");
-        info.className = "trending-info";
-
-        const titleEl = document.createElement("div");
-        titleEl.className = "trending-title";
-        titleEl.textContent = a.title;
-
-        const metaEl = document.createElement("div");
-        metaEl.className = "trending-meta";
-        metaEl.textContent = a.category.toUpperCase();
-
-        info.appendChild(titleEl);
-        info.appendChild(metaEl);
-
-        card.appendChild(thumb);
-        card.appendChild(info);
-
-        trendingList.appendChild(card);
-    });
-
-    container.innerHTML = "";
-    renderMoreArticles();
-}
-
-/* -----------------------------------------------------------
-   FILTERING
------------------------------------------------------------ */
-function getFilteredArticles() {
-    if (currentCategory === "all") return allArticles;
-
-    const filtered = allArticles.filter(a => a.category === currentCategory);
-
-    if (filtered.length < 20) {
-        return allArticles.slice(0, 40);
-    }
-
-    return filtered;
-}
-
-/* -----------------------------------------------------------
-   RENDER MORE ARTICLES
------------------------------------------------------------ */
-function renderMoreArticles() {
-    const container = document.getElementById("news-container");
-    const statusText = document.getElementById("status-text");
-
-    const filtered = getFilteredArticles();
-
-    if (renderedCount === 0) container.innerHTML = "";
-
-    const nextSlice = filtered.slice(renderedCount, renderedCount + CHUNK_SIZE);
-
-    nextSlice.forEach(a => {
-        const card = document.createElement("div");
-        card.className = "news-card";
-
-        const imageWrapper = document.createElement("div");
-        imageWrapper.className = "news-image";
-
-        if (!a.hasRealImage) imageWrapper.classList.add("fallback");
-
-        const img = document.createElement("img");
-        img.src = a.image;
-        imageWrapper.appendChild(img);
-
-        const content = document.createElement("div");
-        content.className = "news-card-content";
-
-        const meta = document.createElement("div");
-        meta.className = "news-meta";
-        meta.textContent = a.category.toUpperCase();
-
-        const titleEl = document.createElement("h3");
-        titleEl.textContent = a.title;
-
-        const descEl = document.createElement("p");
-        descEl.textContent = a.description;
-
-        const linkEl = document.createElement("a");
-        linkEl.href = a.link;
-        linkEl.target = "_blank";
-        linkEl.textContent = "Read more →";
-
-        content.appendChild(meta);
-        content.appendChild(titleEl);
-        content.appendChild(descEl);
-        content.appendChild(linkEl);
-
-        card.appendChild(imageWrapper);
-        card.appendChild(content);
-
-        container.appendChild(card);
-    });
-
-    renderedCount += nextSlice.length;
-
-    if (renderedCount >= filtered.length) {
-        statusText.textContent = "You reached the end.";
-    } else {
-        statusText.textContent = "Scroll to load more…";
-    }
-
-    isLoadingMore = false;
-}
-
-/* -----------------------------------------------------------
-   CATEGORY TABS
------------------------------------------------------------ */
-document.querySelectorAll(".category-tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-        document.querySelectorAll(".category-tab").forEach(t => t.classList.remove("active"));
-        tab.classList.add("active");
-
-        currentCategory = tab.dataset.category;
-        renderedCount = 0;
-        document.getElementById("status-text").textContent = "";
-        renderMoreArticles();
-    });
-});
-
-/* -----------------------------------------------------------
-   INFINITE SCROLL
------------------------------------------------------------ */
-window.addEventListener("scroll", () => {
-    if (isLoadingMore) return;
-
-    const scrollPosition = window.innerHeight + window.scrollY;
-    const threshold = document.body.offsetHeight - 400;
-
-    if (scrollPosition >= threshold) {
-        isLoadingMore = true;
-        renderMoreArticles();
-    }
-});
-
-/* -----------------------------------------------------------
-   REFRESH BUTTON
------------------------------------------------------------ */
-document.getElementById("refresh-btn").addEventListener("click", () => {
-    loadNews();
-});
-
-/* -----------------------------------------------------------
-   INIT
------------------------------------------------------------ */
-loadNews();
-</script>
-
-</body>
-</html>
-
