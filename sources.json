@@ -1,0 +1,26 @@
+{
+  "sources": [
+    "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
+    "https://techcrunch.com/feed/",
+    "https://www.theverge.com/rss/index.xml",
+    "https://www.wired.com/feed/rss",
+    "https://www.technologyreview.com/feed/",
+    "https://feeds.arstechnica.com/arstechnica/technology-lab",
+    "https://www.nasa.gov/rss/dyn/breaking_news.rss",
+
+    "https://venturebeat.com/category/ai/feed/",
+    "https://blog.google/technology/ai/rss/",
+    "https://www.engadget.com/rss.xml",
+    "https://www.cnet.com/rss/news/",
+    "https://gizmodo.com/rss",
+    "https://www.techspot.com/backend.xml",
+    "https://www.scientificamerican.com/feed/",
+    "https://www.sciencedaily.com/rss/all.xml",
+    "https://www.nature.com/nature.rss",
+    "https://www.space.com/feeds/all",
+    "https://www.esa.int/rssfeed/Our_Activities",
+    "https://www.universetoday.com/feed/",
+    "https://hnrss.org/frontpage",
+    "https://stackoverflow.blog/feed/"
+  ]
+}
