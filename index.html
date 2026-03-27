@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlaeAI — Home</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+    /* ---------------------------------------------------
+       GLOBAL THEME VARIABLES
+    --------------------------------------------------- */
+    :root {
+        --bg-light: #f5efe6;
+        --bg-light-accent: #fff9f0;
+        --text-light: #1a1a1a;
+        --card-light: #ffffff;
+        --border-light: #e0d4c2;
+
+        --bg-dark: #0b0c10;
+        --bg-dark-accent: #151821;
+        --text-dark: #f5f5f5;
+        --card-dark: #181b24;
+        --border-dark: #2b3140;
+
+        --primary: #c58b3b;
+        --primary-soft: rgba(197,139,59,0.12);
+
+        --radius-lg: 18px;
+        --radius-md: 12px;
+        --shadow-soft: 0 18px 45px rgba(0,0,0,0.12);
+    }
+
+    /* ---------------------------------------------------
+       BASE STYLES
+    --------------------------------------------------- */
+    body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background: var(--bg-light);
+        color: var(--text-light);
+        transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    body.dark-mode {
+        background: var(--bg-dark);
+        color: var(--text-dark);
+    }
+
+    /* Background geometric effect */
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+            linear-gradient(135deg, rgba(255,255,255,0.8), rgba(245,239,230,0.9)),
+            radial-gradient(circle at 0% 0%, rgba(197,139,59,0.18), transparent 55%),
+            radial-gradient(circle at 100% 100%, rgba(0,0,0,0.06), transparent 55%);
+        z-index: -2;
+    }
+
+    body.dark-mode::before {
+        background:
+            radial-gradient(circle at 0% 0%, rgba(197,139,59,0.22), transparent 55%),
+            radial-gradient(circle at 100% 100%, rgba(80,90,140,0.35), transparent 60%),
+            linear-gradient(145deg, #05060a, #10131c);
+    }
+
+    /* ---------------------------------------------------
+       NAVIGATION
+    --------------------------------------------------- */
+    nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 7%;
+        backdrop-filter: blur(18px);
+        background: rgba(253,247,238,0.85);
+        border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+
+    body.dark-mode nav {
+        background: rgba(10,12,18,0.88);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    nav h1 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+    }
+
+    nav a {
+        margin-left: 22px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 14px;
+        color: inherit;
+        position: relative;
+    }
+
+    nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 0;
+        height: 2px;
+        background: var(--primary);
+        transition: width 0.2s ease;
+    }
+
+    nav a:hover::after {
+        width: 100%;
+    }
+
+    #theme-toggle {
+        padding: 8px 16px;
+        border-radius: 999px;
+        border: 1px solid rgba(0,0,0,0.08);
+        background: rgba(255,255,255,0.9);
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    body.dark-mode #theme-toggle {
+        background: rgba(15,17,25,0.95);
+        border-color: rgba(255,255,255,0.12);
+        color: var(--text-dark);
+    }
+
+    /* ---------------------------------------------------
+       HERO SECTION
+    --------------------------------------------------- */
+    .hero {
+        max-width: 1100px;
+        margin: 60px auto;
+        padding: 0 7%;
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 40px;
+        align-items: center;
+    }
+
+    .hero-text {
+        background: var(--bg-light-accent);
+        border: 1px solid var(--border-light);
+        padding: 30px;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-soft);
+    }
+
+    body.dark-mode .hero-text {
+        background: var(--bg-dark-accent);
+        border-color: var(--border-dark);
+    }
+
+    .hero-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 40px;
+        font-weight: 700;
+        margin: 0 0 12px;
+    }
+
+    .hero-sub {
+        font-size: 16px;
+        opacity: 0.85;
+        line-height: 1.6;
+        margin-bottom: 22px;
+    }
+
+    .hero-buttons {
+        display: flex;
+        gap: 12px;
+    }
+
+    .btn-primary {
+        padding: 10px 20px;
+        border-radius: 999px;
+        border: none;
+        background: var(--primary);
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .btn-ghost {
+        padding: 10px 20px;
+        border-radius: 999px;
+        border: 1px solid rgba(0,0,0,0.12);
+        background: rgba(255,255,255,0.85);
+        text-decoration: none;
+        color: inherit;
+        font-weight: 500;
+    }
+
+    body.dark-mode .btn-ghost {
+        background: rgba(10,12,18,0.9);
+        border-color: rgba(255,255,255,0.16);
+    }
+
+    /* ---------------------------------------------------
+       FEATURED CARDS
+    --------------------------------------------------- */
+    .section {
+        max-width: 1100px;
+        margin: 50px auto;
+        padding: 0 7%;
+    }
+
+    .section h2 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 22px;
+        margin-bottom: 18px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 18px;
+    }
+
+    .card {
+        background: var(--card-light);
+        border: 1px solid var(--border-light);
+        border-radius: var(--radius-md);
+        padding: 18px;
+        box-shadow: 0 10px 26px rgba(0,0,0,0.06);
+    }
+
+    body.dark-mode .card {
+        background: var(--card-dark);
+        border-color: var(--border-dark);
+        box-shadow: 0 14px 32px rgba(0,0,0,0.55);
+    }
+
+    .card h3 {
+        margin: 0 0 6px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .card p {
+        margin: 0;
+        font-size: 14px;
+        opacity: 0.85;
+        line-height: 1.5;
+    }
+
+    /* ---------------------------------------------------
+       FOOTER
+    --------------------------------------------------- */
+    footer {
+        margin-top: 60px;
+        padding: 30px 7%;
+        text-align: center;
+        font-size: 13px;
+        background: rgba(253,247,238,0.9);
+        border-top: 1px solid rgba(0,0,0,0.06);
+    }
+
+    body.dark-mode footer {
+        background: rgba(8,10,16,0.95);
+        border-top-color: rgba(255,255,255,0.08);
+    }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <h1>AlaeAI</h1>
+    <div>
+        <a href="index.html">Home</a>
+        <a href="news.html">News</a>
+        <a href="tutorials.html">Tutorials</a>
+        <a href="tools.html">Tools</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+    </div>
+    <button id="theme-toggle">🌙 Dark Mode</button>
+</nav>
+
+<section class="hero">
+    <div class="hero-text">
+        <h2 class="hero-title">Build. Learn. Create.</h2>
+        <p class="hero-sub">
+            Welcome to <strong>AlaeAI</strong> — your hub for AI tools, real tech news, and step‑by‑step tutorials.
+            Designed for students, creators, and developers who want to grow every day.
+        </p>
+        <div class="hero-buttons">
+            <a href="tools.html" class="btn-primary">Explore Tools →</a>
+            <a href="news.html" class="btn-ghost">Latest News</a>
+        </div>
+    </div>
+
+    <div class="hero-text">
+        <h3 style="margin-top:0;">Why AlaeAI?</h3>
+        <p>• Real AI tools you can use instantly.</p>
+        <p>• Real tech news updated automatically.</p>
+        <p>• Tutorials that grow in difficulty.</p>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Featured Tools</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>AI Text Generator</h3>
+            <p>Create natural text based on your ideas.</p>
+        </div>
+        <div class="card">
+            <h3>Idea Generator</h3>
+            <p>Get unlimited creative project ideas.</p>
+        </div>
+        <div class="card">
+            <h3>Code Formatter</h3>
+            <p>Turn messy code into clean code instantly.</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    © 2026 AlaeAI — All Rights Reserved
+</footer>
+
+<script>
+/* GLOBAL THEME SYSTEM */
+const THEME_KEY = "alaeai-theme";
+
+function applyTheme() {
+    const saved = localStorage.getItem(THEME_KEY);
+    if (saved === "dark") {
+        document.body.classList.add("dark-mode");
+        document.getElementById("theme-toggle").textContent = "☀️ Light Mode";
+    } else {
+        document.body.classList.remove("dark-mode");
+        document.getElementById("theme-toggle").textContent = "🌙 Dark Mode";
+    }
+}
+
+applyTheme();
+
+document.getElementById("theme-toggle").addEventListener("click", () => {
+    const isDark = document.body.classList.toggle("dark-mode");
+    localStorage.setItem(THEME_KEY, isDark ? "dark" : "light");
+    applyTheme();
+});
+</script>
+
+</body>
+</html>

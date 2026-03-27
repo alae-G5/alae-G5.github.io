@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — AlaeAI</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+    :root {
+        --bg-light: #f5efe6;
+        --bg-light-accent: #fff9f0;
+        --text-light: #1a1a1a;
+        --card-light: #ffffff;
+        --border-light: #e0d4c2;
+
+        --bg-dark: #0b0c10;
+        --bg-dark-accent: #151821;
+        --text-dark: #f5f5f5;
+        --card-dark: #181b24;
+        --border-dark: #2b3140;
+
+        --primary: #c58b3b;
+        --primary-soft: rgba(197,139,59,0.12);
+
+        --radius-lg: 22px;
+        --radius-md: 14px;
+        --shadow-soft: 0 18px 45px rgba(0,0,0,0.12);
+    }
+
+    body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background: var(--bg-light);
+        color: var(--text-light);
+        transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    body.dark-mode {
+        background: var(--bg-dark);
+        color: var(--text-dark);
+    }
+
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+            linear-gradient(135deg, rgba(255,255,255,0.8), rgba(245,239,230,0.9)),
+            radial-gradient(circle at 0% 0%, rgba(197,139,59,0.18), transparent 55%),
+            radial-gradient(circle at 100% 100%, rgba(0,0,0,0.06), transparent 55%);
+        z-index: -2;
+    }
+
+    body.dark-mode::before {
+        background:
+            radial-gradient(circle at 0% 0%, rgba(197,139,59,0.22), transparent 55%),
+            radial-gradient(circle at 100% 100%, rgba(80,90,140,0.35), transparent 60%),
+            linear-gradient(145deg, #05060a, #10131c);
+    }
+
+    nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 7%;
+        backdrop-filter: blur(18px);
+        background: rgba(253,247,238,0.85);
+        border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+
+    body.dark-mode nav {
+        background: rgba(10,12,18,0.88);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    nav h1 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    nav a {
+        margin-left: 22px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 14px;
+        color: inherit;
+        position: relative;
+    }
+
+    nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 0;
+        height: 2px;
+        background: var(--primary);
+        transition: width 0.2s ease;
+    }
+
+    nav a:hover::after {
+        width: 100%;
+    }
+
+    #theme-toggle {
+        padding: 8px 16px;
+        border-radius: 999px;
+        border: 1px solid rgba(0,0,0,0.08);
+        background: rgba(255,255,255,0.9);
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    body.dark-mode #theme-toggle {
+        background: rgba(15,17,25,0.95);
+        border-color: rgba(255,255,255,0.12);
+        color: var(--text-dark);
+    }
+
+    .page {
+        max-width: 1100px;
+        margin: 60px auto;
+        padding: 0 7%;
+    }
+
+    .hero-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 42px;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .hero-sub {
+        font-size: 17px;
+        opacity: 0.85;
+        margin-bottom: 40px;
+        line-height: 1.7;
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 40px;
+    }
+
+    @media (max-width: 900px) {
+        .contact-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .contact-card {
+        background: var(--card-light);
+        border: 2px solid var(--border-light);
+        border-radius: var(--radius-lg);
+        padding: 30px;
+        box-shadow: var(--shadow-soft);
+    }
+
+    body.dark-mode .contact-card {
+        background: var(--card-dark);
+        border-color: var(--border-dark);
+    }
+
+    label {
+        font-size: 14px;
+        font-weight: 600;
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 12px;
+        border-radius: var(--radius-md);
+        border: 2px solid var(--border-light);
+        background: var(--bg-light-accent);
+        font-size: 15px;
+        margin-bottom: 18px;
+    }
+
+    body.dark-mode input,
+    body.dark-mode textarea {
+        background: var(--bg-dark-accent);
+        border-color: var(--border-dark);
+        color: var(--text-dark);
+    }
+
+    button {
+        padding: 12px 20px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 999px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    button:hover {
+        filter: brightness(1.05);
+    }
+
+    .info-box {
+        background: var(--primary-soft);
+        border: 2px dashed var(--primary);
+        border-radius: var(--radius-lg);
+        padding: 30px;
+    }
+
+    .info-box h3 {
+        margin-top: 0;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .info-box p {
+        font-size: 15px;
+        opacity: 0.85;
+        margin-bottom: 10px;
+    }
+
+    footer {
+        margin-top: 60px;
+        padding: 30px 7%;
+        text-align: center;
+        font-size: 13px;
+        background: rgba(253,247,238,0.9);
+        border-top: 1px solid rgba(0,0,0,0.06);
+    }
+
+    body.dark-mode footer {
+        background: rgba(8,10,16,0.95);
+        border-top-color: rgba(255,255,255,0.08);
+    }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <h1>AlaeAI</h1>
+    <div>
+        <a href="index.html">Home</a>
+        <a href="news.html">News</a>
+        <a href="tutorials.html">Tutorials</a>
+        <a href="tools.html">Tools</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+    </div>
+    <button id="theme-toggle">🌙 Dark Mode</button>
+</nav>
+
+<div class="page">
+    <h2 class="hero-title">Contactez-moi</h2>
+    <p class="hero-sub">
+        Une question, une idée, un projet ou une collaboration ?  
+        Je serais ravie d’en discuter avec vous.
+    </p>
+
+    <div class="contact-grid">
+
+        <!-- CONTACT FORM -->
+        <div class="contact-card">
+            <form>
+                <label>Nom complet</label>
+                <input type="text" placeholder="Votre nom">
+
+                <label>Email</label>
+                <input type="email" placeholder="Votre email">
+
+                <label>Message</label>
+                <textarea rows="6" placeholder="Écrivez votre message ici..."></textarea>
+
+                <button type="submit">Envoyer</button>
+            </form>
+        </div>
+
+        <!-- INFO BOX -->
+        <div class="info-box">
+            <h3>Informations</h3>
+            <p><strong>Email :</strong> alae@example.com</p>
+            <p><strong>Localisation :</strong> Tanger, Maroc</p>
+            <p><strong>Disponible pour :</strong></p>
+            <p>• Projets web</p>
+            <p>• Design UI/UX</p>
+            <p>• Outils IA</p>
+            <p>• Collaborations créatives</p>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    © 2026 AlaeAI — All Rights Reserved
+</footer>
+
+<script>
+/* GLOBAL THEME SYSTEM */
+const THEME_KEY = "alaeai-theme";
+
+function applyTheme() {
+    const saved = localStorage.getItem(THEME_KEY);
+    if (saved === "dark") {
+        document.body.classList.add("dark-mode");
+        document.getElementById("theme-toggle").textContent = "☀️ Light Mode";
+    } else {
+        document.body.classList.remove("dark-mode");
+        document.getElementById("theme-toggle").textContent = "🌙 Dark Mode";
+    }
+}
+
+applyTheme();
+
+document.getElementById("theme-toggle").addEventListener("click", () => {
+    const isDark = document.body.classList.toggle("dark-mode");
+    localStorage.setItem(THEME_KEY, isDark ? "dark" : "light");
+    applyTheme();
+});
+</script>
+
+</body>
+</html>
