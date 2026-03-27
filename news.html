@@ -8,6 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+/* -----------------------------------------------------------
+   GLOBAL VARIABLES
+----------------------------------------------------------- */
 :root {
     --bg-light: #f5efe6;
     --bg-light-accent: #fff9f0;
@@ -29,7 +32,9 @@
     --shadow-soft: 0 18px 45px rgba(0,0,0,0.12);
 }
 
-/* GLOBAL */
+/* -----------------------------------------------------------
+   GLOBAL STYLES
+----------------------------------------------------------- */
 * {
     box-sizing: border-box;
 }
@@ -47,7 +52,7 @@ body.dark-mode {
     color: var(--text-dark);
 }
 
-/* Background */
+/* Background texture */
 body::before {
     content: "";
     position: fixed;
@@ -66,7 +71,9 @@ body.dark-mode::before {
         linear-gradient(145deg, #05060a, #10131c);
 }
 
-/* NAVBAR */
+/* -----------------------------------------------------------
+   NAVBAR
+----------------------------------------------------------- */
 nav {
     position: sticky;
     top: 0;
@@ -131,7 +138,9 @@ body.dark-mode #theme-toggle {
     color: var(--text-dark);
 }
 
-/* PAGE */
+/* -----------------------------------------------------------
+   PAGE LAYOUT
+----------------------------------------------------------- */
 .page {
     max-width: 1100px;
     margin: 40px auto;
@@ -144,7 +153,9 @@ h2 {
     margin-bottom: 25px;
 }
 
-/* TOP BAR */
+/* -----------------------------------------------------------
+   TOP BAR
+----------------------------------------------------------- */
 .top-bar {
     display: flex;
     justify-content: space-between;
@@ -204,7 +215,9 @@ h2 {
     opacity: 0.95;
 }
 
-/* TRENDING */
+/* -----------------------------------------------------------
+   TRENDING SECTION
+----------------------------------------------------------- */
 .trending-box {
     background: var(--card-light);
     border: 1px solid var(--border-light);
@@ -270,13 +283,15 @@ body.dark-mode .trending-card {
     height: 60px;
     border-radius: 10px;
     overflow: hidden;
-    background: radial-gradient(circle at 0% 0%, rgba(197,139,59,0.25), transparent 60%),
-                radial-gradient(circle at 100% 100%, rgba(0,0,0,0.08), transparent 60%);
+    background:
+        radial-gradient(circle at 0% 0%, rgba(197,139,59,0.25), transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(0,0,0,0.08), transparent 60%);
 }
 
 body.dark-mode .trending-thumb {
-    background: radial-gradient(circle at 0% 0%, rgba(197,139,59,0.35), transparent 60%),
-                radial-gradient(circle at 100% 100%, rgba(40,50,90,0.6), transparent 60%);
+    background:
+        radial-gradient(circle at 0% 0%, rgba(197,139,59,0.35), transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(40,50,90,0.6), transparent 60%);
 }
 
 .trending-thumb img {
@@ -303,7 +318,9 @@ body.dark-mode .trending-thumb {
     opacity: 0.7;
 }
 
-/* NEWS GRID */
+/* -----------------------------------------------------------
+   NEWS GRID
+----------------------------------------------------------- */
 .news-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -388,7 +405,9 @@ body.dark-mode .news-image.fallback {
     font-weight: 600;
 }
 
-/* STATUS */
+/* -----------------------------------------------------------
+   STATUS TEXT
+----------------------------------------------------------- */
 #status-text {
     text-align: center;
     margin: 20px 0 0;
@@ -396,7 +415,9 @@ body.dark-mode .news-image.fallback {
     opacity: 0.8;
 }
 
-/* ANIMATIONS */
+/* -----------------------------------------------------------
+   ANIMATIONS
+----------------------------------------------------------- */
 @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
@@ -407,7 +428,9 @@ body.dark-mode .news-image.fallback {
     to { opacity: 1; }
 }
 
-/* FOOTER */
+/* -----------------------------------------------------------
+   FOOTER
+----------------------------------------------------------- */
 footer {
     margin-top: 60px;
     padding: 30px 7%;
@@ -478,7 +501,9 @@ body.dark-mode footer {
 </footer>
 
 <script>
-/* THEME */
+/* -----------------------------------------------------------
+   THEME SYSTEM
+----------------------------------------------------------- */
 const THEME_KEY = "alaeai-theme";
 
 function applyTheme() {
@@ -500,23 +525,20 @@ document.getElementById("theme-toggle").addEventListener("click", () => {
     applyTheme();
 });
 
-/* NEWS SYSTEM */
+/* -----------------------------------------------------------
+   NEWS SYSTEM
+----------------------------------------------------------- */
 let allArticles = [];
 let currentCategory = "all";
 let renderedCount = 0;
-const CHUNK_SIZE = 9;
+const CHUNK_SIZE = 4; // Your choice
 let isLoadingMore = false;
 
-const RSS_SOURCES = [
-    "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
-    "https://techcrunch.com/feed/",
-    "https://www.theverge.com/rss/index.xml",
-    "https://www.wired.com/feed/rss",
-    "https://www.technologyreview.com/feed/",
-    "https://feeds.arstechnica.com/arstechnica/technology-lab",
-    "https://www.nasa.gov/rss/dyn/breaking_news.rss"
-];
+const SOURCES_URL = "https://raw.githubusercontent.com/Alae-G5/Alae-G5.github.io/main/sources.json";
 
+/* -----------------------------------------------------------
+   CATEGORY DETECTION
+----------------------------------------------------------- */
 function getHostFromUrl(url) {
     try {
         return new URL(url).hostname || "";
@@ -538,56 +560,77 @@ function detectCategory(text, sourceUrl) {
     if (t.includes("research") || t.includes("study") || t.includes("biology") || t.includes("physics") || t.includes("chemistry") || t.includes("scientist")) {
         return "science";
     }
-    if (t.includes("developer") || t.includes("programming") || t.includes("code") || t.includes("software") || t.includes("github") || t.includes("javascript") || t.includes("python")) {
+    if (t.includes("developer") || t.includes("programming") || t.includes("code") || t.includes("software") || t.includes("github") || t    if (t.includes("developer") || t.includes("programming") || t.includes("code") || t.includes("software") || t.includes("github") || t.includes("javascript") || t.includes("python")) {
         return "programming";
     }
 
-    if (host.includes("techcrunch")) return "tech";
-    if (host.includes("theverge")) return "tech";
-    if (host.includes("wired")) return "science";
-    if (host.includes("technologyreview")) return "science";
-    if (host.includes("arstechnica")) return "tech";
-    if (host.includes("nasa")) return "space";
-    if (host.includes("nytimes")) return "tech";
+    // Source-based fallback
+    if (host.includes("techcrunch") || host.includes("theverge") || host.includes("engadget") || host.includes("cnet") || host.includes("gizmodo") || host.includes("techspot")) {
+        return "tech";
+    }
+    if (host.includes("nasa") || host.includes("space") || host.includes("esa") || host.includes("universe")) {
+        return "space";
+    }
+    if (host.includes("scientificamerican") || host.includes("sciencedaily") || host.includes("nature")) {
+        return "science";
+    }
+    if (host.includes("stackoverflow") || host.includes("hnrss")) {
+        return "programming";
+    }
 
     return "tech";
 }
 
-function buildImageUrl(category) {
-    const base = "https://source.unsplash.com/1200x800/?";
-    switch (category) {
-        case "ai":
-            return base + "ai,artificial-intelligence,futuristic,technology";
-        case "space":
-            return base + "space,galaxy,astronomy,stars";
-        case "science":
-            return base + "science,laboratory,research";
-        case "programming":
-            return base + "programming,code,developer,computer";
-        case "tech":
-        default:
-            return base + "technology,gadgets,innovation";
-    }
-}
-
+/* -----------------------------------------------------------
+   IMAGE EXTRACTION
+----------------------------------------------------------- */
 function extractImageFromItem(item) {
-    const media = item.querySelector("media\\:content, content, media\\:thumbnail");
-    if (media && media.getAttribute("url")) {
-        return media.getAttribute("url");
-    }
+    const media = item.querySelector("media\\:content, media\\:thumbnail");
+    if (media && media.getAttribute("url")) return media.getAttribute("url");
+
     const enclosure = item.querySelector("enclosure");
-    if (enclosure && enclosure.getAttribute("url")) {
-        return enclosure.getAttribute("url");
+    if (enclosure && enclosure.getAttribute("url")) return enclosure.getAttribute("url");
+
+    const encoded = item.getElementsByTagName("content:encoded")[0];
+    if (encoded && encoded.textContent) {
+        const match = encoded.textContent.match(/<img[^>]+src=["']([^"']+)["']/i);
+        if (match) return match[1];
     }
-    const contentEncoded = item.getElementsByTagName("content:encoded")[0];
-    if (contentEncoded && contentEncoded.textContent) {
-        const html = contentEncoded.textContent;
-        const match = html.match(/<img[^>]+src=["']([^"']+)["']/i);
-        if (match && match[1]) return match[1];
-    }
+
     return null;
 }
 
+/* -----------------------------------------------------------
+   FALLBACK IMAGE BUILDER
+----------------------------------------------------------- */
+function buildFallbackImage(category) {
+    const base = "https://source.unsplash.com/1200x800/?";
+    switch (category) {
+        case "ai": return base + "ai,artificial-intelligence,futuristic";
+        case "space": return base + "space,galaxy,astronomy";
+        case "science": return base + "science,laboratory,research";
+        case "programming": return base + "programming,code,developer";
+        default: return base + "technology,innovation";
+    }
+}
+
+/* -----------------------------------------------------------
+   LOAD SOURCES.JSON
+----------------------------------------------------------- */
+async function loadSources() {
+    try {
+        const res = await fetch(SOURCES_URL);
+        const json = await res.json();
+        return json.sources || [];
+    } catch (err) {
+        console.error("Failed to load sources.json", err);
+        return [];
+    }
+}
+
+/* -----------------------------------------------------------
+   LOAD NEWS
+----------------------------------------------------------- */
 async function loadNews() {
     const container = document.getElementById("news-container");
     const trendingList = document.getElementById("trending-list");
@@ -600,7 +643,9 @@ async function loadNews() {
     allArticles = [];
     renderedCount = 0;
 
-    for (const url of RSS_SOURCES) {
+    const sources = await loadSources();
+
+    for (const url of sources) {
         try {
             const response = await fetch(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`);
             const text = await response.text();
@@ -619,9 +664,8 @@ async function loadNews() {
 
                 let image = extractImageFromItem(item);
                 const hasRealImage = !!image;
-                if (!image) {
-                    image = buildImageUrl(category);
-                }
+
+                if (!image) image = buildFallbackImage(category);
 
                 allArticles.push({
                     title,
@@ -634,17 +678,26 @@ async function loadNews() {
                 });
             });
         } catch (err) {
-            // ignore single source failure
+            console.warn("Source failed:", url);
         }
     }
 
-    if (allArticles.length === 0) {
-        container.innerHTML = "<p>Failed to load news.</p>";
-        return;
-    }
+    /* -----------------------------------------------------------
+       REMOVE DUPLICATES (MODE B)
+    ----------------------------------------------------------- */
+    const seenTitles = new Set();
+    const seenLinks = new Set();
 
-    allArticles = allArticles.slice(0, 150);
+    allArticles = allArticles.filter(a => {
+        if (seenTitles.has(a.title) || seenLinks.has(a.link)) return false;
+        seenTitles.add(a.title);
+        seenLinks.add(a.link);
+        return true;
+    });
 
+    /* -----------------------------------------------------------
+       TRENDING
+    ----------------------------------------------------------- */
     const trending = allArticles.slice(0, 8);
     trending.forEach(a => {
         const card = document.createElement("div");
@@ -657,7 +710,6 @@ async function loadNews() {
         if (a.hasRealImage) {
             const img = document.createElement("img");
             img.src = a.image;
-            img.alt = "Trending";
             thumb.appendChild(img);
         }
 
@@ -685,15 +737,24 @@ async function loadNews() {
     renderMoreArticles();
 }
 
+/* -----------------------------------------------------------
+   FILTERING
+----------------------------------------------------------- */
 function getFilteredArticles() {
     if (currentCategory === "all") return allArticles;
+
     const filtered = allArticles.filter(a => a.category === currentCategory);
-    if (filtered.length === 0) {
-        return allArticles.slice(0, 30);
+
+    if (filtered.length < 20) {
+        return allArticles.slice(0, 40);
     }
+
     return filtered;
 }
 
+/* -----------------------------------------------------------
+   RENDER MORE ARTICLES
+----------------------------------------------------------- */
 function renderMoreArticles() {
     const container = document.getElementById("news-container");
     const statusText = document.getElementById("status-text");
@@ -707,25 +768,15 @@ function renderMoreArticles() {
     nextSlice.forEach(a => {
         const card = document.createElement("div");
         card.className = "news-card";
-        card.setAttribute("data-category", a.category);
 
         const imageWrapper = document.createElement("div");
         imageWrapper.className = "news-image";
-        if (!a.hasRealImage) {
-            imageWrapper.classList.add("fallback");
-        }
 
-        if (a.image && a.hasRealImage) {
-            const img = document.createElement("img");
-            img.src = a.image;
-            img.alt = "News Image";
-            imageWrapper.appendChild(img);
-        } else if (a.image && !a.hasRealImage) {
-            const img = document.createElement("img");
-            img.src = a.image;
-            img.alt = "News Image";
-            imageWrapper.appendChild(img);
-        }
+        if (!a.hasRealImage) imageWrapper.classList.add("fallback");
+
+        const img = document.createElement("img");
+        img.src = a.image;
+        imageWrapper.appendChild(img);
 
         const content = document.createElement("div");
         content.className = "news-card-content";
@@ -767,7 +818,9 @@ function renderMoreArticles() {
     isLoadingMore = false;
 }
 
-/* CATEGORY FILTER */
+/* -----------------------------------------------------------
+   CATEGORY TABS
+----------------------------------------------------------- */
 document.querySelectorAll(".category-tab").forEach(tab => {
     tab.addEventListener("click", () => {
         document.querySelectorAll(".category-tab").forEach(t => t.classList.remove("active"));
@@ -780,7 +833,9 @@ document.querySelectorAll(".category-tab").forEach(tab => {
     });
 });
 
-/* INFINITE SCROLL */
+/* -----------------------------------------------------------
+   INFINITE SCROLL
+----------------------------------------------------------- */
 window.addEventListener("scroll", () => {
     if (isLoadingMore) return;
 
@@ -793,12 +848,16 @@ window.addEventListener("scroll", () => {
     }
 });
 
-/* REFRESH BUTTON */
+/* -----------------------------------------------------------
+   REFRESH BUTTON
+----------------------------------------------------------- */
 document.getElementById("refresh-btn").addEventListener("click", () => {
     loadNews();
 });
 
-/* INIT */
+/* -----------------------------------------------------------
+   INIT
+----------------------------------------------------------- */
 loadNews();
 </script>
 
