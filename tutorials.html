@@ -1,191 +1,243 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AlaeAI — Tutorials</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlaeAI — Tutorials</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<style>
-:root {
-    --bg: #f5efe6;
-    --text: #1a1a1a;
-    --card: #fff9f0;
-    --border: #e0d4c2;
-    --gold: #c58b3b;
-    --dark-bg: #222;
-    --dark-text: #f5f5f5;
-    --dark-card: #2d2d2d;
-    --dark-border: #444;
-}
+    <style>
+        /* GLOBAL THEME */
+        :root {
+            --bg-light: #f5efe6;
+            --bg-light-accent: #fff9f0;
+            --text-light: #1a1a1a;
+            --card-light: #ffffff;
+            --border-light: #e0d4c2;
 
-body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    transition: 0.3s ease;
-}
+            --bg-dark: #0b0c10;
+            --bg-dark-accent: #151821;
+            --text-dark: #f5f5f5;
+            --card-dark: #181b24;
+            --border-dark: #2b3140;
 
-body.dark {
-    --bg: var(--dark-bg);
-    --text: var(--dark-text);
-    --card: var(--dark-card);
-    --border: var(--dark-border);
-}
+            --primary: #c58b3b;
+            --primary-soft: rgba(197,139,59,0.12);
 
-h1 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 40px;
-    margin: 40px 7% 20px;
-}
+            --radius-lg: 18px;
+            --radius-md: 12px;
+            --shadow-soft: 0 18px 45px rgba(0,0,0,0.12);
+        }
 
-.subtitle {
-    margin: 0 7% 30px;
-    opacity: 0.8;
-}
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-light);
+            transition: background 0.4s ease, color 0.4s ease;
+        }
 
-/* Grid */
-.tutorials-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-    padding: 0 7% 60px;
-}
+        body.dark-mode {
+            background: var(--bg-dark);
+            color: var(--text-dark);
+        }
 
-.tutorial-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    padding: 20px 20px 50px;
-    border-radius: 14px;
-    transition: 0.2s ease;
-    position: relative;
-}
+        /* NAVIGATION */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 7%;
+            backdrop-filter: blur(18px);
+            background: rgba(253,247,238,0.85);
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+        }
 
-.tutorial-card h3 {
-    margin: 0 0 8px;
-    font-family: 'Poppins', sans-serif;
-}
+        body.dark-mode nav {
+            background: rgba(10,12,18,0.88);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
 
-.tutorial-card p {
-    margin: 0;
-    opacity: 0.85;
-}
+        nav h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+        }
 
-.tutorial-card:hover {
-    transform: translateY(-3px);
-}
+        nav a {
+            margin-left: 22px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            color: inherit;
+            position: relative;
+        }
 
-/* Open button */
-.open-btn {
-    position: absolute;
-    right: 15px;
-    bottom: 15px;
-    background: var(--gold);
-    color: white;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 14px;
-    transition: 0.2s ease;
-}
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.2s ease;
+        }
 
-.open-btn:hover {
-    opacity: 0.9;
-}
+        nav a:hover::after {
+            width: 100%;
+        }
 
-/* Modal background */
-#modal-bg {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.4);
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 50;
-}
+        #theme-toggle {
+            padding: 8px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(0,0,0,0.08);
+            background: rgba(255,255,255,0.9);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+        }
 
-#modal-bg.active {
-    display: block;
-    opacity: 1;
-}
+        body.dark-mode #theme-toggle {
+            background: rgba(15,17,25,0.95);
+            border-color: rgba(255,255,255,0.12);
+            color: var(--text-dark);
+        }
 
-/* Side panel */
-#side-panel {
-    position: fixed;
-    top: 0;
-    right: -600px;
-    width: 600px;
-    height: 100%;
-    background: var(--bg);
-    color: var(--text);
-    border-left: 2px solid var(--border);
-    padding: 24px 26px 40px;
-    overflow-y: auto;
-    transition: right 0.35s ease, width 0.35s ease;
-    z-index: 60;
-    box-sizing: border-box;
-}
+        /* HEADER LOGO */
+        header {
+            text-align: center;
+            padding: 30px;
+        }
 
-#side-panel.active {
-    right: 0;
-}
+        .logo-animate {
+            max-width: 350px;
+            border-radius: 12px;
+            opacity: 0;
+            transform: translateY(-10px);
+            animation: fadeInLogo 1.2s ease forwards;
+            filter: drop-shadow(0 0 18px rgba(197,139,59,0.45));
+        }
 
-#side-panel.fullscreen {
-    width: 100%;
-    right: 0;
-}
+        @keyframes fadeInLogo {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-/* Panel buttons */
-.panel-buttons {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 18px;
-}
+        /* TUTORIALS PAGE */
+        h1 {
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            margin-top: 40px;
+        }
 
-.panel-btn {
-    background: var(--gold);
-    color: white;
-    border: none;
-    padding: 9px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 14px;
-}
+        .subtitle {
+            text-align: center;
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
 
-/* Tutorial content */
-.tutorial-content h2 {
-    font-family: 'Poppins', sans-serif;
-    margin-top: 0;
-}
+        .tutorials-container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 7%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
 
-.tutorial-content p {
-    font-size: 16px;
-    line-height: 1.7;
-}
+        .card {
+            background: var(--card-light);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: 18px;
+            box-shadow: 0 10px 26px rgba(0,0,0,0.06);
+        }
 
-pre {
-    background: var(--card);
-    padding: 15px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    overflow-x: auto;
-    font-size: 14px;
-}
-</style>
+        body.dark-mode .card {
+            background: var(--card-dark);
+            border-color: var(--border-dark);
+        }
+
+        .card h3 {
+            margin: 0 0 6px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .card p {
+            margin: 0;
+            font-size: 14px;
+            opacity: 0.85;
+        }
+
+        .open-btn {
+            margin-top: 10px;
+            display: inline-block;
+            padding: 8px 16px;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* SIDE PANEL */
+        #modal-bg {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            display: none;
+        }
+
+        #side-panel {
+            position: fixed;
+            top: 0;
+            right: -500px;
+            width: 400px;
+            height: 100%;
+            background: var(--card-light);
+            border-left: 1px solid var(--border-light);
+            padding: 20px;
+            transition: 0.3s ease;
+            overflow-y: auto;
+        }
+
+        body.dark-mode #side-panel {
+            background: var(--card-dark);
+            border-color: var(--border-dark);
+        }
+
+        .panel-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .panel-btn {
+            padding: 8px 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
 
-<header style="text-align: center; padding: 30px;">
-  <img src="assets/logo.png" 
-       alt="AlaeAI — Build. Learn. Create." 
-       style="max-width: 350px; border-radius: 12px;">
+<header>
+    <img src="assets/logo.png" class="logo-animate" alt="AlaeAI — Build. Learn. Create.">
 </header>
 
 <nav>
@@ -204,254 +256,81 @@ pre {
 <h1>Step-by-Step Tutorials (20 Levels)</h1>
 <p class="subtitle">Click the <strong>Open</strong> button on any tutorial to view it in the side panel.</p>
 
+<div class="tutorials-container" id="tutorials-grid"></div>
+
+<div id="modal-bg" onclick="closePanel()"></div>
+
+<div id="side-panel">
+    <div class="panel-buttons">
+        <button class="panel-btn" onclick="toggleFullscreen()">Full Screen</button>
+        <button class="panel-btn" onclick="closePanel()">Close</button>
+    </div>
+    <div id="tutorial-content"></div>
+</div>
 
 <script>
-// Data for cards
-const tutorialsMeta = [
-    {title:"HTML Basics", diff:"Beginner", desc:"Learn how to structure a webpage using basic HTML tags."},
-    {title:"CSS Basics", diff:"Beginner", desc:"Understand styling, colors, spacing, and simple layouts."},
-    {title:"JavaScript Basics", diff:"Beginner", desc:"Learn variables, functions, and simple interactions."},
-    {title:"Flexbox Layout", diff:"Easy", desc:"Create responsive layouts using CSS Flexbox."},
-    {title:"CSS Grid", diff:"Easy", desc:"Build advanced layouts using CSS Grid."},
-    {title:"DOM Manipulation", diff:"Easy", desc:"Change HTML elements dynamically with JavaScript."},
-    {title:"Event Listeners", diff:"Medium", desc:"Make buttons, forms, and UI elements interactive."},
-    {title:"LocalStorage", diff:"Medium", desc:"Save data in the browser (like your theme system)."},
-    {title:"Responsive Design", diff:"Medium", desc:"Make your website look good on all devices."},
-    {title:"Fetch API", diff:"Medium", desc:"Load real data from APIs (like your news page)."},
-    {title:"Async & Await", diff:"Medium", desc:"Write clean asynchronous JavaScript code."},
-    {title:"JSON Handling", diff:"Medium", desc:"Work with structured data from APIs."},
-    {title:"Building a Calculator", diff:"Hard", desc:"Create a functional calculator using JS logic."},
-    {title:"Building a To-Do App", diff:"Hard", desc:"Use DOM, events, and storage to build a full app."},
-    {title:"API-Based Weather App", diff:"Hard", desc:"Fetch real weather data and display it beautifully."},
-    {title:"Login System (Frontend)", diff:"Hard", desc:"Create a login UI with validation and storage."},
-    {title:"Animations in CSS", diff:"Hard", desc:"Create smooth animations and transitions."},
-    {title:"Snake Game", diff:"Hard", desc:"Build a full snake game using JS."},
-    {title:"Space Shooter Game", diff:"Hard", desc:"Build a spaceship shooter game with lasers."},
-    {title:"Portfolio Website", diff:"Hard", desc:"Build a full personal portfolio website."}
-];
+/* DARK MODE */
+const THEME_KEY = "alaeai-theme";
 
-// Full tutorial contents (inline instead of separate files)
-const tutorialContents = {
-1: `
-<h2>1. HTML Basics</h2>
-<p>HTML (HyperText Markup Language) is the structure of every webpage. It uses tags to define elements like titles, paragraphs, images, and links.</p>
-<p><strong>Example:</strong></p>
-<pre>&lt;h1&gt;Hello World&lt;/h1&gt;
-&lt;p&gt;This is my first webpage.&lt;/p&gt;</pre>
-<p>In this tutorial, you will learn how to create a basic webpage using headings, paragraphs, lists, and links.</p>
-`,
-2: `
-<h2>2. CSS Basics</h2>
-<p>CSS (Cascading Style Sheets) controls how your HTML looks: colors, fonts, spacing, and layout.</p>
-<p><strong>Example:</strong></p>
-<pre>h1 {
-  color: #c58b3b;
-  font-family: 'Poppins', sans-serif;
-}</pre>
-<p>You will learn how to style text, add backgrounds, control spacing, and make your page look clean and modern.</p>
-`,
-3: `
-<h2>3. JavaScript Basics</h2>
-<p>JavaScript adds logic and interactivity to your website. You can react to clicks, change content, and more.</p>
-<p><strong>Example:</strong></p>
-<pre>let name = "Alae";
-function greet() {
-  alert("Hello " + name + "!");
-}</pre>
-<p>In this tutorial, you will learn variables, functions, and basic operations.</p>
-`,
-4: `
-<h2>4. Flexbox Layout</h2>
-<p>Flexbox is a powerful CSS layout system that makes it easy to align and distribute space among items.</p>
-<pre>.container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}</pre>
-<p>You will learn how to center elements, create responsive rows and columns, and build flexible layouts.</p>
-`,
-5: `
-<h2>5. CSS Grid</h2>
-<p>CSS Grid lets you create complex, two-dimensional layouts with rows and columns.</p>
-<pre>.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}</pre>
-<p>You will learn how to define grid tracks, place items, and build advanced page structures.</p>
-`,
-6: `
-<h2>6. DOM Manipulation</h2>
-<p>The DOM (Document Object Model) represents your HTML as a tree that JavaScript can change.</p>
-<pre>const title = document.getElementById("main-title");
-title.textContent = "Updated Title";</pre>
-<p>You will learn how to select elements, change text, styles, and create/remove elements dynamically.</p>
-`,
-7: `
-<h2>7. Event Listeners</h2>
-<p>Event listeners let your website react to user actions like clicks, typing, and scrolling.</p>
-<pre>document.getElementById("btn").addEventListener("click", () =&gt; {
-  alert("Button clicked!");
-});</pre>
-<p>You will learn click events, input events, and keyboard events.</p>
-`,
-8: `
-<h2>8. LocalStorage</h2>
-<p>LocalStorage allows you to save small pieces of data in the browser, even after refresh.</p>
-<pre>localStorage.setItem("theme", "dark");
-const theme = localStorage.getItem("theme");</pre>
-<p>You will learn how to store and retrieve data, like theme preferences or to-do lists.</p>
-`,
-9: `
-<h2>9. Responsive Design</h2>
-<p>Responsive design makes your website look good on phones, tablets, and desktops.</p>
-<pre>@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
-}</pre>
-<p>You will learn breakpoints, fluid layouts, and how to test on different screen sizes.</p>
-`,
-10: `
-<h2>10. Fetch API</h2>
-<p>The Fetch API lets you load data from servers and APIs using JavaScript.</p>
-<pre>fetch("https://api.example.com/data")
-  .then(res =&gt; res.json())
-  .then(data =&gt; {
-    console.log(data);
-  });</pre>
-<p>You will learn how to send requests, handle responses, and display data on your page.</p>
-`,
-11: `
-<h2>11. Async &amp; Await</h2>
-<p>Async/await makes asynchronous code easier to read and write.</p>
-<pre>async function loadData() {
-  const res = await fetch("https://api.example.com/data");
-  const data = await res.json();
-  console.log(data);
-}</pre>
-<p>You will learn how to convert promise chains into clean async functions.</p>
-`,
-12: `
-<h2>12. JSON Handling</h2>
-<p>JSON (JavaScript Object Notation) is a format for structured data, used by most APIs.</p>
-<pre>const user = {
-  name: "Alae",
-  age: 14
-};
-const json = JSON.stringify(user);</pre>
-<p>You will learn how to parse and stringify JSON, and how to work with API responses.</p>
-`,
-13: `
-<h2>13. Building a Calculator</h2>
-<p>In this project, you will build a basic calculator using HTML, CSS, and JavaScript.</p>
-<pre>// Example: handling button click
-buttons.forEach(btn =&gt; {
-  btn.addEventListener("click", () =&gt; {
-    // update display
-  });
-});</pre>
-<p>You will learn event handling, simple math logic, and updating the UI.</p>
-`,
-14: `
-<h2>14. Building a To-Do App</h2>
-<p>You will build a to-do list app that lets you add, complete, and delete tasks.</p>
-<pre>const input = document.getElementById("todo-input");
-const list = document.getElementById("todo-list");</pre>
-<p>You will combine DOM manipulation, events, and LocalStorage to create a full mini app.</p>
-`,
-15: `
-<h2>15. API-Based Weather App</h2>
-<p>In this project, you will fetch real weather data from an API and display it beautifully.</p>
-<pre>const url = \`https://api.openweathermap.org/data/2.5/weather?q=\${city}&amp;appid=KEY\`;</pre>
-<p>You will learn API integration, loading states, and displaying dynamic data.</p>
-`,
-16: `
-<h2>16. Login System (Frontend)</h2>
-<p>You will create a simple login UI with validation and optional LocalStorage for remembering users.</p>
-<pre>form.addEventListener("submit", (e) =&gt; {
-  e.preventDefault();
-  // validate inputs
-});</pre>
-<p>This is a frontend-only simulation, not a real secure auth system, but great for practice.</p>
-`,
-17: `
-<h2>17. Animations in CSS</h2>
-<p>You will learn how to create smooth animations and transitions using CSS.</p>
-<pre>.box {
-  transition: transform 0.3s ease;
+function applyTheme() {
+    const saved = localStorage.getItem(THEME_KEY);
+    if (saved === "dark") {
+        document.body.classList.add("dark-mode");
+        document.getElementById("theme-toggle").textContent = "☀️ Light Mode";
+    } else {
+        document.body.classList.remove("dark-mode");
+        document.getElementById("theme-toggle").textContent = "🌙 Dark Mode";
+    }
 }
-.box:hover {
-  transform: translateY(-5px);
-}</pre>
-<p>You will also explore keyframes for more complex animations.</p>
-`,
-18: `
-<h2>18. Snake Game</h2>
-<p>Build a classic Snake game using JavaScript and the canvas or grid.</p>
-<pre>// Example game loop
-function gameLoop() {
-  update();
-  draw();
-  requestAnimationFrame(gameLoop);
-}</pre>
-<p>You will learn game loops, keyboard controls, and collision detection.</p>
-`,
-19: `
-<h2>19. Space Shooter Game</h2>
-<p>Create a space shooter game with a spaceship, lasers, and enemies.</p>
-<pre>// Example: shooting
-document.addEventListener("keydown", (e) =&gt; {
-  if (e.code === "Space") shootLaser();
-});</pre>
-<p>You will practice animations, object arrays, and hit detection.</p>
-`,
-20: `
-<h2>20. Portfolio Website</h2>
-<p>Build a full personal portfolio website to showcase your projects.</p>
-<pre>&lt;section id="projects"&gt;
-  &lt;h2&gt;My Projects&lt;/h2&gt;
-&lt;/section&gt;</pre>
-<p>You will combine everything: layout, styling, interactivity, and responsive design.</p>
-`
-};
 
-// Build cards
-const grid = document.getElementById('tutorials-grid');
-tutorialsMeta.forEach((t, i) => {
-    const num = i + 1;
-    const card = document.createElement('div');
-    card.className = 'tutorial-card';
-    card.innerHTML = `
-        <h3>${num}. ${t.title}</h3>
-        <p><strong>Difficulty:</strong> ${t.diff}</p>
-        <p>${t.desc}</p>
-        <button class="open-btn" onclick="openTutorial(${num})">Open</button>
-    `;
-    grid.appendChild(card);
+applyTheme();
+
+document.getElementById("theme-toggle").addEventListener("click", () => {
+    const isDark = document.body.classList.toggle("dark-mode");
+    localStorage.setItem(THEME_KEY, isDark ? "dark" : "light");
+    applyTheme();
 });
 
-function openTutorial(num) {
-    const content = tutorialContents[num];
-    if (!content) return;
-    document.getElementById('tutorial-content').innerHTML = content;
-    document.getElementById('modal-bg').classList.add('active');
-    const panel = document.getElementById('side-panel');
-    panel.classList.add('active');
-    panel.classList.remove('fullscreen');
+/* TUTORIALS DATA */
+const tutorials = [
+    { title: "HTML Basics", level: "Beginner", desc: "Learn how to structure a webpage.", file: "tutorials/html-basics.html" },
+    { title: "CSS Basics", level: "Beginner", desc: "Learn styling and layout.", file: "tutorials/css-basics.html" },
+    { title: "JavaScript Basics", level: "Beginner", desc: "Learn variables and functions.", file: "tutorials/js-basics.html" },
+];
+
+/* RENDER CARDS */
+const grid = document.getElementById("tutorials-grid");
+tutorials.forEach(t => {
+    grid.innerHTML += `
+        <div class="card">
+            <h3>${t.title}</h3>
+            <p>Difficulty: ${t.level}</p>
+            <p>${t.desc}</p>
+            <a class="open-btn" onclick="openPanel('${t.file}')">Open</a>
+        </div>
+    `;
+});
+
+/* PANEL FUNCTIONS */
+function openPanel(file) {
+    document.getElementById("modal-bg").style.display = "block";
+    document.getElementById("side-panel").style.right = "0";
+    fetch(file).then(res => res.text()).then(html => {
+        document.getElementById("tutorial-content").innerHTML = html;
+    });
 }
 
 function closePanel() {
-    document.getElementById('modal-bg').classList.remove('active');
-    const panel = document.getElementById('side-panel');
-    panel.classList.remove('active');
-    panel.classList.remove('fullscreen');
+    document.getElementById("modal-bg").style.display = "none";
+    document.getElementById("side-panel").style.right = "-500px";
 }
 
 function toggleFullscreen() {
-    document.getElementById('side-panel').classList.toggle('fullscreen');
+    const panel = document.getElementById("side-panel");
+    panel.style.width = panel.style.width === "100%" ? "400px" : "100%";
 }
 </script>
 
 </body>
 </html>
+
