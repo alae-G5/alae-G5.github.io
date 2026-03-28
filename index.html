@@ -1,1946 +1,1733 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AlaeAI — Build. Learn. Create.</title>
-
-<style>
-/* ========================================================= */
-/* ===================== ROOT THEME ======================== */
-/* ========================================================= */
-
-:root {
-    --bg-light: #f5efe6;
-    --bg-light-accent: #fff9f0;
-    --text-light: #1a1a1a;
-    --card-light: #ffffff;
-    --border-light: #e0d4c2;
-
-    --bg-dark: #05060a;
-    --bg-dark-accent: #151821;
-    --text-dark: #f5f5f5;
-    --card-dark: #181b24;
-    --border-dark: #2b3140;
-
-    --primary: #c58b3b;
-    --primary-soft: rgba(197,139,59,0.12);
-    --accent: #ffb347;
-    --danger: #ff4b6a;
-    --success: #3ac97a;
-    --info: #4aa8ff;
-
-    --radius-xl: 26px;
-    --radius-lg: 20px;
-    --radius-md: 14px;
-    --radius-sm: 9px;
-
-    --shadow-soft: 0 22px 55px rgba(0,0,0,0.16);
-    --shadow-card: 0 14px 32px rgba(0,0,0,0.10);
-    --shadow-strong: 0 26px 70px rgba(0,0,0,0.35);
-
-    --glass-light: rgba(255,255,255,0.82);
-    --glass-dark: rgba(10,12,18,0.88);
-
-    --transition-fast: 0.18s ease-out;
-    --transition-med: 0.28s ease;
-    --transition-slow: 0.45s ease;
-}
-
-/* ========================================================= */
-/* ===================== GLOBAL RESET ====================== */
-/* ========================================================= */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    width: 100%;
-    min-height: 100%;
-}
-
-body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg-light);
-    color: var(--text-light);
-    transition: background var(--transition-slow), color var(--transition-slow);
-    overflow-x: hidden;
-}
-
-body.dark-mode {
-    background: var(--bg-dark);
-    color: var(--text-dark);
-}
-
-/* Background texture */
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background:
-        linear-gradient(135deg, rgba(255,255,255,0.92), rgba(245,239,230,0.96)),
-        radial-gradient(circle at 0% 0%, rgba(197,139,59,0.22), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(0,0,0,0.10), transparent 55%);
-    z-index: -3;
-}
-
-body.dark-mode::before {
-    background:
-        radial-gradient(circle at 0% 0%, rgba(197,139,59,0.26), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(80,90,140,0.45), transparent 60%),
-        linear-gradient(145deg, #05060a, #10131c);
-}
-
-/* ========================================================= */
-/* ===================== FLOATING BLOBS ==================== */
-/* ========================================================= */
-
-.blob {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(40px);
-    opacity: 0.55;
-    z-index: -2;
-    pointer-events: none;
-    mix-blend-mode: screen;
-}
-
-.blob-1 {
-    width: 260px;
-    height: 260px;
-    background: rgba(197,139,59,0.55);
-    top: -60px;
-    left: -40px;
-    animation: floatBlob1 18s ease-in-out infinite alternate;
-}
-
-.blob-2 {
-    width: 280px;
-    height: 280px;
-    background: rgba(255,179,71,0.45);
-    bottom: -80px;
-    right: -40px;
-    animation: floatBlob2 22s ease-in-out infinite alternate;
-}
-
-.blob-3 {
-    width: 220px;
-    height: 220px;
-    background: rgba(120,90,220,0.35);
-    top: 40%;
-    left: -80px;
-    animation: floatBlob3 26s ease-in-out infinite alternate;
-}
-
-@keyframes floatBlob1 {
-    0% { transform: translate(0,0) scale(1); }
-    100% { transform: translate(40px,40px) scale(1.1); }
-}
-
-@keyframes floatBlob2 {
-    0% { transform: translate(0,0) scale(1); }
-    100% { transform: translate(-40px,-30px) scale(1.05); }
-}
-
-@keyframes floatBlob3 {
-    0% { transform: translate(0,0) scale(1); }
-    100% { transform: translate(30px,-40px) scale(1.08); }
-}
-
-/* ========================================================= */
-/* ===================== UTILITIES ========================= */
-/* ========================================================= */
-
-.max-width { max-width: 1200px; margin: 0 auto; padding: 0 7%; }
-.flex { display: flex; }
-.flex-between { display: flex; justify-content: space-between; align-items: center; }
-.flex-center { display: flex; justify-content: center; align-items: center; }
-
-.text-muted { opacity: 0.8; font-size: 13px; }
-
-/* ========================================================= */
-/* ===================== HEADER ============================ */
-/* ========================================================= */
-
-header {
-    text-align: center;
-    padding: 22px 7% 10px;
-}
-
-.logo-animate {
-    max-width: 360px;
-    border-radius: 18px;
-    opacity: 0;
-    transform: translateY(-12px) scale(0.98);
-    animation: fadeInLogo 1.2s ease forwards;
-    filter:
-        drop-shadow(0 0 20px rgba(197,139,59,0.55))
-        drop-shadow(0 18px 40px rgba(0,0,0,0.45));
-}
-
-@keyframes fadeInLogo {
-    0% { opacity: 0; transform: translateY(-12px) scale(0.96); }
-    60% { opacity: 1; transform: translateY(0) scale(1.02); }
-    100% { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-/* ========================================================= */
-/* ===================== NAVIGATION ======================== */
-/* ========================================================= */
-
-nav {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    padding: 12px 7%;
-    backdrop-filter: blur(18px);
-    background: rgba(253,247,238,0.92);
-    border-bottom: 1px solid rgba(0,0,0,0.04);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
-}
-
-body.dark-mode nav {
-    background: rgba(10,12,18,0.92);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-
-.nav-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.nav-logo-mini {
-    width: 32px;
-    height: 32px;
-    border-radius: 10px;
-    background: radial-gradient(circle at 30% 0%, #ffe2a8, #c58b3b);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #1a1a1a;
-    font-weight: 700;
-    font-size: 16px;
-    box-shadow: 0 10px 24px rgba(0,0,0,0.25);
-}
-
-.nav-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-}
-
-.nav-subtitle {
-    font-size: 11px;
-    opacity: 0.8;
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-}
-
-.nav-links a {
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 14px;
-    color: inherit;
-    position: relative;
-    padding-bottom: 3px;
-    opacity: 0.9;
-    transition: opacity var(--transition-fast);
-}
-
-.nav-links a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 0;
-    height: 2px;
-    background: var(--primary);
-    transition: width 0.2s ease;
-}
-
-.nav-links a:hover {
-    opacity: 1;
-}
-
-.nav-links a:hover::after {
-    width: 100%;
-}
-
-.nav-right {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-#theme-toggle {
-    padding: 7px 14px;
-    border-radius: 999px;
-    border: 1px solid rgba(0,0,0,0.08);
-    background: rgba(255,255,255,0.9);
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
-}
-
-#theme-toggle:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 12px 26px rgba(0,0,0,0.16);
-}
-
-body.dark-mode #theme-toggle {
-    background: rgba(15,17,25,0.95);
-    border-color: rgba(255,255,255,0.16);
-    color: var(--text-dark);
-}
-
-/* ========================================================= */
-/* ===================== SECTION SYSTEM ==================== */
-/* ========================================================= */
-
-.section {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 26px 7% 30px;
-}
-
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 10px;
-    margin-bottom: 18px;
-}
-
-.section-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 22px;
-    margin: 0;
-}
-
-.section-subtitle {
-    margin: 4px 0 0;
-    font-size: 13px;
-    opacity: 0.8;
-}
-
-.section-actions {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-/* ========================================================= */
-/* ===================== BUTTONS =========================== */
-/* ========================================================= */
-
-.btn-primary {
-    padding: 9px 18px;
-    border-radius: 999px;
-    border: none;
-    background: var(--primary);
-    color: white;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 12px 26px rgba(197,139,59,0.45);
-    transform: translateY(0);
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 16px 32px rgba(197,139,59,0.55);
-    background: #d79a45;
-}
-
-.btn-ghost {
-    padding: 9px 16px;
-    border-radius: 999px;
-    border: 1px solid rgba(0,0,0,0.12);
-    background: rgba(255,255,255,0.9);
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
-}
-
-.btn-ghost:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 10px 24px rgba(0,0,0,0.12);
-    border-color: rgba(0,0,0,0.18);
-}
-
-body.dark-mode .btn-ghost {
-    background: rgba(10,12,18,0.95);
-    border-color: rgba(255,255,255,0.16);
-    color: var(--text-dark);
-}
-
-/* ========================================================= */
-/* ===================== SCROLL REVEAL ===================== */
-/* ========================================================= */
-
-.reveal {
-    opacity: 0;
-    transform: translateY(18px);
-}
-
-.reveal-visible {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-/* ========================================================= */
-/* ===================== HERO SECTION ====================== */
-/* ========================================================= */
-
-.hero {
-    max-width: 1200px;
-    margin: 18px auto 10px;
-    padding: 0 7% 30px;
-    display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-    gap: 26px;
-    align-items: center;
-}
-
-@media (max-width: 880px) {
-    .hero {
-        grid-template-columns: 1fr;
-    }
-}
-
-.hero-left {
-    position: relative;
-    padding-right: 10px;
-}
-
-.hero-right {
-    position: relative;
-    padding-left: 10px;
-}
-
-.hero-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 12px;
-    border-radius: 999px;
-    background: var(--primary-soft);
-    font-size: 12px;
-    margin-bottom: 10px;
-    opacity: 0;
-    transform: translateY(8px);
-    animation: heroPillIn 0.9s ease forwards 0.1s;
-}
-
-.hero-pill-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--primary);
-    box-shadow: 0 0 12px rgba(197,139,59,0.8);
-}
-
-.hero-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 32px;
-    margin: 4px 0 8px;
-    line-height: 1.2;
-    opacity: 0;
-    transform: translateY(10px);
-    animation: heroTitleIn 0.9s ease forwards 0.18s;
-}
-
-.hero-highlight {
-    background: linear-gradient(120deg, #c58b3b, #ffb347);
-    -webkit-background-clip: text;
-    color: transparent;
-}
-
-.hero-subtitle {
-    margin: 0 0 14px;
-    font-size: 14px;
-    opacity: 0;
-    transform: translateY(10px);
-    animation: heroSubtitleIn 0.9s ease forwards 0.26s;
-}
-
-.hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
-    opacity: 0;
-    transform: translateY(10px);
-    animation: heroActionsIn 0.9s ease forwards 0.34s;
-}
-
-.hero-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    margin-top: 16px;
-    font-size: 12px;
-    opacity: 0;
-    transform: translateY(10px);
-    animation: heroMetaIn 0.9s ease forwards 0.42s;
-}
-
-.hero-meta span {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-/* HERO STATS STRIP */
-
-.stats-strip {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 12px;
-    margin-top: 18px;
-}
-
-.stat-card {
-    background: rgba(255,255,255,0.9);
-    border-radius: 999px;
-    padding: 8px 12px;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 1px solid rgba(0,0,0,0.06);
-    box-shadow: 0 10px 24px rgba(0,0,0,0.06);
-}
-
-body.dark-mode .stat-card {
-    background: rgba(10,12,18,0.95);
-    border-color: rgba(255,255,255,0.12);
-}
-
-.stat-label {
-    opacity: 0.8;
-}
-
-.stat-value {
-    font-weight: 600;
-}
-
-/* HERO RIGHT CARD */
-
-.hero-card-wrapper {
-    position: relative;
-    perspective: 1200px;
-}
-
-.hero-card {
-    background: var(--card-light);
-    border-radius: var(--radius-xl);
-    border: 1px solid var(--border-light);
-    padding: 18px 18px 16px;
-    box-shadow: var(--shadow-soft);
-    position: relative;
-    overflow: hidden;
-    transform: translateY(12px) scale(0.98);
-    opacity: 0;
-    animation: heroCardIn 0.9s ease forwards 0.3s;
-}
-
-body.dark-mode .hero-card {
-    background: var(--card-dark);
-    border-color: var(--border-dark);
-    box-shadow: var(--shadow-strong);
-}
-
-.hero-card-badge {
-    position: absolute;
-    top: 14px;
-    right: 16px;
-    padding: 4px 10px;
-    border-radius: 999px;
-    font-size: 11px;
-    background: rgba(197,139,59,0.16);
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.hero-card-badge-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--success);
-    box-shadow: 0 0 10px rgba(58,201,122,0.9);
-}
-
-.hero-card-title {
-    font-size: 16px;
-    font-weight: 600;
-    margin: 0 0 6px;
-}
-
-.hero-card-sub {
-    font-size: 13px;
-    opacity: 0.85;
-    margin: 0 0 10px;
-}
-
-.hero-card-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.hero-mini-card {
-    padding: 8px 10px;
-    border-radius: var(--radius-md);
-    background: rgba(0,0,0,0.03);
-    font-size: 12px;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-}
-
-body.dark-mode .hero-mini-card {
-    background: rgba(255,255,255,0.06);
-}
-
-.hero-mini-label {
-    font-size: 11px;
-    opacity: 0.7;
-}
-
-.hero-mini-value {
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.hero-orbit {
-    position: absolute;
-    inset: -10px;
-    border-radius: var(--radius-xl);
-    border: 1px dashed rgba(197,139,59,0.35);
-    pointer-events: none;
-    animation: orbitSpin 18s linear infinite;
-}
-
-@keyframes orbitSpin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-/* HERO IMAGE AREA */
-
-.hero-image-shell {
-    margin-top: 14px;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    position: relative;
-    background: radial-gradient(circle at 20% 0%, rgba(255,255,255,0.4), transparent 55%),
-                radial-gradient(circle at 80% 100%, rgba(197,139,59,0.35), transparent 60%),
-                #05060a;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.65);
-    transition: transform 0.25s ease;
-}
-
-.hero-image-shell-inner {
-    position: relative;
-    padding: 18px;
-}
-
-.hero-image-shell img {
-    width: 100%;
-    border-radius: 16px;
-    display: block;
-    box-shadow: 0 18px 40px rgba(0,0,0,0.7);
-}
-
-.hero-image-tag {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    padding: 4px 10px;
-    border-radius: 999px;
-    font-size: 11px;
-    background: rgba(0,0,0,0.65);
-    color: #f5f5f5;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.hero-image-tag-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--accent);
-}
-
-.hero-image-bottom-strip {
-    position: absolute;
-    bottom: 12px;
-    left: 16px;
-    right: 16px;
-    padding: 8px 10px;
-    border-radius: 12px;
-    background: linear-gradient(90deg, rgba(0,0,0,0.85), rgba(0,0,0,0.6));
-    color: #f5f5f5;
-    font-size: 11px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-}
-
-/* HERO ANIMATIONS */
-
-@keyframes heroPillIn {
-    0% { opacity: 0; transform: translateY(8px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes heroTitleIn {
-    0% { opacity: 0; transform: translateY(10px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes heroSubtitleIn {
-    0% { opacity: 0; transform: translateY(10px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes heroActionsIn {
-    0% { opacity: 0; transform: translateY(10px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes heroMetaIn {
-    0% { opacity: 0; transform: translateY(10px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes heroCardIn {
-    0% { opacity: 0; transform: translateY(12px) scale(0.98); }
-    100% { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-@media (max-width: 720px) {
-    .hero-title {
-        font-size: 24px;
-    }
-    .hero-image-bottom-strip {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-}
-
-/* ========================================================= */
-/* ===================== CORE FEATURES ===================== */
-/* ========================================================= */
-
-.feature-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 14px;
-}
-
-@media (max-width: 880px) {
-    .feature-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-@media (max-width: 600px) {
-    .feature-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-.feature-card {
-    border-radius: 999px;
-    padding: 10px 12px;
-    background: rgba(255,255,255,0.9);
-    border: 1px solid rgba(0,0,0,0.06);
-    font-size: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    box-shadow: 0 10px 24px rgba(0,0,0,0.06);
-    transform: translateY(14px);
-    opacity: 0;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-}
-
-body.dark-mode .feature-card {
-    background: rgba(10,12,18,0.95);
-    border-color: rgba(255,255,255,0.16);
-    box-shadow: 0 16px 40px rgba(0,0,0,0.7);
-}
-
-.feature-card:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 16px 40px rgba(0,0,0,0.18);
-}
-
-.feature-icon {
-    font-size: 16px;
-}
-
-.feature-title {
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.feature-text {
-    font-size: 12px;
-    opacity: 0.85;
-}
-
-.feature-meta {
-    font-size: 11px;
-    opacity: 0.75;
-}
-
-/* ========================================================= */
-/* ===================== PREVIEW CARDS ===================== */
-/* ========================================================= */
-
-.preview-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 14px;
-}
-
-.preview-card {
-    background: var(--card-light);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-light);
-    padding: 14px 14px 12px;
-    box-shadow: var(--shadow-card);
-    position: relative;
-    overflow: hidden;
-    transform: translateY(14px);
-    opacity: 0;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-body.dark-mode .preview-card {
-    background: var(--card-dark);
-    border-color: var(--border-dark);
-    box-shadow: 0 16px 40px rgba(0,0,0,0.7);
-}
-
-.preview-card::after {
-    content: "";
-    position: absolute;
-    inset: auto 0 0 0;
-    height: 3px;
-    background: linear-gradient(90deg, rgba(197,139,59,0.7), rgba(255,179,71,0.7));
-    opacity: 0.8;
-}
-
-.preview-card:hover {
-    transform: translateY(-4px) scale(1.01);
-    box-shadow: 0 18px 40px rgba(0,0,0,0.22);
-}
-
-.preview-tag {
-    font-size: 11px;
-    opacity: 0.7;
-    margin-bottom: 4px;
-}
-
-.preview-title {
-    font-size: 15px;
-    font-weight: 600;
-    margin: 0 0 4px;
-}
-
-.preview-text {
-    font-size: 13px;
-    opacity: 0.85;
-    margin: 0 0 8px;
-}
-
-.preview-meta {
-    font-size: 11px;
-    opacity: 0.75;
-}
-
-/* ========================================================= */
-/* ===================== CTA / FOOTER ====================== */
-/* ========================================================= */
-
-.cta-section {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 26px 7% 40px;
-}
-
-.cta-wrapper {
-    border-radius: var(--radius-xl);
-    padding: 26px 24px 24px;
-    background: linear-gradient(135deg, rgba(197,139,59,0.18), rgba(0,0,0,0.02));
-    border: 1px solid rgba(197,139,59,0.35);
-    box-shadow: var(--shadow-card);
-    position: relative;
-    overflow: hidden;
-}
-
-body.dark-mode .cta-wrapper {
-    background: linear-gradient(135deg, rgba(197,139,59,0.22), rgba(10,12,18,0.9));
-    border-color: rgba(255,255,255,0.18);
-}
-
-.cta-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-    gap: 22px;
-    align-items: center;
-}
-
-@media (max-width: 880px) {
-    .cta-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-.cta-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 24px;
-    margin-bottom: 8px;
-}
-
-.cta-subtitle {
-    font-size: 14px;
-    opacity: 0.85;
-    margin-bottom: 14px;
-}
-
-.cta-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.cta-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 12px;
-    border-radius: 999px;
-    background: rgba(0,0,0,0.06);
-    font-size: 12px;
-    margin-bottom: 8px;
-}
-
-body.dark-mode .cta-pill {
-    background: rgba(0,0,0,0.45);
-    color: #f5f5f5;
-}
-
-.cta-pill-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--success);
-    box-shadow: 0 0 10px rgba(58,201,122,0.9);
-}
-
-.cta-right-card {
-    border-radius: var(--radius-lg);
-    padding: 18px 18px 16px;
-    background: rgba(255,255,255,0.9);
-    border: 1px solid rgba(0,0,0,0.06);
-    box-shadow: var(--shadow-card);
-    position: relative;
-    overflow: hidden;
-}
-
-body.dark-mode .cta-right-card {
-    background: rgba(10,12,18,0.95);
-    border-color: rgba(255,255,255,0.16);
-    box-shadow: var(--shadow-strong);
-}
-
-.cta-right-title {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 6px;
-}
-
-.cta-right-text {
-    font-size: 13px;
-    opacity: 0.85;
-    margin-bottom: 10px;
-}
-
-.cta-progress-bar-shell {
-    width: 100%;
-    height: 8px;
-    border-radius: 999px;
-    background: rgba(0,0,0,0.06);
-    overflow: hidden;
-    margin-top: 6px;
-}
-
-body.dark-mode .cta-progress-bar-shell {
-    background: rgba(255,255,255,0.12);
-}
-
-.cta-progress-bar-fill {
-    width: 0%;
-    height: 100%;
-    border-radius: 999px;
-    background: linear-gradient(90deg, #c58b3b, #ffb347);
-    transition: width 0.4s ease;
-}
-
-.cta-progress-labels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    opacity: 0.8;
-    margin-top: 6px;
-}
-
-.cta-orbit {
-    position: absolute;
-    inset: -20px;
-    border-radius: var(--radius-xl);
-    border: 1px dashed rgba(197,139,59,0.35);
-    pointer-events: none;
-    animation: ctaOrbitSpin 22s linear infinite;
-}
-
-@keyframes ctaOrbitSpin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-.mini-stats-strip {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 14px;
-    margin-top: 18px;
-}
-
-.mini-stat-card {
-    border-radius: var(--radius-md);
-    padding: 10px 12px;
-    background: rgba(255,255,255,0.9);
-    border: 1px solid rgba(0,0,0,0.06);
-    font-size: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-body.dark-mode .mini-stat-card {
-    background: rgba(10,12,18,0.95);
-    border-color: rgba(255,255,255,0.16);
-}
-
-.mini-stat-label {
-    opacity: 0.75;
-}
-
-.mini-stat-value {
-    font-weight: 600;
-}
-
-/* FOOTER */
-
-footer {
-    margin-top: 40px;
-    padding: 26px 7% 30px;
-    border-top: 1px solid rgba(0,0,0,0.06);
-    background: rgba(255,255,255,0.85);
-}
-
-body.dark-mode footer {
-    background: rgba(5,6,10,0.96);
-    border-top-color: rgba(255,255,255,0.12);
-}
-
-.footer-grid {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-    gap: 22px;
-}
-
-@media (max-width: 880px) {
-    .footer-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-.footer-brand {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.footer-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 20px;
-}
-
-.footer-text {
-    font-size: 13px;
-    opacity: 0.85;
-}
-
-.footer-links {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 10px;
-    font-size: 13px;
-}
-
-.footer-links-column {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.footer-links-title {
-    font-weight: 600;
-    margin-bottom: 4px;
-}
-
-.footer-links a {
-    text-decoration: none;
-    color: inherit;
-    opacity: 0.8;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.footer-links a:hover {
-    opacity: 1;
-    transform: translateX(2px);
-}
-
-.footer-bottom {
-    max-width: 1200px;
-    margin: 16px auto 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 10px;
-    font-size: 11px;
-    opacity: 0.8;
-}
-
-.footer-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 10px;
-    border-radius: 999px;
-    background: rgba(0,0,0,0.06);
-    font-size: 11px;
-}
-
-body.dark-mode .footer-badge {
-    background: rgba(255,255,255,0.06);
-}
-
-.footer-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--primary);
-}
-
-@keyframes footerGlow {
-    0% { box-shadow: 0 0 0 rgba(197,139,59,0.0); }
-    100% { box-shadow: 0 0 18px rgba(197,139,59,0.45); }
-}
-
-.footer-glow {
-    animation: footerGlow 2.8s ease-in-out infinite alternate;
-}
-
-/* ========================================================= */
-/* ===================== END OF CSS ======================== */
-/* ========================================================= */
-</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AlaeAI — Build. Learn. Create.</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@900&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===========================
+           GLOBAL RESET & ROOT
+        ============================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background: #f5efe3;
+            font-family: 'Rubik', sans-serif;
+            color: #2b2b2b;
+            overflow-x: hidden;
+            transition: background 0.35s ease, color 0.35s ease;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        :root {
+            --gold: #C58B3B;
+            --gold-soft: rgba(197, 139, 59, 0.55);
+            --gold-strong: rgba(197, 139, 59, 0.8);
+            --bg-main: #f5efe3;
+            --bg-card: #ffffff;
+            --text-main: #2b2b2b;
+            --text-muted: #4a4a4a;
+            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --gold-glow: 0 0 18px var(--gold-soft);
+            --gold-glow-strong: 0 0 28px var(--gold-strong);
+            --radius-pill: 40px;
+            --radius-card: 20px;
+            --radius-subtle: 14px;
+            --transition-fast: 0.25s ease;
+            --transition-med: 0.35s ease;
+            --transition-slow: 0.55s ease;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        /* ===========================
+           NAVIGATION
+        ============================ */
+        nav {
+            width: 100%;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: rgba(245, 239, 227, 0.9);
+            backdrop-filter: blur(14px);
+            z-index: 1000;
+            box-shadow: var(--shadow-soft);
+            transition: background 0.35s ease;
+        }
+
+        nav .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--gold);
+            text-shadow: var(--gold-glow);
+            letter-spacing: 0.04em;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        nav ul li {
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition-fast);
+        }
+
+        nav ul li::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            box-shadow: var(--gold-glow);
+            transition: var(--transition-med);
+        }
+
+        nav ul li:hover {
+            color: var(--gold);
+            text-shadow: var(--gold-glow);
+        }
+
+        nav ul li:hover::after {
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-cta {
+            padding: 8px 20px;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-size: 14px;
+            font-weight: 500;
+            background: transparent;
+            cursor: pointer;
+            transition: var(--transition-med);
+        }
+
+        .nav-cta:hover {
+            background: rgba(197, 139, 59, 0.12);
+            box-shadow: var(--gold-glow);
+            transform: translateY(-2px);
+        }
+
+        .dark-toggle {
+            padding: 8px 18px;
+            border-radius: 999px;
+            background: var(--gold);
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: 0.3s ease;
+        }
+
+        .dark-toggle:hover {
+            transform: scale(1.06);
+            box-shadow: var(--gold-glow-strong);
+        }
+
+        /* ===========================
+           HERO SECTION
+        ============================ */
+        .hero {
+            padding-top: 140px;
+            padding-bottom: 120px;
+        }
+
+        .hero-inner {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 56px;
+            font-weight: 900;
+            line-height: 1.1;
+            color: var(--text-main);
+            text-shadow: var(--gold-glow);
+            margin-bottom: 18px;
+        }
+
+        .hero-highlight {
+            color: var(--gold);
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            max-width: 520px;
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .hero-badge {
+            padding: 8px 16px;
+            border-radius: 999px;
+            background: #fff;
+            box-shadow: var(--shadow-soft), var(--gold-glow);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 26px;
+        }
+
+        .btn-primary {
+            padding: 13px 30px;
+            background: var(--gold);
+            color: #fff;
+            border-radius: var(--radius-pill);
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: var(--gold-glow);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition-med);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.06) translateY(-3px);
+            box-shadow: var(--gold-glow-strong);
+        }
+
+        .btn-secondary {
+            padding: 13px 30px;
+            border-radius: var(--radius-pill);
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            background: transparent;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-med);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(197, 139, 59, 0.12);
+            box-shadow: var(--gold-glow);
+            transform: scale(1.06) translateY(-3px);
+        }
+
+        .hero-meta {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .hero-right {
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            margin-left: auto;
+        }
+
+        .hero-3d {
+            perspective: 1200px;
+        }
+
+        .hero-image-main {
+            width: 100%;
+            height: 420px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #fdf7ea, #f0e0c7);
+            box-shadow: var(--shadow-soft), var(--gold-glow);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform 0.35s ease;
+        }
+
+        .hero-image-main::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 0%, rgba(197, 139, 59, 0.25), transparent 55%),
+                radial-gradient(circle at 80% 100%, rgba(197, 139, 59, 0.2), transparent 55%);
+            opacity: 0.9;
+        }
+
+        .hero-image-main:hover {
+            transform: rotateY(14deg) rotateX(8deg) scale(1.03);
+        }
+
+        .hero-orbit {
+            position: absolute;
+            inset: 18%;
+            border-radius: 999px;
+            border: 1px dashed rgba(197, 139, 59, 0.4);
+            animation: orbit-rotate 18s linear infinite;
+        }
+
+        .hero-orbit-dot {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--gold);
+            box-shadow: var(--gold-glow-strong);
+            top: -7px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .hero-floating-card {
+            position: absolute;
+            bottom: 18px;
+            left: 18px;
+            right: 18px;
+            padding: 14px 18px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: var(--shadow-soft), var(--gold-glow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .hero-floating-card strong {
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .hero-floating-pill {
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(197, 139, 59, 0.08);
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .hero-particle {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--gold);
+            box-shadow: var(--gold-glow-strong);
+            animation: floatParticle 6s ease-in-out infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes orbit-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-20px) translateX(10px); }
+            100% { transform: translateY(0) translateX(0); }
+        }
+
+        /* ===========================
+           SECTION TITLES
+        ============================ */
+        .section-header {
+            margin-bottom: 40px;
+        }
+
+        .section-title-card {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #ffffff;
+            border-radius: var(--radius-pill);
+            box-shadow: var(--shadow-soft), var(--gold-glow);
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--text-main);
+            margin-bottom: 18px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .section-subtitle-card {
+            display: inline-block;
+            padding: 9px 20px;
+            background: #ffffff;
+            border-radius: var(--radius-subtle);
+            box-shadow: var(--shadow-soft), var(--gold-glow);
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-muted);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        /* ===========================
+           CORE FEATURES
+        ============================ */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 28px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            padding: 26px;
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition-med);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top left, rgba(197, 139, 59, 0.12), transparent 55%);
+            opacity: 0;
+            transition: var(--transition-med);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-soft), var(--gold-glow);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 999px;
+            background: rgba(197, 139, 59, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 18px;
+            margin-bottom: 14px;
+        }
+
+        .feature-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .feature-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ===========================
+           ABOUT
+        ============================ */
+        .about-inner {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .about-list {
+            margin-top: 18px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 18px;
+            font-size: 14px;
+        }
+
+        .about-list-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .about-bullet {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gold);
+            box-shadow: var(--gold-glow);
+        }
+
+        .about-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: var(--shadow-soft), var(--gold-glow);
+            position: relative;
+        }
+
+        .about-tag {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(197, 139, 59, 0.08);
+            color: var(--gold);
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .about-metric {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .about-metric-label {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .about-metric-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        .about-metric-block {
+            flex: 1;
+        }
+
+        /* ===========================
+           TUTORIAL PATH
+        ============================ */
+        .tutorial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .tutorial-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-card);
+            padding: 22px;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition-med);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tutorial-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top right, rgba(197, 139, 59, 0.16), transparent 55%);
+            opacity: 0;
+            transition: var(--transition-med);
+        }
+
+        .tutorial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-soft), var(--gold-glow);
+        }
+
+        .tutorial-card:hover::before {
+            opacity: 1;
+        }
+
+        .tutorial-level {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 6px;
+        }
+
+        .tutorial-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 8px;
+        }
+
+        .tutorial-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .tutorial-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .section-cta-row {
+            margin-top: 32px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* ===========================
+           NEWS & TOOLS
+        ============================ */
+        .news-tools-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 32px;
+        }
+
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .news-item {
+            background: var(--bg-card);
+            border-radius: 18px;
+            padding: 16px 18px;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition-med);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-item::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(197, 139, 59, 0.12), transparent 60%);
+            opacity: 0;
+            transition: var(--transition-med);
+        }
+
+        .news-item:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-soft), var(--gold-glow);
+        }
+
+        .news-item:hover::before {
+            opacity: 1;
+        }
+
+        .news-tag {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+
+        .news-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .news-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .tools-card {
+            background: var(--bg-card);
+            border-radius: 22px;
+            padding: 22px;
+            box-shadow: var(--shadow-soft), var(--gold-glow);
+        }
+
+        .tools-list {
+            margin-top: 10px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 16px;
+            font-size: 13px;
+        }
+
+        .tools-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tools-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--gold);
+        }
+
+        /* ===========================
+           ROADMAP
+        ============================ */
+        .roadmap-timeline {
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .roadmap-item {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 26px;
+        }
+
+        .roadmap-dot {
+            position: absolute;
+            left: 0;
+            top: 4px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--gold);
+            box-shadow: var(--gold-glow-strong);
+        }
+
+        .roadmap-line {
+            position: absolute;
+            left: 6px;
+            top: 20px;
+            width: 2px;
+            height: 100%;
+            background: rgba(197, 139, 59, 0.4);
+        }
+
+        .roadmap-line-end {
+            height: 0;
+        }
+
+        .roadmap-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+
+        .roadmap-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 6px;
+        }
+
+        .roadmap-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* ===========================
+           TESTIMONIALS
+        ============================ */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .testimonial-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-card);
+            padding: 20px;
+            box-shadow: var(--shadow-soft), var(--gold-glow);
+            transition: var(--transition-med);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-soft), var(--gold-glow-strong);
+        }
+
+        .testimonial-quote {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* ===========================
+           FAQ
+        ============================ */
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            border-radius: 16px;
+            box-shadow: var(--shadow-soft);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 14px 18px;
+            border: none;
+            background: transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .faq-icon {
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 18px;
+            font-size: 13px;
+            color: var(--text-muted);
+            transition: max-height 0.35s ease;
+        }
+
+        .faq-answer.open {
+            padding-bottom: 14px;
+        }
+
+        /* ===========================
+           CONTACT
+        ============================ */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .contact-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 12px;
+        }
+
+        .contact-text {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .contact-form {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: var(--shadow-soft), var(--gold-glow);
+        }
+
+        .contact-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 14px;
+        }
+
+        .contact-field {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            font-size: 13px;
+        }
+
+        .contact-field label {
+            font-weight: 500;
+        }
+
+        .contact-field input,
+        .contact-field textarea {
+            border-radius: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            padding: 8px 10px;
+            font-family: inherit;
+            font-size: 13px;
+            outline: none;
+            transition: border 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .contact-field input:focus,
+        .contact-field textarea:focus {
+            border-color: var(--gold);
+            box-shadow: var(--gold-glow);
+        }
+
+        /* ===========================
+           FOOTER
+        ============================ */
+        #footer {
+            padding: 40px 0;
+            background: #e8dfcf;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--gold);
+            text-shadow: var(--gold-glow);
+        }
+
+        .footer-tagline {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .footer-meta {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* ===========================
+           DARK MODE
+        ============================ */
+        body.dark {
+            background: #1a1a1a;
+            color: #eaeaea;
+        }
+
+        body.dark nav {
+            background: rgba(20, 20, 20, 0.9);
+        }
+
+        body.dark .section-title-card,
+        body.dark .section-subtitle-card,
+        body.dark .feature-card,
+        body.dark .tutorial-card,
+        body.dark .news-item,
+        body.dark .tools-card,
+        body.dark .testimonial-card,
+        body.dark .contact-form,
+        body.dark .about-card,
+        body.dark .faq-item {
+            background: #222;
+            color: #eaeaea;
+            box-shadow: var(--gold-glow);
+        }
+
+        body.dark .hero-image-main {
+            background: linear-gradient(135deg, #2a2a2a, #1f1f1f);
+        }
+
+        body.dark #footer {
+            background: #111;
+        }
+
+        /* ===========================
+           RESPONSIVE
+        ============================ */
+        @media (max-width: 992px) {
+            nav {
+                padding: 16px 24px;
+            }
+
+            nav ul {
+                gap: 18px;
+            }
+
+            .hero-inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-left {
+                order: 2;
+            }
+
+            .hero-right {
+                order: 1;
+            }
+
+            .hero-image-wrapper {
+                margin: 0 auto 40px auto;
+            }
+
+            .features-grid,
+            .tutorial-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .news-tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav ul {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 42px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .features-grid,
+            .tutorial-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title-card {
+                font-size: 22px;
+                padding: 10px 22px;
+            }
+
+            .section-subtitle-card {
+                font-size: 14px;
+            }
+
+            .roadmap-item {
+                padding-left: 20px;
+            }
+
+            .contact-row {
+                flex-direction: column;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (min-width: 1400px) {
+            .container {
+                max-width: 1400px;
+            }
+
+            .hero-title {
+                font-size: 64px;
+            }
+
+            .features-grid,
+            .tutorial-grid {
+                gap: 40px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<div class="blob blob-1"></div>
-<div class="blob blob-2"></div>
-<div class="blob blob-3"></div>
-
-<header class="max-width">
-    <img src="assets/logo.png"
-         alt="AlaeAI — Build. Learn. Create."
-         class="logo-animate">
-</header>
-
-<nav>
-    <div class="nav-left">
-        <div class="nav-logo-mini">A</div>
-        <div>
-            <div class="nav-title">AlaeAI</div>
-            <div class="nav-subtitle">Build. Learn. Create.</div>
+    <!-- ===========================
+         NAVIGATION
+    ============================ -->
+    <nav>
+        <div class="logo">AlaeAI</div>
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#tutorials">Tutorials</a></li>
+            <li><a href="#news-tools">News & Tools</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="nav-cta" onclick="scrollToSection('tutorials')">Start Learning</button>
+            <button class="dark-toggle" onclick="toggleDarkMode()">Dark Mode</button>
         </div>
-    </div>
+    </nav>
 
-    <div class="nav-links">
-        <a href="index.html" class="active">Home</a>
-        <a href="tutorials.html">Tutorials</a>
-        <a href="news.html">News</a>
-        <a href="tools.html">Tools</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-    </div>
+    <!-- ===========================
+         HERO
+    ============================ -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <div class="hero-inner">
+                <div class="hero-left">
+                    <h1 class="hero-title">
+                        Build. <span class="hero-highlight">Learn.</span> Create.
+                    </h1>
+                    <p class="hero-subtitle">
+                        A premium learning space where tutorials, tools, and real-time news come together in one elegant experience.
+                    </p>
 
-    <div class="nav-right">
-        <button id="theme-toggle">
-            <span>🌙</span>
-            <span>Dark Mode</span>
-        </button>
-    </div>
-</nav>
-
-<section class="hero">
-    <div class="hero-left">
-        <div class="hero-pill">
-            <span class="hero-pill-dot"></span>
-            <span>Welcome back, creator</span>
-        </div>
-
-        <h2 class="hero-title">
-            Build your <span class="hero-highlight">developer journey</span> with AlaeAI.
-        </h2>
-
-        <p class="hero-subtitle">
-            Practice web development, track your tutorial progress, explore tools, and stay updated with tech &amp; AI news —
-            all in one clean, animated, professional space.
-        </p>
-
-        <div class="hero-actions">
-            <a href="tutorials.html">
-                <button class="btn-primary">Resume Tutorials</button>
-            </a>
-            <a href="news.html">
-                <button class="btn-ghost">View News</button>
-            </a>
-        </div>
-
-        <div class="hero-meta">
-            <span>✅ <strong>20</strong> structured tutorial levels</span>
-            <span>🧠 Real‑world projects</span>
-            <span>🌙 Dark mode ready</span>
-        </div>
-
-        <div class="stats-strip">
-            <div class="stat-card">
-                <span class="stat-label">Levels Completed</span>
-                <span class="stat-value" id="stat-levels">0 / 20</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-label">Completion</span>
-                <span class="stat-value" id="stat-percent">0%</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-label">Current Focus</span>
-                <span class="stat-value" id="stat-focus">Level 1</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="hero-right">
-        <div class="hero-card-wrapper">
-            <div class="hero-card">
-                <div class="hero-card-badge">
-                    <span class="hero-card-badge-dot"></span>
-                    <span>Live Snapshot</span>
-                </div>
-
-                <h3 class="hero-card-title">Today on AlaeAI</h3>
-                <p class="hero-card-sub">Your learning progress at a glance</p>
-
-                <div class="hero-card-grid">
-                    <div class="hero-mini-card hero-mini-card-1">
-                        <div class="hero-mini-label">Tutorials Completed</div>
-                        <div class="hero-mini-value" id="mini-completed">0</div>
+                    <div class="hero-badges">
+                        <div class="hero-badge">Guided tutorials</div>
+                        <div class="hero-badge">Real-time tech news</div>
+                        <div class="hero-badge">Smart tools & utilities</div>
                     </div>
 
-                    <div class="hero-mini-card hero-mini-card-2">
-                        <div class="hero-mini-label">Active Level</div>
-                        <div class="hero-mini-value" id="mini-active">1</div>
+                    <div class="hero-buttons">
+                        <button class="btn-primary" onclick="scrollToSection('tutorials')">
+                            Resume Tutorials
+                        </button>
+                        <button class="btn-secondary" onclick="scrollToSection('news-tools')">
+                            View News & Tools
+                        </button>
                     </div>
 
-                    <div class="hero-mini-card hero-mini-card-3">
-                        <div class="hero-mini-label">Daily Streak</div>
-                        <div class="hero-mini-value" id="mini-streak">0 days</div>
-                    </div>
-
-                    <div class="hero-mini-card hero-mini-card-4">
-                        <div class="hero-mini-label">Focus Path</div>
-                        <div class="hero-mini-value">Web Dev Track</div>
+                    <div class="hero-meta">
+                        Designed for focus, clarity, and real progress — not noise.
                     </div>
                 </div>
 
-                <div class="hero-image-shell mt-md">
-                    <div class="hero-image-shell-inner">
-                        <img src="assets/logo.png" alt="AlaeAI Logo Hero">
-                        <div class="hero-image-tag">
-                            <span class="hero-image-tag-dot"></span>
-                            <span>Live Preview</span>
+                <div class="hero-right">
+                    <div class="hero-image-wrapper hero-3d">
+                        <div class="hero-image-main">
+                            <div class="hero-orbit">
+                                <div class="hero-orbit-dot"></div>
+                            </div>
+                            <div class="hero-particle" style="top: 20px; left: 40px;"></div>
+                            <div class="hero-particle" style="bottom: 40px; right: 30px; animation-delay: 1s;"></div>
+                            <div class="hero-particle" style="top: 60%; left: 70%; animation-delay: 2s;"></div>
                         </div>
-                        <div class="hero-image-bottom-strip">
-                            <span>“Build. Learn. Create.”</span>
-                            <span class="text-muted">Your personal lab for experiments and growth.</span>
+                        <div class="hero-floating-card">
+                            <div>
+                                <strong>AlaeAI Workspace</strong><br />
+                                Tutorials • News • Tools • One clean interface
+                            </div>
+                            <div class="hero-floating-pill">
+                                Live • Active
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="hero-orbit"></div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="section">
-    <div class="section-header">
-        <div>
-            <h2 class="section-title">Core Features</h2>
-            <p class="section-subtitle">Everything you need to grow as a developer</p>
-        </div>
-        <div class="section-actions">
-            <a href="tutorials.html">
-                <button class="btn-ghost">See Tutorials</button>
-            </a>
-            <a href="news.html">
-                <button class="btn-ghost">See News</button>
-            </a>
-        </div>
-    </div>
-
-    <div class="feature-grid">
-        <div class="feature-card reveal">
-            <div class="feature-icon">📘</div>
-            <div class="feature-title">Structured Tutorials</div>
-            <div class="feature-text">
-                20 levels from beginner to builder with real projects.
+    <!-- ===========================
+         CORE FEATURES
+    ============================ -->
+    <section id="features">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title-card reveal-on-scroll">Core Features</div><br />
+                <div class="section-subtitle-card reveal-on-scroll">
+                    The essential pillars that make AlaeAI a powerful daily workspace.
+                </div>
             </div>
-            <div class="feature-meta">Progress saved locally</div>
-        </div>
 
-        <div class="feature-card reveal">
-            <div class="feature-icon">🛠️</div>
-            <div class="feature-title">Developer Tools</div>
-            <div class="feature-text">
-                Curated tools to speed up your workflow and experimentation.
-            </div>
-            <div class="feature-meta">Always expanding</div>
-        </div>
-
-        <div class="feature-card reveal">
-            <div class="feature-icon">📰</div>
-            <div class="feature-title">Tech &amp; AI News</div>
-            <div class="feature-text">
-                Stay updated with the latest in AI, coding, and innovation.
-            </div>
-            <div class="feature-meta">Fresh content</div>
-        </div>
-
-        <div class="feature-card reveal">
-            <div class="feature-icon">⚙️</div>
-            <div class="feature-title">Custom Experiments</div>
-            <div class="feature-text">
-                Build mini‑projects, test ideas, and iterate quickly.
-            </div>
-            <div class="feature-meta">Made for builders</div>
-        </div>
-    </div>
-</section>
-
-<section class="section">
-    <div class="section-header">
-        <div>
-            <h2 class="section-title">Tutorial Path</h2>
-            <p class="section-subtitle">Start your learning journey</p>
-        </div>
-        <div class="section-actions">
-            <a href="tutorials.html">
-                <button class="btn-ghost">View all tutorials</button>
-            </a>
-        </div>
-    </div>
-
-    <div class="preview-grid">
-        <div class="preview-card reveal">
-            <div class="preview-tag">Level 1</div>
-            <h3 class="preview-title">HTML Basics</h3>
-            <p class="preview-text">Learn the structure of the web and build your first page.</p>
-            <div class="preview-meta">Beginner friendly</div>
-        </div>
-
-        <div class="preview-card reveal">
-            <div class="preview-tag">Level 2</div>
-            <h3 class="preview-title">CSS Essentials</h3>
-            <p class="preview-text">Style your first layout with modern techniques.</p>
-            <div class="preview-meta">Hands‑on</div>
-        </div>
-
-        <div class="preview-card reveal">
-            <div class="preview-tag">Level 3</div>
-            <h3 class="preview-title">JavaScript Intro</h3>
-            <p class="preview-text">Make your pages interactive with core JS concepts.</p>
-            <div class="preview-meta">Interactive</div>
-        </div>
-    </div>
-</section>
-
-<section class="section">
-    <div class="section-header">
-        <div>
-            <h2 class="section-title">News &amp; Tools</h2>
-            <p class="section-subtitle">Stay sharp and equipped</p>
-        </div>
-        <div class="section-actions">
-            <a href="news.html">
-                <button class="btn-ghost">View news</button>
-            </a>
-        </div>
-    </div>
-
-    <div class="preview-grid">
-        <div class="preview-card reveal">
-            <div class="preview-tag">News</div>
-            <h3 class="preview-title">Latest Tech &amp; AI</h3>
-            <p class="preview-text">Curated stories and updates you actually care about.</p>
-            <div class="preview-meta">Updated regularly</div>
-        </div>
-
-        <div class="preview-card reveal">
-            <div class="preview-tag">Tools</div>
-            <h3 class="preview-title">Developer Toolkit</h3>
-            <p class="preview-text">Snippets, generators, and helpers to speed up your work.</p>
-            <div class="preview-meta">Optimized for learning</div>
-        </div>
-
-        <div class="preview-card reveal">
-            <div class="preview-tag">Experiments</div>
-            <h3 class="preview-title">Playground</h3>
-            <p class="preview-text">Try ideas, test animations, and explore interactions.</p>
-            <div class="preview-meta">Made for curiosity</div>
-        </div>
-    </div>
-</section>
-
-<section class="cta-section">
-    <div class="cta-wrapper reveal">
-        <div class="cta-orbit"></div>
-
-        <div class="cta-grid">
-            <div>
-                <div class="cta-pill">
-                    <span class="cta-pill-dot"></span>
-                    <span>Keep your momentum</span>
+            <div class="features-grid">
+                <div class="feature-card reveal-on-scroll">
+                    <div class="feature-icon">📚</div>
+                    <div class="feature-title">Interactive Tutorials</div>
+                    <div class="feature-desc">
+                        Follow structured, step-by-step paths that help you actually understand and apply what you learn.
+                    </div>
                 </div>
 
-                <h3 class="cta-title">Continue your learning streak</h3>
-                <p class="cta-subtitle">
-                    Your progress is saved locally in your browser. Come back anytime and pick up exactly where you left off.
-                </p>
-
-                <div class="cta-actions">
-                    <a href="tutorials.html">
-                        <button class="btn-primary">Resume Tutorials</button>
-                    </a>
-                    <a href="tools.html">
-                        <button class="btn-ghost">Explore Tools</button>
-                    </a>
+                <div class="feature-card reveal-on-scroll">
+                    <div class="feature-icon">📰</div>
+                    <div class="feature-title">Real-Time News</div>
+                    <div class="feature-desc">
+                        Stay updated with curated, meaningful news — not noise — focused on tech, science, and innovation.
+                    </div>
                 </div>
 
-                <div class="mini-stats-strip">
-                    <div class="mini-stat-card">
-                        <div class="mini-stat-label">Levels Completed</div>
-                        <div class="mini-stat-value" id="cta-levels-completed">0 / 20</div>
+                <div class="feature-card reveal-on-scroll">
+                    <div class="feature-icon">🛠️</div>
+                    <div class="feature-title">Smart Tools</div>
+                    <div class="feature-desc">
+                        Use calculators, generators, and utilities that actually help you build, test, and ship ideas faster.
                     </div>
-                    <div class="mini-stat-card">
-                        <div class="mini-stat-label">Completion</div>
-                        <div class="mini-stat-value" id="cta-levels-percent">0%</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================
+         ABOUT
+    ============================ -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title-card reveal-on-scroll">About AlaeAI</div><br />
+                <div class="section-subtitle-card reveal-on-scroll">
+                    A focused environment built to help you grow, one clear step at a time.
+                </div>
+            </div>
+
+            <div class="about-inner">
+                <div class="about-left reveal-on-scroll">
+                    <p class="about-text">
+                        AlaeAI is designed as a calm, powerful workspace — not a chaotic dashboard.
+                        Every section is intentional: tutorials guide you, tools support you, and news keeps you aware of what matters.
+                    </p>
+                    <div class="about-list">
+                        <div class="about-list-item">
+                            <div class="about-bullet"></div>
+                            <span>Clean, distraction-free layout</span>
+                        </div>
+                        <div class="about-list-item">
+                            <div class="about-bullet"></div>
+                            <span>Soft gold glow for a premium feel</span>
+                        </div>
+                        <div class="about-list-item">
+                            <div class="about-bullet"></div>
+                            <span>Structured learning paths</span>
+                        </div>
+                        <div class="about-list-item">
+                            <div class="about-bullet"></div>
+                            <span>Real-time content integration ready</span>
+                        </div>
                     </div>
-                    <div class="mini-stat-card">
-                        <div class="mini-stat-label">Current Level</div>
-                        <div class="mini-stat-value" id="cta-current-level">1</div>
+                </div>
+
+                <div class="about-right reveal-on-scroll">
+                    <div class="about-card">
+                        <div class="about-tag">Workspace Snapshot</div>
+                        <div class="about-metric">3</div>
+                        <div class="about-metric-label">Core pillars — Tutorials, News, Tools</div>
+
+                        <div class="about-metric-row">
+                            <div class="about-metric-block">
+                                <div class="about-metric">20+</div>
+                                <div class="about-metric-label">Tutorial levels planned</div>
+                            </div>
+                            <div class="about-metric-block">
+                                <div class="about-metric">24/7</div>
+                                <div class="about-metric-label">News & tools ready to extend</div>
+                            </div>
+                        </div>
+
+                        <div class="about-metric-row">
+                            <div class="about-metric-block">
+                                <div class="about-metric">1</div>
+                                <div class="about-metric-label">Unified, clean interface</div>
+                            </div>
+                            <div class="about-metric-block">
+                                <div class="about-metric">∞</div>
+                                <div class="about-metric-label">Room to grow and scale</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================
+         TUTORIAL PATH
+    ============================ -->
+    <section id="tutorials">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title-card reveal-on-scroll">Tutorial Path</div><br />
+                <div class="section-subtitle-card reveal-on-scroll">
+                    Move from basics to advanced topics with a clear, structured progression.
+                </div>
+            </div>
+
+            <div class="tutorial-grid">
+                <div class="tutorial-card reveal-on-scroll">
+                    <div class="tutorial-level">Level 1 • Foundations</div>
+                    <div class="tutorial-title">Getting Started</div>
+                    <div class="tutorial-desc">
+                        Learn the core concepts, tools, and mindset you need before diving into complex projects.
+                    </div>
+                    <div class="tutorial-meta">
+                        ~10 lessons • Perfect for beginners
+                    </div>
+                </div>
+
+                <div class="tutorial-card reveal-on-scroll">
+                    <div class="tutorial-level">Level 2 • Builder Mode</div>
+                    <div class="tutorial-title">Real Projects</div>
+                    <div class="tutorial-desc">
+                        Apply what you know by building small but complete projects with clear goals.
+                    </div>
+                    <div class="tutorial-meta">
+                        ~15 lessons • Hands-on practice
+                    </div>
+                </div>
+
+                <div class="tutorial-card reveal-on-scroll">
+                    <div class="tutorial-level">Level 3 • Advanced</div>
+                    <div class="tutorial-title">Deep Dive</div>
+                    <div class="tutorial-desc">
+                        Explore advanced patterns, performance, and clean architecture for serious builds.
+                    </div>
+                    <div class="tutorial-meta">
+                        ~20 lessons • For focused learners
                     </div>
                 </div>
             </div>
 
-            <div class="cta-right-card">
-                <h4 class="cta-right-title">Tutorial Progress Overview</h4>
-                <p class="cta-right-text">
-                    This bar reflects your overall completion across all 20 tutorial levels. Each level you finish moves you closer to mastery.
-                </p>
+            <div class="section-cta-row">
+                <button class="btn-primary" onclick="scrollToSection('tutorials')">
+                    View Full Tutorial Roadmap
+                </button>
+                <button class="btn-secondary" onclick="scrollToSection('contact')">
+                    Ask for a Custom Path
+                </button>
+            </div>
+        </div>
+    </section>
 
-                <div class="cta-progress-bar-shell">
-                    <div class="cta-progress-bar-fill" id="cta-progress-bar"></div>
+    <!-- ===========================
+         NEWS & TOOLS
+    ============================ -->
+    <section id="news-tools">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title-card reveal-on-scroll">News & Tools</div><br />
+                <div class="section-subtitle-card reveal-on-scroll">
+                    Stay updated and use focused utilities that support your learning and building.
+                </div>
+            </div>
+
+            <div class="news-tools-grid">
+                <div class="news-column reveal-on-scroll">
+                    <div class="news-list">
+                        <div class="news-item">
+                            <div class="news-tag">Tech • Today</div>
+                            <div class="news-title">AI breakthroughs are reshaping how we learn and build.</div>
+                            <div class="news-meta">Curated headline • Ready for live integration</div>
+                        </div>
+
+                        <div class="news-item">
+                            <div class="news-tag">Dev • This week</div>
+                            <div class="news-title">New tools make prototyping faster than ever.</div>
+                            <div class="news-meta">Placeholder content • Connect to your API later</div>
+                        </div>
+
+                        <div class="news-item">
+                            <div class="news-tag">World • This week</div>
+                            <div class="news-title">Innovation and education are merging globally.</div>
+                            <div class="news-meta">Static example • Replace with real feed</div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="cta-progress-labels">
-                    <span>0%</span>
-                    <span id="cta-progress-label">0% complete</span>
-                    <span>100%</span>
+                <div class="tools-column reveal-on-scroll">
+                    <div class="tools-card">
+                        <div class="feature-title" style="margin-bottom: 6px;">Tools Overview</div>
+                        <div class="feature-desc">
+                            A growing collection of utilities designed to support your workflow.
+                        </div>
+
+                        <div class="tools-list">
+                            <div class="tools-item">
+                                <div class="tools-dot"></div>
+                                <span>Code snippet generator</span>
+                            </div>
+                            <div class="tools-item">
+                                <div class="tools-dot"></div>
+                                <span>Math & logic helpers</span>
+                            </div>
+                            <div class="tools-item">
+                                <div class="tools-dot"></div>
+                                <span>Layout & design presets</span>
+                            </div>
+                            <div class="tools-item">
+                                <div class="tools-dot"></div>
+                                <span>API integration stubs</span>
+                            </div>
+                        </div>
+
+                        <div class="section-cta-row" style="margin-top: 20px;">
+                            <button class="btn-secondary" onclick="scrollToSection('contact')">
+                                Suggest a New Tool
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<footer>
-    <div class="footer-grid">
-        <div class="footer-brand">
-            <div class="footer-title">AlaeAI</div>
-            <p class="footer-text">
-                Build. Learn. Create. A focused space for practicing web development, exploring tools, and staying updated with tech &amp; AI.
-            </p>
-            <div class="footer-badge footer-glow">
-                <span class="footer-dot"></span>
-                <span>Made for builders</span>
+    <!-- ===========================
+         ROADMAP
+    ============================ -->
+    <section id="roadmap">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title-card reveal-on-scroll">Roadmap</div><br />
+                <div class="section-subtitle-card reveal-on-scroll">
+                    A clear path for how AlaeAI can grow with you over time.
+                </div>
+            </div>
+
+            <div class="roadmap-timeline">
+                <div class="roadmap-item reveal-on-scroll">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-line"></div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-label">Phase 1 • Now</div>
+                        <div class="roadmap-title">Core Homepage</div>
+                        <div class="roadmap-desc">
+                            A clean, premium landing experience with tutorials, news, and tools in one place.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="roadmap-item reveal-on-scroll">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-line"></div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-label">Phase 2 • Soon</div>
+                        <div class="roadmap-title">Dedicated Tutorials Hub</div>
+                        <div class="roadmap-desc">
+                            A full tutorials page with levels, progress tracking, and interactive exercises.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="roadmap-item reveal-on-scroll">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-line"></div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-label">Phase 3 • Next</div>
+                        <div class="roadmap-title">Live News Integration</div>
+                        <div class="roadmap-desc">
+                            Real-time news feeds connected to your backend or APIs, filtered by topics you care about.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="roadmap-item reveal-on-scroll">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-line roadmap-line-end"></div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-label">Phase 4 • Future</div>
+                        <div class="roadmap-title">Full Workspace</div>
+                        <div class="roadmap-desc">
+                            A complete learning and building environment with dashboards, stats, and personalized flows.
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="footer-links">
-            <div class="footer-links-column">
-                <div class="footer-links-title">Explore</div>
-                <a href="index.html">Home</a>
-                <a href="tutorials.html">Tutorials</a>
-                <a href="news.html">News</a>
-                <a href="tools.html">Tools</a>
+    <!-- ===========================
+         TESTIMONIALS
+    ============================ -->
+    <section id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title-card reveal-on-scroll">Testimonials</div><br />
+                <div class="section-subtitle-card reveal-on-scroll">
+                    Imagine how learners will talk about AlaeAI once it’s fully live.
+                </div>
             </div>
 
-            <div class="footer-links-column">
-                <div class="footer-links-title">About</div>
-                <a href="about.html">About AlaeAI</a>
-                <a href="contact.html">Contact</a>
-            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal-on-scroll">
+                    <div class="testimonial-quote">
+                        “The layout is so clean that I actually want to keep learning.”
+                    </div>
+                    <div class="testimonial-meta">
+                        Future User • Focused Learner
+                    </div>
+                </div>
 
-            <div class="footer-links-column">
-                <div class="footer-links-title">Focus</div>
-                <span>Web Development</span>
-                <span>Tech &amp; AI</span>
-                <span>Learning by building</span>
+                <div class="testimonial-card reveal-on-scroll">
+                    <div class="testimonial-quote">
+                        “Everything I need is in one place — tutorials, tools, and news.”
+                    </div>
+                    <div class="testimonial-meta">
+                        Future User • Builder
+                    </div>
+                </div>
+
+                <div class="testimonial-card reveal-on-scroll">
+                    <div class="testimonial-quote">
+                        “It feels premium without being complicated. Just clear and powerful.”
+                    </div>
+                    <div class="testimonial-meta">
+                        Future User • Creator
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="footer-bottom">
-        <span>© <span id="footer-year"></span> AlaeAI. All rights reserved.</span>
-        <span>Built with curiosity and persistence.</span>
-    </div>
-</footer>
+    <!-- ===========================
+         FAQ
+    ============================ -->
+    <section id="faq">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title-card reveal-on-scroll">FAQ</div><br />
+                <div class="section-subtitle-card reveal-on-scroll">
+                    Quick answers to how this space is meant to work.
+                </div>
+            </div>
 
-<script>
-// =========================================================
-// =============== 1. DARK MODE TOGGLE LOGIC ===============
-// =========================================================
+            <div class="faq-list">
+                <div class="faq-item reveal-on-scroll">
+                    <button class="faq-question" type="button">
+                        <span>Is this homepage ready for real data?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Yes. The layout is built so you can plug in real tutorials, news APIs, and tools without redesigning everything.
+                    </div>
+                </div>
 
-(function () {
-    const THEME_KEY = 'alaeai-theme';
-    const body = document.body;
-    const themeToggle = document.getElementById('theme-toggle');
+                <div class="faq-item reveal-on-scroll">
+                    <button class="faq-question" type="button">
+                        <span>Can I extend this into multiple pages?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Absolutely. The navigation, sections, and style system are ready to be reused on /tutorials, /news, /tools, and more.
+                    </div>
+                </div>
 
-    function applyTheme(theme) {
-        if (theme === 'dark') {
-            body.classList.add('dark-mode');
-            if (themeToggle) {
-                themeToggle.innerHTML = '<span>☀️</span><span>Light Mode</span>';
+                <div class="faq-item reveal-on-scroll">
+                    <button class="faq-question" type="button">
+                        <span>Is the design mobile-friendly?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Yes. There are responsive rules for mobile, tablet, and large screens so the layout stays clean everywhere.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================
+         CONTACT
+    ============================ -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title-card reveal-on-scroll">Stay in Control</div><br />
+                <div class="section-subtitle-card reveal-on-scroll">
+                    Use this space as your personal lab — and shape what comes next.
+                </div>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-left reveal-on-scroll">
+                    <h3 class="contact-title">Ready to expand AlaeAI?</h3>
+                    <p class="contact-text">
+                        Whether it’s a new tutorials page, a tools dashboard, or a live news backend,
+                        this homepage is the foundation. You can keep extending it step by step.
+                    </p>
+                    <button class="btn-primary" onclick="scrollToSection('hero')">
+                        Back to Top
+                    </button>
+                </div>
+
+                <div class="contact-right reveal-on-scroll">
+                    <form class="contact-form" onsubmit="event.preventDefault();">
+                        <div class="contact-row">
+                            <div class="contact-field">
+                                <label for="name">Name</label>
+                                <input id="name" type="text" placeholder="Your name" />
+                            </div>
+                            <div class="contact-field">
+                                <label for="email">Email</label>
+                                <input id="email" type="email" placeholder="you@example.com" />
+                            </div>
+                        </div>
+
+                        <div class="contact-field">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="4" placeholder="What do you want to build next?"></textarea>
+                        </div>
+
+                        <button class="btn-secondary" type="submit">
+                            (Static) Submit
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================
+         FOOTER
+    ============================ -->
+    <footer id="footer">
+        <div class="container footer-inner">
+            <div class="footer-left">
+                <div class="footer-logo">AlaeAI</div>
+                <div class="footer-tagline">Build. Learn. Create.</div>
+            </div>
+            <div class="footer-right">
+                <div class="footer-meta">© 2026 AlaeAI. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===========================
+         JS: SCROLL, ANIMATIONS, DARK MODE
+    ============================ -->
+    <script>
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                window.scrollTo({
+                    top: el.offsetTop - 80,
+                    behavior: "smooth"
+                });
             }
-        } else {
-            body.classList.remove('dark-mode');
-            if (themeToggle) {
-                themeToggle.innerHTML = '<span>🌙</span><span>Dark Mode</span>';
-            }
         }
-    }
 
-    function getStoredTheme() {
-        try {
-            return localStorage.getItem(THEME_KEY);
-        } catch (e) {
-            return null;
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark");
         }
-    }
 
-    function storeTheme(theme) {
-        try {
-            localStorage.setItem(THEME_KEY, theme);
-        } catch (e) {}
-    }
-
-    const storedTheme = getStoredTheme();
-    if (storedTheme === 'dark' || storedTheme === 'light') {
-        applyTheme(storedTheme);
-    } else {
-        const prefersDark = window.matchMedia &&
-            window.matchMedia('(prefers-color-scheme: dark)').matches;
-        applyTheme(prefersDark ? 'dark' : 'light');
-    }
-
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            const isDark = body.classList.contains('dark-mode');
-            const nextTheme = isDark ? 'light' : 'dark';
-            applyTheme(nextTheme);
-            storeTheme(nextTheme);
-        });
-    }
-})();
-
-// =========================================================
-// =============== 2. TUTORIAL PROGRESS LOGIC ==============
-// =========================================================
-
-(function () {
-    const PROGRESS_KEY = 'alaeai-tutorial-progress';
-    const TOTAL_LEVELS = 20;
-
-    const statLevels = document.getElementById('stat-levels');
-    const statPercent = document.getElementById('stat-percent');
-    const statFocus = document.getElementById('stat-focus');
-
-    const miniCompleted = document.getElementById('mini-completed');
-    const miniActive = document.getElementById('mini-active');
-    const miniStreak = document.getElementById('mini-streak');
-
-    const ctaLevelsCompleted = document.getElementById('cta-levels-completed');
-    const ctaLevelsPercent = document.getElementById('cta-levels-percent');
-    const ctaCurrentLevel = document.getElementById('cta-current-level');
-    const ctaProgressBar = document.getElementById('cta-progress-bar');
-    const ctaProgressLabel = document.getElementById('cta-progress-label');
-
-    function getProgress() {
-        try {
-            const raw = localStorage.getItem(PROGRESS_KEY);
-            if (!raw) {
-                return {
-                    completedLevels: 0,
-                    currentLevel: 1,
-                    streakDays: 0
-                };
-            }
-            const parsed = JSON.parse(raw);
-            return {
-                completedLevels: Number(parsed.completedLevels) || 0,
-                currentLevel: Number(parsed.currentLevel) || 1,
-                streakDays: Number(parsed.streakDays) || 0
-            };
-        } catch (e) {
-            return {
-                completedLevels: 0,
-                currentLevel: 1,
-                streakDays: 0
-            };
-        }
-    }
-
-    function setProgress(progress) {
-        try {
-            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
-        } catch (e) {}
-    }
-
-    function clamp(value, min, max) {
-        return Math.min(Math.max(value, min), max);
-    }
-
-    function updateUI() {
-        const progress = getProgress();
-        const completed = clamp(progress.completedLevels, 0, TOTAL_LEVELS);
-        const currentLevel = clamp(progress.currentLevel, 1, TOTAL_LEVELS);
-        const streak = Math.max(progress.streakDays, 0);
-
-        const percent = TOTAL_LEVELS > 0
-            ? Math.round((completed / TOTAL_LEVELS) * 100)
-            : 0;
-
-        if (statLevels) statLevels.textContent = `${completed} / ${TOTAL_LEVELS}`;
-        if (statPercent) statPercent.textContent = `${percent}%`;
-        if (statFocus) statFocus.textContent = `Level ${currentLevel}`;
-
-        if (miniCompleted) miniCompleted.textContent = completed.toString();
-        if (miniActive) miniActive.textContent = currentLevel.toString();
-        if (miniStreak) miniStreak.textContent = `${streak} day${streak === 1 ? '' : 's'}`;
-
-        if (ctaLevelsCompleted) ctaLevelsCompleted.textContent = `${completed} / ${TOTAL_LEVELS}`;
-        if (ctaLevelsPercent) ctaLevelsPercent.textContent = `${percent}%`;
-        if (ctaCurrentLevel) ctaCurrentLevel.textContent = currentLevel.toString();
-        if (ctaProgressBar) ctaProgressBar.style.width = `${percent}%`;
-        if (ctaProgressLabel) ctaProgressLabel.textContent = `${percent}% complete`;
-    }
-
-    function simulateInitialProgress() {
-        const existing = getProgress();
-        if (existing.completedLevels === 0 && existing.currentLevel === 1) {
-            const simulated = {
-                completedLevels: 3,
-                currentLevel: 4,
-                streakDays: 2
-            };
-            setProgress(simulated);
-        }
-    }
-
-    simulateInitialProgress();
-    updateUI();
-
-    window.__AlaeAIProgress = {
-        get: getProgress,
-        set: function (data) {
-            const merged = Object.assign({}, getProgress(), data || {});
-            setProgress(merged);
-            updateUI();
-        },
-        reset: function () {
-            setProgress({
-                completedLevels: 0,
-                currentLevel: 1,
-                streakDays: 0
+        const revealElements = document.querySelectorAll(".reveal-on-scroll");
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                    entry.target.style.transition = "0.8s ease";
+                    revealObserver.unobserve(entry.target);
+                }
             });
-            updateUI();
-        }
-    };
-})();
+        }, { threshold: 0.2 });
 
-// =========================================================
-// =============== 3. SCROLL REVEAL ANIMATIONS =============
-// =========================================================
+        revealElements.forEach(el => revealObserver.observe(el));
 
-(function () {
-    const revealElements = Array.prototype.slice.call(
-        document.querySelectorAll('.reveal')
-    );
+        const faqItems = document.querySelectorAll(".faq-item");
+        faqItems.forEach(item => {
+            const btn = item.querySelector(".faq-question");
+            const answer = item.querySelector(".faq-answer");
+            const icon = item.querySelector(".faq-icon");
 
-    if (!('IntersectionObserver' in window)) {
-        revealElements.forEach(el => {
-            el.classList.add('reveal-visible');
-        });
-        return;
-    }
+            btn.addEventListener("click", () => {
+                const isOpen = answer.style.maxHeight;
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('reveal-visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.15
-    });
+                faqItems.forEach(i => {
+                    i.querySelector(".faq-answer").style.maxHeight = null;
+                    i.querySelector(".faq-answer").classList.remove("open");
+                    i.querySelector(".faq-icon").textContent = "+";
+                });
 
-    revealElements.forEach(el => observer.observe(el));
-})();
-
-// =========================================================
-// =============== 4. MOBILE NAVIGATION HANDLER ============
-// =========================================================
-
-(function () {
-    const nav = document.querySelector('nav');
-    if (!nav) return;
-
-    let mobileMenu;
-    let toggleButton;
-
-    function createMobileMenu() {
-        const existing = document.querySelector('.nav-links-mobile');
-        if (existing) {
-            mobileMenu = existing;
-            return;
-        }
-
-        const desktopLinks = nav.querySelector('.nav-links');
-        if (!desktopLinks) return;
-
-        mobileMenu = document.createElement('div');
-        mobileMenu.className = 'nav-links-mobile';
-
-        const links = desktopLinks.querySelectorAll('a');
-        links.forEach(link => {
-            const clone = link.cloneNode(true);
-            mobileMenu.appendChild(clone);
+                if (!isOpen) {
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                    answer.classList.add("open");
+                    icon.textContent = "–";
+                }
+            });
         });
 
-        document.body.appendChild(mobileMenu);
-    }
+        const staggerGroups = document.querySelectorAll(".feature-card, .tutorial-card, .news-item, .testimonial-card");
+        const staggerObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                    entry.target.style.transition = "0.6s ease";
+                    staggerObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
 
-    function createToggleButton() {
-        const existing = nav.querySelector('.nav-menu-toggle');
-        if (existing) {
-            toggleButton = existing;
-            return;
-        }
-
-        const right = nav.querySelector('.nav-right');
-        if (!right) return;
-
-        toggleButton = document.createElement('button');
-        toggleButton.className = 'nav-menu-toggle';
-        toggleButton.setAttribute('aria-label', 'Toggle navigation');
-        toggleButton.textContent = '☰';
-
-        right.appendChild(toggleButton);
-    }
-
-    function setupEvents() {
-        if (!toggleButton || !mobileMenu) return;
-
-        toggleButton.addEventListener('click', () => {
-            const isShown = mobileMenu.classList.contains('show');
-            if (isShown) {
-                mobileMenu.classList.remove('show');
-            } else {
-                mobileMenu.classList.add('show');
-            }
+        staggerGroups.forEach(el => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(20px)";
+            staggerObserver.observe(el);
         });
-
-        mobileMenu.addEventListener('click', (e) => {
-            const target = e.target;
-            if (target && target.tagName === 'A') {
-                mobileMenu.classList.remove('show');
-            }
-        });
-
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 860 && mobileMenu) {
-                mobileMenu.classList.remove('show');
-            }
-        });
-    }
-
-    createMobileMenu();
-    createToggleButton();
-    setupEvents();
-})();
-
-// =========================================================
-// =============== 5. MICRO INTERACTIONS ===================
-// =========================================================
-
-(function () {
-    const footerYear = document.getElementById('footer-year');
-    if (footerYear) {
-        footerYear.textContent = new Date().getFullYear().toString();
-    }
-
-    const heroMiniCards = document.querySelectorAll('.hero-mini-card');
-    heroMiniCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.transform = 'translateY(-3px) scale(1.02)';
-            card.style.boxShadow = '0 14px 30px rgba(0,0,0,0.25)';
-        });
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = '';
-            card.style.boxShadow = '';
-        });
-    });
-
-    const featureCards = document.querySelectorAll('.feature-card');
-    featureCards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -4;
-            const rotateY = ((x - centerX) / centerX) * 4;
-            card.style.transform =
-                `translateY(-4px) scale(1.02) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = '';
-        });
-    });
-
-    const previewCards = document.querySelectorAll('.preview-card');
-    previewCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.transform = 'translateY(-4px) scale(1.01)';
-        });
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = '';
-        });
-    });
-
-    const heroImageShell = document.querySelector('.hero-image-shell');
-    if (heroImageShell) {
-        heroImageShell.addEventListener('mousemove', (e) => {
-            const rect = heroImageShell.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const moveX = (x - centerX) * -0.02;
-            const moveY = (y - centerY) * -0.02;
-            heroImageShell.style.transform =
-                `translate(${moveX}px, ${moveY}px)`;
-        });
-        heroImageShell.addEventListener('mouseleave', () => {
-            heroImageShell.style.transform = '';
-        });
-    }
-
-    const blobs = document.querySelectorAll('.blob');
-    window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY || window.pageYOffset;
-        blobs.forEach((blob, index) => {
-            const speed = (index + 1) * 0.03;
-            blob.style.transform = `translateY(${scrollY * speed}px)`;
-        });
-    });
-})();
-
-// =========================================================
-// =============== 6. EXTRA FILLER ANIMATIONS ==============
-// =========================================================
-
-(function () {
-    const filler = document.createElement('div');
-    filler.style.display = 'none';
-    filler.textContent = 'Filler animation logic placeholder';
-    document.body.appendChild(filler);
-
-    function noop() {}
-    noop();
-})();
-
-// =========================================================
-// ==================== END OF SCRIPT ======================
-// =========================================================
-</script>
-
+    </script>
 </body>
 </html>
