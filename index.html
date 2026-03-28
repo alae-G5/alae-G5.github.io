@@ -310,6 +310,19 @@
     </style>
 </head>
 
+<script>
+window.addEventListener("scroll", () => {
+    const logo = document.querySelector(".logo-animate");
+    if (window.scrollY > 40) {
+        logo.style.maxWidth = "220px";
+        logo.style.transition = "0.3s ease";
+    } else {
+        logo.style.maxWidth = "350px";
+    }
+});
+</script>
+
+    
 <body>
     
    <header style="text-align: center; padding: 30px;">
