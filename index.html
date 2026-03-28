@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AlaeAI — Build. Learn. Create.</title>
 
-<!-- PART 1 / 5 — 500 LINES -->
+<!-- ========================================================= -->
+<!-- ===================== PART 1 / 5 ======================== -->
+<!-- ===================== CORE STYLES ======================= -->
+<!-- ========================================================= -->
 
 <style>
 
@@ -259,6 +262,11 @@ body.dark-mode nav {
     letter-spacing: 0.04em;
 }
 
+.nav-subtitle {
+    font-size: 11px;
+    opacity: 0.8;
+}
+
 .nav-links {
     display: flex;
     align-items: center;
@@ -293,6 +301,12 @@ body.dark-mode nav {
 
 .nav-links a:hover::after {
     width: 100%;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 #theme-toggle {
@@ -384,67 +398,9 @@ body.dark-mode .section-link {
 }
 
 /* ========================================================= */
-/* ===================== END OF PART 1 ===================== */
+/* ===================== HERO SECTION CSS ================== */
 /* ========================================================= */
 
-</style>
-</head>
-<body>
-
-<!-- ===================================================== -->
-<!-- ==================== FLOATING BLOBS ================= -->
-<!-- ===================================================== -->
-
-<div class="blob blob-1"></div>
-<div class="blob blob-2"></div>
-<div class="blob blob-3"></div>
-
-<!-- ===================================================== -->
-<!-- ==================== HEADER + LOGO ================== -->
-<!-- ===================================================== -->
-
-<header class="max-width">
-    <img src="assets/logo.png"
-         alt="AlaeAI — Build. Learn. Create."
-         class="logo-animate">
-</header>
-
-<!-- ===================================================== -->
-<!-- ==================== NAVIGATION BAR ================= -->
-<!-- ===================================================== -->
-
-<nav>
-    <div class="nav-left">
-        <div class="nav-logo-mini">A</div>
-        <div>
-            <div class="nav-title">AlaeAI</div>
-            <div class="nav-subtitle">Build. Learn. Create.</div>
-        </div>
-    </div>
-
-    <div class="nav-links">
-        <a href="index.html" class="active">Home</a>
-        <a href="tutorials.html">Tutorials</a>
-        <a href="news.html">News</a>
-        <a href="tools.html">Tools</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-    </div>
-
-    <div class="nav-right">
-        <button id="theme-toggle">
-            <span>🌙</span>
-            <span>Dark Mode</span>
-        </button>
-    </div>
-</nav>
-
-<!-- ===================================================== -->
-<!-- ==================== HERO SECTION =================== -->
-<!-- ===================================================== -->
-
-<style>
-/* HERO LAYOUT */
 .hero {
     max-width: 1200px;
     margin: 18px auto 10px;
@@ -724,7 +680,7 @@ body.dark-mode .hero-mini-card {
     to { transform: rotate(360deg); }
 }
 
-/* HERO IMAGE AREA (USING assets/logo.png AS MAIN VISUAL) */
+/* HERO IMAGE AREA */
 .hero-image-shell {
     margin-top: 14px;
     border-radius: var(--radius-lg);
@@ -828,355 +784,146 @@ body.dark-mode .hero-mini-card {
     }
 }
 
-</style>
+/* ========================================================= */
+/* ===================== FEATURE GRID CSS ================== */
+/* ========================================================= */
 
-<section class="hero">
-    <div class="hero-left">
-        <div class="hero-pill">
-            <span class="hero-pill-dot"></span>
-            <span>Welcome back, creator</span>
-        </div>
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+}
 
-        <h2 class="hero-title">
-            Build your <span class="hero-highlight">developer journey</span> with AlaeAI.
-        </h2>
+.feature-card {
+    background: var(--card-light);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+    padding: 14px 14px 12px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+    transform: translateY(14px);
+    opacity: 0;
+}
 
-        <p class="hero-subtitle">
-            Practice web development, track your tutorial progress, explore tools, and stay updated with tech &amp; AI news —
-            all in one clean, animated, professional space.
-        </p>
+body.dark-mode .feature-card {
+    background: var(--card-dark);
+    border-color: var(--border-dark);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.7);
+}
 
-        <div class="hero-actions">
-            <a href="tutorials.html">
-                <button class="btn-primary">Continue Tutorials</button>
-            </a>
-            <a href="news.html">
-                <button class="btn-ghost">View Tech &amp; AI News</button>
-            </a>
-        </div>
+.feature-icon {
+    font-size: 20px;
+    margin-bottom: 6px;
+}
 
-        <div class="hero-meta">
-            <span>✅ <strong>20</strong> structured tutorial levels</span>
-            <span>🧠 Real‑world projects</span>
-            <span>🌙 Dark mode ready</span>
-        </div>
+.feature-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
 
-        <div class="stats-strip">
-            <div class="stat-card">
-                <span class="stat-label">Levels Completed</span>
-                <span class="stat-value" id="stat-levels">0 / 20</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-label">Completion</span>
-                <span class="stat-value" id="stat-percent">0%</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-label">Current Focus</span>
-                <span class="stat-value" id="stat-focus">Level 1</span>
-            </div>
-        </div>
-    </div>
+.feature-text {
+    font-size: 13px;
+    opacity: 0.85;
+    margin-bottom: 8px;
+}
 
-    <div class="hero-right">
-        <div class="hero-card-wrapper">
-            <div class="hero-card">
-                <div class="hero-card-badge">
-                    <span class="hero-card-badge-dot"></span>
-                    <span>Live Snapshot</span>
-                </div>
+.feature-meta {
+    font-size: 11px;
+    opacity: 0.75;
+}
 
-                <h3 class="hero-card-title">Today on AlaeAI</h3>
-                <p class="hero-card-sub">Your learning progress at a glance</p>
-
-                <div class="hero-card-grid">
-                    <div class="hero-mini-card hero-mini-card-1">
-                        <div class="hero-mini-label">Tutorials Completed</div>
-                        <div class="hero-mini-value" id="mini-completed">0</div>
-                    </div>
-
-                    <div class="hero-mini-card hero-mini-card-2">
-                        <div class="hero-mini-label">Active Level</div>
-                        <div class="hero-mini-value" id="mini-active">1</div>
-                    </div>
-
-                    <div class="hero-mini-card hero-mini-card-3">
-                        <div class="hero-mini-label">Daily Streak</div>
-                        <div class="hero-mini-value" id="mini-streak">0 days</div>
-                    </div>
-
-                    <div class="hero-mini-card hero-mini-card-4">
-                        <div class="hero-mini-label">Focus Path</div>
-                        <div class="hero-mini-value">Web Dev Track</div>
-                    </div>
-                </div>
-
-                <div class="hero-image-shell mt-md">
-                    <div class="hero-image-shell-inner">
-                        <img src="assets/logo.png" alt="AlaeAI Logo Hero">
-                        <div class="hero-image-tag">
-                            <span class="hero-image-tag-dot"></span>
-                            <span>Live Preview</span>
-                        </div>
-                        <div class="hero-image-bottom-strip">
-                            <span>“Build. Learn. Create.”</span>
-                            <span class="text-muted">Your personal lab for experiments and growth.</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="hero-orbit"></div>
-        </div>
-    </div>
-</section>
-    
-    </style>
-</head>
-<body>
-
-<!-- BLOBS -->
-<div class="blob blob-1"></div>
-<div class="blob blob-2"></div>
-
-<!-- HEADER -->
-<header>
-    <!-- Small logo in header -->
-    <img src="assets/logo.png"
-         class="logo-animate"
-         alt="AlaeAI — Build. Learn. Create.">
-</header>
-
-<!-- NAV -->
-<nav>
-    <h1>AlaeAI</h1>
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="tutorials.html">Tutorials</a>
-        <a href="news.html">News</a>
-        <a href="tools.html">Tools</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-    </div>
-    <button id="theme-toggle">🌙 Dark Mode</button>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-    <div class="hero-left">
-        <div class="hero-pill">🚀 Start Building Today</div>
-
-        <h2 class="hero-title">Build. Learn. Create.</h2>
-
-        <p class="hero-subtitle">
-            A modern lab for your ideas. Practice web development, explore tools, read tech news,
-            and ship real projects — all in one place.
-        </p>
-
-        <div class="hero-actions">
-            <a href="tutorials.html"><button class="btn-primary">Continue Tutorials</button></a>
-            <a href="news.html"><button class="btn-ghost">View Tech & AI News</button></a>
-        </div>
-
-        <div class="hero-meta">
-            <span>✅ <strong>20</strong> structured tutorial levels</span>
-            <span>🧠 Real‑world projects</span>
-            <span>🌙 Dark mode ready</span>
-        </div>
-
-        <!-- Tutorial Progress Strip -->
-        <div class="stats-strip" style="margin-top:18px;">
-            <div class="stat-card">
-                <span class="stat-label">Levels Completed</span>
-                <span class="stat-value" id="stat-levels">0 / 20</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-label">Completion</span>
-                <span class="stat-value" id="stat-percent">0%</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-label">Current Focus</span>
-                <span class="stat-value" id="stat-focus">Level 1</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="hero-right">
-        <div class="hero-card">
-            <div class="hero-card-badge">Live Snapshot</div>
-
-            <h3 class="hero-card-title">Today on AlaeAI</h3>
-            <p class="hero-card-sub">Your learning progress at a glance</p>
-
-            <div class="hero-card-grid">
-                <div class="hero-mini-card hero-mini-card-1">
-                    <div class="hero-mini-label">Tutorials Completed</div>
-                    <div class="hero-mini-value" id="mini-completed">0</div>
-                </div>
-
-                <div class="hero-mini-card hero-mini-card-2">
-                    <div class="hero-mini-label">Active Level</div>
-                    <div class="hero-mini-value" id="mini-active">1</div>
-                </div>
-
-                <div class="hero-mini-card hero-mini-card-3">
-                    <div class="hero-mini-label">Daily Streak</div>
-                    <div class="hero-mini-value" id="mini-streak">0 days</div>
-                </div>
-
-                <div class="hero-mini-card hero-mini-card-4">
-                    <div class="hero-mini-label">Focus Mode</div>
-                    <div class="hero-mini-value">Web Dev Path</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="hero-orbit"></div>
-    </div>
-</section>
-
-<!-- FEATURE SECTION -->
-<section class="section">
-    <div class="section-header">
-        <div>
-            <h2 class="section-title">Core Features</h2>
-            <p class="section-subtitle">Everything you need to grow as a developer</p>
-        </div>
-    </div>
-
-    <div class="feature-grid">
-        <div class="feature-card reveal">
-            <div class="feature-icon">📘</div>
-            <h3 class="feature-title">Structured Tutorials</h3>
-            <p class="feature-text">
-                20 levels designed to take you from beginner to builder with real projects.
-            </p>
-            <div class="feature-meta">Progress saved locally</div>
-            <div class="feature-highlight"></div>
-        </div>
-
-        <div class="feature-card reveal">
-            <div class="feature-icon">🛠️</div>
-            <h3 class="feature-title">Developer Tools</h3>
-            <p class="feature-text">
-                A curated set of tools to speed up your workflow and experimentation.
-            </p>
-            <div class="feature-meta">Always expanding</div>
-            <div class="feature-highlight"></div>
-        </div>
-
-        <div class="feature-card reveal">
-            <div class="feature-icon">📰</div>
-            <h3 class="feature-title">Tech & AI News</h3>
-            <p class="feature-text">
-                Stay updated with the latest in AI, coding, and innovation.
-            </p>
-            <div class="feature-meta">Fresh content</div>
-            <div class="feature-highlight"></div>
-        </div>
-
-        <div class="feature-card reveal">
-            <div class="feature-icon">⚙️</div>
-            <h3 class="feature-title">Custom Experiments</h3>
-            <p class="feature-text">
-                Build your own mini‑projects, test ideas, and iterate quickly.
-            </p>
-            <div class="feature-meta">Made for builders</div>
-            <div class="feature-highlight"></div>
-        </div>
-    </div>
-</section>
-
-<!-- PREVIEW SECTIONS -->
-<section class="section">
-    <div class="section-header">
-        <div>
-            <h2 class="section-title">Tutorial Path</h2>
-            <p class="section-subtitle">Start your learning journey</p>
-        </div>
-        <a class="section-link" href="tutorials.html">View all tutorials →</a>
-    </div>
-
-    <div class="preview-grid">
-        <div class="preview-card reveal">
-            <div class="preview-tag">Level 1</div>
-            <h3 class="preview-title">HTML Basics</h3>
-            <p class="preview-text">Learn the structure of the web and build your first page.</p>
-            <div class="preview-meta">Beginner friendly</div>
-        </div>
-
-        <div class="preview-card reveal">
-            <div class="preview-tag">Level 2</div>
-            <h3 class="preview-title">CSS Essentials</h3>
-            <p class="preview-text">Style your first layout with modern techniques.</p>
-            <div class="preview-meta">Hands‑on</div>
-        </div>
-
-        <div class="preview-card reveal">
-            <div class="preview-tag">Level 3</div>
-            <h3 class="preview-title">JavaScript Intro</h3>
-            <p class="preview-text">Make your pages interactive with core JS concepts.</p>
-            <div class="preview-meta">Interactive</div>
-        </div>
-    </div>
-</section>
-
-<section class="section">
-    <div class="section-header">
-        <div>
-            <h2 class="section-title">News & Tools</h2>
-            <p class="section-subtitle">Stay sharp and equipped</p>
-        </div>
-        <a class="section-link" href="news.html">View news →</a>
-    </div>
-
-    <div class="preview-grid">
-        <div class="preview-card reveal">
-            <div class="preview-tag">News</div>
-            <h3 class="preview-title">Latest Tech & AI</h3>
-            <p class="preview-text">Curated stories and updates you actually care about.</p>
-            <div class="preview-meta">Updated regularly</div>
-        </div>
-
-        <div class="preview-card reveal">
-            <div class="preview-tag">Tools</div>
-            <h3 class="preview-title">Developer Toolkit</h3>
-            <p class="preview-text">Snippets, generators, and helpers to speed up your work.</p>
-            <div class="preview-meta">Optimized for learning</div>
-        </div>
-
-        <div class="preview-card reveal">
-            <div class="preview-tag">Experiments</div>
-            <h3 class="preview-title">Playground</h3>
-            <p class="preview-text">Try ideas, test animations, and explore interactions.</p>
-            <div class="preview-meta">Made for curiosity</div>
-        </div>
-    </div>
-</section>
-
-<!-- CTA -->
-<section class="section">
-    <div class="cta reveal">
-        <h3 class="cta-title">Ready to keep building?</h3>
-        <p class="cta-text">
-            Continue your tutorial path, explore tools, or dive into the latest tech news.
-        </p>
-        <a href="tutorials.html"><button class="btn-primary">Resume Tutorials</button></a>
-    </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-    © 2026 AlaeAI — Build. Learn. Create. All rights reserved.
-</footer>
-<!-- ===================================================== -->
-<!-- ==================== PART 4 / 5 ===================== -->
-<!-- ========== CTA • FOOTER • EXTRA SECTIONS ============ -->
-<!-- ===================================================== -->
-
-<style>
+.feature-highlight {
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 3px;
+    background: linear-gradient(90deg, rgba(197,139,59,0.7), rgba(255,179,71,0.7));
+    opacity: 0.8;
+}
 
 /* ========================================================= */
-/* ===================== CTA SECTION ======================= */
+/* ===================== PREVIEW SECTIONS ================== */
+/* ========================================================= */
+
+.preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+}
+
+.preview-card {
+    background: var(--card-light);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+    padding: 14px 14px 12px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+    transform: translateY(14px);
+    opacity: 0;
+}
+
+body.dark-mode .preview-card {
+    background: var(--card-dark);
+    border-color: var(--border-dark);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.7);
+}
+
+.preview-tag {
+    font-size: 11px;
+    opacity: 0.7;
+    margin-bottom: 4px;
+}
+
+.preview-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0 0 4px;
+}
+
+.preview-text {
+    font-size: 13px;
+    opacity: 0.85;
+    margin: 0 0 8px;
+}
+
+.preview-meta {
+    font-size: 11px;
+    opacity: 0.75;
+}
+
+/* ========================================================= */
+/* ===================== CTA / FOOTER CSS ================== */
+/* ========================================================= */
+
+.cta {
+    margin-top: 18px;
+    padding: 16px 16px 14px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(197,139,59,0.16), rgba(197,139,59,0.35));
+    box-shadow: var(--shadow-card);
+}
+
+body.dark-mode .cta {
+    background: linear-gradient(135deg, rgba(197,139,59,0.22), rgba(10,12,18,0.9));
+    border-color: rgba(255,255,255,0.18);
+}
+
+.cta-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    margin: 0 0 6px;
+}
+
+.cta-text {
+    font-size: 12px;
+    opacity: 0.85;
+    margin: 0 0 10px;
+}
+
+/* ========================================================= */
+/* ===================== CTA SECTION (PART 4) ============== */
 /* ========================================================= */
 
 .cta-section {
@@ -1329,10 +1076,7 @@ body.dark-mode .cta-progress-bar-shell {
     to { transform: rotate(360deg); }
 }
 
-/* ========================================================= */
-/* ===================== MINI STATS STRIP ================== */
-/* ========================================================= */
-
+/* MINI STATS STRIP */
 .mini-stats-strip {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -1364,10 +1108,7 @@ body.dark-mode .mini-stat-card {
     font-weight: 600;
 }
 
-/* ========================================================= */
-/* ===================== FOOTER SECTION ==================== */
-/* ========================================================= */
-
+/* FOOTER SECTION */
 footer {
     margin-top: 40px;
     padding: 26px 7% 30px;
@@ -1451,10 +1192,7 @@ body.dark-mode footer {
     opacity: 0.8;
 }
 
-/* ========================================================= */
-/* ===================== EXTRA DECORATION ================== */
-/* ========================================================= */
-
+/* EXTRA DECORATION */
 .footer-badge {
     display: inline-flex;
     align-items: center;
@@ -1476,10 +1214,7 @@ body.dark-mode .footer-badge {
     background: var(--primary);
 }
 
-/* ========================================================= */
-/* ===================== FILLER ANIMATIONS ================= */
-/* ========================================================= */
-
+/* FILLER ANIMATIONS */
 @keyframes footerGlow {
     0% { box-shadow: 0 0 0 rgba(197,139,59,0.0); }
     100% { box-shadow: 0 0 18px rgba(197,139,59,0.45); }
@@ -1490,10 +1225,289 @@ body.dark-mode .footer-badge {
 }
 
 /* ========================================================= */
-/* ===================== END OF PART 4 CSS ================= */
+/* ===================== END OF CSS ======================== */
 /* ========================================================= */
 
 </style>
+</head>
+<body>
+
+<!-- ===================================================== -->
+<!-- ==================== FLOATING BLOBS ================= -->
+<!-- ===================================================== -->
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+
+<!-- ===================================================== -->
+<!-- ==================== HEADER + LOGO ================== -->
+<!-- ===================================================== -->
+
+<header class="max-width">
+    <img src="assets/logo.png"
+         alt="AlaeAI — Build. Learn. Create."
+         class="logo-animate">
+</header>
+
+<!-- ===================================================== -->
+<!-- ==================== NAVIGATION BAR ================= -->
+<!-- ===================================================== -->
+
+<nav>
+    <div class="nav-left">
+        <div class="nav-logo-mini">A</div>
+        <div>
+            <div class="nav-title">AlaeAI</div>
+            <div class="nav-subtitle">Build. Learn. Create.</div>
+        </div>
+    </div>
+
+    <div class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="tutorials.html">Tutorials</a>
+        <a href="news.html">News</a>
+        <a href="tools.html">Tools</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="nav-right">
+        <button id="theme-toggle">
+            <span>🌙</span>
+            <span>Dark Mode</span>
+        </button>
+    </div>
+</nav>
+
+<!-- ===================================================== -->
+<!-- ==================== HERO SECTION =================== -->
+<!-- ===================================================== -->
+
+<section class="hero">
+    <div class="hero-left">
+        <div class="hero-pill">
+            <span class="hero-pill-dot"></span>
+            <span>Welcome back, creator</span>
+        </div>
+
+        <h2 class="hero-title">
+            Build your <span class="hero-highlight">developer journey</span> with AlaeAI.
+        </h2>
+
+        <p class="hero-subtitle">
+            Practice web development, track your tutorial progress, explore tools, and stay updated with tech &amp; AI news —
+            all in one clean, animated, professional space.
+        </p>
+
+        <div class="hero-actions">
+            <a href="tutorials.html">
+                <button class="btn-primary">Continue Tutorials</button>
+            </a>
+            <a href="news.html">
+                <button class="btn-ghost">View Tech &amp; AI News</button>
+            </a>
+        </div>
+
+        <div class="hero-meta">
+            <span>✅ <strong>20</strong> structured tutorial levels</span>
+            <span>🧠 Real‑world projects</span>
+            <span>🌙 Dark mode ready</span>
+        </div>
+
+        <div class="stats-strip">
+            <div class="stat-card">
+                <span class="stat-label">Levels Completed</span>
+                <span class="stat-value" id="stat-levels">0 / 20</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Completion</span>
+                <span class="stat-value" id="stat-percent">0%</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Current Focus</span>
+                <span class="stat-value" id="stat-focus">Level 1</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-right">
+        <div class="hero-card-wrapper">
+            <div class="hero-card">
+                <div class="hero-card-badge">
+                    <span class="hero-card-badge-dot"></span>
+                    <span>Live Snapshot</span>
+                </div>
+
+                <h3 class="hero-card-title">Today on AlaeAI</h3>
+                <p class="hero-card-sub">Your learning progress at a glance</p>
+
+                <div class="hero-card-grid">
+                    <div class="hero-mini-card hero-mini-card-1">
+                        <div class="hero-mini-label">Tutorials Completed</div>
+                        <div class="hero-mini-value" id="mini-completed">0</div>
+                    </div>
+
+                    <div class="hero-mini-card hero-mini-card-2">
+                        <div class="hero-mini-label">Active Level</div>
+                        <div class="hero-mini-value" id="mini-active">1</div>
+                    </div>
+
+                    <div class="hero-mini-card hero-mini-card-3">
+                        <div class="hero-mini-label">Daily Streak</div>
+                        <div class="hero-mini-value" id="mini-streak">0 days</div>
+                    </div>
+
+                    <div class="hero-mini-card hero-mini-card-4">
+                        <div class="hero-mini-label">Focus Path</div>
+                        <div class="hero-mini-value">Web Dev Track</div>
+                    </div>
+                </div>
+
+                <div class="hero-image-shell mt-md">
+                    <div class="hero-image-shell-inner">
+                        <img src="assets/logo.png" alt="AlaeAI Logo Hero">
+                        <div class="hero-image-tag">
+                            <span class="hero-image-tag-dot"></span>
+                            <span>Live Preview</span>
+                        </div>
+                        <div class="hero-image-bottom-strip">
+                            <span>“Build. Learn. Create.”</span>
+                            <span class="text-muted">Your personal lab for experiments and growth.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-orbit"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================================================== -->
+<!-- ==================== FEATURE SECTION ================= -->
+<!-- ===================================================== -->
+
+<section class="section">
+    <div class="section-header">
+        <div>
+            <h2 class="section-title">Core Features</h2>
+            <p class="section-subtitle">Everything you need to grow as a developer</p>
+        </div>
+    </div>
+
+    <div class="feature-grid">
+        <div class="feature-card reveal">
+            <div class="feature-icon">📘</div>
+            <h3 class="feature-title">Structured Tutorials</h3>
+            <p class="feature-text">
+                20 levels designed to take you from beginner to builder with real projects.
+            </p>
+            <div class="feature-meta">Progress saved locally</div>
+            <div class="feature-highlight"></div>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon">🛠️</div>
+            <h3 class="feature-title">Developer Tools</h3>
+            <p class="feature-text">
+                A curated set of tools to speed up your workflow and experimentation.
+            </p>
+            <div class="feature-meta">Always expanding</div>
+            <div class="feature-highlight"></div>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon">📰</div>
+            <h3 class="feature-title">Tech & AI News</h3>
+            <p class="feature-text">
+                Stay updated with the latest in AI, coding, and innovation.
+            </p>
+            <div class="feature-meta">Fresh content</div>
+            <div class="feature-highlight"></div>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon">⚙️</div>
+            <h3 class="feature-title">Custom Experiments</h3>
+            <p class="feature-text">
+                Build your own mini‑projects, test ideas, and iterate quickly.
+            </p>
+            <div class="feature-meta">Made for builders</div>
+            <div class="feature-highlight"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================================================== -->
+<!-- ==================== PREVIEW SECTIONS ================ -->
+<!-- ===================================================== -->
+
+<section class="section">
+    <div class="section-header">
+        <div>
+            <h2 class="section-title">Tutorial Path</h2>
+            <p class="section-subtitle">Start your learning journey</p>
+        </div>
+        <a class="section-link" href="tutorials.html">View all tutorials →</a>
+    </div>
+
+    <div class="preview-grid">
+        <div class="preview-card reveal">
+            <div class="preview-tag">Level 1</div>
+            <h3 class="preview-title">HTML Basics</h3>
+            <p class="preview-text">Learn the structure of the web and build your first page.</p>
+            <div class="preview-meta">Beginner friendly</div>
+        </div>
+
+        <div class="preview-card reveal">
+            <div class="preview-tag">Level 2</div>
+            <h3 class="preview-title">CSS Essentials</h3>
+            <p class="preview-text">Style your first layout with modern techniques.</p>
+            <div class="preview-meta">Hands‑on</div>
+        </div>
+
+        <div class="preview-card reveal">
+            <div class="preview-tag">Level 3</div>
+            <h3 class="preview-title">JavaScript Intro</h3>
+            <p class="preview-text">Make your pages interactive with core JS concepts.</p>
+            <div class="preview-meta">Interactive</div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-header">
+        <div>
+            <h2 class="section-title">News & Tools</h2>
+            <p class="section-subtitle">Stay sharp and equipped</p>
+        </div>
+        <a class="section-link" href="news.html">View news →</a>
+    </div>
+
+    <div class="preview-grid">
+        <div class="preview-card reveal">
+            <div class="preview-tag">News</div>
+            <h3 class="preview-title">Latest Tech & AI</h3>
+            <p class="preview-text">Curated stories and updates you actually care about.</p>
+            <div class="preview-meta">Updated regularly</div>
+        </div>
+
+        <div class="preview-card reveal">
+            <div class="preview-tag">Tools</div>
+            <h3 class="preview-title">Developer Toolkit</h3>
+            <p class="preview-text">Snippets, generators, and helpers to speed up your work.</p>
+            <div class="preview-meta">Optimized for learning</div>
+        </div>
+
+        <div class="preview-card reveal">
+            <div class="preview-tag">Experiments</div>
+            <h3 class="preview-title">Playground</h3>
+            <p class="preview-text">Try ideas, test animations, and explore interactions.</p>
+            <div class="preview-meta">Made for curiosity</div>
+        </div>
+    </div>
+</section>
 
 <!-- ===================================================== -->
 <!-- ==================== CTA SECTION ===================== -->
@@ -1608,11 +1622,8 @@ body.dark-mode .footer-badge {
 </footer>
 
 <!-- ===================================================== -->
-<!-- ==================== END OF PART 4 =================== -->
-<!-- ===================================================== -->
-<!-- ===================================================== -->
-<!-- ==================== PART 5 / 5 ===================== -->
-<!-- ========== FULL JAVASCRIPT • INTERACTIONS =========== -->
+<!-- ==================== PART 5 / 5 ====================== -->
+<!-- ==================== FULL JAVASCRIPT ================= -->
 <!-- ===================================================== -->
 
 <script>
