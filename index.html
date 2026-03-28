@@ -1,16 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlaeAI — Build. Learn. Create.</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AlaeAI — Latest Tech & AI News</title>
 
-    <!-- SEO -->
-    <meta name="description" content="AlaeAI is a modern learning hub with tutorials, tools, news, and projects to help you build, learn, and create.">
-    <meta http-equiv="Content-Language" content="en, ar">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
         /* ---------------------------------------------------
@@ -18,33 +14,21 @@
         --------------------------------------------------- */
         :root {
             --bg-light: #f5efe6;
-            --bg-light-accent: #fff9f0;
             --text-light: #1a1a1a;
             --card-light: #ffffff;
             --border-light: #e0d4c2;
 
             --bg-dark: #05060a;
-            --bg-dark-accent: #151821;
             --text-dark: #f5f5f5;
             --card-dark: #181b24;
             --border-dark: #2b3140;
 
             --primary: #c58b3b;
-            --primary-soft: rgba(197,139,59,0.12);
-            --accent: #ffb347;
-            --danger: #ff4b6a;
-            --success: #3ac97a;
 
-            --radius-lg: 20px;
-            --radius-md: 14px;
-            --radius-sm: 9px;
+            --radius-lg: 22px;
+            --radius-md: 16px;
 
-            --shadow-soft: 0 22px 55px rgba(0,0,0,0.16);
             --shadow-card: 0 14px 32px rgba(0,0,0,0.10);
-        }
-
-        * {
-            box-sizing: border-box;
         }
 
         body {
@@ -61,25 +45,9 @@
             color: var(--text-dark);
         }
 
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background:
-                linear-gradient(135deg, rgba(255,255,255,0.85), rgba(245,239,230,0.95)),
-                radial-gradient(circle at 0% 0%, rgba(197,139,59,0.22), transparent 55%),
-                radial-gradient(circle at 100% 100%, rgba(0,0,0,0.08), transparent 55%);
-            z-index: -3;
-        }
-
-        body.dark-mode::before {
-            background:
-                radial-gradient(circle at 0% 0%, rgba(197,139,59,0.26), transparent 55%),
-                radial-gradient(circle at 100% 100%, rgba(80,90,140,0.45), transparent 60%),
-                linear-gradient(145deg, #05060a, #10131c);
-        }
-
-        /* Floating gradient blobs */
+        /* ---------------------------------------------------
+           FLOATING BLOBS
+        --------------------------------------------------- */
         .blob {
             position: fixed;
             border-radius: 50%;
@@ -108,14 +76,6 @@
             animation: floatBlob2 22s ease-in-out infinite alternate;
         }
 
-        body.dark-mode .blob-1 {
-            background: rgba(197,139,59,0.75);
-        }
-
-        body.dark-mode .blob-2 {
-            background: rgba(120,90,220,0.55);
-        }
-
         @keyframes floatBlob1 {
             0% { transform: translate(0,0) scale(1); }
             100% { transform: translate(40px,40px) scale(1.1); }
@@ -127,13 +87,8 @@
         }
 
         /* ---------------------------------------------------
-           HEADER + NAV
+           LOGO ANIMATION (THE FIX)
         --------------------------------------------------- */
-        header {
-            text-align: center;
-            padding: 26px 7% 10px;
-        }
-
         .logo-animate {
             max-width: 360px;
             border-radius: 14px;
@@ -148,6 +103,9 @@
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
+        /* ---------------------------------------------------
+           NAVIGATION
+        --------------------------------------------------- */
         nav {
             position: sticky;
             top: 0;
@@ -170,38 +128,29 @@
             font-family: 'Poppins', sans-serif;
             font-size: 22px;
             font-weight: 700;
-            letter-spacing: 0.04em;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 18px;
         }
 
         nav a {
+            margin-left: 18px;
             text-decoration: none;
             font-weight: 500;
             font-size: 14px;
             color: inherit;
             position: relative;
-            padding-bottom: 3px;
         }
 
         nav a::after {
             content: "";
             position: absolute;
             left: 0;
-            bottom: 0;
+            bottom: -4px;
             width: 0;
             height: 2px;
             background: var(--primary);
             transition: width 0.2s ease;
         }
 
-        nav a:hover::after {
-            width: 100%;
-        }
+        nav a:hover::after { width: 100%; }
 
         #theme-toggle {
             padding: 7px 14px;
@@ -214,8 +163,8 @@
         }
 
         body.dark-mode #theme-toggle {
-            background: rgba(15,17,25,0.95);
-            border-color: rgba(255,255,255,0.12);
+            background: rgba(10,12,18,0.95);
+            border-color: rgba(255,255,255,0.16);
             color: var(--text-dark);
         }
 
@@ -223,455 +172,96 @@
            HERO SECTION
         --------------------------------------------------- */
         .hero {
-            max-width: 1100px;
-            margin: 18px auto 10px;
-            padding: 0 7% 30px;
-            display: grid;
-            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-            gap: 26px;
-            align-items: center;
-        }
-
-        @media (max-width: 880px) {
-            .hero {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .hero-left {
-            position: relative;
-        }
-
-        .hero-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 12px;
-            border-radius: 999px;
-            background: var(--primary-soft);
-            font-size: 12px;
-            margin-bottom: 10px;
-            animation: floatUp 1.2s ease forwards;
-            opacity: 0;
+            padding: 90px 7% 40px;
+            text-align: center;
+            max-width: 900px;
+            margin: auto;
         }
 
         .hero-title {
             font-family: 'Poppins', sans-serif;
-            font-size: 32px;
-            margin: 4px 0 8px;
-            line-height: 1.2;
-            opacity: 0;
-            transform: translateY(10px);
-            animation: fadeSlideUp 1s ease forwards 0.15s;
-        }
-
-        .hero-subtitle {
-            margin: 0 0 14px;
-            font-size: 14px;
-            opacity: 0.85;
-            opacity: 0;
-            transform: translateY(10px);
-            animation: fadeSlideUp 1s ease forwards 0.25s;
-        }
-
-        .hero-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
-            opacity: 0;
-            transform: translateY(10px);
-            animation: fadeSlideUp 1s ease forwards 0.35s;
-        }
-
-        .btn-primary {
-            padding: 9px 18px;
-            border-radius: 999px;
-            border: none;
-            background: var(--primary);
-            color: white;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 12px 26px rgba(197,139,59,0.45);
-            transform: translateY(0);
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 16px 32px rgba(197,139,59,0.55);
-        }
-
-        .btn-ghost {
-            padding: 9px 16px;
-            border-radius: 999px;
-            border: 1px solid rgba(0,0,0,0.12);
-            background: rgba(255,255,255,0.9);
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-        }
-
-        body.dark-mode .btn-ghost {
-            background: rgba(10,12,18,0.95);
-            border-color: rgba(255,255,255,0.16);
-            color: var(--text-dark);
-        }
-
-        .hero-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-            margin-top: 16px;
-            font-size: 12px;
-            opacity: 0.85;
-            opacity: 0;
-            transform: translateY(10px);
-            animation: fadeSlideUp 1s ease forwards 0.45s;
-        }
-
-        .hero-meta span {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .hero-right {
-            position: relative;
-            padding: 16px;
-        }
-
-        .hero-card {
-            background: var(--card-light);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border-light);
-            padding: 18px 18px 16px;
-            box-shadow: var(--shadow-soft);
-            position: relative;
-            overflow: hidden;
-            transform: translateY(12px) scale(0.98);
-            opacity: 0;
-            animation: heroCardIn 0.9s ease forwards 0.3s;
-        }
-
-        body.dark-mode .hero-card {
-            background: var(--card-dark);
-            border-color: var(--border-dark);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
-        }
-
-        .hero-card-badge {
-            position: absolute;
-            top: 14px;
-            right: 16px;
-            padding: 4px 10px;
-            border-radius: 999px;
-            font-size: 11px;
-            background: rgba(197,139,59,0.16);
-        }
-
-        .hero-card-title {
-            font-size: 16px;
-            font-weight: 600;
-            margin: 0 0 6px;
-        }
-
-        .hero-card-sub {
-            font-size: 13px;
-            opacity: 0.85;
-            margin: 0 0 10px;
-        }
-
-        .hero-card-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .hero-mini-card {
-            padding: 8px 10px;
-            border-radius: var(--radius-md);
-            background: rgba(0,0,0,0.03);
-            font-size: 12px;
-        }
-
-        body.dark-mode .hero-mini-card {
-            background: rgba(255,255,255,0.06);
-        }
-
-        .hero-mini-label {
-            font-size: 11px;
-            opacity: 0.7;
-        }
-
-        .hero-mini-value {
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .hero-orbit {
-            position: absolute;
-            inset: -10px;
-            border-radius: var(--radius-lg);
-            border: 1px dashed rgba(197,139,59,0.35);
-            pointer-events: none;
-            animation: orbitSpin 18s linear infinite;
-        }
-
-        @keyframes orbitSpin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* ---------------------------------------------------
-           FEATURE CARDS SECTION
-        --------------------------------------------------- */
-        .section {
-            max-width: 1100px;
-            margin: 10px auto 0;
-            padding: 0 7% 30px;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            gap: 10px;
+            font-size: 42px;
+            font-weight: 700;
             margin-bottom: 14px;
         }
 
-        .section-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 20px;
-            margin: 0;
-        }
-
-        .section-subtitle {
-            margin: 2px 0 0;
-            font-size: 13px;
-            opacity: 0.8;
-        }
-
-        .section-link {
-            font-size: 12px;
+        .hero-subtitle {
+            font-size: 16px;
             opacity: 0.85;
-            text-decoration: none;
-            color: inherit;
+            max-width: 600px;
+            margin: auto;
+            margin-bottom: 30px;
         }
 
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 16px;
-        }
-
-        .feature-card {
-            background: var(--card-light);
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border-light);
-            padding: 14px 14px 12px;
-            box-shadow: var(--shadow-card);
-            position: relative;
-            overflow: hidden;
-            transform: translateY(14px);
-            opacity: 0;
-        }
-
-        body.dark-mode .feature-card {
-            background: var(--card-dark);
-            border-color: var(--border-dark);
-            box-shadow: 0 16px 40px rgba(0,0,0,0.7);
-        }
-
-        .feature-icon {
-            width: 26px;
-            height: 26px;
-            border-radius: 9px;
-            background: rgba(197,139,59,0.16);
+        .featured-photo-wrapper {
             display: flex;
-            align-items: center;
             justify-content: center;
-            font-size: 14px;
-            margin-bottom: 6px;
-        }
-
-        .feature-title {
-            font-size: 15px;
-            font-weight: 600;
-            margin: 0 0 4px;
-        }
-
-        .feature-text {
-            font-size: 13px;
-            opacity: 0.85;
-            margin: 0 0 8px;
-        }
-
-        .feature-meta {
-            font-size: 11px;
-            opacity: 0.75;
-        }
-
-        .feature-highlight {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 0 0, rgba(255,255,255,0.35), transparent 55%);
-            opacity: 0;
-            transition: opacity 0.2s ease;
-            pointer-events: none;
-        }
-
-        .feature-card:hover .feature-highlight {
-            opacity: 1;
+            margin-top: 20px;
         }
 
         /* ---------------------------------------------------
-           STATS STRIP
+           NEWS GRID
         --------------------------------------------------- */
-        .stats-strip {
+        .news-grid {
+            max-width: 1100px;
+            margin: 40px auto 60px;
+            padding: 0 7%;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 12px;
-            margin-top: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 22px;
         }
 
-        .stat-card {
-            background: rgba(255,255,255,0.9);
-            border-radius: 999px;
-            padding: 8px 12px;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border: 1px solid rgba(0,0,0,0.06);
-        }
-
-        body.dark-mode .stat-card {
-            background: rgba(10,12,18,0.95);
-            border-color: rgba(255,255,255,0.12);
-        }
-
-        .stat-label {
-            opacity: 0.8;
-        }
-
-        .stat-value {
-            font-weight: 600;
-        }
-
-        /* ---------------------------------------------------
-           PREVIEW SECTIONS (TUTORIALS / NEWS / TOOLS)
-        --------------------------------------------------- */
-        .preview-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 16px;
-        }
-
-        .preview-card {
+        .news-card {
             background: var(--card-light);
             border-radius: var(--radius-md);
             border: 1px solid var(--border-light);
-            padding: 14px 14px 12px;
             box-shadow: var(--shadow-card);
-            position: relative;
             overflow: hidden;
-            transform: translateY(14px);
             opacity: 0;
+            transform: translateY(20px);
         }
 
-        body.dark-mode .preview-card {
+        body.dark-mode .news-card {
             background: var(--card-dark);
             border-color: var(--border-dark);
             box-shadow: 0 16px 40px rgba(0,0,0,0.7);
         }
 
-        .preview-tag {
-            font-size: 11px;
-            opacity: 0.75;
-            margin-bottom: 4px;
+        .news-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
         }
 
-        .preview-title {
-            font-size: 15px;
+        .news-content { padding: 16px 18px 20px; }
+
+        .news-title {
+            font-size: 17px;
             font-weight: 600;
-            margin: 0 0 4px;
+            margin-bottom: 8px;
         }
 
-        .preview-text {
-            font-size: 13px;
+        .news-desc {
+            font-size: 14px;
             opacity: 0.85;
-            margin: 0 0 8px;
+            margin-bottom: 10px;
         }
 
-        .preview-meta {
-            font-size: 11px;
-            opacity: 0.75;
+        .news-btn {
+            margin-top: 12px;
+            padding: 8px 16px;
+            border-radius: 999px;
+            background: var(--primary);
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
         }
 
         /* ---------------------------------------------------
-           CTA / FOOTER
+           REVEAL
         --------------------------------------------------- */
-        .cta {
-            margin-top: 18px;
-            padding: 16px 16px 14px;
-            border-radius: var(--radius-lg);
-            background: linear-gradient(135deg, rgba(197,139,59,0.16), rgba(0,0,0,0.02));
-            border: 1px solid rgba(197,139,59,0.35);
-            box-shadow: var(--shadow-card);
-        }
-
-        body.dark-mode .cta {
-            background: linear-gradient(135deg, rgba(197,139,59,0.22), rgba(10,12,18,0.9));
-            border-color: rgba(255,255,255,0.18);
-        }
-
-        .cta-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 18px;
-            margin: 0 0 6px;
-        }
-
-        .cta-text {
-            font-size: 13px;
-            opacity: 0.85;
-            margin: 0 0 10px;
-        }
-
-        footer {
-            margin-top: 30px;
-            padding: 20px 7% 24px;
-            text-align: center;
-            font-size: 12px;
-            background: rgba(253,247,238,0.92);
-            border-top: 1px solid rgba(0,0,0,0.06);
-        }
-
-        body.dark-mode footer {
-            background: rgba(8,10,16,0.96);
-            border-top-color: rgba(255,255,255,0.08);
-        }
-
-        /* ---------------------------------------------------
-           ANIMATIONS (SCROLL REVEAL)
-        --------------------------------------------------- */
-        @keyframes fadeSlideUp {
-            0% { opacity: 0; transform: translateY(10px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes floatUp {
-            0% { opacity: 0; transform: translateY(8px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes heroCardIn {
-            0% { opacity: 0; transform: translateY(12px) scale(0.98); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
         .reveal {
             opacity: 0;
             transform: translateY(16px);
@@ -684,36 +274,33 @@
         }
 
         /* ---------------------------------------------------
-           RESPONSIVE
+           FOOTER
         --------------------------------------------------- */
-        @media (max-width: 720px) {
-            nav h1 {
-                font-size: 18px;
-            }
-            .hero-title {
-                font-size: 24px;
-            }
-            .section-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+        footer {
+            margin-top: 40px;
+            padding: 24px 7%;
+            text-align: center;
+            font-size: 12px;
+            background: rgba(253,247,238,0.92);
+            border-top: 1px solid rgba(0,0,0,0.06);
+        }
+
+        body.dark-mode footer {
+            background: rgba(8,10,16,0.96);
+            border-top-color: rgba(255,255,255,0.08);
         }
     </style>
 </head>
 <body>
 
+<!-- BLOBS -->
 <div class="blob blob-1"></div>
 <div class="blob blob-2"></div>
 
-<header>
-    <img src="assets/logo.png"
-         class="logo-animate"
-         alt="AlaeAI — Build. Learn. Create.">
-</header>
-
+<!-- NAV -->
 <nav>
     <h1>AlaeAI</h1>
-    <div class="nav-links">
+    <div>
         <a href="index.html">Home</a>
         <a href="tutorials.html">Tutorials</a>
         <a href="news.html">News</a>
@@ -725,501 +312,99 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-    <div class="hero-left">
-        <div class="hero-pill">
-            <span>🚀 New</span>
-            <span>20‑Level Tutorials · Live Tools · Real Projects</span>
-        </div>
+<section class="hero reveal">
+    <h2 class="hero-title">Latest Tech & AI News</h2>
+    <p class="hero-subtitle">
+        Curated by you — hand‑picked articles, stories, and updates you think matter most.
+    </p>
 
-        <h2 class="hero-title">
-            Build. Learn. Create.<br>
-            A modern lab for your ideas.
-        </h2>
-
-        <p class="hero-subtitle">
-            AlaeAI is your personal space to practice web development, explore tools, read tech news,
-            and ship real projects — all in one clean, focused environment.
-        </p>
-
-        <div class="hero-actions">
-            <button class="btn-primary" onclick="location.href='tutorials.html'">
-                Start Tutorials
-            </button>
-            <button class="btn-ghost" onclick="location.href='tools.html'">
-                Explore Tools
-            </button>
-        </div>
-
-        <div class="hero-meta">
-            <span>✅ 20 structured levels</span>
-            <span>🧠 Real projects, not just theory</span>
-            <span>🌙 Dark mode ready</span>
-        </div>
-    </div>
-
-    <div class="hero-right">
-        <div class="hero-card">
-            <div class="hero-orbit"></div>
-            <div class="hero-card-badge">Live learning snapshot</div>
-
-            <h3 class="hero-card-title">Today on AlaeAI</h3>
-            <p class="hero-card-sub">
-                Track your progress, jump back into tutorials, and discover what to build next.
-            </p>
-
-            <div class="hero-card-grid">
-                <div class="hero-mini-card">
-                    <div class="hero-mini-label">Tutorials completed</div>
-                    <div class="hero-mini-value" id="hero-tutorials-completed">0 / 20</div>
-                </div>
-                <div class="hero-mini-card">
-                    <div class="hero-mini-label">Active focus</div>
-                    <div class="hero-mini-value">Web Dev Path</div>
-                </div>
-                <div class="hero-mini-card">
-                    <div class="hero-mini-label">Latest section</div>
-                    <div class="hero-mini-value">Tutorials & Tools</div>
-                </div>
-                <div class="hero-mini-card">
-                    <div class="hero-mini-label">Next step</div>
-                    <div class="hero-mini-value">Continue Level 1 → 20</div>
-                </div>
-            </div>
-        </div>
+    <div class="featured-photo-wrapper">
+        <img src="assets/logo.png" class="logo-animate" alt="AlaeAI Featured Image">
     </div>
 </section>
 
-<!-- CORE FEATURES -->
-<section class="section">
-    <div class="section-header">
-        <div>
-            <h2 class="section-title">Core areas of AlaeAI</h2>
-            <p class="section-subtitle">
-                Everything is organized into clear sections so you always know where to go next.
-            </p>
-        </div>
-        <a href="tutorials.html" class="section-link">View full tutorials →</a>
-    </div>
+<!-- NEWS GRID -->
+<div class="news-grid">
 
-    <div class="feature-grid">
-        <article class="feature-card reveal">
-            <div class="feature-highlight"></div>
-            <div class="feature-icon">📚</div>
-            <h3 class="feature-title">Step‑by‑step tutorials</h3>
-            <p class="feature-text">
-                20 levels from basics to advanced projects, with explanations, code, and a clean side‑panel experience.
+    <div class="news-card reveal">
+        <img class="news-img" src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg">
+        <div class="news-content">
+            <h3 class="news-title">AI Startups Are Redefining Productivity</h3>
+            <p class="news-desc">
+                A new wave of AI tools is helping developers, designers, and students build faster than ever before.
             </p>
-            <div class="feature-meta">
-                Progress tracking · Difficulty scaling · Real‑world examples
-            </div>
-        </article>
-
-        <article class="feature-card reveal">
-            <div class="feature-highlight"></div>
-            <div class="feature-icon">🛠️</div>
-            <h3 class="feature-title">Practical tools</h3>
-            <p class="feature-text">
-                Small focused tools to help you test, debug, and experiment while you learn and build.
-            </p>
-            <div class="feature-meta">
-                Snippets · Utilities · Experiments
-            </div>
-        </article>
-
-        <article class="feature-card reveal">
-            <div class="feature-highlight"></div>
-            <div class="feature-icon">📰</div>
-            <h3 class="feature-title">Curated tech news</h3>
-            <p class="feature-text">
-                A clean news section to keep you updated on technology, AI, and development trends.
-            </p>
-            <div class="feature-meta">
-                Focused · Relevant · No noise
-            </div>
-        </article>
-
-        <article class="feature-card reveal">
-            <div class="feature-highlight"></div>
-            <div class="feature-icon">🎯</div>
-            <h3 class="feature-title">Project‑driven learning</h3>
-            <p class="feature-text">
-                Build calculators, to‑do apps, weather dashboards, mini‑games, and more as you progress.
-            </p>
-            <div class="feature-meta">
-                Real UI · Real logic · Real practice
-            </div>
-        </article>
-    </div>
-
-    <div class="stats-strip reveal">
-        <div class="stat-card">
-            <span class="stat-label">Tutorial levels</span>
-            <span class="stat-value">20</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-label">Main sections</span>
-            <span class="stat-value">6</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-label">Learning path</span>
-            <span class="stat-value">Beginner → Advanced</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-label">Theme</span>
-            <span class="stat-value">Minimal · Focused</span>
-        </div>
-    </div>
-</section>
-
-<!-- PREVIEW: TUTORIALS / NEWS / TOOLS -->
-<section class="section">
-    <div class="section-header">
-        <div>
-            <h2 class="section-title">Explore what’s inside</h2>
-            <p class="section-subtitle">
-                A quick preview of the main areas you can dive into right now.
-            </p>
+            <a href="#" target="_blank">
+                <button class="news-btn">Read More</button>
+            </a>
         </div>
     </div>
 
-    <div class="preview-grid">
-        <article class="preview-card reveal">
-            <div class="preview-tag">Tutorials</div>
-            <h3 class="preview-title">20‑Level Web Dev Path</h3>
-            <p class="preview-text">
-                Start from HTML basics and grow into building full projects with JavaScript, APIs, and responsive layouts.
+    <div class="news-card reveal">
+        <img class="news-img" src="https://images.pexels.com/photos/3861964/pexels-photo-3861964.jpeg">
+        <div class="news-content">
+            <h3 class="news-title">Robotics & AI: The Next Frontier</h3>
+            <p class="news-desc">
+                From autonomous drones to smart factories, robotics powered by AI is transforming real‑world industries.
             </p>
-            <div class="preview-meta">
-                Includes: HTML · CSS · JS · Layout · APIs · Projects
-            </div>
-        </article>
-
-        <article class="preview-card reveal">
-            <div class="preview-tag">News</div>
-            <h3 class="preview-title">Tech & AI Highlights</h3>
-            <p class="preview-text">
-                A clean feed of important updates in AI, web development, and technology — without distractions.
-            </p>
-            <div class="preview-meta">
-                Updated regularly · Focused on what matters
-            </div>
-        </article>
-
-        <article class="preview-card reveal">
-            <div class="preview-tag">Tools</div>
-            <h3 class="preview-title">Hands‑on utilities</h3>
-            <p class="preview-text">
-                Use small tools to test ideas, inspect code, and experiment while you follow tutorials or build projects.
-            </p>
-            <div class="preview-meta">
-                Designed to stay out of your way
-            </div>
-        </article>
-    </div>
-</section>
-
-<!-- CTA -->
-<section class="section">
-    <div class="cta reveal">
-        <h2 class="cta-title">Ready to continue your path?</h2>
-        <p class="cta-text">
-            Jump into the tutorials, explore tools, or read the latest news — everything is designed to help you
-            build, learn, and create at your own pace.
-        </p>
-        <div class="hero-actions">
-            <button class="btn-primary" onclick="location.href='tutorials.html'">
-                Continue learning
-            </button>
-            <button class="btn-ghost" onclick="location.href='news.html'">
-                Check tech news
-            </button>
+            <a href="#" target="_blank">
+                <button class="news-btn">Read More</button>
+            </a>
         </div>
     </div>
-</section>
 
+    <div class="news-card reveal">
+        <img class="news-img" src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg">
+        <div class="news-content">
+            <h3 class="news-title">Learning to Code with AI Assistants</h3>
+            <p class="news-desc">
+                Students are using AI copilots to understand concepts, debug code, and build real projects faster.
+            </p>
+            <a href="#" target="_blank">
+                <button class="news-btn">Read More</button>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
 <footer>
-    © 2026 AlaeAI — Build. Learn. Create. · Crafted for focused learning.
+    © 2026 AlaeAI — All rights reserved.
 </footer>
-<script>
-/* ---------------------------------------------------
-   DARK MODE SYNC
---------------------------------------------------- */
-const THEME_KEY = "alaeai-theme";
 
-function applyTheme() {
-    const saved = localStorage.getItem(THEME_KEY);
-    if (saved === "dark") {
-        document.body.classList.add("dark-mode");
-        document.getElementById("theme-toggle").textContent = "☀️ Light Mode";
+<!-- DARK MODE + REVEAL -->
+<script>
+// Load saved theme
+if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-mode");
+}
+
+// Toggle theme
+const themeToggle = document.getElementById("theme-toggle");
+themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+
+    if (document.body.classList.contains("dark-mode")) {
+        localStorage.setItem("theme", "dark");
+        themeToggle.textContent = "☀️ Light Mode";
     } else {
-        document.body.classList.remove("dark-mode");
-        document.getElementById("theme-toggle").textContent = "🌙 Dark Mode";
-    }
-}
-
-applyTheme();
-
-document.getElementById("theme-toggle").addEventListener("click", () => {
-    const isDark = document.body.classList.toggle("dark-mode");
-    localStorage.setItem(THEME_KEY, isDark ? "dark" : "light");
-    applyTheme();
-});
-
-/* ---------------------------------------------------
-   LOAD TUTORIAL PROGRESS INTO HERO CARD
---------------------------------------------------- */
-const PROGRESS_KEY = "tutorial-progress";
-let completed = JSON.parse(localStorage.getItem(PROGRESS_KEY) || "[]");
-
-function updateHeroProgress() {
-    const count = completed.length;
-    document.getElementById("hero-tutorials-completed").textContent = `${count} / 20`;
-}
-
-updateHeroProgress();
-
-/* ---------------------------------------------------
-   SCROLL REVEAL ANIMATIONS
---------------------------------------------------- */
-const revealElements = document.querySelectorAll(".reveal");
-
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("reveal-visible");
-            revealObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.15 });
-
-revealElements.forEach(el => revealObserver.observe(el));
-
-/* ---------------------------------------------------
-   FLOATING BUTTON EFFECTS
---------------------------------------------------- */
-document.querySelectorAll(".btn-primary, .btn-ghost").forEach(btn => {
-    btn.addEventListener("mousemove", (e) => {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        btn.style.setProperty("--x", `${x}px`);
-        btn.style.setProperty("--y", `${y}px`);
-    });
-});
-
-/* ---------------------------------------------------
-   SMOOTH SCROLL FOR INTERNAL LINKS
---------------------------------------------------- */
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener("click", (e) => {
-        e.preventDefault();
-        const target = document.querySelector(link.getAttribute("href"));
-        if (target) {
-            window.scrollTo({
-                top: target.offsetTop - 80,
-                behavior: "smooth"
-            });
-        }
-    });
-});
-
-/* ---------------------------------------------------
-   PARALLAX EFFECT FOR BLOBS
---------------------------------------------------- */
-document.addEventListener("mousemove", (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 20;
-    const y = (e.clientY / window.innerHeight - 0.5) * 20;
-
-    document.querySelector(".blob-1").style.transform = `translate(${x}px, ${y}px)`;
-    document.querySelector(".blob-2").style.transform = `translate(${-x}px, ${-y}px)`;
-});
-
-/* ---------------------------------------------------
-   CARD ENTRANCE ANIMATION
---------------------------------------------------- */
-const animatedCards = document.querySelectorAll(".feature-card, .preview-card");
-
-animatedCards.forEach((card, index) => {
-    card.style.animation = `fadeSlideUp 0.7s ease forwards ${index * 0.12}s`;
-});
-
-/* ---------------------------------------------------
-   HERO ORBIT SPEED VARIATION
---------------------------------------------------- */
-const orbit = document.querySelector(".hero-orbit");
-let orbitSpeed = 18;
-
-setInterval(() => {
-    orbitSpeed = 14 + Math.random() * 10;
-    orbit.style.animationDuration = `${orbitSpeed}s`;
-}, 4000);
-
-/* ---------------------------------------------------
-   COUNTERS (OPTIONAL)
---------------------------------------------------- */
-function animateCounter(element, target, duration = 1200) {
-    let start = 0;
-    const step = target / (duration / 16);
-
-    function update() {
-        start += step;
-        if (start >= target) {
-            element.textContent = target;
-        } else {
-            element.textContent = Math.floor(start);
-            requestAnimationFrame(update);
-        }
-    }
-    update();
-}
-
-// Example usage (if you want animated stats later)
-// animateCounter(document.getElementById("stat-tutorials"), 20);
-
-</script>
-<script>
-/* ---------------------------------------------------
-   MICRO‑INTERACTIONS & POLISH
---------------------------------------------------- */
-
-/* ---------------------------------------------------
-   1. Magnetic Buttons
---------------------------------------------------- */
-document.querySelectorAll(".btn-primary, .btn-ghost").forEach(btn => {
-    btn.addEventListener("mousemove", (e) => {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        btn.style.transform = `translate(${x * 0.08}px, ${y * 0.08}px)`;
-    });
-
-    btn.addEventListener("mouseleave", () => {
-        btn.style.transform = "translate(0,0)";
-    });
-});
-
-/* ---------------------------------------------------
-   2. Card Tilt Effect
---------------------------------------------------- */
-document.querySelectorAll(".feature-card, .preview-card, .hero-card").forEach(card => {
-    card.addEventListener("mousemove", (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        card.style.transform = `rotateX(${y * -6}deg) rotateY(${x * 6}deg) scale(1.02)`;
-    });
-
-    card.addEventListener("mouseleave", () => {
-        card.style.transform = "rotateX(0) rotateY(0) scale(1)";
-    });
-});
-
-/* ---------------------------------------------------
-   3. Soft Floating Animations
---------------------------------------------------- */
-function floatElement(el, intensity = 6, speed = 3000) {
-    let y = 0;
-    let direction = 1;
-
-    setInterval(() => {
-        y += direction * 0.4;
-        if (Math.abs(y) >= intensity) direction *= -1;
-        el.style.transform = `translateY(${y}px)`;
-    }, speed / 120);
-}
-
-document.querySelectorAll(".hero-mini-card").forEach(card => {
-    floatElement(card, 4, 2600);
-});
-
-/* ---------------------------------------------------
-   4. Section Fade‑In Chain
---------------------------------------------------- */
-const sections = document.querySelectorAll(".section");
-
-sections.forEach((section, index) => {
-    section.style.opacity = 0;
-    section.style.transform = "translateY(20px)";
-    setTimeout(() => {
-        section.style.transition = "opacity 0.8s ease, transform 0.8s ease";
-        section.style.opacity = 1;
-        section.style.transform = "translateY(0)";
-    }, 300 + index * 200);
-});
-
-/* ---------------------------------------------------
-   5. Animated Stats (Auto‑Counter)
---------------------------------------------------- */
-function animateNumber(el, target, duration = 1200) {
-    let start = 0;
-    const increment = target / (duration / 16);
-
-    function update() {
-        start += increment;
-        if (start >= target) {
-            el.textContent = target;
-        } else {
-            el.textContent = Math.floor(start);
-            requestAnimationFrame(update);
-        }
-    }
-    update();
-}
-
-// Example: animate stats when visible
-const statObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const values = entry.target.querySelectorAll(".stat-value");
-            values.forEach(v => {
-                const num = parseInt(v.textContent);
-                if (!isNaN(num)) animateNumber(v, num);
-            });
-            statObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.3 });
-
-document.querySelectorAll(".stats-strip").forEach(strip => statObserver.observe(strip));
-
-/* ---------------------------------------------------
-   6. Hero Card Parallax
---------------------------------------------------- */
-const heroCard = document.querySelector(".hero-card");
-
-document.addEventListener("mousemove", (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 10;
-    const y = (e.clientY / window.innerHeight - 0.5) * 10;
-    heroCard.style.transform = `translateY(0) scale(1) rotateX(${y * -0.6}deg) rotateY(${x * 0.6}deg)`;
-});
-
-/* ---------------------------------------------------
-   7. Easter Egg (Konami Code)
---------------------------------------------------- */
-let konami = [];
-const secret = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
-
-document.addEventListener("keydown", (e) => {
-    konami.push(e.key);
-    if (konami.length > secret.length) konami.shift();
-
-    if (JSON.stringify(konami) === JSON.stringify(secret)) {
-        alert("🎉 Secret unlocked! You're a real developer, Alae.");
+        localStorage.setItem("theme", "light");
+        themeToggle.textContent = "🌙 Dark Mode";
     }
 });
 
-/* ---------------------------------------------------
-   8. Performance‑Safe Animation Throttle
---------------------------------------------------- */
-let ticking = false;
+// Fix button text on load
+if (document.body.classList.contains("dark-mode")) {
+    themeToggle.textContent = "☀️ Light Mode";
+} else {
+    themeToggle.textContent = "🌙 Dark Mode";
+}
 
-window.addEventListener("scroll", () => {
-    if (!ticking) {
-        window.requestAnimationFrame(() => {
-            ticking = false;
-        });
-        ticking = true;
-    }
+// Reveal animation
+document.querySelectorAll(".reveal").forEach(el => {
+    el.classList.add("reveal-visible");
 });
 </script>
+
+</body>
+</html>
