@@ -182,22 +182,28 @@ pre {
 
 <body>
 
+<header style="text-align: center; padding: 30px;">
+  <img src="assets/logo.png" 
+       alt="AlaeAI — Build. Learn. Create." 
+       style="max-width: 350px; border-radius: 12px;">
+</header>
+
+<nav>
+    <h1>AlaeAI</h1>
+    <div>
+        <a href="index.html">Home</a>
+        <a href="news.html">News</a>
+        <a href="tutorials.html">Tutorials</a>
+        <a href="tools.html">Tools</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+    </div>
+    <button id="theme-toggle">🌙 Dark Mode</button>
+</nav>
+
 <h1>Step-by-Step Tutorials (20 Levels)</h1>
 <p class="subtitle">Click the <strong>Open</strong> button on any tutorial to view it in the side panel.</p>
 
-<div class="tutorials-container" id="tutorials-grid">
-    <!-- Cards will be injected by JS -->
-</div>
-
-<div id="modal-bg" onclick="closePanel()"></div>
-
-<div id="side-panel">
-    <div class="panel-buttons">
-        <button class="panel-btn" onclick="toggleFullscreen()">Full Screen</button>
-        <button class="panel-btn" onclick="closePanel()">Close</button>
-    </div>
-    <div id="tutorial-content" class="tutorial-content"></div>
-</div>
 
 <script>
 // Data for cards
