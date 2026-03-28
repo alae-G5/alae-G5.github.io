@@ -9,9 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
-        /* ---------------------------------------------------
-           THEME VARIABLES
-        --------------------------------------------------- */
         :root {
             --bg-light: #f5efe6;
             --text-light: #1a1a1a;
@@ -46,9 +43,7 @@
             color: var(--text-dark);
         }
 
-        /* ---------------------------------------------------
-           FLOATING BLOBS
-        --------------------------------------------------- */
+        /* BLOBS */
         .blob {
             position: fixed;
             border-radius: 50%;
@@ -87,9 +82,7 @@
             100% { transform: translate(-40px,-30px) scale(1.05); }
         }
 
-        /* ---------------------------------------------------
-           NAVIGATION
-        --------------------------------------------------- */
+        /* NAVBAR */
         nav {
             position: sticky;
             top: 0;
@@ -152,9 +145,7 @@
             color: var(--text-dark);
         }
 
-        /* ---------------------------------------------------
-           HERO SECTION WITH GLOWING IMAGE
-        --------------------------------------------------- */
+        /* HERO */
         .hero {
             padding: 90px 7% 40px;
             text-align: center;
@@ -202,9 +193,7 @@
             100% { box-shadow: 0 0 45px rgba(197,139,59,0.55); }
         }
 
-        /* ---------------------------------------------------
-           NEWS GRID
-        --------------------------------------------------- */
+        /* NEWS GRID */
         .news-grid {
             max-width: 1100px;
             margin: 40px auto 60px;
@@ -262,9 +251,7 @@
             cursor: pointer;
         }
 
-        /* ---------------------------------------------------
-           SCROLL REVEAL
-        --------------------------------------------------- */
+        /* REVEAL */
         .reveal {
             opacity: 0;
             transform: translateY(16px);
@@ -276,9 +263,7 @@
             transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
-        /* ---------------------------------------------------
-           FOOTER
-        --------------------------------------------------- */
+        /* FOOTER */
         footer {
             margin-top: 40px;
             padding: 24px 7%;
@@ -296,11 +281,9 @@
 </head>
 <body>
 
-<!-- FLOATING BLOBS -->
 <div class="blob blob-1"></div>
 <div class="blob blob-2"></div>
 
-<!-- NAVIGATION -->
 <nav>
     <h1>AlaeAI</h1>
     <div>
@@ -314,7 +297,6 @@
     <button id="theme-toggle">🌙 Dark Mode</button>
 </nav>
 
-<!-- HERO SECTION WITH GLOWING IMAGE -->
 <section class="hero reveal">
     <h2 class="hero-title">Latest Tech & AI News</h2>
     <p class="hero-subtitle">
@@ -322,14 +304,12 @@
     </p>
 
     <div class="featured-photo-wrapper">
-        <img src="logo.png" class="featured-photo" alt="AlaeAI Featured Image">
+        <img src="assets/logo.png" class="featured-photo" alt="AlaeAI Featured Image">
     </div>
 </section>
 
-<!-- NEWS GRID (YOU CONTROL EVERYTHING HERE) -->
 <div id="news-container" class="news-grid">
 
-    <!-- ⭐ EXAMPLE NEWS CARD 1 ⭐ -->
     <div class="news-card reveal">
         <img class="news-img" src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg" />
         <div class="news-content">
@@ -343,7 +323,6 @@
         </div>
     </div>
 
-    <!-- ⭐ EXAMPLE NEWS CARD 2 ⭐ -->
     <div class="news-card reveal">
         <img class="news-img" src="https://images.pexels.com/photos/3861964/pexels-photo-3861964.jpeg" />
         <div class="news-content">
@@ -357,7 +336,6 @@
         </div>
     </div>
 
-    <!-- ⭐ EXAMPLE NEWS CARD 3 ⭐ -->
     <div class="news-card reveal">
         <img class="news-img" src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg" />
         <div class="news-content">
@@ -373,12 +351,10 @@
 
 </div>
 
-<!-- FOOTER -->
 <footer>
     © 2026 AlaeAI — All rights reserved.
 </footer>
 
-<!-- GLOBAL DARK MODE + REVEAL -->
 <script>
 // Load saved theme
 if (localStorage.getItem("theme") === "dark") {
