@@ -745,7 +745,20 @@
             <div class="section-hint">Level content</div>
 
             <!-- TUTORIAL 1–20 BLOCKS (placeholders for now) -->
-            <article class="tutorial-block" id="t1">
+            <article class="tutorial-block" id=<div class="tutorial-description">
+  <p><strong>Welcome to Level 1 of the Tool Builder path.</strong> This is where your entire platform begins. In this level, you will create the structural foundation that every future tool will rely on. Think of this as building the skeleton of a house: no styling, no animations, no interactivity — just clean, semantic HTML that is easy to maintain and expand.</p>
+
+  <p>The goal is to create a universal layout that can host any tool: a prompt builder, a gradient generator, a JSON viewer, a password generator, and more. To achieve this, you must design a structure that is flexible, readable, and consistent. A strong foundation now will save you hours of debugging later.</p>
+
+  <p>Start by defining the global layout. Your page needs a header, a main content area, and a footer. The header will contain your brand and theme toggle. The main area will contain the tool workspace. The footer will contain credits or links. Use semantic tags like <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, and <code>&lt;footer&gt;</code> to keep your structure clean.</p>
+
+  <p>Inside the main area, create a container for the tool interface. This container will hold the tool title, the input section, the output section, and the action buttons. Even though these sections are empty for now, defining them early ensures that every tool follows the same structure.</p>
+
+  <p>Finally, keep your HTML readable. Use indentation, spacing, and comments. A professional developer should be able to open your file and understand the structure instantly. This is what separates beginners from real builders.</p>
+
+  <p>Below is the complete HTML structure you will build in this level.</p>
+</div>
+>
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 1 — HTML structure for the Tool Builder</div>
                 <div class="tutorial-meta-tags">
@@ -763,7 +776,18 @@
               </div>
             </article>
 
-            <article class="tutorial-block" id="t2">
+            <article class="tutorial-block" id=<div class="tutorial-description">
+  <p><strong>Level 2 gives your skeleton a clean visual identity.</strong> Instead of writing random CSS for each element, you’ll create a small, reusable styling framework. This framework will define your colors, spacing, typography, and basic components so every future tool feels like part of one product.</p>
+
+  <p>You’ll start by defining CSS variables for background, text, accent color, border radius, and shadows. These variables make it easy to adjust the entire theme later without rewriting every rule. Then you’ll style the global layout: header, main area, and footer.</p>
+
+  <p>Next, you’ll design the “tool card” component. This card will be the container for every tool you build. It should look like a modern, minimal panel: white background, soft shadow, rounded corners, and comfortable padding. In dark mode, the same structure will use darker surfaces and glowing accents.</p>
+
+  <p>Finally, you’ll add basic button styles for primary and secondary actions. These buttons will be reused across all tools, so they should be clear, consistent, and easy to recognize. You’re not chasing perfection here — just a solid, reusable base.</p>
+
+  <p>The CSS below is intentionally small but powerful. You can paste it into a separate file or inside a <code>&lt;style&gt;</code> tag and immediately see your Level 1 HTML transform into a clean interface.</p>
+</div>
+>
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 2 — CSS framework & portfolio theme</div>
                 <div class="tutorial-meta-tags">
@@ -782,7 +806,18 @@
             </article>
 
             <!-- 3–20 placeholders -->
-            <article class="tutorial-block" id="t3">
+            <article class="tutorial-block" id=<div class="tutorial-description">
+  <p><strong>Level 3 connects your structure and styling with real behavior.</strong> You already have a header, a tool card, and a basic visual system. Now you’ll add a minimal JavaScript theme toggle that switches between light and dark modes using a single class on the <code>&lt;body&gt;</code> element.</p>
+
+  <p>The idea is simple: when the user clicks the toggle button, you add or remove a <code>.dark</code> class on the body. Your CSS will react to that class by changing variables like background, text, and card colors. This keeps your logic clean and your styling centralized.</p>
+
+  <p>You’ll also store the user’s choice in <code>localStorage</code>, so the theme persists when they refresh the page. This is a small detail, but it makes your tool feel more like a real app and less like a demo.</p>
+
+  <p>The script below assumes you already have the HTML from Level 1 and the CSS from Level 2. It wires up the <code>#themeToggle</code> button, applies the saved theme on load, and updates the label text so users know which mode they’re in.</p>
+
+  <p>Once this level is done, you’ll have a basic but complete foundation: structure, styling, and behavior. From here, every new tool you build will automatically benefit from the same theme system.</p>
+</div>
+>
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 3 — Component system (cards, panels, buttons)</div>
                 <div class="tutorial-meta-tags">
@@ -799,7 +834,20 @@
               </div>
             </article>
 
-            <article class="tutorial-block" id="t4">
+            <article class="tutorial-block" id=<div class="tutorial-description">
+  <p><strong>Level 4 introduces animations and micro‑interactions.</strong> These are the small visual details that make your interface feel alive. Animations are not just decoration — they guide the user’s attention, create flow, and make your tools feel premium.</p>
+
+  <p>In this level, you’ll add smooth transitions, hover effects, and subtle motion to your tool card and buttons. The goal is not to make things flashy, but to make them feel responsive and intentional. Every animation should have a purpose: highlight an action, confirm a click, or soften a layout change.</p>
+
+  <p>You’ll start by defining global transition variables. These ensure that all animations across your platform feel consistent. Then you’ll animate your tool card so it gently fades and slides into view. This gives users a sense of structure and hierarchy.</p>
+
+  <p>Next, you’ll animate your buttons. A small lift on hover, a soft shadow, and a color shift make buttons feel interactive. These micro‑interactions are what separate a basic UI from a polished product.</p>
+
+  <p>Finally, you’ll add a simple “active state” animation for the theme toggle. This helps users understand that the button actually did something, even before the theme changes.</p>
+
+  <p>Below is a clean CSS animation pack you can drop into your project. It works with the structure and styles from previous levels and will automatically enhance every tool you build later.</p>
+</div>
+>
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 4 — Animations & micro-interactions</div>
                 <div class="tutorial-meta-tags">
@@ -817,7 +865,16 @@
             </article>
 
             <!-- Core tools -->
-            <article class="tutorial-block" id="t5">
+            <article class="tutorial-block" id=<div class="tutorial-description">
+  <p><strong>Level 5 is your first real tool: a Prompt Builder.</strong> This tool lets users combine text fields, dropdowns, and options to generate a structured prompt. It’s simple, but it teaches you how to build interactive tools that take input and produce output.</p>
+
+  <p>The Prompt Builder has three parts: an input section, a settings section, and an output section. Users type a topic, choose a tone, and click “Generate.” The tool then builds a formatted prompt automatically.</p>
+
+  <p>This level introduces event listeners, string templates, and DOM manipulation. You’ll learn how to read values from inputs, combine them into a final result, and display that result in a clean output box.</p>
+
+  <p>The code below is intentionally simple so you can understand the logic. Later tools will build on this foundation with more advanced features like validation, saving, exporting, and AI integration.</p>
+</div>
+>
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 5 — Prompt builder tool</div>
                 <div class="tutorial-meta-tags">
@@ -832,7 +889,16 @@
               <div class="placeholder">Will be replaced with full code later.</div>
             </article>
 
-            <article class="tutorial-block" id="t6">
+            <article class="tutorial-block" id=<div class="tutorial-description">
+  <p><strong>Level 6 introduces your first visual tool: a Color Palette Generator.</strong> This tool creates random color palettes and displays them as swatches. It teaches you how to generate dynamic content, update the DOM, and style elements programmatically.</p>
+
+  <p>The tool works like this: when the user clicks “Generate Palette,” the script creates five random colors, displays them as boxes, and shows their hex codes. Users can click a color to copy its value.</p>
+
+  <p>This level teaches loops, randomization, event delegation, and inline styling. It also shows how to create elements dynamically instead of writing them manually in HTML.</p>
+
+  <p>The code below is compact but powerful. It generates palettes instantly and looks great inside your tool card.</p>
+</div>
+>
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 6 — Color palette generator</div>
                 <div class="tutorial-meta-tags">
@@ -847,7 +913,16 @@
               <div class="placeholder">Will be replaced with full code later.</div>
             </article>
 
-            <article class="tutorial-block" id="t7">
+            <article class="tutorial-block" id=<div class="tutorial-description">
+  <p><strong>Level 7 introduces your first visual‑design tool: a Gradient Generator.</strong> This tool lets users create smooth CSS gradients by choosing two colors and adjusting the angle. It teaches you how to combine user inputs, live previews, and CSS output generation.</p>
+
+  <p>The Gradient Generator has three main parts: color pickers, angle control, and a preview box. When the user changes any value, the preview updates instantly. This is your first “live UI” tool — no buttons required.</p>
+
+  <p>This level teaches event listeners, dynamic styling, and generating CSS code that users can copy. You’ll also learn how to update multiple elements at once and how to keep your UI responsive.</p>
+
+  <p>The code below is compact but powerful. It creates a clean gradient tool that fits perfectly inside your tool card layout.</p>
+</div>
+>
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 7 — Gradient generator</div>
                 <div class="tutorial-meta-tags">
@@ -862,7 +937,16 @@
               <div class="placeholder">Will be replaced with full code later.</div>
             </article>
 
-            <article class="tutorial-block" id="t8">
+            <article class="tutorial-block" id=<div class="tutorial-description">
+  <p><strong>Level 8 introduces your first text‑processing tool: a Code Formatter.</strong> This tool takes messy HTML, CSS, or JavaScript and formats it with proper indentation. It teaches you how to manipulate strings, detect patterns, and update text areas.</p>
+
+  <p>The formatter uses a simple indentation algorithm: every time it sees an opening brace or tag, it increases the indent; every time it sees a closing brace or tag, it decreases it. This is not a full parser, but it works well for small snippets and teaches you the logic behind formatting tools.</p>
+
+  <p>This level teaches loops, conditionals, whitespace handling, and updating text areas. You’ll also learn how to prevent the UI from freezing by keeping the logic lightweight.</p>
+
+  <p>The code below is a minimal formatter that works for HTML, CSS, and JS. It’s not perfect, but it’s a great starting point for more advanced tools.</p>
+</div>
+>
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 8 — Code formatter</div>
                 <div class="tutorial-meta-tags">
@@ -877,7 +961,14 @@
               <div class="placeholder">Will be replaced with full code later.</div>
             </article>
 
-            <article class="tutorial-block" id="t9">
+            <article class="tutorial-block" id=<div class="tutorial-description">
+  <p><strong>Level 9 introduces a practical tool: a Password Generator.</strong> This tool creates secure random passwords based on user‑selected options like length, numbers, symbols, and uppercase letters.</p>
+
+  <p>This level teaches randomization, checkboxes, loops, and building strings dynamically. You’ll also learn how to validate user input and prevent empty selections.</p>
+
+  <p>The tool generates a password instantly and displays it in a copy‑ready box. This is one of the most useful tools in your entire collection.</p>
+</div>
+>
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 9 — Password generator</div>
                 <div class="tutorial-meta-tags">
@@ -892,7 +983,16 @@
               <div class="placeholder">Will be replaced with full code later.</div>
             </article>
 
-            <article class="tutorial-block" id="t10">
+            <article class="tutorial-block" id=<div class="tutorial-description">
+  <p><strong>Level 10 introduces your first time‑based tool: a Focus Timer.</strong> This tool lets users set a duration, start a countdown, and stay focused until the timer ends. It teaches you how to work with intervals, time formatting, and UI state changes.</p>
+
+  <p>The Focus Timer has three parts: a duration selector, a countdown display, and control buttons (Start, Pause, Reset). When the user starts the timer, the countdown updates every second. When it reaches zero, the tool plays a sound or shows a visual alert.</p>
+
+  <p>This level teaches interval management, preventing multiple timers from running at once, and updating the UI in real time. You’ll also learn how to format seconds into minutes and seconds.</p>
+
+  <p>The code below is simple but effective. It gives you a clean, functional timer that fits perfectly inside your tool card layout.</p>
+</div>
+>
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 10 — Focus timer</div>
                 <div class="tutorial-meta-tags">
@@ -908,7 +1008,16 @@
             </article>
 
             <!-- Advanced -->
-            <article class="tutorial-block" id="t11">
+            <article class="tutorial-block" id=<div class="tutorial-description">
+  <p><strong>Level 11 introduces persistent data with a Notes App.</strong> This tool lets users write notes, save them, delete them, and keep them even after refreshing the page. It teaches you how to use <code>localStorage</code> to store data permanently in the browser.</p>
+
+  <p>The Notes App has two main parts: a text input area and a list of saved notes. When the user writes a note and clicks “Save,” the note is added to the list and stored in localStorage. When they delete a note, it is removed from both the UI and storage.</p>
+
+  <p>This level teaches arrays, JSON serialization, dynamic element creation, and persistent storage. It also introduces the concept of syncing UI with stored data.</p>
+
+  <p>The code below gives you a clean, functional notes app that works instantly and feels like a real productivity tool.</p>
+</div>
+
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 11 — Notes app with LocalStorage</div>
                 <div class="tutorial-meta-tags">
@@ -923,7 +1032,14 @@
               <div class="placeholder">Will be replaced with full code later.</div>
             </article>
 
-            <article class="tutorial-block" id="t12">
+            <article class="tutorial-block" id=<div class="tutorial-description">
+  <p><strong>Level 12 upgrades your theme system into a full Theme Switcher.</strong> Instead of just light and dark mode, this version supports multiple themes using CSS variables. Users can switch between themes instantly, and the choice is saved in localStorage.</p>
+
+  <p>This level teaches theme mapping, dynamic variable updates, and UI state syncing. You’ll also learn how to store structured theme data and apply it cleanly.</p>
+
+  <p>The code below introduces three themes: Light, Dark, and Gold. You can add more later by extending the theme object.</p>
+</div>
+>
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 12 — Global theme switcher</div>
                 <div class="tutorial-meta-tags">
@@ -938,7 +1054,16 @@
               <div class="placeholder">Will be replaced with full code later.</div>
             </article>
 
-            <article class="tutorial-block" id="t13">
+            <article class="tutorial-block" id=<div class="tutorial-description">
+  <p><strong>Level 13 introduces your first network tool: an API Tester.</strong> This tool lets users send GET requests to any public API and view the JSON response. It teaches you how to work with the Fetch API, handle errors, and display formatted results.</p>
+
+  <p>The API Tester has two main parts: a URL input and a results box. When the user enters an API endpoint and clicks “Send Request,” the tool fetches the data and displays it in a readable format. If the request fails, the tool shows a clear error message.</p>
+
+  <p>This level teaches asynchronous JavaScript, promises, error handling, and JSON formatting. You’ll also learn how to prevent the UI from freezing by using async/await.</p>
+
+  <p>The code below is a clean, minimal API tester that works instantly and fits perfectly inside your tool card layout.</p>
+</div>
+>
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 13 — API tester</div>
                 <div class="tutorial-meta-tags">
@@ -953,7 +1078,16 @@
               <div class="placeholder">Will be replaced with full code later.</div>
             </article>
 
-            <article class="tutorial-block" id="t14">
+            <article class="tutorial-block" id=<div class="tutorial-description">
+  <p><strong>Level 14 introduces a JSON Viewer and Validator.</strong> This tool checks if JSON is valid and formats it with proper indentation. It’s extremely useful for debugging APIs, building tools, and working with structured data.</p>
+
+  <p>The tool has two parts: an input box and an output box. When the user clicks “Validate,” the tool tries to parse the JSON. If it’s valid, the formatted version appears in the output box. If not, the tool shows an error message.</p>
+
+  <p>This level teaches try/catch blocks, JSON parsing, error handling, and formatting. It also reinforces the importance of clean UI feedback.</p>
+
+  <p>The code below gives you a simple but powerful JSON validator that works instantly.</p>
+</div>
+>
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 14 — JSON viewer</div>
                 <div class="tutorial-meta-tags">
@@ -968,7 +1102,16 @@
               <div class="placeholder">Will be replaced with full code later.</div>
             </article>
 
-            <article class="tutorial-block" id="t15">
+            <article class="tutorial-block" id=<div class="tutorial-description">
+  <p><strong>Level 15 introduces a client‑side Search Engine.</strong> This tool filters a list of items in real time as the user types. It teaches you how to work with arrays, filtering, and dynamic DOM updates.</p>
+
+  <p>The search engine has two parts: a search input and a list of items. As the user types, the list updates instantly to show only matching items. This is the same logic used in dashboards, admin panels, and productivity apps.</p>
+
+  <p>This level teaches event listeners, filtering arrays, updating the DOM efficiently, and creating responsive UI components.</p>
+
+  <p>The code below gives you a clean, fast search engine that works instantly and feels professional.</p>
+</div>
+>
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 15 — Search & filter engine</div>
                 <div class="tutorial-meta-tags">
@@ -984,7 +1127,16 @@
             </article>
 
             <!-- Builder mode -->
-            <article class="tutorial-block" id="t16">
+            <article class="tutorial-block" id=<div class="tutorial-description">
+  <p><strong>Level 16 introduces your first multi‑tool Dashboard.</strong> This tool displays a grid of cards, each representing one of your tools (Prompt Builder, Gradient Generator, JSON Viewer, etc.). When the user clicks a card, it loads that tool inside the main tool area.</p>
+
+  <p>This level teaches modular UI design, dynamic content loading, and event delegation. Instead of writing separate pages for each tool, you’ll load them inside the same interface. This makes your platform feel like a real app instead of a collection of files.</p>
+
+  <p>The dashboard uses a simple grid layout. Each card has a title, an icon, and a short description. When clicked, the card triggers a callback function that loads the corresponding tool’s HTML into the tool card container.</p>
+
+  <p>This level prepares you for Level 20, where you’ll combine all tools into a full multi‑tool application.</p>
+</div>
+>
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 16 — Tool dashboard</div>
                 <div class="tutorial-meta-tags">
@@ -999,7 +1151,14 @@
               <div class="placeholder">Will be replaced with full code later.</div>
             </article>
 
-            <article class="tutorial-block" id="t17">
+            <article class="tutorial-block" id=<div class="tutorial-description">
+  <p><strong>Level 17 introduces a Drag & Drop system.</strong> This tool teaches you how to move elements around the screen using mouse events. It’s the foundation for building organizers, dashboards, kanban boards, and interactive UI components.</p>
+
+  <p>The tool consists of draggable boxes inside a container. Users can click and drag a box to reposition it. This level teaches mouse events, element positioning, and updating styles dynamically.</p>
+
+  <p>You’ll learn how to track mouse movement, calculate offsets, and apply transforms smoothly. This is one of the most fun and interactive tools in your collection.</p>
+</div>
+>
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 17 — Drag & drop layout</div>
                 <div class="tutorial-meta-tags">
@@ -1014,7 +1173,14 @@
               <div class="placeholder">Will be replaced with full code later.</div>
             </article>
 
-            <article class="tutorial-block" id="t18">
+            <article class="tutorial-block" id=<div class="tutorial-description">
+  <p><strong>Level 18 introduces a full Settings System.</strong> This tool lets users toggle preferences (animations, compact mode, rounded corners, etc.) and saves them permanently using localStorage.</p>
+
+  <p>This level teaches structured settings objects, syncing UI with saved preferences, and applying settings globally. It also prepares you for Level 20, where the full app will use these settings.</p>
+
+  <p>The code below includes three settings: animations, compact mode, and rounded UI. You can add more later.</p>
+</div>
+>
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 18 — Tool settings system</div>
                 <div class="tutorial-meta-tags">
@@ -1029,7 +1195,20 @@
               <div class="placeholder">Will be replaced with full code later.</div>
             </article>
 
-            <article class="tutorial-block" id="t19">
+            <article class="tutorial-block" id=<div class="tutorial-description">
+  <p><strong>Level 19 introduces your Export Tool — one of the most useful utilities in your entire platform.</strong> This tool allows users to export text, JSON, or any generated content into downloadable files. It also includes a “Copy to Clipboard” feature for instant sharing. Exporting is essential for real‑world tools: prompt builders, code generators, JSON validators, and even design tools all need a way to save results.</p>
+
+  <p>The Export Tool has three main features: exporting text as a <code>.txt</code> file, exporting JSON as a <code>.json</code> file, and copying content to the clipboard. Each export uses a simple but powerful technique: creating a Blob object, generating a temporary URL, and triggering a download. This method works in all modern browsers and requires no backend.</p>
+
+  <p>You’ll also learn how to validate JSON before exporting it. If the user enters invalid JSON, the tool will show an error instead of exporting a broken file. This is an important detail that makes your tool feel professional and safe to use.</p>
+
+  <p>The UI is simple: a textarea for content, a dropdown to choose the export type, and three buttons — Export, Copy, and Clear. The tool automatically adjusts its behavior based on the selected format. For example, if the user selects JSON, the tool will format the output before exporting.</p>
+
+  <p>This level teaches Blob creation, URL generation, clipboard APIs, error handling, and dynamic UI behavior. It also prepares you for Level 20, where you will combine all tools into a full multi‑tool application with persistent state, settings, and dynamic loading.</p>
+
+  <p>The code below is complete, clean, and ready to paste into your tutorials system. It works instantly and integrates perfectly with your existing theme, animations, and layout.</p>
+</div>
+>
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 19 — Export tool</div>
                 <div class="tutorial-meta-tags">
@@ -1044,7 +1223,22 @@
               <div class="placeholder">Will be replaced with full code later.</div>
             </article>
 
-            <article class="tutorial-block" id="t20">
+            <article class="tutorial-block" id=<div class="tutorial-description">
+  <p><strong>Level 20 is the final stage: turning everything into a unified Multi‑Tool App.</strong> Until now, each tool has lived as its own idea: prompt builder, gradient generator, JSON viewer, password generator, notes app, API tester, and more. In this level, you stop thinking in “single tools” and start thinking in “systems.” Your goal is to design a central shell that can load any tool dynamically, remember user preferences, and feel like one coherent product.</p>
+
+  <p>The core concept is simple: you have a main layout with a sidebar (or top bar) listing all tools, and a central workspace where the active tool is rendered. Instead of navigating to new pages, you swap the content inside the workspace. This is how real dashboards, admin panels, and pro apps behave. The user stays in one place while the content changes around them.</p>
+
+  <p>To keep things flexible, you’ll use a small registry of tools. Each tool has an ID, a name, a short description, and a function that returns its HTML snippet. When the user clicks a tool in the list, the app looks up that tool in the registry and injects its content into the main area. This pattern makes it easy to add, remove, or reorder tools without rewriting the core logic.</p>
+
+  <p>You’ll also connect your existing systems: theme handling, settings, and export logic. The multi‑tool shell doesn’t need to know the internal details of each tool — it just needs a clean way to render them. This separation of concerns is what makes your architecture scalable. You can imagine future tools (like AI chat, markdown editor, kanban board) plugging into the same shell with almost no changes.</p>
+
+  <p>Another important detail is state. Some tools, like Notes or Settings, already use <code>localStorage</code>. In this level, you accept that each tool is responsible for its own state, while the shell is responsible for navigation and layout. This keeps your code modular and avoids one giant file trying to control everything.</p>
+
+  <p>The code below gives you a minimal but complete multi‑tool shell. It defines a list of tools, renders them as a sidebar menu, and loads the selected tool into a central workspace. For the tutorial version, each tool is represented by a simple placeholder block, but in your real project you can replace those placeholders with the actual HTML from previous levels or even load them from separate files.</p>
+
+  <p>By finishing Level 20, you’ve built more than a collection of snippets — you’ve built a platform. You now understand structure, styling, behavior, state, persistence, exports, and composition. From here, you’re not just following tutorials anymore. You’re designing systems.</p>
+</div>
+>
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 20 — Full multi-tool app</div>
                 <div class="tutorial-meta-tags">
@@ -1071,7 +1265,69 @@
   </div>
 
   <script>
-    // THEME TOGGLE
+    <script>
+const codeBlocks = {
+code1: `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tool Builder – Level 1</title>
+</head>
+<body>
+
+  <header class="tb-header">
+    <h1>Tool Builder</h1>
+    <button id="themeToggle">Toggle theme</button>
+  </header>
+
+  <main class="tb-main">
+    <section class="tb-tool-card">
+      <header class="tb-tool-header">
+        <h2>Tool title</h2>
+      </header>
+
+      <section class="tb-tool-body">
+        <!-- Inputs and UI will go here in later levels -->
+        <p>This is the main tool area.</p>
+      </section>
+
+      <footer class="tb-tool-footer">
+        <button class="tb-btn-primary">Generate</button>
+        <button class="tb-btn-secondary">Reset</button>
+      </footer>
+    </section>
+  </main>
+
+  <footer class="tb-footer">
+    <small>© 2026 Tool Builder by Alae</small>
+  </footer>
+
+</body>
+</html>
+`,
+
+  code2: "/* Level 2 code will be added later */",
+  code3: "/* Level 3 code will be added later */",
+  code4: "/* Level 4 code will be added later */",
+  code5: "/* Level 5 code will be added later */",
+  code6: "/* Level 6 code will be added later */",
+  code7: "/* Level 7 code will be added later */",
+  code8: "/* Level 8 code will be added later */",
+  code9: "/* Level 9 code will be added later */",
+  code10: "/* Level 10 code will be added later */",
+  code11: "/* Level 11 code will be added later */",
+  code12: "/* Level 12 code will be added later */",
+  code13: "/* Level 13 code will be added later */",
+  code14: "/* Level 14 code will be added later */",
+  code15: "/* Level 15 code will be added later */",
+  code16: "/* Level 16 code will be added later */",
+  code17: "/* Level 17 code will be added later */",
+  code18: "/* Level 18 code will be added later */",
+  code19: "/* Level 19 code will be added later */",
+  code20: "/* Level 20 code will be added later */"
+};
+
     const body = document.body;
     const toggleBtn = document.getElementById('darkToggle');
     const icon = document.getElementById('darkIcon');
