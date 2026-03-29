@@ -1,1733 +1,1389 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AlaeAI — Build. Learn. Create.</title>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@900&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <style>
-        /* ===========================
-           GLOBAL RESET & ROOT
-        ============================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            width: 100%;
-            height: 100%;
-        }
-
-        body {
-            background: #f5efe3;
-            font-family: 'Rubik', sans-serif;
-            color: #2b2b2b;
-            overflow-x: hidden;
-            transition: background 0.35s ease, color 0.35s ease;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-        }
-
-        :root {
-            --gold: #C58B3B;
-            --gold-soft: rgba(197, 139, 59, 0.55);
-            --gold-strong: rgba(197, 139, 59, 0.8);
-            --bg-main: #f5efe3;
-            --bg-card: #ffffff;
-            --text-main: #2b2b2b;
-            --text-muted: #4a4a4a;
-            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08);
-            --gold-glow: 0 0 18px var(--gold-soft);
-            --gold-glow-strong: 0 0 28px var(--gold-strong);
-            --radius-pill: 40px;
-            --radius-card: 20px;
-            --radius-subtle: 14px;
-            --transition-fast: 0.25s ease;
-            --transition-med: 0.35s ease;
-            --transition-slow: 0.55s ease;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        section {
-            padding: 100px 0;
-        }
-
-        /* ===========================
-           NAVIGATION
-        ============================ */
-        nav {
-            width: 100%;
-            padding: 18px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background: rgba(245, 239, 227, 0.9);
-            backdrop-filter: blur(14px);
-            z-index: 1000;
-            box-shadow: var(--shadow-soft);
-            transition: background 0.35s ease;
-        }
-
-        nav .logo {
-            font-family: 'Poppins', sans-serif;
-            font-size: 26px;
-            font-weight: 900;
-            color: var(--gold);
-            text-shadow: var(--gold-glow);
-            letter-spacing: 0.04em;
-        }
-
-        nav ul {
-            display: flex;
-            gap: 28px;
-            list-style: none;
-        }
-
-        nav ul li {
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            position: relative;
-            transition: var(--transition-fast);
-        }
-
-        nav ul li::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -6px;
-            width: 0;
-            height: 2px;
-            background: var(--gold);
-            box-shadow: var(--gold-glow);
-            transition: var(--transition-med);
-        }
-
-        nav ul li:hover {
-            color: var(--gold);
-            text-shadow: var(--gold-glow);
-        }
-
-        nav ul li:hover::after {
-            width: 100%;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .nav-cta {
-            padding: 8px 20px;
-            border-radius: var(--radius-pill);
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            font-size: 14px;
-            font-weight: 500;
-            background: transparent;
-            cursor: pointer;
-            transition: var(--transition-med);
-        }
-
-        .nav-cta:hover {
-            background: rgba(197, 139, 59, 0.12);
-            box-shadow: var(--gold-glow);
-            transform: translateY(-2px);
-        }
-
-        .dark-toggle {
-            padding: 8px 18px;
-            border-radius: 999px;
-            background: var(--gold);
-            color: white;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: 0.3s ease;
-        }
-
-        .dark-toggle:hover {
-            transform: scale(1.06);
-            box-shadow: var(--gold-glow-strong);
-        }
-
-        /* ===========================
-           HERO SECTION
-        ============================ */
-        .hero {
-            padding-top: 140px;
-            padding-bottom: 120px;
-        }
-
-        .hero-inner {
-            display: grid;
-            grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-            gap: 60px;
-            align-items: center;
-        }
-
-        .hero-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 56px;
-            font-weight: 900;
-            line-height: 1.1;
-            color: var(--text-main);
-            text-shadow: var(--gold-glow);
-            margin-bottom: 18px;
-        }
-
-        .hero-highlight {
-            color: var(--gold);
-        }
-
-        .hero-subtitle {
-            font-size: 18px;
-            font-weight: 400;
-            color: var(--text-muted);
-            margin-bottom: 32px;
-            max-width: 520px;
-        }
-
-        .hero-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 28px;
-        }
-
-        .hero-badge {
-            padding: 8px 16px;
-            border-radius: 999px;
-            background: #fff;
-            box-shadow: var(--shadow-soft), var(--gold-glow);
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-muted);
-        }
-
-        .hero-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            margin-bottom: 26px;
-        }
-
-        .btn-primary {
-            padding: 13px 30px;
-            background: var(--gold);
-            color: #fff;
-            border-radius: var(--radius-pill);
-            font-size: 16px;
-            font-weight: 600;
-            box-shadow: var(--gold-glow);
-            border: none;
-            cursor: pointer;
-            transition: var(--transition-med);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-primary:hover {
-            transform: scale(1.06) translateY(-3px);
-            box-shadow: var(--gold-glow-strong);
-        }
-
-        .btn-secondary {
-            padding: 13px 30px;
-            border-radius: var(--radius-pill);
-            border: 2px solid var(--gold);
-            color: var(--gold);
-            background: transparent;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition-med);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(197, 139, 59, 0.12);
-            box-shadow: var(--gold-glow);
-            transform: scale(1.06) translateY(-3px);
-        }
-
-        .hero-meta {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        .hero-right {
-            display: flex;
-            justify-content: center;
-        }
-
-        .hero-image-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 420px;
-            margin-left: auto;
-        }
-
-        .hero-3d {
-            perspective: 1200px;
-        }
-
-        .hero-image-main {
-            width: 100%;
-            height: 420px;
-            border-radius: 30px;
-            background: linear-gradient(135deg, #fdf7ea, #f0e0c7);
-            box-shadow: var(--shadow-soft), var(--gold-glow);
-            position: relative;
-            overflow: hidden;
-            transform-style: preserve-3d;
-            transition: transform 0.35s ease;
-        }
-
-        .hero-image-main::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(circle at 20% 0%, rgba(197, 139, 59, 0.25), transparent 55%),
-                radial-gradient(circle at 80% 100%, rgba(197, 139, 59, 0.2), transparent 55%);
-            opacity: 0.9;
-        }
-
-        .hero-image-main:hover {
-            transform: rotateY(14deg) rotateX(8deg) scale(1.03);
-        }
-
-        .hero-orbit {
-            position: absolute;
-            inset: 18%;
-            border-radius: 999px;
-            border: 1px dashed rgba(197, 139, 59, 0.4);
-            animation: orbit-rotate 18s linear infinite;
-        }
-
-        .hero-orbit-dot {
-            position: absolute;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: var(--gold);
-            box-shadow: var(--gold-glow-strong);
-            top: -7px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .hero-floating-card {
-            position: absolute;
-            bottom: 18px;
-            left: 18px;
-            right: 18px;
-            padding: 14px 18px;
-            border-radius: 18px;
-            background: rgba(255, 255, 255, 0.96);
-            box-shadow: var(--shadow-soft), var(--gold-glow);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-        }
-
-        .hero-floating-card strong {
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        .hero-floating-pill {
-            padding: 6px 12px;
-            border-radius: 999px;
-            background: rgba(197, 139, 59, 0.08);
-            color: var(--gold);
-            font-weight: 600;
-        }
-
-        .hero-particle {
-            position: absolute;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: var(--gold);
-            box-shadow: var(--gold-glow-strong);
-            animation: floatParticle 6s ease-in-out infinite;
-            opacity: 0.8;
-        }
-
-        @keyframes orbit-rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes floatParticle {
-            0% { transform: translateY(0) translateX(0); }
-            50% { transform: translateY(-20px) translateX(10px); }
-            100% { transform: translateY(0) translateX(0); }
-        }
-
-        /* ===========================
-           SECTION TITLES
-        ============================ */
-        .section-header {
-            margin-bottom: 40px;
-        }
-
-        .section-title-card {
-            display: inline-block;
-            padding: 12px 30px;
-            background: #ffffff;
-            border-radius: var(--radius-pill);
-            box-shadow: var(--shadow-soft), var(--gold-glow);
-            font-family: 'Poppins', sans-serif;
-            font-size: 28px;
-            font-weight: 900;
-            color: var(--text-main);
-            margin-bottom: 18px;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .section-subtitle-card {
-            display: inline-block;
-            padding: 9px 20px;
-            background: #ffffff;
-            border-radius: var(--radius-subtle);
-            box-shadow: var(--shadow-soft), var(--gold-glow);
-            font-size: 15px;
-            font-weight: 500;
-            color: var(--text-muted);
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        /* ===========================
-           CORE FEATURES
-        ============================ */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 28px;
-        }
-
-        .feature-card {
-            background: var(--bg-card);
-            padding: 26px;
-            border-radius: var(--radius-card);
-            box-shadow: var(--shadow-soft);
-            transition: var(--transition-med);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at top left, rgba(197, 139, 59, 0.12), transparent 55%);
-            opacity: 0;
-            transition: var(--transition-med);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-soft), var(--gold-glow);
-        }
-
-        .feature-card:hover::before {
-            opacity: 1;
-        }
-
-        .feature-icon {
-            width: 34px;
-            height: 34px;
-            border-radius: 999px;
-            background: rgba(197, 139, 59, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gold);
-            font-size: 18px;
-            margin-bottom: 14px;
-        }
-
-        .feature-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 20px;
-            font-weight: 900;
-            margin-bottom: 10px;
-            color: var(--text-main);
-        }
-
-        .feature-desc {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* ===========================
-           ABOUT
-        ============================ */
-        .about-inner {
-            display: grid;
-            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-            gap: 50px;
-            align-items: center;
-        }
-
-        .about-text {
-            font-size: 15px;
-            color: var(--text-muted);
-            line-height: 1.7;
-        }
-
-        .about-list {
-            margin-top: 18px;
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 10px 18px;
-            font-size: 14px;
-        }
-
-        .about-list-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .about-bullet {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--gold);
-            box-shadow: var(--gold-glow);
-        }
-
-        .about-card {
-            background: var(--bg-card);
-            border-radius: 24px;
-            padding: 24px;
-            box-shadow: var(--shadow-soft), var(--gold-glow);
-            position: relative;
-        }
-
-        .about-tag {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            padding: 6px 12px;
-            border-radius: 999px;
-            background: rgba(197, 139, 59, 0.08);
-            color: var(--gold);
-            font-size: 11px;
-            font-weight: 600;
-        }
-
-        .about-metric {
-            font-family: 'Poppins', sans-serif;
-            font-size: 32px;
-            font-weight: 900;
-            color: var(--text-main);
-            margin-bottom: 4px;
-        }
-
-        .about-metric-label {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        .about-metric-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 18px;
-            margin-top: 18px;
-        }
-
-        .about-metric-block {
-            flex: 1;
-        }
-
-        /* ===========================
-           TUTORIAL PATH
-        ============================ */
-        .tutorial-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 24px;
-        }
-
-        .tutorial-card {
-            background: var(--bg-card);
-            border-radius: var(--radius-card);
-            padding: 22px;
-            box-shadow: var(--shadow-soft);
-            transition: var(--transition-med);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tutorial-card::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at top right, rgba(197, 139, 59, 0.16), transparent 55%);
-            opacity: 0;
-            transition: var(--transition-med);
-        }
-
-        .tutorial-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-soft), var(--gold-glow);
-        }
-
-        .tutorial-card:hover::before {
-            opacity: 1;
-        }
-
-        .tutorial-level {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--gold);
-            margin-bottom: 6px;
-        }
-
-        .tutorial-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 18px;
-            font-weight: 900;
-            margin-bottom: 8px;
-        }
-
-        .tutorial-desc {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 12px;
-        }
-
-        .tutorial-meta {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        .section-cta-row {
-            margin-top: 32px;
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        /* ===========================
-           NEWS & TOOLS
-        ============================ */
-        .news-tools-grid {
-            display: grid;
-            grid-template-columns: 1.4fr 1fr;
-            gap: 32px;
-        }
-
-        .news-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .news-item {
-            background: var(--bg-card);
-            border-radius: 18px;
-            padding: 16px 18px;
-            box-shadow: var(--shadow-soft);
-            transition: var(--transition-med);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .news-item::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(120deg, rgba(197, 139, 59, 0.12), transparent 60%);
-            opacity: 0;
-            transition: var(--transition-med);
-        }
-
-        .news-item:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-soft), var(--gold-glow);
-        }
-
-        .news-item:hover::before {
-            opacity: 1;
-        }
-
-        .news-tag {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--gold);
-            margin-bottom: 4px;
-        }
-
-        .news-title {
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .news-meta {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        .tools-card {
-            background: var(--bg-card);
-            border-radius: 22px;
-            padding: 22px;
-            box-shadow: var(--shadow-soft), var(--gold-glow);
-        }
-
-        .tools-list {
-            margin-top: 10px;
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 10px 16px;
-            font-size: 13px;
-        }
-
-        .tools-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .tools-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: var(--gold);
-        }
-
-        /* ===========================
-           ROADMAP
-        ============================ */
-        .roadmap-timeline {
-            position: relative;
-            margin-top: 20px;
-        }
-
-        .roadmap-item {
-            position: relative;
-            padding-left: 40px;
-            margin-bottom: 26px;
-        }
-
-        .roadmap-dot {
-            position: absolute;
-            left: 0;
-            top: 4px;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: var(--gold);
-            box-shadow: var(--gold-glow-strong);
-        }
-
-        .roadmap-line {
-            position: absolute;
-            left: 6px;
-            top: 20px;
-            width: 2px;
-            height: 100%;
-            background: rgba(197, 139, 59, 0.4);
-        }
-
-        .roadmap-line-end {
-            height: 0;
-        }
-
-        .roadmap-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--gold);
-            margin-bottom: 4px;
-        }
-
-        .roadmap-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 18px;
-            font-weight: 900;
-            margin-bottom: 6px;
-        }
-
-        .roadmap-desc {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
-        /* ===========================
-           TESTIMONIALS
-        ============================ */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 24px;
-        }
-
-        .testimonial-card {
-            background: var(--bg-card);
-            border-radius: var(--radius-card);
-            padding: 20px;
-            box-shadow: var(--shadow-soft), var(--gold-glow);
-            transition: var(--transition-med);
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-soft), var(--gold-glow-strong);
-        }
-
-        .testimonial-quote {
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-
-        .testimonial-meta {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        /* ===========================
-           FAQ
-        ============================ */
-        .faq-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .faq-item {
-            background: var(--bg-card);
-            border-radius: 16px;
-            box-shadow: var(--shadow-soft);
-            overflow: hidden;
-        }
-
-        .faq-question {
-            width: 100%;
-            padding: 14px 18px;
-            border: none;
-            background: transparent;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        .faq-icon {
-            font-weight: 700;
-            color: var(--gold);
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            padding: 0 18px;
-            font-size: 13px;
-            color: var(--text-muted);
-            transition: max-height 0.35s ease;
-        }
-
-        .faq-answer.open {
-            padding-bottom: 14px;
-        }
-
-        /* ===========================
-           CONTACT
-        ============================ */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-            gap: 40px;
-            align-items: flex-start;
-        }
-
-        .contact-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 24px;
-            font-weight: 900;
-            margin-bottom: 12px;
-        }
-
-        .contact-text {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-        }
-
-        .contact-form {
-            background: var(--bg-card);
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: var(--shadow-soft), var(--gold-glow);
-        }
-
-        .contact-row {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 14px;
-        }
-
-        .contact-field {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            font-size: 13px;
-        }
-
-        .contact-field label {
-            font-weight: 500;
-        }
-
-        .contact-field input,
-        .contact-field textarea {
-            border-radius: 10px;
-            border: 1px solid rgba(0, 0, 0, 0.12);
-            padding: 8px 10px;
-            font-family: inherit;
-            font-size: 13px;
-            outline: none;
-            transition: border 0.25s ease, box-shadow 0.25s ease;
-        }
-
-        .contact-field input:focus,
-        .contact-field textarea:focus {
-            border-color: var(--gold);
-            box-shadow: var(--gold-glow);
-        }
-
-        /* ===========================
-           FOOTER
-        ============================ */
-        #footer {
-            padding: 40px 0;
-            background: #e8dfcf;
-            box-shadow: var(--shadow-soft);
-        }
-
-        .footer-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .footer-logo {
-            font-family: 'Poppins', sans-serif;
-            font-size: 22px;
-            font-weight: 900;
-            color: var(--gold);
-            text-shadow: var(--gold-glow);
-        }
-
-        .footer-tagline {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
-        .footer-meta {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        /* ===========================
-           DARK MODE
-        ============================ */
-        body.dark {
-            background: #1a1a1a;
-            color: #eaeaea;
-        }
-
-        body.dark nav {
-            background: rgba(20, 20, 20, 0.9);
-        }
-
-        body.dark .section-title-card,
-        body.dark .section-subtitle-card,
-        body.dark .feature-card,
-        body.dark .tutorial-card,
-        body.dark .news-item,
-        body.dark .tools-card,
-        body.dark .testimonial-card,
-        body.dark .contact-form,
-        body.dark .about-card,
-        body.dark .faq-item {
-            background: #222;
-            color: #eaeaea;
-            box-shadow: var(--gold-glow);
-        }
-
-        body.dark .hero-image-main {
-            background: linear-gradient(135deg, #2a2a2a, #1f1f1f);
-        }
-
-        body.dark #footer {
-            background: #111;
-        }
-
-        /* ===========================
-           RESPONSIVE
-        ============================ */
-        @media (max-width: 992px) {
-            nav {
-                padding: 16px 24px;
-            }
-
-            nav ul {
-                gap: 18px;
-            }
-
-            .hero-inner {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-left {
-                order: 2;
-            }
-
-            .hero-right {
-                order: 1;
-            }
-
-            .hero-image-wrapper {
-                margin: 0 auto 40px auto;
-            }
-
-            .features-grid,
-            .tutorial-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .news-tools-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .about-inner {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .testimonials-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 600px) {
-            nav ul {
-                display: none;
-            }
-
-            .hero-title {
-                font-size: 42px;
-            }
-
-            .hero-subtitle {
-                font-size: 16px;
-            }
-
-            .hero-buttons {
-                justify-content: center;
-            }
-
-            .features-grid,
-            .tutorial-grid,
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section-title-card {
-                font-size: 22px;
-                padding: 10px 22px;
-            }
-
-            .section-subtitle-card {
-                font-size: 14px;
-            }
-
-            .roadmap-item {
-                padding-left: 20px;
-            }
-
-            .contact-row {
-                flex-direction: column;
-            }
-
-            .footer-inner {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-
-        @media (min-width: 1400px) {
-            .container {
-                max-width: 1400px;
-            }
-
-            .hero-title {
-                font-size: 64px;
-            }
-
-            .features-grid,
-            .tutorial-grid {
-                gap: 40px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>ALAEAI — Warm Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f5efe6;
+      --bg-soft: #f9f3ea;
+      --bg-deep: #1b1714;
+      --text: #1f130b;
+      --subtext: #7a6250;
+      --card: #ffffff;
+      --accent: #f2c26b;
+      --accent-soft: rgba(242, 194, 107, 0.18);
+      --accent-strong: rgba(242, 194, 107, 0.45);
+      --border-subtle: rgba(0, 0, 0, 0.06);
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.18);
+      --shadow-strong: 0 26px 70px rgba(0, 0, 0, 0.35);
+      --radius-lg: 26px;
+      --radius-md: 18px;
+      --radius-pill: 999px;
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.28s ease-out;
+      --transition-slow: 0.45s ease-out;
+    }
+
+    body.dark {
+      --bg: #0b0908;
+      --bg-soft: #15100d;
+      --bg-deep: #050304;
+      --text: #f7f2ec;
+      --subtext: #b9a89a;
+      --card: #15100d;
+      --accent: #f2c26b;
+      --accent-soft: rgba(242, 194, 107, 0.22);
+      --accent-strong: rgba(242, 194, 107, 0.55);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.75);
+      --shadow-strong: 0 30px 80px rgba(0, 0, 0, 0.9);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Rubik", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, var(--bg-soft) 0, var(--bg) 40%, var(--bg-deep) 100%);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* GLOBAL LAYOUT */
+    .page-shell {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 20px 18px 60px;
+      position: relative;
+    }
+
+    /* BACKGROUND ORNAMENTS */
+    .bg-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.7;
+      pointer-events: none;
+      z-index: -1;
+      transition: transform var(--transition-slow), opacity var(--transition-slow);
+    }
+
+    .bg-orb.orb-1 {
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(242, 194, 107, 0.7), transparent 70%);
+      top: -60px;
+      left: -40px;
+    }
+
+    .bg-orb.orb-2 {
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(242, 194, 107, 0.4), transparent 70%);
+      bottom: -80px;
+      right: -40px;
+    }
+
+    .bg-orb.orb-3 {
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.35), transparent 70%);
+      top: 40%;
+      left: 60%;
+    }
+
+    /* NAVBAR */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(249, 240, 228, 0.96));
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+      position: sticky;
+      top: 14px;
+      z-index: 40;
+      backdrop-filter: blur(18px);
+    }
+
+    body.dark .nav {
+      background: linear-gradient(135deg, rgba(18, 12, 8, 0.96), rgba(10, 6, 4, 0.96));
+      border-color: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-logo-wrap {
+      width: 40px;
+      height: 40px;
+      border-radius: 16px;
+      background: radial-gradient(circle at 20% 0%, #f2c26b 0, #b8863b 40%, #3a2614 100%);
+      box-shadow: 0 0 18px rgba(242, 194, 107, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .nav-logo-wrap img {
+      width: 80%;
+      height: 80%;
+      object-fit: contain;
+    }
+
+    .nav-title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .nav-title-main {
+      font-family: "Poppins", system-ui;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-title-sub {
+      font-size: 11px;
+      color: var(--subtext);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+      color: var(--subtext);
+    }
+
+    .nav-link {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .nav-link:hover {
+      background: rgba(0, 0, 0, 0.03);
+      border-color: rgba(0, 0, 0, 0.08);
+      transform: translateY(-1px);
+    }
+
+    body.dark .nav-link:hover {
+      background: rgba(242, 194, 107, 0.08);
+      border-color: rgba(242, 194, 107, 0.4);
+    }
+
+    .nav-link.active {
+      background: radial-gradient(circle at 0 0, rgba(242, 194, 107, 0.4), rgba(242, 194, 107, 0.08));
+      border-color: rgba(242, 194, 107, 0.7);
+      color: var(--text);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-cta {
+      padding: 7px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(242, 194, 107, 0.9);
+      background: radial-gradient(circle at 0 0, rgba(242, 194, 107, 0.6), rgba(242, 194, 107, 0.16));
+      color: #2b1a0d;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      box-shadow: 0 0 20px rgba(242, 194, 107, 0.9);
+      cursor: pointer;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px) scale(1.03);
+      box-shadow: 0 0 26px rgba(242, 194, 107, 1);
+      background: radial-gradient(circle at 0 0, rgba(242, 194, 107, 0.75), rgba(242, 194, 107, 0.2));
+    }
+
+    .nav-toggle {
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--subtext);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    body.dark .nav-toggle {
+      background: rgba(10, 6, 4, 0.96);
+      border-color: rgba(255, 255, 255, 0.16);
+      color: var(--subtext);
+    }
+
+    .nav-toggle:hover {
+      transform: translateY(-1px);
+      background: rgba(242, 194, 107, 0.12);
+      border-color: rgba(242, 194, 107, 0.6);
+      color: var(--text);
+    }
+
+    /* HERO */
+    .hero {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .hero-main {
+      background: radial-gradient(circle at top left, rgba(242, 194, 107, 0.18), rgba(255, 255, 255, 0.96));
+      border-radius: var(--radius-lg);
+      padding: 24px 24px 26px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+      transform: translateY(18px);
+      opacity: 0;
+      animation: heroIn 0.9s var(--transition-med) forwards;
+    }
+
+    body.dark .hero-main {
+      background: radial-gradient(circle at top left, rgba(242, 194, 107, 0.18), rgba(18, 12, 8, 0.98));
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      color: var(--subtext);
+      font-size: 11px;
+      margin-bottom: 12px;
+    }
+
+    body.dark .hero-pill {
+      background: rgba(10, 6, 4, 0.96);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #3cff8f;
+      box-shadow: 0 0 10px rgba(60, 255, 143, 0.9);
+    }
+
+    .hero-title {
+      font-family: "Poppins", system-ui;
+      font-weight: 800;
+      font-size: 36px;
+      line-height: 1.05;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .hero-title span.accent {
+      background: linear-gradient(120deg, #f2c26b, #ffe3b0);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      color: var(--subtext);
+      max-width: 520px;
+      margin-bottom: 18px;
+    }
+
+    .hero-pills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .hero-pill-tag {
+      font-size: 11px;
+      padding: 5px 11px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--subtext);
+    }
+
+    body.dark .hero-pill-tag {
+      background: rgba(10, 6, 4, 0.96);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .btn-primary {
+      padding: 10px 20px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(242, 194, 107, 0.9);
+      background: radial-gradient(circle at 0 0, rgba(242, 194, 107, 0.7), rgba(242, 194, 107, 0.2));
+      color: #2b1a0d;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      box-shadow: 0 0 22px rgba(242, 194, 107, 0.9);
+      cursor: pointer;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 0 28px rgba(242, 194, 107, 1);
+      background: radial-gradient(circle at 0 0, rgba(242, 194, 107, 0.85), rgba(242, 194, 107, 0.26));
+    }
+
+    .btn-ghost {
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--subtext);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), color var(--transition-fast);
+    }
+
+    body.dark .btn-ghost {
+      background: rgba(10, 6, 4, 0.96);
+      border-color: rgba(255, 255, 255, 0.12);
+      color: var(--subtext);
+    }
+
+    .btn-ghost:hover {
+      transform: translateY(-2px);
+      background: rgba(242, 194, 107, 0.12);
+      border-color: rgba(242, 194, 107, 0.6);
+      color: var(--text);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 11px;
+      color: var(--subtext);
+    }
+
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-meta-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(242, 194, 107, 0.9);
+      box-shadow: 0 0 10px rgba(242, 194, 107, 0.9);
+    }
+
+    /* HERO SIDE PORTFOLIO PREVIEW */
+    .hero-side {
+      background: radial-gradient(circle at top, rgba(242, 194, 107, 0.22), rgba(255, 255, 255, 0.96));
+      border-radius: var(--radius-lg);
+      padding: 18px 18px 20px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-strong);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+      transform: translateY(24px) translateX(12px);
+      opacity: 0;
+      animation: heroSideIn 1s var(--transition-med) forwards;
+    }
+
+    body.dark .hero-side {
+      background: radial-gradient(circle at top, rgba(242, 194, 107, 0.22), rgba(18, 12, 8, 0.98));
+    }
+
+    .hero-side-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--subtext);
+    }
+
+    .hero-side-title {
+      font-family: "Poppins", system-ui;
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .hero-side-sub {
+      font-size: 12px;
+      color: var(--subtext);
+      margin-bottom: 8px;
+    }
+
+    .hero-grid-preview {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .preview-card {
+      border-radius: 16px;
+      padding: 10px 10px 12px;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+      transform: translateY(0) translateZ(0);
+      transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med), background var(--transition-med);
+    }
+
+    body.dark .preview-card {
+      background: rgba(18, 12, 8, 0.98);
+      border-color: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.9);
+    }
+
+    .preview-card:hover {
+      transform: translateY(-6px) translateZ(0) rotate3d(1, -1, 0, 4deg);
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.25);
+      border-color: rgba(242, 194, 107, 0.7);
+      background: rgba(255, 255, 255, 1);
+    }
+
+    body.dark .preview-card:hover {
+      background: rgba(22, 14, 9, 1);
+    }
+
+    .preview-tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--subtext);
+    }
+
+    .preview-title {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .preview-meta {
+      font-size: 11px;
+      color: var(--subtext);
+    }
+
+    .hero-side-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--subtext);
+      margin-top: 6px;
+    }
+
+    .hero-side-tag {
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    body.dark .hero-side-tag {
+      background: rgba(10, 6, 4, 0.96);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    /* SECTION HEADER */
+    .section {
+      margin-top: 40px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .section-title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .section-kicker {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--subtext);
+    }
+
+    .section-title {
+      font-family: "Poppins", system-ui;
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: var(--subtext);
+    }
+
+    .section-cta-inline {
+      font-size: 11px;
+      color: var(--accent);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(242, 194, 107, 0.4);
+      background: rgba(255, 255, 255, 0.9);
+      transition: background var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+    }
+
+    body.dark .section-cta-inline {
+      background: rgba(10, 6, 4, 0.96);
+      border-color: rgba(242, 194, 107, 0.5);
+    }
+
+    .section-cta-inline:hover {
+      background: rgba(242, 194, 107, 0.12);
+      transform: translateY(-1px);
+      border-color: rgba(242, 194, 107, 0.7);
+      color: var(--text);
+    }
+
+    /* PORTFOLIO GRID */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1.1fr;
+      gap: 18px;
+    }
+
+    .portfolio-main-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .portfolio-card {
+      background: var(--card);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 14px 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transform: translateY(18px);
+      opacity: 0;
+    }
+
+    .portfolio-card:nth-child(1) { animation: cardIn 0.7s 0.1s forwards; }
+    .portfolio-card:nth-child(2) { animation: cardIn 0.7s 0.2s forwards; }
+    .portfolio-card:nth-child(3) { animation: cardIn 0.7s 0.3s forwards; }
+    .portfolio-card:nth-child(4) { animation: cardIn 0.7s 0.4s forwards; }
+
+    .portfolio-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top left, var(--accent-soft), transparent 55%);
+      opacity: 0;
+      transition: opacity var(--transition-med);
+      pointer-events: none;
+    }
+
+    .portfolio-card:hover::before {
+      opacity: 1;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-strong);
+      border-color: rgba(242, 194, 107, 0.7);
+    }
+
+    .portfolio-tag-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .portfolio-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--subtext);
+    }
+
+    .portfolio-pill {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--subtext);
+    }
+
+    body.dark .portfolio-pill {
+      background: rgba(10, 6, 4, 0.96);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .portfolio-title {
+      font-family: "Poppins", system-ui;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .portfolio-desc {
+      font-size: 12px;
+      color: var(--subtext);
+    }
+
+    .portfolio-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--subtext);
+      margin-top: 4px;
+    }
+
+    .portfolio-meta-pill {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(242, 194, 107, 0.12);
+      border: 1px solid rgba(242, 194, 107, 0.6);
+      color: var(--text);
+    }
+
+    .portfolio-side {
+      background: var(--card);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 16px 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transform: translateY(24px);
+      opacity: 0;
+      animation: cardIn 0.7s 0.45s forwards;
+    }
+
+    .portfolio-side-title {
+      font-family: "Poppins", system-ui;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .portfolio-side-sub {
+      font-size: 12px;
+      color: var(--subtext);
+    }
+
+    .portfolio-side-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--subtext);
+    }
+
+    .portfolio-side-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 8px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      cursor: pointer;
+      transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    body.dark .portfolio-side-item {
+      background: rgba(10, 6, 4, 0.96);
+      border-color: rgba(255, 255, 255, 0.06);
+    }
+
+    .portfolio-side-item:hover {
+      background: rgba(242, 194, 107, 0.12);
+      border-color: rgba(242, 194, 107, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .portfolio-side-item span.badge {
+      font-size: 10px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(242, 194, 107, 0.12);
+      border: 1px solid rgba(242, 194, 107, 0.6);
+      color: var(--text);
+    }
+
+    /* FEATURE STRIP (TUTORIALS / NEWS / TOOLS / ABOUT) */
+    .feature-strip {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border-radius: 18px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 12px 12px 14px;
+      font-size: 12px;
+      color: var(--subtext);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transform: translateY(18px);
+      opacity: 0;
+    }
+
+    .feature-card:nth-child(1) { animation: cardIn 0.7s 0.55s forwards; }
+    .feature-card:nth-child(2) { animation: cardIn 0.7s 0.65s forwards; }
+    .feature-card:nth-child(3) { animation: cardIn 0.7s 0.75s forwards; }
+    .feature-card:nth-child(4) { animation: cardIn 0.7s 0.85s forwards; }
+
+    .feature-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(242, 194, 107, 0.16), transparent 60%);
+      opacity: 0;
+      transition: opacity var(--transition-med);
+      pointer-events: none;
+    }
+
+    .feature-card:hover::after {
+      opacity: 1;
+    }
+
+    .feature-title {
+      font-family: "Poppins", system-ui;
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .feature-pill {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--subtext);
+    }
+
+    /* ROADMAP SECTION */
+    .roadmap {
+      margin-top: 44px;
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 18px 20px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
+      gap: 18px;
+      transform: translateY(24px);
+      opacity: 0;
+      animation: cardIn 0.7s 0.95s forwards;
+    }
+
+    .roadmap-title {
+      font-family: "Poppins", system-ui;
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .roadmap-sub {
+      font-size: 13px;
+      color: var(--subtext);
+      margin-bottom: 10px;
+    }
+
+    .roadmap-phases {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--subtext);
+    }
+
+    .roadmap-phase {
+      padding: 8px 10px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    body.dark .roadmap-phase {
+      background: rgba(10, 6, 4, 0.96);
+      border-color: rgba(255, 255, 255, 0.06);
+    }
+
+    .roadmap-phase:hover {
+      background: rgba(242, 194, 107, 0.12);
+      border-color: rgba(242, 194, 107, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .roadmap-phase-title {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .roadmap-phase-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--subtext);
+      margin-bottom: 2px;
+    }
+
+    .roadmap-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--subtext);
+    }
+
+    .roadmap-metric {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    body.dark .roadmap-metric {
+      background: rgba(10, 6, 4, 0.96);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    /* FOOTER */
+    footer {
+      margin-top: 40px;
+      padding: 20px 0 10px;
+      font-size: 12px;
+      color: var(--subtext);
+      text-align: center;
+    }
+
+    footer span.accent {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-side {
+        transform: translateY(18px);
+      }
+      .portfolio-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .roadmap {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        padding-inline: 12px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hero-title {
+        font-size: 30px;
+      }
+      .portfolio-main-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .feature-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .page-shell {
+        padding-inline: 14px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .feature-strip {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* ANIMATIONS */
+    @keyframes heroIn {
+      from { opacity: 0; transform: translateY(26px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes heroSideIn {
+      from { opacity: 0; transform: translateY(30px) translateX(12px); }
+      to { opacity: 1; transform: translateY(0) translateX(0); }
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(26px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
+  <!-- ORBS -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
 
-    <!-- ===========================
-         NAVIGATION
-    ============================ -->
-    <nav>
-        <div class="logo">AlaeAI</div>
-        <ul>
-            <li><a href="#hero">Home</a></li>
-            <li><a href="#tutorials">Tutorials</a></li>
-            <li><a href="#news-tools">News & Tools</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div class="nav-right">
-            <button class="nav-cta" onclick="scrollToSection('tutorials')">Start Learning</button>
-            <button class="dark-toggle" onclick="toggleDarkMode()">Dark Mode</button>
+  <div class="page-shell">
+    <!-- NAVBAR -->
+    <header class="nav">
+      <div class="nav-left">
+        <div class="nav-logo-wrap">
+          <img src="assets/logo.png" alt="ALAEAI Logo">
         </div>
-    </nav>
-
-    <!-- ===========================
-         HERO
-    ============================ -->
-    <section id="hero" class="hero">
-        <div class="container">
-            <div class="hero-inner">
-                <div class="hero-left">
-                    <h1 class="hero-title">
-                        Build. <span class="hero-highlight">Learn.</span> Create.
-                    </h1>
-                    <p class="hero-subtitle">
-                        A premium learning space where tutorials, tools, and real-time news come together in one elegant experience.
-                    </p>
-
-                    <div class="hero-badges">
-                        <div class="hero-badge">Guided tutorials</div>
-                        <div class="hero-badge">Real-time tech news</div>
-                        <div class="hero-badge">Smart tools & utilities</div>
-                    </div>
-
-                    <div class="hero-buttons">
-                        <button class="btn-primary" onclick="scrollToSection('tutorials')">
-                            Resume Tutorials
-                        </button>
-                        <button class="btn-secondary" onclick="scrollToSection('news-tools')">
-                            View News & Tools
-                        </button>
-                    </div>
-
-                    <div class="hero-meta">
-                        Designed for focus, clarity, and real progress — not noise.
-                    </div>
-                </div>
-
-                <div class="hero-right">
-                    <div class="hero-image-wrapper hero-3d">
-                        <div class="hero-image-main">
-                            <div class="hero-orbit">
-                                <div class="hero-orbit-dot"></div>
-                            </div>
-                            <div class="hero-particle" style="top: 20px; left: 40px;"></div>
-                            <div class="hero-particle" style="bottom: 40px; right: 30px; animation-delay: 1s;"></div>
-                            <div class="hero-particle" style="top: 60%; left: 70%; animation-delay: 2s;"></div>
-                        </div>
-                        <div class="hero-floating-card">
-                            <div>
-                                <strong>AlaeAI Workspace</strong><br />
-                                Tutorials • News • Tools • One clean interface
-                            </div>
-                            <div class="hero-floating-pill">
-                                Live • Active
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="nav-title-block">
+          <div class="nav-title-main">ALAEAI</div>
+          <div class="nav-title-sub">Warm Portfolio • Build. Learn. Create.</div>
         </div>
+      </div>
+      <nav class="nav-links">
+        <span class="nav-link active" onclick="scrollToId('hero')">Home</span>
+        <span class="nav-link" onclick="scrollToId('portfolio')">Portfolio</span>
+        <span class="nav-link" onclick="scrollToId('features')">Features</span>
+        <span class="nav-link" onclick="scrollToId('roadmap')">Roadmap</span>
+      </nav>
+      <div class="nav-right">
+        <button class="nav-cta" onclick="location.href='tutorials.html'">Start Tutorials</button>
+        <button class="nav-toggle" id="darkToggle">Dark Mode</button>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-main">
+        <div class="hero-pill">
+          <span class="hero-pill-dot"></span>
+          <span>Warm AI Portfolio • ALAEAI</span>
+        </div>
+        <h1 class="hero-title">
+          A warm space to<br>
+          <span class="accent">build, learn, and show</span>
+          your work.
+        </h1>
+        <p class="hero-sub">
+          ALAEAI is your personal, warm portfolio and workspace — tutorials, tools, and projects in one calm,
+          premium environment. Every section is designed to feel intentional, focused, and alive.
+        </p>
+        <div class="hero-pills-row">
+          <div class="hero-pill-tag">Guided AI tutorials</div>
+          <div class="hero-pill-tag">Real projects &amp; experiments</div>
+          <div class="hero-pill-tag">News &amp; tools in one place</div>
+        </div>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="location.href='tutorials.html'">Resume Tutorials</button>
+          <button class="btn-ghost" onclick="scrollToId('portfolio')">View Portfolio Grid</button>
+        </div>
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <span class="hero-meta-dot"></span>
+            <span>Warm, minimal, and focused on real progress.</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-dot"></span>
+            <span>Built to grow into a full workspace over time.</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-side">
+        <div class="hero-side-label">Portfolio Snapshot</div>
+        <div class="hero-side-title">A calm grid of what you build.</div>
+        <div class="hero-side-sub">
+          Projects, experiments, and learning paths — all presented in a warm, inviting layout.
+        </div>
+
+        <div class="hero-grid-preview">
+          <div class="preview-card" onclick="scrollToId('portfolio')">
+            <div class="preview-tag">Tutorials</div>
+            <div class="preview-title">Level-based AI learning</div>
+            <div class="preview-meta">Foundations, builder mode, and advanced deep dives.</div>
+          </div>
+          <div class="preview-card" onclick="scrollToId('features')">
+            <div class="preview-tag">News &amp; Tools</div>
+            <div class="preview-title">Real-time tech awareness</div>
+            <div class="preview-meta">Curated updates and utilities that support your builds.</div>
+          </div>
+          <div class="preview-card" onclick="scrollToId('portfolio')">
+            <div class="preview-tag">Projects</div>
+            <div class="preview-title">Small, complete builds</div>
+            <div class="preview-meta">From spam detectors to dashboards and more.</div>
+          </div>
+          <div class="preview-card" onclick="scrollToId('roadmap')">
+            <div class="preview-tag">Roadmap</div>
+            <div class="preview-title">A path that grows with you</div>
+            <div class="preview-meta">From core homepage to full workspace.</div>
+          </div>
+        </div>
+
+        <div class="hero-side-footer">
+          <div class="hero-side-tag">Tutorials • News • Tools • Portfolio</div>
+          <div style="font-size:11px;color:var(--accent);">Live • Active</div>
+        </div>
+      </aside>
     </section>
 
-    <!-- ===========================
-         CORE FEATURES
-    ============================ -->
-    <section id="features">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-title-card reveal-on-scroll">Core Features</div><br />
-                <div class="section-subtitle-card reveal-on-scroll">
-                    The essential pillars that make AlaeAI a powerful daily workspace.
-                </div>
-            </div>
-
-            <div class="features-grid">
-                <div class="feature-card reveal-on-scroll">
-                    <div class="feature-icon">📚</div>
-                    <div class="feature-title">Interactive Tutorials</div>
-                    <div class="feature-desc">
-                        Follow structured, step-by-step paths that help you actually understand and apply what you learn.
-                    </div>
-                </div>
-
-                <div class="feature-card reveal-on-scroll">
-                    <div class="feature-icon">📰</div>
-                    <div class="feature-title">Real-Time News</div>
-                    <div class="feature-desc">
-                        Stay updated with curated, meaningful news — not noise — focused on tech, science, and innovation.
-                    </div>
-                </div>
-
-                <div class="feature-card reveal-on-scroll">
-                    <div class="feature-icon">🛠️</div>
-                    <div class="feature-title">Smart Tools</div>
-                    <div class="feature-desc">
-                        Use calculators, generators, and utilities that actually help you build, test, and ship ideas faster.
-                    </div>
-                </div>
-            </div>
+    <!-- PORTFOLIO GRID -->
+    <section class="section" id="portfolio">
+      <div class="section-header">
+        <div class="section-title-block">
+          <div class="section-kicker">Portfolio</div>
+          <div class="section-title">A warm grid of what ALAEAI can do.</div>
+          <div class="section-sub">
+            Each card represents a direction: tutorials, tools, experiments, and future workspace ideas.
+          </div>
         </div>
+        <button class="section-cta-inline" onclick="location.href='tutorials.html'">
+          Open Tutorials
+          <span>↗</span>
+        </button>
+      </div>
+
+      <div class="portfolio-grid">
+        <div class="portfolio-main-grid">
+          <article class="portfolio-card">
+            <div class="portfolio-tag-row">
+              <div class="portfolio-tag">Tutorials • Level 1–3</div>
+              <div class="portfolio-pill">Learning Path</div>
+            </div>
+            <div class="portfolio-title">Structured AI Tutorials</div>
+            <div class="portfolio-desc">
+              A clear, level-based path from foundations to advanced topics. Designed to feel like a calm,
+              guided journey — not a chaotic course list.
+            </div>
+            <div class="portfolio-meta-row">
+              <div class="portfolio-meta-pill">20+ levels planned</div>
+              <div>Foundations • Builder Mode • Advanced</div>
+            </div>
+          </article>
+
+          <article class="portfolio-card">
+            <div class="portfolio-tag-row">
+              <div class="portfolio-tag">Projects • Builder Mode</div>
+              <div class="portfolio-pill">Hands-on</div>
+            </div>
+            <div class="portfolio-title">Mini AI Projects</div>
+            <div class="portfolio-desc">
+              Spam detectors, recommendation systems, simple chatbots, and more — each project small enough to finish,
+              but real enough to be proud of.
+            </div>
+            <div class="portfolio-meta-row">
+              <div class="portfolio-meta-pill">Real code examples</div>
+              <div>Python • JS • APIs</div>
+            </div>
+          </article>
+
+          <article class="portfolio-card">
+            <div class="portfolio-tag-row">
+              <div class="portfolio-tag">News &amp; Tools</div>
+              <div class="portfolio-pill">Live</div>
+            </div>
+            <div class="portfolio-title">Curated Tech News &amp; Utilities</div>
+            <div class="portfolio-desc">
+              A calm feed of meaningful updates and tools — no noise, no clickbait. Just what helps you think and build better.
+            </div>
+            <div class="portfolio-meta-row">
+              <div class="portfolio-meta-pill">24/7 ready to extend</div>
+              <div>News • Calculators • Generators</div>
+            </div>
+          </article>
+
+          <article class="portfolio-card">
+            <div class="portfolio-tag-row">
+              <div class="portfolio-tag">Workspace Vision</div>
+              <div class="portfolio-pill">Future</div>
+            </div>
+            <div class="portfolio-title">Full ALAEAI Workspace</div>
+            <div class="portfolio-desc">
+              A complete environment with dashboards, stats, and personalized flows — where tutorials, tools, and news
+              feel like one integrated system.
+            </div>
+            <div class="portfolio-meta-row">
+              <div class="portfolio-meta-pill">Roadmap-driven</div>
+              <div>Calm • Focused • Powerful</div>
+            </div>
+          </article>
+        </div>
+
+        <aside class="portfolio-side">
+          <div class="portfolio-side-title">How this portfolio is structured</div>
+          <div class="portfolio-side-sub">
+            Instead of random sections, everything is grouped into clear pillars that match how you actually learn and build.
+          </div>
+          <div class="portfolio-side-list">
+            <div class="portfolio-side-item" onclick="location.href='tutorials.html'">
+              <span>Tutorials • Learn step by step</span>
+              <span class="badge">Start</span>
+            </div>
+            <div class="portfolio-side-item" onclick="scrollToId('features')">
+              <span>News &amp; Tools • Stay aware</span>
+              <span class="badge">Explore</span>
+            </div>
+            <div class="portfolio-side-item" onclick="scrollToId('roadmap')">
+              <span>Roadmap • See the future</span>
+              <span class="badge">View</span>
+            </div>
+            <div class="portfolio-side-item" onclick="scrollToId('hero')">
+              <span>Homepage • Warm first impression</span>
+              <span class="badge">Top</span>
+            </div>
+          </div>
+        </aside>
+      </div>
     </section>
 
-    <!-- ===========================
-         ABOUT
-    ============================ -->
-    <section id="about">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-title-card reveal-on-scroll">About AlaeAI</div><br />
-                <div class="section-subtitle-card reveal-on-scroll">
-                    A focused environment built to help you grow, one clear step at a time.
-                </div>
-            </div>
-
-            <div class="about-inner">
-                <div class="about-left reveal-on-scroll">
-                    <p class="about-text">
-                        AlaeAI is designed as a calm, powerful workspace — not a chaotic dashboard.
-                        Every section is intentional: tutorials guide you, tools support you, and news keeps you aware of what matters.
-                    </p>
-                    <div class="about-list">
-                        <div class="about-list-item">
-                            <div class="about-bullet"></div>
-                            <span>Clean, distraction-free layout</span>
-                        </div>
-                        <div class="about-list-item">
-                            <div class="about-bullet"></div>
-                            <span>Soft gold glow for a premium feel</span>
-                        </div>
-                        <div class="about-list-item">
-                            <div class="about-bullet"></div>
-                            <span>Structured learning paths</span>
-                        </div>
-                        <div class="about-list-item">
-                            <div class="about-bullet"></div>
-                            <span>Real-time content integration ready</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="about-right reveal-on-scroll">
-                    <div class="about-card">
-                        <div class="about-tag">Workspace Snapshot</div>
-                        <div class="about-metric">3</div>
-                        <div class="about-metric-label">Core pillars — Tutorials, News, Tools</div>
-
-                        <div class="about-metric-row">
-                            <div class="about-metric-block">
-                                <div class="about-metric">20+</div>
-                                <div class="about-metric-label">Tutorial levels planned</div>
-                            </div>
-                            <div class="about-metric-block">
-                                <div class="about-metric">24/7</div>
-                                <div class="about-metric-label">News & tools ready to extend</div>
-                            </div>
-                        </div>
-
-                        <div class="about-metric-row">
-                            <div class="about-metric-block">
-                                <div class="about-metric">1</div>
-                                <div class="about-metric-label">Unified, clean interface</div>
-                            </div>
-                            <div class="about-metric-block">
-                                <div class="about-metric">∞</div>
-                                <div class="about-metric-label">Room to grow and scale</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- FEATURE STRIP -->
+    <section class="section" id="features">
+      <div class="section-header">
+        <div class="section-title-block">
+          <div class="section-kicker">Core Pillars</div>
+          <div class="section-title">What lives inside ALAEAI.</div>
+          <div class="section-sub">
+            Tutorials, news, tools, and a calm about section — all tuned for a warm, focused experience.
+          </div>
         </div>
+      </div>
+
+      <div class="feature-strip">
+        <article class="feature-card" onclick="location.href='tutorials.html'">
+          <div class="feature-pill">Interactive Tutorials</div>
+          <div class="feature-title">Step-by-step learning paths</div>
+          <p>
+            Follow structured, level-based tutorials that help you actually understand and apply what you learn.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-pill">Real-Time News</div>
+          <div class="feature-title">Meaningful tech updates</div>
+          <p>
+            Stay updated with curated, focused news about AI, science, and innovation — not random noise.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-pill">Smart Tools</div>
+          <div class="feature-title">Utilities that support building</div>
+          <p>
+            Calculators, generators, and helpers that make it easier to test ideas and ship projects faster.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-pill">About ALAEAI</div>
+          <div class="feature-title">A calm, powerful workspace</div>
+          <p>
+            Built as a warm environment where every section has a purpose — no clutter, just progress.
+          </p>
+        </article>
+      </div>
     </section>
 
-    <!-- ===========================
-         TUTORIAL PATH
-    ============================ -->
-    <section id="tutorials">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-title-card reveal-on-scroll">Tutorial Path</div><br />
-                <div class="section-subtitle-card reveal-on-scroll">
-                    Move from basics to advanced topics with a clear, structured progression.
-                </div>
+    <!-- ROADMAP -->
+    <section class="section" id="roadmap">
+      <div class="roadmap">
+        <div>
+          <div class="roadmap-title">Roadmap</div>
+          <div class="roadmap-sub">
+            A clear path for how ALAEAI can grow with you over time — from this warm homepage to a full workspace.
+          </div>
+          <div class="roadmap-phases">
+            <div class="roadmap-phase">
+              <div class="roadmap-phase-label">Phase 1 • Now</div>
+              <div class="roadmap-phase-title">Core Warm Homepage</div>
+              <div>
+                A premium landing experience with portfolio, tutorials, news, and tools in one place.
+              </div>
             </div>
-
-            <div class="tutorial-grid">
-                <div class="tutorial-card reveal-on-scroll">
-                    <div class="tutorial-level">Level 1 • Foundations</div>
-                    <div class="tutorial-title">Getting Started</div>
-                    <div class="tutorial-desc">
-                        Learn the core concepts, tools, and mindset you need before diving into complex projects.
-                    </div>
-                    <div class="tutorial-meta">
-                        ~10 lessons • Perfect for beginners
-                    </div>
-                </div>
-
-                <div class="tutorial-card reveal-on-scroll">
-                    <div class="tutorial-level">Level 2 • Builder Mode</div>
-                    <div class="tutorial-title">Real Projects</div>
-                    <div class="tutorial-desc">
-                        Apply what you know by building small but complete projects with clear goals.
-                    </div>
-                    <div class="tutorial-meta">
-                        ~15 lessons • Hands-on practice
-                    </div>
-                </div>
-
-                <div class="tutorial-card reveal-on-scroll">
-                    <div class="tutorial-level">Level 3 • Advanced</div>
-                    <div class="tutorial-title">Deep Dive</div>
-                    <div class="tutorial-desc">
-                        Explore advanced patterns, performance, and clean architecture for serious builds.
-                    </div>
-                    <div class="tutorial-meta">
-                        ~20 lessons • For focused learners
-                    </div>
-                </div>
+            <div class="roadmap-phase">
+              <div class="roadmap-phase-label">Phase 2 • Soon</div>
+              <div class="roadmap-phase-title">Dedicated Tutorials Hub</div>
+              <div>
+                A full tutorials page with levels, progress tracking, and interactive exercises.
+              </div>
             </div>
-
-            <div class="section-cta-row">
-                <button class="btn-primary" onclick="scrollToSection('tutorials')">
-                    View Full Tutorial Roadmap
-                </button>
-                <button class="btn-secondary" onclick="scrollToSection('contact')">
-                    Ask for a Custom Path
-                </button>
+            <div class="roadmap-phase">
+              <div class="roadmap-phase-label">Phase 3 • Next</div>
+              <div class="roadmap-phase-title">Live News Integration</div>
+              <div>
+                Real-time news feeds connected to your backend or APIs, filtered by topics you care about.
+              </div>
             </div>
+            <div class="roadmap-phase">
+              <div class="roadmap-phase-label">Phase 4 • Future</div>
+              <div class="roadmap-phase-title">Full ALAEAI Workspace</div>
+              <div>
+                A complete learning and building environment with dashboards, stats, and personalized flows.
+              </div>
+            </div>
+          </div>
         </div>
+
+        <div>
+          <div class="roadmap-title">Workspace Snapshot</div>
+          <div class="roadmap-sub">
+            A quick look at what this warm portfolio is already ready to support.
+          </div>
+          <div class="roadmap-metrics">
+            <div class="roadmap-metric">
+              <strong>3</strong> core pillars — Tutorials, News, Tools
+            </div>
+            <div class="roadmap-metric">
+              <strong>20+</strong> tutorial levels planned
+            </div>
+            <div class="roadmap-metric">
+              <strong>24/7</strong> news &amp; tools ready to extend
+            </div>
+            <div class="roadmap-metric">
+              <strong>1</strong> warm portfolio homepage to welcome everyone
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- ===========================
-         NEWS & TOOLS
-    ============================ -->
-    <section id="news-tools">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-title-card reveal-on-scroll">News & Tools</div><br />
-                <div class="section-subtitle-card reveal-on-scroll">
-                    Stay updated and use focused utilities that support your learning and building.
-                </div>
-            </div>
-
-            <div class="news-tools-grid">
-                <div class="news-column reveal-on-scroll">
-                    <div class="news-list">
-                        <div class="news-item">
-                            <div class="news-tag">Tech • Today</div>
-                            <div class="news-title">AI breakthroughs are reshaping how we learn and build.</div>
-                            <div class="news-meta">Curated headline • Ready for live integration</div>
-                        </div>
-
-                        <div class="news-item">
-                            <div class="news-tag">Dev • This week</div>
-                            <div class="news-title">New tools make prototyping faster than ever.</div>
-                            <div class="news-meta">Placeholder content • Connect to your API later</div>
-                        </div>
-
-                        <div class="news-item">
-                            <div class="news-tag">World • This week</div>
-                            <div class="news-title">Innovation and education are merging globally.</div>
-                            <div class="news-meta">Static example • Replace with real feed</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tools-column reveal-on-scroll">
-                    <div class="tools-card">
-                        <div class="feature-title" style="margin-bottom: 6px;">Tools Overview</div>
-                        <div class="feature-desc">
-                            A growing collection of utilities designed to support your workflow.
-                        </div>
-
-                        <div class="tools-list">
-                            <div class="tools-item">
-                                <div class="tools-dot"></div>
-                                <span>Code snippet generator</span>
-                            </div>
-                            <div class="tools-item">
-                                <div class="tools-dot"></div>
-                                <span>Math & logic helpers</span>
-                            </div>
-                            <div class="tools-item">
-                                <div class="tools-dot"></div>
-                                <span>Layout & design presets</span>
-                            </div>
-                            <div class="tools-item">
-                                <div class="tools-dot"></div>
-                                <span>API integration stubs</span>
-                            </div>
-                        </div>
-
-                        <div class="section-cta-row" style="margin-top: 20px;">
-                            <button class="btn-secondary" onclick="scrollToSection('contact')">
-                                Suggest a New Tool
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===========================
-         ROADMAP
-    ============================ -->
-    <section id="roadmap">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-title-card reveal-on-scroll">Roadmap</div><br />
-                <div class="section-subtitle-card reveal-on-scroll">
-                    A clear path for how AlaeAI can grow with you over time.
-                </div>
-            </div>
-
-            <div class="roadmap-timeline">
-                <div class="roadmap-item reveal-on-scroll">
-                    <div class="roadmap-dot"></div>
-                    <div class="roadmap-line"></div>
-                    <div class="roadmap-content">
-                        <div class="roadmap-label">Phase 1 • Now</div>
-                        <div class="roadmap-title">Core Homepage</div>
-                        <div class="roadmap-desc">
-                            A clean, premium landing experience with tutorials, news, and tools in one place.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="roadmap-item reveal-on-scroll">
-                    <div class="roadmap-dot"></div>
-                    <div class="roadmap-line"></div>
-                    <div class="roadmap-content">
-                        <div class="roadmap-label">Phase 2 • Soon</div>
-                        <div class="roadmap-title">Dedicated Tutorials Hub</div>
-                        <div class="roadmap-desc">
-                            A full tutorials page with levels, progress tracking, and interactive exercises.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="roadmap-item reveal-on-scroll">
-                    <div class="roadmap-dot"></div>
-                    <div class="roadmap-line"></div>
-                    <div class="roadmap-content">
-                        <div class="roadmap-label">Phase 3 • Next</div>
-                        <div class="roadmap-title">Live News Integration</div>
-                        <div class="roadmap-desc">
-                            Real-time news feeds connected to your backend or APIs, filtered by topics you care about.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="roadmap-item reveal-on-scroll">
-                    <div class="roadmap-dot"></div>
-                    <div class="roadmap-line roadmap-line-end"></div>
-                    <div class="roadmap-content">
-                        <div class="roadmap-label">Phase 4 • Future</div>
-                        <div class="roadmap-title">Full Workspace</div>
-                        <div class="roadmap-desc">
-                            A complete learning and building environment with dashboards, stats, and personalized flows.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===========================
-         TESTIMONIALS
-    ============================ -->
-    <section id="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-title-card reveal-on-scroll">Testimonials</div><br />
-                <div class="section-subtitle-card reveal-on-scroll">
-                    Imagine how learners will talk about AlaeAI once it’s fully live.
-                </div>
-            </div>
-
-            <div class="testimonials-grid">
-                <div class="testimonial-card reveal-on-scroll">
-                    <div class="testimonial-quote">
-                        “The layout is so clean that I actually want to keep learning.”
-                    </div>
-                    <div class="testimonial-meta">
-                        Future User • Focused Learner
-                    </div>
-                </div>
-
-                <div class="testimonial-card reveal-on-scroll">
-                    <div class="testimonial-quote">
-                        “Everything I need is in one place — tutorials, tools, and news.”
-                    </div>
-                    <div class="testimonial-meta">
-                        Future User • Builder
-                    </div>
-                </div>
-
-                <div class="testimonial-card reveal-on-scroll">
-                    <div class="testimonial-quote">
-                        “It feels premium without being complicated. Just clear and powerful.”
-                    </div>
-                    <div class="testimonial-meta">
-                        Future User • Creator
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===========================
-         FAQ
-    ============================ -->
-    <section id="faq">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-title-card reveal-on-scroll">FAQ</div><br />
-                <div class="section-subtitle-card reveal-on-scroll">
-                    Quick answers to how this space is meant to work.
-                </div>
-            </div>
-
-            <div class="faq-list">
-                <div class="faq-item reveal-on-scroll">
-                    <button class="faq-question" type="button">
-                        <span>Is this homepage ready for real data?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        Yes. The layout is built so you can plug in real tutorials, news APIs, and tools without redesigning everything.
-                    </div>
-                </div>
-
-                <div class="faq-item reveal-on-scroll">
-                    <button class="faq-question" type="button">
-                        <span>Can I extend this into multiple pages?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        Absolutely. The navigation, sections, and style system are ready to be reused on /tutorials, /news, /tools, and more.
-                    </div>
-                </div>
-
-                <div class="faq-item reveal-on-scroll">
-                    <button class="faq-question" type="button">
-                        <span>Is the design mobile-friendly?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        Yes. There are responsive rules for mobile, tablet, and large screens so the layout stays clean everywhere.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===========================
-         CONTACT
-    ============================ -->
-    <section id="contact">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-title-card reveal-on-scroll">Stay in Control</div><br />
-                <div class="section-subtitle-card reveal-on-scroll">
-                    Use this space as your personal lab — and shape what comes next.
-                </div>
-            </div>
-
-            <div class="contact-grid">
-                <div class="contact-left reveal-on-scroll">
-                    <h3 class="contact-title">Ready to expand AlaeAI?</h3>
-                    <p class="contact-text">
-                        Whether it’s a new tutorials page, a tools dashboard, or a live news backend,
-                        this homepage is the foundation. You can keep extending it step by step.
-                    </p>
-                    <button class="btn-primary" onclick="scrollToSection('hero')">
-                        Back to Top
-                    </button>
-                </div>
-
-                <div class="contact-right reveal-on-scroll">
-                    <form class="contact-form" onsubmit="event.preventDefault();">
-                        <div class="contact-row">
-                            <div class="contact-field">
-                                <label for="name">Name</label>
-                                <input id="name" type="text" placeholder="Your name" />
-                            </div>
-                            <div class="contact-field">
-                                <label for="email">Email</label>
-                                <input id="email" type="email" placeholder="you@example.com" />
-                            </div>
-                        </div>
-
-                        <div class="contact-field">
-                            <label for="message">Message</label>
-                            <textarea id="message" rows="4" placeholder="What do you want to build next?"></textarea>
-                        </div>
-
-                        <button class="btn-secondary" type="submit">
-                            (Static) Submit
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===========================
-         FOOTER
-    ============================ -->
-    <footer id="footer">
-        <div class="container footer-inner">
-            <div class="footer-left">
-                <div class="footer-logo">AlaeAI</div>
-                <div class="footer-tagline">Build. Learn. Create.</div>
-            </div>
-            <div class="footer-right">
-                <div class="footer-meta">© 2026 AlaeAI. All rights reserved.</div>
-            </div>
-        </div>
+    <!-- FOOTER -->
+    <footer>
+      © 2026 <span class="accent">ALAEAI</span> — Warm Portfolio • Build. Learn. Create.
     </footer>
+  </div>
 
-    <!-- ===========================
-         JS: SCROLL, ANIMATIONS, DARK MODE
-    ============================ -->
-    <script>
-        function scrollToSection(id) {
-            const el = document.getElementById(id);
-            if (el) {
-                window.scrollTo({
-                    top: el.offsetTop - 80,
-                    behavior: "smooth"
-                });
-            }
+  <script>
+    // Smooth scroll helper
+    function scrollToId(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    // Dark mode persistence
+    const toggle = document.getElementById("darkToggle");
+    const savedMode = localStorage.getItem("alaeai-mode");
+
+    if (savedMode === "dark") {
+      document.body.classList.add("dark");
+      if (toggle) toggle.textContent = "Light Mode";
+    } else {
+      if (toggle) toggle.textContent = "Dark Mode";
+    }
+
+    if (toggle) {
+      toggle.onclick = () => {
+        document.body.classList.toggle("dark");
+        if (document.body.classList.contains("dark")) {
+          localStorage.setItem("alaeai-mode", "dark");
+          toggle.textContent = "Light Mode";
+        } else {
+          localStorage.setItem("alaeai-mode", "light");
+          toggle.textContent = "Dark Mode";
         }
+      };
+    }
 
-        function toggleDarkMode() {
-            document.body.classList.toggle("dark");
-        }
-
-        const revealElements = document.querySelectorAll(".reveal-on-scroll");
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = "1";
-                    entry.target.style.transform = "translateY(0)";
-                    entry.target.style.transition = "0.8s ease";
-                    revealObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.2 });
-
-        revealElements.forEach(el => revealObserver.observe(el));
-
-        const faqItems = document.querySelectorAll(".faq-item");
-        faqItems.forEach(item => {
-            const btn = item.querySelector(".faq-question");
-            const answer = item.querySelector(".faq-answer");
-            const icon = item.querySelector(".faq-icon");
-
-            btn.addEventListener("click", () => {
-                const isOpen = answer.style.maxHeight;
-
-                faqItems.forEach(i => {
-                    i.querySelector(".faq-answer").style.maxHeight = null;
-                    i.querySelector(".faq-answer").classList.remove("open");
-                    i.querySelector(".faq-icon").textContent = "+";
-                });
-
-                if (!isOpen) {
-                    answer.style.maxHeight = answer.scrollHeight + "px";
-                    answer.classList.add("open");
-                    icon.textContent = "–";
-                }
-            });
-        });
-
-        const staggerGroups = document.querySelectorAll(".feature-card, .tutorial-card, .news-item, .testimonial-card");
-        const staggerObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = "1";
-                    entry.target.style.transform = "translateY(0)";
-                    entry.target.style.transition = "0.6s ease";
-                    staggerObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.15 });
-
-        staggerGroups.forEach(el => {
-            el.style.opacity = "0";
-            el.style.transform = "translateY(20px)";
-            staggerObserver.observe(el);
-        });
-    </script>
+    // Subtle orb movement on mouse move
+    const orbs = document.querySelectorAll(".bg-orb");
+    window.addEventListener("mousemove", (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 20;
+      const y = (e.clientY / window.innerHeight - 0.5) * 20;
+      orbs.forEach((orb, i) => {
+        const factor = (i + 1) * 0.4;
+        orb.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
+      });
+    });
+  </script>
 </body>
 </html>
