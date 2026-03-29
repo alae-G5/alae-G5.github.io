@@ -65,6 +65,37 @@
       100% { transform: translateY(40px) translateX(30px); }
     }
 
+    /* Solar system object */
+    .solar-system {
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 2px solid rgba(242,194,107,0.25);
+      animation: rotate 18s linear infinite;
+      pointer-events: none;
+    }
+
+    .solar-system::before {
+      content: "";
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      background: var(--accent);
+      border-radius: 50%;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 18px rgba(242,194,107,0.8);
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
     /* Page container */
     .page {
       width: 100%;
@@ -78,9 +109,9 @@
       to { opacity: 1; }
     }
 
-    /* Hero / Identity block */
-    .hero {
-      padding: 40px 32px;
+    /* Banner */
+    .banner {
+      padding: 26px 32px;
       background: linear-gradient(145deg, #0b0d11, #151821);
       border-radius: 26px;
       border: 1px solid rgba(255,255,255,0.06);
@@ -90,13 +121,29 @@
       overflow: hidden;
     }
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle at 0% 0%, rgba(242,194,107,0.18) 0, transparent 55%);
-      opacity: 0.7;
-      pointer-events: none;
+    .banner-title {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .banner-sub {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 620px;
+      line-height: 1.6;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 40px 32px;
+      background: linear-gradient(145deg, #0b0d11, #151821);
+      border-radius: 26px;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
     }
 
     .hero-title {
@@ -176,7 +223,7 @@
       line-height: 1.6;
     }
 
-    /* Category chips */
+    /* Chips */
     .chips {
       display: flex;
       flex-wrap: wrap;
@@ -236,9 +283,19 @@
 
   <div class="page">
 
+    <!-- BANNER -->
+    <section class="banner">
+      <div class="solar-system"></div>
+
+      <h1 class="banner-title">AlaeAI — À propos d’Alaedine</h1>
+      <p class="banner-sub">
+        Une identité construite autour de la précision, du design, de l’IA et de la créativité.
+      </p>
+    </section>
+
     <!-- HERO -->
     <section class="hero">
-      <h1 class="hero-title">Alaedine — Créateur, Bâtisseur, Visionnaire</h1>
+      <h1 class="hero-title">Créateur. Bâtisseur. Visionnaire.</h1>
       <p class="hero-sub">
         Je suis un étudiant passionné par l’IA, le développement web, le design et les expériences interactives.
         Mon objectif est simple : créer des projets qui respirent la précision, l’identité et l’impact.
@@ -248,7 +305,7 @@
     <!-- GRID -->
     <main class="grid">
 
-      <!-- LEFT COLUMN -->
+      <!-- LEFT -->
       <section class="card">
         <h2 class="card-title">Mon identité</h2>
 
@@ -271,7 +328,7 @@
         </ul>
       </section>
 
-      <!-- RIGHT COLUMN -->
+      <!-- RIGHT -->
       <section class="card">
         <h2 class="card-title">Ce que j’aime créer</h2>
 
