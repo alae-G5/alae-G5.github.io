@@ -1,1215 +1,1181 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlaeAI — Step-by-Step Tutorials</title>
-
-    <!-- SEO -->
-    <meta name="description" content="20-level progressive web development tutorials on AlaeAI, from HTML basics to advanced real-world projects.">
-    <meta http-equiv="Content-Language" content="en, ar">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-    <style>
-        /* ---------------------------------------------------
-           GLOBAL THEME
-        --------------------------------------------------- */
-        :root {
-            --bg-light: #f5efe6;
-            --bg-light-accent: #fff9f0;
-            --text-light: #1a1a1a;
-            --card-light: #ffffff;
-            --border-light: #e0d4c2;
-
-            --bg-dark: #05060a;
-            --bg-dark-accent: #151821;
-            --text-dark: #f5f5f5;
-            --card-dark: #181b24;
-            --border-dark: #2b3140;
-
-            --primary: #c58b3b;
-            --primary-soft: rgba(197,139,59,0.12);
-            --danger: #ff4b6a;
-            --success: #3ac97a;
-
-            --radius-lg: 18px;
-            --radius-md: 12px;
-            --radius-sm: 8px;
-
-            --shadow-soft: 0 18px 45px rgba(0,0,0,0.12);
-            --shadow-card: 0 10px 26px rgba(0,0,0,0.08);
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            background: var(--bg-light);
-            color: var(--text-light);
-            transition: background 0.4s ease, color 0.4s ease;
-        }
-
-        body.dark-mode {
-            background: var(--bg-dark);
-            color: var(--text-dark);
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background:
-                linear-gradient(135deg, rgba(255,255,255,0.8), rgba(245,239,230,0.9)),
-                radial-gradient(circle at 0% 0%, rgba(197,139,59,0.18), transparent 55%),
-                radial-gradient(circle at 100% 100%, rgba(0,0,0,0.06), transparent 55%);
-            z-index: -2;
-        }
-
-        body.dark-mode::before {
-            background:
-                radial-gradient(circle at 0% 0%, rgba(197,139,59,0.22), transparent 55%),
-                radial-gradient(circle at 100% 100%, rgba(80,90,140,0.35), transparent 60%),
-                linear-gradient(145deg, #05060a, #10131c);
-        }
-
-        /* ---------------------------------------------------
-           NAVIGATION + HEADER
-        --------------------------------------------------- */
-        header {
-            text-align: center;
-            padding: 30px 7% 10px;
-        }
-
-        .logo-animate {
-            max-width: 340px;
-            border-radius: 12px;
-            opacity: 0;
-            transform: translateY(-10px);
-            animation: fadeInLogo 1.2s ease forwards;
-            filter: drop-shadow(0 0 18px rgba(197,139,59,0.45));
-        }
-
-        @keyframes fadeInLogo {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px 7%;
-            backdrop-filter: blur(18px);
-            background: rgba(253,247,238,0.9);
-            border-bottom: 1px solid rgba(0,0,0,0.04);
-        }
-
-        body.dark-mode nav {
-            background: rgba(10,12,18,0.9);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-        }
-
-        nav h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: 0.04em;
-        }
-
-        nav a {
-            margin-left: 18px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 14px;
-            color: inherit;
-            position: relative;
-        }
-
-        nav a::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -4px;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.2s ease;
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        #theme-toggle {
-            padding: 7px 14px;
-            border-radius: 999px;
-            border: 1px solid rgba(0,0,0,0.08);
-            background: rgba(255,255,255,0.9);
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        body.dark-mode #theme-toggle {
-            background: rgba(15,17,25,0.95);
-            border-color: rgba(255,255,255,0.12);
-            color: var(--text-dark);
-        }
-
-        /* ---------------------------------------------------
-           PAGE HEADER + FILTERS
-        --------------------------------------------------- */
-        .page-header {
-            max-width: 1100px;
-            margin: 30px auto 10px;
-            padding: 0 7%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 16px;
-            align-items: flex-end;
-        }
-
-        .page-header-main {
-            max-width: 600px;
-        }
-
-        .page-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 28px;
-            margin: 0 0 6px;
-        }
-
-        .page-subtitle {
-            margin: 0;
-            font-size: 14px;
-            opacity: 0.85;
-        }
-
-        .progress-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 10px;
-            padding: 6px 12px;
-            border-radius: 999px;
-            background: var(--primary-soft);
-            font-size: 12px;
-        }
-
-        .progress-bar-wrapper {
-            margin-top: 6px;
-            width: 180px;
-            height: 6px;
-            border-radius: 999px;
-            background: rgba(0,0,0,0.06);
-            overflow: hidden;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            width: 0%;
-            background: var(--primary);
-            transition: width 0.3s ease;
-        }
-
-        .page-controls {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .search-input {
-            padding: 8px 12px;
-            border-radius: 999px;
-            border: 1px solid rgba(0,0,0,0.12);
-            min-width: 220px;
-            font-size: 13px;
-            outline: none;
-            background: rgba(255,255,255,0.9);
-        }
-
-        body.dark-mode .search-input {
-            background: rgba(10,12,18,0.95);
-            border-color: rgba(255,255,255,0.16);
-            color: var(--text-dark);
-        }
-
-        .select-input {
-            padding: 7px 10px;
-            border-radius: 999px;
-            border: 1px solid rgba(0,0,0,0.12);
-            font-size: 13px;
-            background: rgba(255,255,255,0.9);
-            outline: none;
-        }
-
-        body.dark-mode .select-input {
-            background: rgba(10,12,18,0.95);
-            border-color: rgba(255,255,255,0.16);
-            color: var(--text-dark);
-        }
-
-        /* ---------------------------------------------------
-           TUTORIALS GRID
-        --------------------------------------------------- */
-        .tutorials-container {
-            max-width: 1100px;
-            margin: 18px auto 40px;
-            padding: 0 7%;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 18px;
-        }
-
-        .tutorial-card {
-            background: var(--card-light);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-md);
-            padding: 16px 16px 14px;
-            box-shadow: var(--shadow-card);
-            position: relative;
-            overflow: hidden;
-        }
-
-        body.dark-mode .tutorial-card {
-            background: var(--card-dark);
-            border-color: var(--border-dark);
-            box-shadow: 0 14px 32px rgba(0,0,0,0.55);
-        }
-
-        .tutorial-level {
-            font-size: 11px;
-            opacity: 0.7;
-            margin-bottom: 4px;
-        }
-
-        .tutorial-title {
-            margin: 0 0 6px;
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .tutorial-meta {
-            font-size: 12px;
-            opacity: 0.8;
-            margin-bottom: 6px;
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 3px 8px;
-            border-radius: 999px;
-            font-size: 11px;
-            margin-right: 4px;
-        }
-
-        .badge-easy {
-            background: rgba(58,201,122,0.12);
-            color: #1f8a4a;
-        }
-
-        .badge-medium {
-            background: rgba(255,193,7,0.16);
-            color: #b38300;
-        }
-
-        .badge-hard {
-            background: rgba(255,75,106,0.16);
-            color: #b0203d;
-        }
-
-        .badge-very-hard {
-            background: rgba(155,89,182,0.18);
-            color: #7d3cb0;
-        }
-
-        .tag-list {
-            margin: 6px 0 8px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-        }
-
-        .tag {
-            font-size: 11px;
-            padding: 3px 7px;
-            border-radius: 999px;
-            background: rgba(0,0,0,0.04);
-        }
-
-        body.dark-mode .tag {
-            background: rgba(255,255,255,0.06);
-        }
-
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 6px;
-        }
-
-        .open-btn {
-            padding: 7px 14px;
-            background: var(--primary);
-            color: white;
-            border-radius: 999px;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-        }
-
-        .completed-pill {
-            font-size: 11px;
-            color: var(--success);
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .completed-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: var(--success);
-        }
-
-        /* ---------------------------------------------------
-           SIDE PANEL
-        --------------------------------------------------- */
-        #modal-bg {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.4);
-            display: none;
-            z-index: 80;
-        }
-
-        #side-panel {
-            position: fixed;
-            top: 0;
-            right: -520px;
-            width: 460px;
-            max-width: 100%;
-            height: 100%;
-            background: var(--card-light);
-            border-left: 1px solid var(--border-light);
-            padding: 20px 22px 26px;
-            transition: right 0.3s ease, width 0.3s ease;
-            overflow-y: auto;
-            z-index: 90;
-        }
-
-        body.dark-mode #side-panel {
-            background: var(--card-dark);
-            border-color: var(--border-dark);
-        }
-
-        .panel-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .panel-title {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            font-size: 18px;
-        }
-
-        .panel-buttons {
-            display: flex;
-            gap: 6px;
-        }
-
-        .panel-btn {
-            padding: 6px 10px;
-            background: rgba(0,0,0,0.06);
-            border-radius: 999px;
-            border: none;
-            font-size: 11px;
-            cursor: pointer;
-        }
-
-        body.dark-mode .panel-btn {
-            background: rgba(255,255,255,0.08);
-            color: var(--text-dark);
-        }
-
-        .panel-meta {
-            font-size: 12px;
-            opacity: 0.85;
-            margin-bottom: 8px;
-        }
-
-        .panel-tags {
-            margin-bottom: 10px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-        }
-
-        .panel-section-title {
-            font-size: 13px;
-            font-weight: 600;
-            margin: 16px 0 6px;
-        }
-
-        .panel-code-block {
-            margin: 8px 0 12px;
-            padding: 10px 12px;
-            border-radius: var(--radius-sm);
-            background: #111317;
-            color: #f5f5f5;
-            font-family: "JetBrains Mono", "Consolas", monospace;
-            font-size: 12px;
-            overflow-x: auto;
-        }
-
-        body.dark-mode .panel-code-block {
-            background: #05060a;
-        }
-
-        .panel-tip {
-            font-size: 12px;
-            padding: 8px 10px;
-            border-radius: var(--radius-sm);
-            background: rgba(197,139,59,0.12);
-            margin: 8px 0 10px;
-        }
-
-        .panel-actions {
-            margin-top: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .panel-primary-btn {
-            padding: 7px 14px;
-            border-radius: 999px;
-            border: none;
-            background: var(--primary);
-            color: white;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .panel-secondary-text {
-            font-size: 11px;
-            opacity: 0.8;
-        }
-
-        /* ---------------------------------------------------
-           FOOTER
-        --------------------------------------------------- */
-        footer {
-            margin-top: 40px;
-            padding: 24px 7%;
-            text-align: center;
-            font-size: 12px;
-            background: rgba(253,247,238,0.9);
-            border-top: 1px solid rgba(0,0,0,0.06);
-        }
-
-        body.dark-mode footer {
-            background: rgba(8,10,16,0.95);
-            border-top-color: rgba(255,255,255,0.08);
-        }
-
-        /* ---------------------------------------------------
-           RESPONSIVE
-        --------------------------------------------------- */
-        @media (max-width: 720px) {
-            .page-header {
-                align-items: flex-start;
-            }
-            nav h1 {
-                font-size: 18px;
-            }
-            .page-title {
-                font-size: 22px;
-            }
-            #side-panel {
-                width: 100%;
-            }
-        }
-    </style>
-</head>
-<body>
-
-<header>
-    <img src="assets/logo.png"
-         class="logo-animate"
-         alt="AlaeAI — Build. Learn. Create.">
-</header>
-
-<nav>
-    <h1>AlaeAI</h1>
-    <div>
-        <a href="index.html">Home</a>
-        <a href="news.html">News</a>
-        <a href="tutorials.html">Tutorials</a>
-        <a href="tools.html">Tools</a>
-        <a href="contact.html">Contact</a>
-        <a href="about.html">About</a>
-    </div>
-    <button id="theme-toggle">🌙 Dark Mode</button>
-</nav>
-
-<!-- PAGE HEADER -->
-<section class="page-header">
-    <div class="page-header-main">
-        <h2 class="page-title">Step-by-Step Tutorials (20 Levels)</h2>
-        <p class="page-subtitle">
-            Start from the basics and climb to advanced, real‑world projects.  
-            Your progress is saved automatically.
-        </p>
-
-        <div class="progress-pill">
-            <span id="progress-count">0 / 20 completed</span>
-        </div>
-
-        <div class="progress-bar-wrapper">
-            <div class="progress-bar-fill" id="progress-bar"></div>
-        </div>
-    </div>
-
-    <!-- FILTERS -->
-    <div class="page-controls">
-        <input id="search-input" class="search-input" type="text"
-               placeholder="Search tutorials (HTML, API, layout...)">
-
-        <select id="difficulty-filter" class="select-input">
-            <option value="all">All difficulties</option>
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
-            <option value="very-hard">Very Hard</option>
-        </select>
-
-        <select id="category-filter" class="select-input">
-            <option value="all">All categories</option>
-            <option value="fundamentals">Fundamentals</option>
-            <option value="layout">Layout & Responsive</option>
-            <option value="javascript">JavaScript Core</option>
-            <option value="browser-apis">Browser & APIs</option>
-            <option value="projects">Projects</option>
-        </select>
-    </div>
-</section>
-
-<!-- TUTORIALS GRID -->
-<section class="tutorials-container" id="tutorials-grid">
-    <!-- Cards will be injected by JS -->
-</section>
-
-<!-- BACKDROP -->
-<div id="modal-bg"></div>
-
-<!-- SIDE PANEL -->
-<aside id="side-panel">
-
-    <div class="panel-header">
-        <div>
-            <h3 class="panel-title" id="panel-title">Tutorial</h3>
-            <div class="panel-meta" id="panel-meta"></div>
-        </div>
-
-        <div class="panel-buttons">
-            <button class="panel-btn" id="panel-fullscreen-btn">Full Screen</button>
-            <button class="panel-btn" id="panel-close-btn">Close</button>
-        </div>
-    </div>
-
-    <div class="panel-tags" id="panel-tags"></div>
-
-    <div id="panel-content">
-        <!-- Tutorial content injected by JS -->
-    </div>
-
-    <div class="panel-actions">
-        <button class="panel-primary-btn" id="panel-complete-btn">Mark as completed</button>
-        <div class="panel-secondary-text">
-            Tip: Use <strong>Esc</strong> to close, <strong>F</strong> to toggle full screen.
-        </div>
-    </div>
-
-</aside>
-
-<footer>
-    © 2026 AlaeAI — Tutorials Engine v1.0 · Built to grow with you.
-</footer>
-<script>
-/* ---------------------------------------------------
-   TUTORIAL CONTENT (20 LEVELS)
---------------------------------------------------- */
-
-const tutorialContent = {};
-
-/* ---------------------------------------------------
-   LEVEL 1 — HTML BASICS
---------------------------------------------------- */
-tutorialContent["level1"] = `
-<h2>Level 1 — HTML Basics</h2>
-<p>Welcome to your first step. In this tutorial, you will learn the essential building blocks of every webpage.</p>
-
-<h3>What You Will Learn</h3>
-<ul>
-    <li>HTML structure</li>
-    <li>Head vs Body</li>
-    <li>Headings, paragraphs, links</li>
-    <li>Images and lists</li>
-</ul>
-
-<h3>Starter Code</h3>
-<div class="panel-code-block">
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;My First Page&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;Hello World!&lt;/h1&gt;
-    &lt;p&gt;This is my first webpage.&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</div>
-
-<div class="panel-tip">
-Tip: Every HTML page starts with <strong>&lt;!DOCTYPE html&gt;</strong>.
-</div>
-`;
-
-/* ---------------------------------------------------
-   LEVEL 2 — CSS BASICS
---------------------------------------------------- */
-tutorialContent["level2"] = `
-<h2>Level 2 — CSS Basics</h2>
-<p>Now that you know HTML, it's time to style your page.</p>
-
-<h3>What You Will Learn</h3>
-<ul>
-    <li>Colors</li>
-    <li>Fonts</li>
-    <li>Spacing</li>
-    <li>Borders</li>
-</ul>
-
-<h3>Starter Code</h3>
-<div class="panel-code-block">
-body {
-    background: #f5efe6;
-    font-family: Arial;
-}
-
-h1 {
-    color: #c58b3b;
-}
-</div>
-
-<div class="panel-tip">
-Tip: CSS controls how your website <strong>looks</strong>.
-</div>
-`;
-
-/* ---------------------------------------------------
-   LEVEL 3 — JAVASCRIPT BASICS
---------------------------------------------------- */
-tutorialContent["level3"] = `
-<h2>Level 3 — JavaScript Basics</h2>
-<p>JavaScript brings your website to life.</p>
-
-<h3>What You Will Learn</h3>
-<ul>
-    <li>Variables</li>
-    <li>Functions</li>
-    <li>Events</li>
-</ul>
-
-<h3>Starter Code</h3>
-<div class="panel-code-block">
-let name = "Alae";
-function greet() {
-    alert("Hello " + name);
-}
-</div>
-
-<div class="panel-tip">
-Tip: JavaScript controls <strong>behavior</strong>.
-</div>
-`;
-
-/* ---------------------------------------------------
-   LEVEL 4 — FLEXBOX LAYOUT
---------------------------------------------------- */
-tutorialContent["level4"] = `
-<h2>Level 4 — Flexbox Layout</h2>
-<p>Flexbox helps you create responsive layouts easily.</p>
-
-<h3>Starter Code</h3>
-<div class="panel-code-block">
-.container {
-    display: flex;
-    gap: 20px;
-}
-
-.box {
-    background: #c58b3b;
-    padding: 20px;
-    color: white;
-}
-</div>
-`;
-
-/* ---------------------------------------------------
-   LEVEL 5 — CSS GRID
---------------------------------------------------- */
-tutorialContent["level5"] = `
-<h2>Level 5 — CSS Grid</h2>
-<p>Grid is perfect for complex layouts.</p>
-
-<div class="panel-code-block">
-.grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-}
-</div>
-`;
-
-/* ---------------------------------------------------
-   LEVEL 6 — DOM MANIPULATION
---------------------------------------------------- */
-tutorialContent["level6"] = `
-<h2>Level 6 — DOM Manipulation</h2>
-<p>Change HTML elements dynamically.</p>
-
-<div class="panel-code-block">
-document.getElementById("title").textContent = "Updated!";
-</div>
-`;
-
-/* ---------------------------------------------------
-   LEVEL 7 — EVENT LISTENERS
---------------------------------------------------- */
-tutorialContent["level7"] = `
-<h2>Level 7 — Event Listeners</h2>
-<p>Make your UI interactive.</p>
-
-<div class="panel-code-block">
-button.addEventListener("click", () => {
-    alert("Clicked!");
-});
-</div>
-`;
-
-/* ---------------------------------------------------
-   LEVEL 8 — LOCALSTORAGE
---------------------------------------------------- */
-tutorialContent["level8"] = `
-<h2>Level 8 — LocalStorage</h2>
-<p>Save data in the browser.</p>
-
-<div class="panel-code-block">
-localStorage.setItem("theme", "dark");
-</div>
-`;
-
-/* ---------------------------------------------------
-   LEVEL 9 — RESPONSIVE DESIGN
---------------------------------------------------- */
-tutorialContent["level9"] = `
-<h2>Level 9 — Responsive Design</h2>
-<p>Make your website look good on all devices.</p>
-
-<div class="panel-code-block">
-@media (max-width: 600px) {
-    .container {
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AlaeAI — Tool Builder Tutorials</title>
+
+  <style>
+    :root {
+      --bg: #e9edf5;
+      --bg-alt: rgba(255, 255, 255, 0.18);
+      --glass-border: rgba(255, 255, 255, 0.45);
+      --glass-border-soft: rgba(255, 255, 255, 0.25);
+      --text: #0f172a;
+      --muted: #6b7280;
+      --accent: #facc15;
+      --accent-soft: rgba(250, 204, 21, 0.18);
+      --accent-strong: rgba(250, 204, 21, 0.9);
+      --card-shadow: 0 18px 45px rgba(15, 23, 42, 0.35);
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 10px;
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.28s ease-out;
+    }
+
+    body.dark {
+      --bg: radial-gradient(circle at top, rgba(250, 204, 21, 0.08), #020617);
+      --bg-alt: rgba(15, 23, 42, 0.7);
+      --glass-border: rgba(148, 163, 184, 0.6);
+      --glass-border-soft: rgba(30, 64, 175, 0.5);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #facc15;
+      --accent-soft: rgba(250, 204, 21, 0.18);
+      --accent-strong: rgba(250, 204, 21, 0.95);
+      --card-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Poppins", sans-serif;
+      background: radial-gradient(circle at top, rgba(250, 204, 21, 0.12), #e5e7eb);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      animation: bodyFade 0.6s ease-out;
+    }
+
+    @keyframes bodyFade {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      padding: 14px 18px 16px;
+      backdrop-filter: blur(18px);
+      background:
+        radial-gradient(circle at top left, rgba(250, 204, 21, 0.18), transparent 55%),
+        linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.96));
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.75);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background:
+        radial-gradient(circle at 20% 20%, #fefce8, #facc15),
+        radial-gradient(circle at 80% 80%, #0f172a, #020617);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: 0.6px;
+      color: #020617;
+      box-shadow:
+        0 0 18px rgba(250, 204, 21, 0.9),
+        0 0 40px rgba(250, 204, 21, 0.45),
+        0 14px 32px rgba(0, 0, 0, 0.85);
+      transform: translateY(0);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .brand-logo:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+      box-shadow:
+        0 0 24px rgba(250, 204, 21, 1),
+        0 0 55px rgba(250, 204, 21, 0.7),
+        0 18px 40px rgba(0, 0, 0, 0.95);
+    }
+
+    .brand-text-main {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.9px;
+      color: #f9fafb;
+    }
+
+    .brand-text-sub {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.6px;
+      color: rgba(209, 213, 219, 0.9);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .pill {
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: rgba(15, 23, 42, 0.8);
+      color: rgba(249, 250, 251, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+
+    .cta-small {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(248, 250, 252, 0.9);
+      background: rgba(15, 23, 42, 0.9);
+      color: #f9fafb;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.7);
+      transform: translateY(0);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .cta-small span {
+      font-size: 14px;
+    }
+
+    .cta-small:hover {
+      transform: translateY(-2px);
+      background: #f9fafb;
+      color: #020617;
+      border-color: transparent;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.9);
+    }
+
+    .dark-toggle {
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(250, 204, 21, 0.7);
+      background: rgba(15, 23, 42, 0.7);
+      color: #fefce8;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow:
+        0 0 14px rgba(250, 204, 21, 0.7),
+        0 10px 26px rgba(0, 0, 0, 0.85);
+      transform: translateY(0);
+      transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .dark-toggle:hover {
+      transform: translateY(-2px);
+      background: rgba(250, 204, 21, 0.16);
+      color: #fefce8;
+      box-shadow:
+        0 0 20px rgba(250, 204, 21, 1),
+        0 14px 34px rgba(0, 0, 0, 0.95);
+    }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      padding: 24px 18px 40px;
+    }
+
+    .main-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .page-heading {
+      margin-bottom: 18px;
+    }
+
+    .page-title {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      margin-bottom: 4px;
+    }
+
+    .page-sub {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 640px;
+    }
+
+    /* CATEGORY BAR (Foundations / Core / Advanced / Builder) */
+    .categories-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .cat-chip {
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      border: 1px solid var(--glass-border-soft);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.08));
+      backdrop-filter: blur(14px);
+      color: var(--muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.18);
+      transform: translateY(0);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+    }
+
+    .cat-chip span.icon {
+      font-size: 13px;
+    }
+
+    .cat-chip:hover {
+      transform: translateY(-2px);
+      border-color: rgba(250, 204, 21, 0.7);
+      color: var(--text);
+      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.3);
+    }
+
+    .cat-chip.active {
+      background:
+        radial-gradient(circle at top left, rgba(250, 204, 21, 0.35), transparent 55%),
+        linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.96));
+      color: #fefce8;
+      border-color: rgba(250, 204, 21, 0.9);
+      box-shadow:
+        0 0 18px rgba(250, 204, 21, 0.9),
+        0 16px 40px rgba(15, 23, 42, 0.9);
+    }
+
+    /* LAYOUT: SIDEBAR + CONTENT */
+    .layout {
+      display: grid;
+      grid-template-columns: 290px minmax(0, 1fr);
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 960px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* SIDEBAR (glass) */
+    .sidebar {
+      position: sticky;
+      top: 96px;
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.06));
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--card-shadow);
+      padding: 16px 14px 18px;
+      backdrop-filter: blur(22px);
+    }
+
+    .sidebar-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .sidebar-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .progress-wrapper {
+      margin-bottom: 14px;
+    }
+
+    .progress-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 9px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(15, 23, 42, 0.08), rgba(15, 23, 42, 0.18));
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-track-glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0% 50%, rgba(250, 204, 21, 0.25), transparent 60%);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .progress-fill {
+      position: relative;
+      height: 100%;
+      width: 5%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #facc15, #fef08a);
+      box-shadow:
+        0 0 12px rgba(250, 204, 21, 0.9),
+        0 0 26px rgba(250, 204, 21, 0.6);
+      transition: width 0.35s var(--transition-med);
+    }
+
+    .tutorial-list {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 430px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .tutorial-item {
+      padding: 8px 10px;
+      border-radius: var(--radius-md);
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.12));
+      border: 1px solid var(--glass-border-soft);
+      backdrop-filter: blur(16px);
+      color: var(--text);
+      transform: translateY(0);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.18);
+      transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+    }
+
+    .tutorial-item span.level-label {
+      font-weight: 600;
+    }
+
+    .tutorial-item span.diff-label {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .tutorial-item:hover {
+      transform: translateY(-2px);
+      border-color: rgba(250, 204, 21, 0.7);
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.3);
+    }
+
+    .tutorial-item.active {
+      background:
+        radial-gradient(circle at left, rgba(250, 204, 21, 0.4), transparent 60%),
+        linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.98));
+      color: #fefce8;
+      border-color: rgba(250, 204, 21, 0.95);
+      box-shadow:
+        0 0 18px rgba(250, 204, 21, 0.9),
+        0 16px 40px rgba(15, 23, 42, 0.95);
+    }
+
+    .tutorial-item.active .diff-label {
+      color: #fef9c3;
+    }
+
+    /* CONTENT */
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .section-hint {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+    }
+
+    .tutorial-block {
+      position: relative;
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0.06));
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--card-shadow);
+      padding: 18px 18px 20px;
+      backdrop-filter: blur(22px);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(18px) scale(0.99);
+      animation: blockIn 0.7s var(--transition-med) forwards;
+    }
+
+    .tutorial-block::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(250, 204, 21, 0.22), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    @keyframes blockIn {
+      from { opacity: 0; transform: translateY(18px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .tutorial-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .tutorial-main-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .tutorial-meta-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 11px;
+      justify-content: flex-end;
+    }
+
+    .tag-pill {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.04);
+      color: var(--muted);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      backdrop-filter: blur(10px);
+    }
+
+    .tag-pill.diff-easy { border-color: rgba(34, 197, 94, 0.6); }
+    .tag-pill.diff-med { border-color: rgba(234, 179, 8, 0.7); }
+    .tag-pill.diff-hard { border-color: rgba(239, 68, 68, 0.7); }
+
+    .tutorial-description {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 12px;
+      max-width: 760px;
+    }
+
+    .tutorial-steps {
+      margin-bottom: 12px;
+      font-size: 13px;
+    }
+
+    .tutorial-steps ol {
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    .tutorial-steps li {
+      margin-bottom: 4px;
+    }
+
+    .code-block {
+      margin-top: 10px;
+      border-radius: var(--radius-md);
+      background: #020617;
+      color: #e5e7eb;
+      padding: 12px 12px 14px;
+      font-family: "Fira Code", "Consolas", monospace;
+      font-size: 12px;
+      overflow-x: auto;
+      position: relative;
+      box-shadow:
+        0 0 18px rgba(15, 23, 42, 0.95),
+        0 0 26px rgba(250, 204, 21, 0.35);
+    }
+
+    .code-label {
+      position: absolute;
+      top: 6px;
+      right: 10px;
+      font-size: 10px;
+      color: #facc15;
+      opacity: 0.85;
+    }
+
+    pre {
+      margin: 0;
+      white-space: pre;
+    }
+
+    .tip {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      border-left: 3px solid rgba(250, 204, 21, 0.8);
+      padding-left: 10px;
+    }
+
+    /* PLACEHOLDER STATE FOR EMPTY TUTORIALS */
+    .placeholder {
+      font-size: 12px;
+      color: var(--muted);
+      padding: 10px 0 4px;
+    }
+
+    footer {
+      padding: 18px 18px 22px;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    footer span {
+      opacity: 0.9;
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 12px 14px 14px;
+      }
+      .header-inner {
         flex-direction: column;
+        align-items: flex-start;
+      }
+      .layout {
+        gap: 16px;
+      }
+      .tutorial-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
-}
-</div>
-`;
+  </style>
+</head>
 
-/* ---------------------------------------------------
-   LEVEL 10 — FETCH API
---------------------------------------------------- */
-tutorialContent["level10"] = `
-<h2>Level 10 — Fetch API</h2>
-<p>Load real data from APIs.</p>
+<body>
+  <div class="page">
+    <header>
+      <div class="header-inner">
+        <div class="brand">
+          <div class="brand-logo">A</div>
+          <div>
+            <div class="brand-text-main">ALAEAI</div>
+            <div class="brand-text-sub">Tool Builder · 20 Levels</div>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="pill">Glass · Dark · Tutorials</div>
+          <button class="cta-small" onclick="window.location.href='index.html'">
+            Back home
+            <span>↩</span>
+          </button>
+          <button class="dark-toggle" id="darkToggle">
+            <span id="darkIcon">🌙</span>
+            <span id="darkLabel">Dark</span>
+          </button>
+        </div>
+      </div>
+    </header>
 
-<div class="panel-code-block">
-fetch("https://api.example.com/data")
-    .then(res => res.json())
-    .then(data => console.log(data));
-</div>
-`;
+    <main>
+      <div class="main-inner">
+        <div class="page-heading">
+          <div class="page-title">Tool Builder — Step-by-step path</div>
+          <div class="page-sub">
+            20 evolving levels. You start with structure and end with a full multi-tool web app builder — all inside this page.
+          </div>
+        </div>
 
-/* ---------------------------------------------------
-   LEVEL 11 — ASYNC & AWAIT
---------------------------------------------------- */
-tutorialContent["level11"] = `
-<h2>Level 11 — Async & Await</h2>
+        <!-- CATEGORY CHIPS -->
+        <div class="categories-bar" id="categoryBar">
+          <button class="cat-chip active" data-range="1-4">
+            <span class="icon">🧱</span>
+            <span>Foundations (1–4)</span>
+          </button>
+          <button class="cat-chip" data-range="5-10">
+            <span class="icon">🛠</span>
+            <span>Core tools (5–10)</span>
+          </button>
+          <button class="cat-chip" data-range="11-15">
+            <span class="icon">⚙️</span>
+            <span>Advanced systems (11–15)</span>
+          </button>
+          <button class="cat-chip" data-range="16-20">
+            <span class="icon">🚀</span>
+            <span>Builder mode (16–20)</span>
+          </button>
+        </div>
 
-<div class="panel-code-block">
-async function load() {
-    const res = await fetch("https://api.example.com");
-    const data = await res.json();
-    console.log(data);
-}
-</div>
-`;
+        <div class="layout">
+          <!-- SIDEBAR -->
+          <aside class="sidebar">
+            <div class="sidebar-title">Your progress</div>
+            <div class="sidebar-sub">Click a level to jump and update the bar.</div>
 
-/* ---------------------------------------------------
-   LEVEL 12 — JSON HANDLING
---------------------------------------------------- */
-tutorialContent["level12"] = `
-<h2>Level 12 — JSON Handling</h2>
+            <div class="progress-wrapper">
+              <div class="progress-label-row">
+                <span id="progressText">Level 1 of 20</span>
+                <span id="progressPercent">5%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-track-glow"></div>
+                <div class="progress-fill" id="progressFill"></div>
+              </div>
+            </div>
 
-<div class="panel-code-block">
-const user = {
-    name: "Alae",
-    age: 16
-};
+            <div class="sidebar-sub">Levels</div>
+            <div class="tutorial-list" id="tutorialList">
+              <!-- 20 items -->
+              <div class="tutorial-item active" data-target="t1" data-level="1" data-category="foundations">
+                <span class="level-label">Level 1 — HTML structure</span>
+                <span class="diff-label">Easy</span>
+              </div>
+              <div class="tutorial-item" data-target="t2" data-level="2" data-category="foundations">
+                <span class="level-label">Level 2 — CSS framework</span>
+                <span class="diff-label">Easy</span>
+              </div>
+              <div class="tutorial-item" data-target="t3" data-level="3" data-category="foundations">
+                <span class="level-label">Level 3 — Component system</span>
+                <span class="diff-label">Easy</span>
+              </div>
+              <div class="tutorial-item" data-target="t4" data-level="4" data-category="foundations">
+                <span class="level-label">Level 4 — Animations & micro-UX</span>
+                <span class="diff-label">Easy</span>
+              </div>
 
-console.log(user.name);
-</div>
-`;
+              <div class="tutorial-item" data-target="t5" data-level="5" data-category="core">
+                <span class="level-label">Level 5 — Prompt builder</span>
+                <span class="diff-label">Medium</span>
+              </div>
+              <div class="tutorial-item" data-target="t6" data-level="6" data-category="core">
+                <span class="level-label">Level 6 — Color palette generator</span>
+                <span class="diff-label">Medium</span>
+              </div>
+              <div class="tutorial-item" data-target="t7" data-level="7" data-category="core">
+                <span class="level-label">Level 7 — Gradient generator</span>
+                <span class="diff-label">Medium</span>
+              </div>
+              <div class="tutorial-item" data-target="t8" data-level="8" data-category="core">
+                <span class="level-label">Level 8 — Code formatter</span>
+                <span class="diff-label">Medium</span>
+              </div>
+              <div class="tutorial-item" data-target="t9" data-level="9" data-category="core">
+                <span class="level-label">Level 9 — Password generator</span>
+                <span class="diff-label">Medium</span>
+              </div>
+              <div class="tutorial-item" data-target="t10" data-level="10" data-category="core">
+                <span class="level-label">Level 10 — Focus timer</span>
+                <span class="diff-label">Medium</span>
+              </div>
 
-/* ---------------------------------------------------
-   LEVEL 13 — BUILDING A CALCULATOR
---------------------------------------------------- */
-tutorialContent["level13"] = `
-<h2>Level 13 — Calculator Project</h2>
+              <div class="tutorial-item" data-target="t11" data-level="11" data-category="advanced">
+                <span class="level-label">Level 11 — Notes app (LocalStorage)</span>
+                <span class="diff-label">Hard</span>
+              </div>
+              <div class="tutorial-item" data-target="t12" data-level="12" data-category="advanced">
+                <span class="level-label">Level 12 — Global theme switcher</span>
+                <span class="diff-label">Hard</span>
+              </div>
+              <div class="tutorial-item" data-target="t13" data-level="13" data-category="advanced">
+                <span class="level-label">Level 13 — API tester</span>
+                <span class="diff-label">Hard</span>
+              </div>
+              <div class="tutorial-item" data-target="t14" data-level="14" data-category="advanced">
+                <span class="level-label">Level 14 — JSON viewer</span>
+                <span class="diff-label">Hard</span>
+              </div>
+              <div class="tutorial-item" data-target="t15" data-level="15" data-category="advanced">
+                <span class="level-label">Level 15 — Search & filter engine</span>
+                <span class="diff-label">Hard</span>
+              </div>
 
-<div class="panel-code-block">
-function add(a, b) {
-    return a + b;
-}
-</div>
-`;
+              <div class="tutorial-item" data-target="t16" data-level="16" data-category="builder">
+                <span class="level-label">Level 16 — Tool dashboard</span>
+                <span class="diff-label">Expert</span>
+              </div>
+              <div class="tutorial-item" data-target="t17" data-level="17" data-category="builder">
+                <span class="level-label">Level 17 — Drag & drop layout</span>
+                <span class="diff-label">Expert</span>
+              </div>
+              <div class="tutorial-item" data-target="t18" data-level="18" data-category="builder">
+                <span class="level-label">Level 18 — Tool settings system</span>
+                <span class="diff-label">Expert</span>
+              </div>
+              <div class="tutorial-item" data-target="t19" data-level="19" data-category="builder">
+                <span class="level-label">Level 19 — Export tool</span>
+                <span class="diff-label">Expert</span>
+              </div>
+              <div class="tutorial-item" data-target="t20" data-level="20" data-category="builder">
+                <span class="level-label">Level 20 — Full multi-tool app</span>
+                <span class="diff-label">Expert</span>
+              </div>
+            </div>
+          </aside>
 
-/* ---------------------------------------------------
-   LEVEL 14 — TO-DO APP
---------------------------------------------------- */
-tutorialContent["level14"] = `
-<h2>Level 14 — To-Do App</h2>
+          <!-- CONTENT AREA -->
+          <section class="content" id="contentArea">
+            <div class="section-hint">Level content</div>
 
-<div class="panel-code-block">
-let tasks = [];
-function addTask(t) {
-    tasks.push(t);
-}
-</div>
-`;
+            <!-- TUTORIAL 1–20 BLOCKS WILL LIVE HERE -->
+            <!-- Message 2..11 will fill these <article> blocks with 1000+ lines each -->
 
-/* ---------------------------------------------------
-   LEVEL 15 — WEATHER APP (API)
---------------------------------------------------- */
-tutorialContent["level15"] = `
-<h2>Level 15 — Weather App</h2>
-
-<div class="panel-code-block">
-fetch("https://api.weatherapi.com/...").then(...)
-</div>
-`;
-
-/* ---------------------------------------------------
-   LEVEL 16 — LOGIN SYSTEM (FRONTEND)
---------------------------------------------------- */
-tutorialContent["level16"] = `
-<h2>Level 16 — Login System</h2>
-
-<div class="panel-code-block">
-function login(user, pass) {
-    if(user === "admin" && pass === "1234") {
-        return true;
-    }
-}
-</div>
-`;
-
-/* ---------------------------------------------------
-   LEVEL 17 — ADVANCED ANIMATIONS
---------------------------------------------------- */
-tutorialContent["level17"] = `
-<h2>Level 17 — Advanced Animations</h2>
-
-<div class="panel-code-block">
-@keyframes fadeSlide {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-</div>
-`;
-
-/* ---------------------------------------------------
-   LEVEL 18 — MINI GAME (JS)
---------------------------------------------------- */
-tutorialContent["level18"] = `
-<h2>Level 18 — Mini Game</h2>
-
-<div class="panel-code-block">
-let score = 0;
-function hit() {
-    score++;
-}
-</div>
-`;
-
-/* ---------------------------------------------------
-   LEVEL 19 — ADVANCED UI PROJECT
---------------------------------------------------- */
-tutorialContent["level19"] = `
-<h2>Level 19 — Advanced UI Project</h2>
-
-<div class="panel-code-block">
-function createCard(title, desc) {
-    return \`<div class="card"><h3>\${title}</h3><p>\${desc}</p></div>\`;
-}
-</div>
-`;
-
-/* ---------------------------------------------------
-   LEVEL 20 — FINAL PROJECT (VERY HARD)
---------------------------------------------------- */
-tutorialContent["level20"] = `
-<h2>Level 20 — Final Mega Project</h2>
-<p>This is your final challenge. Build a full web app combining everything you learned.</p>
-
-<div class="panel-code-block">
-async function loadApp() {
-    const user = await fetchUser();
-    const weather = await fetchWeather();
-    renderDashboard(user, weather);
-}
-</div>
-
-<div class="panel-tip">
-This level is designed to push your limits. Take your time.
-</div>
-`;
-</script>
-<script>
-/* ---------------------------------------------------
-   DARK MODE SYNC
---------------------------------------------------- */
-const THEME_KEY = "alaeai-theme";
-
-function applyTheme() {
-    const saved = localStorage.getItem(THEME_KEY);
-    if (saved === "dark") {
-        document.body.classList.add("dark-mode");
-        document.getElementById("theme-toggle").textContent = "☀️ Light Mode";
-    } else {
-        document.body.classList.remove("dark-mode");
-        document.getElementById("theme-toggle").textContent = "🌙 Dark Mode";
-    }
-}
-
-applyTheme();
-
-document.getElementById("theme-toggle").addEventListener("click", () => {
-    const isDark = document.body.classList.toggle("dark-mode");
-    localStorage.setItem(THEME_KEY, isDark ? "dark" : "light");
-    applyTheme();
-});
-
-/* ---------------------------------------------------
-   TUTORIALS DATA (20 LEVELS)
---------------------------------------------------- */
-const tutorials = [
-    { id: "level1", title: "HTML Basics", difficulty: "easy", category: "fundamentals", tags: ["html", "beginner"], time: "10 min" },
-    { id: "level2", title: "CSS Basics", difficulty: "easy", category: "fundamentals", tags: ["css", "styling"], time: "12 min" },
-    { id: "level3", title: "JavaScript Basics", difficulty: "easy", category: "javascript", tags: ["js", "variables"], time: "15 min" },
-    { id: "level4", title: "Flexbox Layout", difficulty: "medium", category: "layout", tags: ["flexbox", "responsive"], time: "18 min" },
-    { id: "level5", title: "CSS Grid", difficulty: "medium", category: "layout", tags: ["grid", "layout"], time: "20 min" },
-    { id: "level6", title: "DOM Manipulation", difficulty: "medium", category: "javascript", tags: ["dom", "elements"], time: "18 min" },
-    { id: "level7", title: "Event Listeners", difficulty: "medium", category: "javascript", tags: ["events", "click"], time: "15 min" },
-    { id: "level8", title: "LocalStorage", difficulty: "medium", category: "browser-apis", tags: ["storage", "save"], time: "14 min" },
-    { id: "level9", title: "Responsive Design", difficulty: "medium", category: "layout", tags: ["responsive", "media queries"], time: "20 min" },
-    { id: "level10", title: "Fetch API", difficulty: "medium", category: "browser-apis", tags: ["fetch", "api"], time: "18 min" },
-    { id: "level11", title: "Async & Await", difficulty: "hard", category: "javascript", tags: ["async", "await"], time: "22 min" },
-    { id: "level12", title: "JSON Handling", difficulty: "hard", category: "javascript", tags: ["json", "data"], time: "20 min" },
-    { id: "level13", title: "Calculator Project", difficulty: "hard", category: "projects", tags: ["project", "calculator"], time: "25 min" },
-    { id: "level14", title: "To‑Do App", difficulty: "hard", category: "projects", tags: ["todo", "project"], time: "30 min" },
-    { id: "level15", title: "Weather App (API)", difficulty: "hard", category: "projects", tags: ["weather", "api"], time: "35 min" },
-    { id: "level16", title: "Login System (Frontend)", difficulty: "hard", category: "projects", tags: ["login", "auth"], time: "30 min" },
-    { id: "level17", title: "Advanced Animations", difficulty: "very-hard", category: "javascript", tags: ["animation", "keyframes"], time: "28 min" },
-    { id: "level18", title: "Mini Game (JS)", difficulty: "very-hard", category: "projects", tags: ["game", "logic"], time: "40 min" },
-    { id: "level19", title: "Advanced UI Project", difficulty: "very-hard", category: "projects", tags: ["ui", "components"], time: "45 min" },
-    { id: "level20", title: "Final Mega Project", difficulty: "very-hard", category: "projects", tags: ["final", "mega"], time: "60+ min" }
-];
-
-/* ---------------------------------------------------
-   PROGRESS SYSTEM
---------------------------------------------------- */
-const PROGRESS_KEY = "tutorial-progress";
-let completed = JSON.parse(localStorage.getItem(PROGRESS_KEY) || "[]");
-
-function saveProgress() {
-    localStorage.setItem(PROGRESS_KEY, JSON.stringify(completed));
-}
-
-function updateProgressUI() {
-    const count = completed.length;
-    document.getElementById("progress-count").textContent = `${count} / 20 completed`;
-    document.getElementById("progress-bar").style.width = `${(count / 20) * 100}%`;
-}
-
-updateProgressUI();
-
-/* ---------------------------------------------------
-   RENDER TUTORIAL CARDS
---------------------------------------------------- */
-function renderTutorials() {
-    const grid = document.getElementById("tutorials-grid");
-    grid.innerHTML = "";
-
-    const search = document.getElementById("search-input").value.toLowerCase();
-    const diff = document.getElementById("difficulty-filter").value;
-    const cat = document.getElementById("category-filter").value;
-
-    tutorials.forEach(t => {
-        const matchesSearch =
-            t.title.toLowerCase().includes(search) ||
-            t.tags.some(tag => tag.includes(search));
-
-        const matchesDiff = diff === "all" || diff === t.difficulty;
-        const matchesCat = cat === "all" || cat === t.category;
-
-        if (matchesSearch && matchesDiff && matchesCat) {
-            const badgeClass =
-                t.difficulty === "easy" ? "badge-easy" :
-                t.difficulty === "medium" ? "badge-medium" :
-                t.difficulty === "hard" ? "badge-hard" :
-                "badge-very-hard";
-
-            const isCompleted = completed.includes(t.id);
-
-            grid.innerHTML += `
-                <div class="tutorial-card">
-                    <div class="tutorial-level">Level ${t.id.replace("level", "")}</div>
-                    <h3 class="tutorial-title">${t.title}</h3>
-
-                    <div class="tutorial-meta">
-                        <span class="badge ${badgeClass}">${t.difficulty}</span>
-                        · ${t.time}
-                    </div>
-
-                    <div class="tag-list">
-                        ${t.tags.map(tag => `<span class="tag">${tag}</span>`).join("")}
-                    </div>
-
-                    <div class="card-footer">
-                        <button class="open-btn" onclick="openPanel('${t.id}')">Open</button>
-
-                        ${isCompleted ? `
-                            <div class="completed-pill">
-                                <div class="completed-dot"></div> Done
-                            </div>
-                        ` : ""}
-                    </div>
+            <article class="tutorial-block" id="t1">
+              <div class="tutorial-header-row">
+                <div class="tutorial-main-title">Level 1 — HTML structure for the Tool Builder</div>
+                <div class="tutorial-meta-tags">
+                  <span class="tag-pill diff-easy">Difficulty: Easy</span>
+                  <span class="tag-pill">Focus: HTML layout</span>
+                  <span class="tag-pill">Time: ~25 min</span>
                 </div>
-            `;
-        }
+              </div>
+              <div class="tutorial-description">
+                This level sets the skeleton of your Tool Builder. You’ll create a clean HTML structure with a header,
+                main area, and a flexible zone where future tools will live. No CSS or JS yet — just the semantic base.
+              </div>
+              <div class="placeholder">
+                In the next message, this block will be replaced with a full 1000+ line tutorial (HTML only) that you can copy directly.
+              </div>
+            </article>
+
+            <article class="tutorial-block" id="t2">
+              <div class="tutorial-header-row">
+                <div class="tutorial-main-title">Level 2 — CSS framework & glass theme</div>
+                <div class="tutorial-meta-tags">
+                  <span class="tag-pill diff-easy">Difficulty: Easy</span>
+                  <span class="tag-pill">Focus: CSS system</span>
+                  <span class="tag-pill">Time: ~35 min</span>
+                </div>
+              </div>
+              <div class="tutorial-description">
+                Here you’ll build a small CSS framework for your Tool Builder: spacing, typography, cards, buttons,
+                and the glassmorphism look. This will be the visual foundation for all future tools.
+              </div>
+              <div class="placeholder">
+                In the next message, this block will be replaced with a full 1000+ line tutorial (CSS-heavy) that you can copy directly.
+              </div>
+            </article>
+
+            <!-- Empty shells for 3–20 so scrolling + progress still work -->
+            <article class="tutorial-block" id="t3">
+              <div class="tutorial-header-row">
+                <div class="tutorial-main-title">Level 3 — Component system (cards, panels, buttons)</div>
+                <div class="tutorial-meta-tags">
+                  <span class="tag-pill diff-easy">Difficulty: Easy</span>
+                  <span class="tag-pill">Focus: Reusable components</span>
+                  <span class="tag-pill">Time: ~40 min</span>
+                </div>
+              </div>
+              <div class="tutorial-description">
+                You’ll define reusable HTML/CSS patterns for cards, panels, and buttons that every tool can use.
+              </div>
+              <div class="placeholder">
+                This will be filled in a later message with a full, long tutorial.
+              </div>
+            </article>
+
+            <article class="tutorial-block" id="t4">
+              <div class="tutorial-header-row">
+                <div class="tutorial-main-title">Level 4 — Animations & micro-interactions</div>
+                <div class="tutorial-meta-tags">
+                  <span class="tag-pill diff-easy">Difficulty: Easy</span>
+                  <span class="tag-pill">Focus: Animations</span>
+                  <span class="tag-pill">Time: ~35 min</span>
+                </div>
+              </div>
+              <div class="tutorial-description">
+                You’ll add hover effects, depth, and subtle transitions to make the Tool Builder feel premium.
+              </div>
+              <div class="placeholder">
+                This will be filled in a later message with a full, long tutorial.
+              </div>
+            </article>
+
+            <!-- 5–20 placeholders -->
+            <article class="tutorial-block" id="t5">
+              <div class="tutorial-header-row">
+                <div class="tutorial-main-title">Level 5 — Prompt builder tool</div>
+                <div class="tutorial-meta-tags">
+                  <span class="tag-pill diff-med">Difficulty: Medium</span>
+                  <span class="tag-pill">Focus: JS + UI</span>
+                  <span class="tag-pill">Time: ~45 min</span>
+                </div>
+              </div>
+              <div class="tutorial-description">
+                First real tool: a prompt builder with fields, presets, and copy-to-clipboard.
+              </div>
+              <div class="placeholder">Will be replaced with full code later.</div>
+            </article>
+
+            <article class="tutorial-block" id="t6">
+              <div class="tutorial-header-row">
+                <div class="tutorial-main-title">Level 6 — Color palette generator</div>
+                <div class="tutorial-meta-tags">
+                  <span class="tag-pill diff-med">Difficulty: Medium</span>
+                  <span class="tag-pill">Focus: JS + color logic</span>
+                  <span class="tag-pill">Time: ~45 min</span>
+                </div>
+              </div>
+              <div class="tutorial-description">
+                A tool that generates color palettes and shows them in your glass UI.
+              </div>
+              <div class="placeholder">Will be replaced with full code later.</div>
+            </article>
+
+            <article class="tutorial-block" id="t7">
+              <div class="tutorial-header-row">
+                <div class="tutorial-main-title">Level 7 — Gradient generator</div>
+                <div class="tutorial-meta-tags">
+                  <span class="tag-pill diff-med">Difficulty: Medium</span>
+                  <span class="tag-pill">Focus: JS + CSS output</span>
+                  <span class="tag-pill">Time: ~45 min</span>
+                </div>
+              </div>
+              <div class="tutorial-description">
+                A gradient generator that outputs CSS you can paste into real projects.
+              </div>
+              <div class="placeholder">Will be replaced with full code later.</div>
+            </article>
+
+            <article class="tutorial-block" id="t8">
+              <div class="tutorial-header-row">
+                <div class="tutorial-main-title">Level 8 — Code formatter</div>
+                <div class="tutorial-meta-tags">
+                  <span class="tag-pill diff-med">Difficulty: Medium</span>
+                  <span class="tag-pill">Focus: JS text processing</span>
+                  <span class="tag-pill">Time: ~50 min</span>
+                </div>
+              </div>
+              <div class="tutorial-description">
+                A simple formatter for HTML/CSS/JS snippets inside your builder.
+              </div>
+              <div class="placeholder">Will be replaced with full code later.</div>
+            </article>
+
+            <article class="tutorial-block" id="t9">
+              <div class="tutorial-header-row">
+                <div class="tutorial-main-title">Level 9 — Password generator</div>
+                <div class="tutorial-meta-tags">
+                  <span class="tag-pill diff-med">Difficulty: Medium</span>
+                  <span class="tag-pill">Focus: JS logic</span>
+                  <span class="tag-pill">Time: ~40 min</span>
+                </div>
+              </div>
+              <div class="tutorial-description">
+                A secure password generator with options for length and character sets.
+              </div>
+              <div class="placeholder">Will be replaced with full code later.</div>
+            </article>
+
+            <article class="tutorial-block" id="t10">
+              <div class="tutorial-header-row">
+                <div class="tutorial-main-title">Level 10 — Focus timer</div>
+                <div class="tutorial-meta-tags">
+                  <span class="tag-pill diff-med">Difficulty: Medium</span>
+                  <span class="tag-pill">Focus: JS timers</span>
+                  <span class="tag-pill">Time: ~45 min</span>
+                </div>
+              </div>
+              <div class="tutorial-description">
+                A Pomodoro-style focus timer integrated into your Tool Builder.
+              </div>
+              <div class="placeholder">Will be replaced with full code later.</div>
+            </article>
+
+            <article class="tutorial-block" id="t11">
+              <div class="tutorial-header-row">
+                <div class="tutorial-main-title">Level 11 — Notes app with LocalStorage</div>
+                <div class="tutorial-meta-tags">
+                  <span class="tag-pill diff-hard">Difficulty: Hard</span>
+                  <span class="tag-pill">Focus: Storage</span>
+                  <span class="tag-pill">Time: ~60 min</span>
+                </div>
+              </div>
+              <div class="tutorial-description">
+                A notes tool that saves data in the browser and survives refresh.
+              </div>
+              <div class="placeholder">Will be replaced with full code later.</div>
+            </article>
+
+            <article class="tutorial-block" id="t12">
+              <div class="tutorial-header-row">
+                <div class="tutorial-main-title">Level 12 — Global theme switcher</div>
+                <div class="tutorial-meta-tags">
+                  <span class="tag-pill diff-hard">Difficulty: Hard</span>
+                  <span class="tag-pill">Focus: Theming</span>
+                  <span class="tag-pill">Time: ~60 min</span>
+                </div>
+              </div>
+              <div class="tutorial-description">
+                A theme system that can change colors and styles for all tools.
+              </div>
+              <div class="placeholder">Will be replaced with full code later.</div>
+            </article>
+
+            <article class="tutorial-block" id="t13">
+              <div class="tutorial-header-row">
+                <div class="tutorial-main-title">Level 13 — API tester</div>
+                <div class="tutorial-meta-tags">
+                  <span class="tag-pill diff-hard">Difficulty: Hard</span>
+                  <span class="tag-pill">Focus: Fetch + UI</span>
+                  <span class="tag-pill">Time: ~70 min</span>
+                </div>
+              </div>
+              <div class="tutorial-description">
+                A tool to send GET/POST requests and inspect responses.
+              </div>
+              <div class="placeholder">Will be replaced with full code later.</div>
+            </article>
+
+            <article class="tutorial-block" id="t14">
+              <div class="tutorial-header-row">
+                <div class="tutorial-main-title">Level 14 — JSON viewer</div>
+                <div class="tutorial-meta-tags">
+                  <span class="tag-pill diff-hard">Difficulty: Hard</span>
+                  <span class="tag-pill">Focus: Parsing + display</span>
+                  <span class="tag-pill">Time: ~60 min</span>
+                </div>
+              </div>
+              <div class="tutorial-description">
+                A viewer that pretty-prints JSON and highlights keys/values.
+              </div>
+              <div class="placeholder">Will be replaced with full code later.</div>
+            </article>
+
+            <article class="tutorial-block" id="t15">
+              <div class="tutorial-header-row">
+                <div class="tutorial-main-title">Level 15 — Search & filter engine</div>
+                <div class="tutorial-meta-tags">
+                  <span class="tag-pill diff-hard">Difficulty: Hard</span>
+                  <span class="tag-pill">Focus: Data filtering</span>
+                  <span class="tag-pill">Time: ~60 min</span>
+                </div>
+              </div>
+              <div class="tutorial-description">
+                A generic search/filter system that other tools can reuse.
+              </div>
+              <div class="placeholder">Will be replaced with full code later.</div>
+            </article>
+
+            <article class="tutorial-block" id="t16">
+              <div class="tutorial-header-row">
+                <div class="tutorial-main-title">Level 16 — Tool dashboard</div>
+                <div class="tutorial-meta-tags">
+                  <span class="tag-pill diff-hard">Difficulty: Hard</span>
+                  <span class="tag-pill">Focus: Layout + overview</span>
+                  <span class="tag-pill">Time: ~70 min</span>
+                </div>
+              </div>
+              <div class="tutorial-description">
+                A dashboard that shows all tools, quick stats, and shortcuts.
+              </div>
+              <div class="placeholder">Will be replaced with full code later.</div>
+            </article>
+
+            <article class="tutorial-block" id="t17">
+              <div class="tutorial-header-row">
+                <div class="tutorial-main-title">Level 17 — Drag & drop layout</div>
+                <div class="tutorial-meta-tags">
+                  <span class="tag-pill diff-hard">Difficulty: Hard</span>
+                  <span class="tag-pill">Focus: Drag & drop</span>
+                  <span class="tag-pill">Time: ~80 min</span>
+                </div>
+              </div>
+              <div class="tutorial-description">
+                A system to rearrange tool cards on the dashboard.
+              </div>
+              <div class="placeholder">Will be replaced with full code later.</div>
+            </article>
+
+            <article class="tutorial-block" id="t18">
+              <div class="tutorial-header-row">
+                <div class="tutorial-main-title">Level 18 — Tool settings system</div>
+                <div class="tutorial-meta-tags">
+                  <span class="tag-pill diff-hard">Difficulty: Hard</span>
+                  <span class="tag-pill">Focus: Config + storage</span>
+                  <span class="tag-pill">Time: ~70 min</span>
+                </div>
+              </div>
+              <div class="tutorial-description">
+                A settings panel where each tool can store preferences.
+              </div>
+              <div class="placeholder">Will be replaced with full code later.</div>
+            </article>
+
+            <article class="tutorial-block" id="t19">
+              <div class="tutorial-header-row">
+                <div class="tutorial-main-title">Level 19 — Export tool</div>
+                <div class="tutorial-meta-tags">
+                  <span class="tag-pill diff-hard">Difficulty: Hard</span>
+                  <span class="tag-pill">Focus: Exporting code</span>
+                  <span class="tag-pill">Time: ~70 min</span>
+                </div>
+              </div>
+              <div class="tutorial-description">
+                A feature to export generated code or configs as files.
+              </div>
+              <div class="placeholder">Will be replaced with full code later.</div>
+            </article>
+
+            <article class="tutorial-block" id="t20">
+              <div class="tutorial-header-row">
+                <div class="tutorial-main-title">Level 20 — Full multi-tool app</div>
+                <div class="tutorial-meta-tags">
+                  <span class="tag-pill diff-hard">Difficulty: Expert</span>
+                  <span class="tag-pill">Focus: Integration</span>
+                  <span class="tag-pill">Time: ~90 min</span>
+                </div>
+              </div>
+              <div class="tutorial-description">
+                Final integration: all tools, dashboard, settings, and theme working together as one mini platform.
+              </div>
+              <div class="placeholder">
+                Final giant tutorial that connects everything into a single experience.
+              </div>
+            </article>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <span>© 2026 ALAEAI — Tool Builder Tutorials by Alae.</span>
+    </footer>
+  </div>
+
+  <script>
+    // DARK MODE TOGGLE (shared with your site logic style)
+    const body = document.body;
+    const toggleBtn = document.getElementById('darkToggle');
+    const icon = document.getElementById('darkIcon');
+    const label = document.getElementById('darkLabel');
+
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        body.classList.add('dark');
+        icon.textContent = '☀️';
+        label.textContent = 'Light';
+      } else {
+        body.classList.remove('dark');
+        icon.textContent = '🌙';
+        label.textContent = 'Dark';
+      }
+    }
+
+    const savedTheme = localStorage.getItem('alaeai-theme') || 'dark';
+    applyTheme(savedTheme);
+
+    toggleBtn.addEventListener('click', () => {
+      const current = body.classList.contains('dark') ? 'dark' : 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('alaeai-theme', next);
+      applyTheme(next);
     });
-}
 
-renderTutorials();
+    // PROGRESS + NAVIGATION
+    const tutorialItems = document.querySelectorAll('.tutorial-item');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const progressPercent = document.getElementById('progressPercent');
 
-/* ---------------------------------------------------
-   SIDE PANEL SYSTEM
---------------------------------------------------- */
-let currentTutorial = null;
+    function setActiveTutorial(level, targetId) {
+      tutorialItems.forEach(item => item.classList.remove('active'));
+      const activeItem = document.querySelector('.tutorial-item[data-level="' + level + '"]');
+      if (activeItem) activeItem.classList.add('active');
 
-function openPanel(id) {
-    currentTutorial = id;
+      const percent = Math.round((level / 20) * 100);
+      progressFill.style.width = percent + '%';
+      progressText.textContent = 'Level ' + level + ' of 20';
+      progressPercent.textContent = percent + '%';
 
-    const t = tutorials.find(x => x.id === id);
-
-    document.getElementById("panel-title").textContent = t.title;
-    document.getElementById("panel-meta").textContent =
-        `Level ${id.replace("level", "")} · ${t.time}`;
-
-    document.getElementById("panel-tags").innerHTML =
-        t.tags.map(tag => `<span class="tag">${tag}</span>`).join("");
-
-    document.getElementById("panel-content").innerHTML =
-        tutorialContent[id];
-
-    document.getElementById("modal-bg").style.display = "block";
-    document.getElementById("side-panel").style.right = "0";
-}
-
-function closePanel() {
-    document.getElementById("modal-bg").style.display = "none";
-    document.getElementById("side-panel").style.right = "-520px";
-}
-
-document.getElementById("panel-close-btn").onclick = closePanel;
-document.getElementById("modal-bg").onclick = closePanel;
-
-/* ---------------------------------------------------
-   FULLSCREEN MODE
---------------------------------------------------- */
-let isFullscreen = false;
-
-document.getElementById("panel-fullscreen-btn").onclick = () => {
-    const panel = document.getElementById("side-panel");
-    isFullscreen = !isFullscreen;
-    panel.style.width = isFullscreen ? "100%" : "460px";
-};
-
-/* ---------------------------------------------------
-   MARK AS COMPLETED
---------------------------------------------------- */
-document.getElementById("panel-complete-btn").onclick = () => {
-    if (!completed.includes(currentTutorial)) {
-        completed.push(currentTutorial);
-        saveProgress();
-        updateProgressUI();
-        renderTutorials();
+      const block = document.getElementById(targetId);
+      if (block) {
+        block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
-};
 
-/* ---------------------------------------------------
-   FILTERS + SEARCH
---------------------------------------------------- */
-document.getElementById("search-input").oninput = renderTutorials;
-document.getElementById("difficulty-filter").onchange = renderTutorials;
-document.getElementById("category-filter").onchange = renderTutorials;
+    tutorialItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const level = parseInt(item.getAttribute('data-level'), 10);
+        const target = item.getAttribute('data-target');
+        setActiveTutorial(level, target);
+      });
+    });
 
-/* ---------------------------------------------------
-   KEYBOARD SHORTCUTS
---------------------------------------------------- */
-document.addEventListener("keydown", e => {
-    if (e.key === "Escape") closePanel();
-    if (e.key.toLowerCase() === "f") {
-        document.getElementById("panel-fullscreen-btn").click();
-    }
-});
-</script>
+    // CATEGORY FILTER (just scroll to first level in that range)
+    const catChips = document.querySelectorAll('.cat-chip');
+
+    catChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        catChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+
+        const range = chip.getAttribute('data-range'); // "1-4"
+        if (!range) return;
+        const [startStr] = range.split('-');
+        const startLevel = parseInt(startStr, 10);
+        const firstItem = document.querySelector('.tutorial-item[data-level="' + startLevel + '"]');
+        if (firstItem) {
+          const target = firstItem.getAttribute('data-target');
+          setActiveTutorial(startLevel, target);
+        }
+      });
+    });
+
+    // INITIAL STATE
+    setActiveTutorial(1, 't1');
+  </script>
 </body>
 </html>
+
