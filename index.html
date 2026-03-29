@@ -1,1754 +1,1515 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>ALAEAI — Build. Learn. Create.</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
+  <title>ALAEAI — Build. Learn. Create.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- Google Ads -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6065282700750014" crossorigin="anonymous"></script>
+  <!-- Google Ads script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6065282700750014" crossorigin="anonymous"></script>
 
-<!-- Aptos Black -->
-<link href="https://fonts.cdnfonts.com/css/aptos" rel="stylesheet">
+  <!-- Aptos Black -->
+  <link href="https://fonts.cdnfonts.com/css/aptos" rel="stylesheet">
 
-<!-- Aharoni -->
-<link href="https://fonts.cdnfonts.com/css/aharoni" rel="stylesheet">
+  <!-- Aharoni -->
+  <link href="https://fonts.cdnfonts.com/css/aharoni" rel="stylesheet">
 
-<style>
-:root{
-  --accent:#f2c26b;
-  --accent-soft:rgba(242,194,107,0.4);
-  --accent-strong:#ffb45c;
-  --text:#fff7ea;
-  --sub:#c9b7a0;
-  --bg:#050304;
-  --bg-soft:#0b0705;
-  --card:#140c09;
-  --card-soft:#1a0f0b;
-  --border:rgba(255,255,255,0.08);
-  --border-soft:rgba(255,255,255,0.04);
-  --shadow:0 22px 60px rgba(0,0,0,0.9);
-}
+  <style>
+  :root{
+    --bg:#050304;
+    --bg-soft:#0b0705;
+    --bg-card:#140c09;
+    --bg-card-soft:#1a0f0b;
+    --bg-elevated:#1b100b;
 
-/* RESET */
-*{margin:0;padding:0;box-sizing:border-box;}
-html,body{height:100%;}
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Aharoni',sans-serif;
-  overflow-x:hidden;
-}
+    --text:#fff7ea;
+    --text-sub:#c9b7a0;
 
-/* GLOBAL UTILS */
-.max-width{
-  max-width:1120px;
-  margin:0 auto;
-  padding:0 20px;
-}
+    --accent:#f2c26b;
+    --accent-strong:#ffb45c;
+    --accent-soft:rgba(242,194,107,0.4);
 
-/* =========================
-   CINEMATIC BANNER (TOP)
-   ========================= */
-.banner{
-  position:relative;
-  width:100%;
-  min-height:520px;
-  background:
-    radial-gradient(circle at top left,rgba(242,194,107,0.25),transparent 60%),
-    radial-gradient(circle at top right,rgba(255,140,90,0.25),transparent 60%),
-    radial-gradient(circle at bottom,rgba(80,120,255,0.25),transparent 60%),
-    #050304;
-  overflow:hidden;
-}
+    --border-soft:rgba(255,255,255,0.06);
+    --border-strong:rgba(255,255,255,0.12);
 
-/* NOISE OVERLAY */
-.banner::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
-  mix-blend-mode:soft-light;
-  opacity:0.6;
-  pointer-events:none;
-}
+    --shadow-strong:0 22px 60px rgba(0,0,0,0.9);
+    --shadow-soft:0 14px 40px rgba(0,0,0,0.7);
 
-/* BACKGROUND ORBS */
-.banner-orb{
-  position:absolute;
-  border-radius:50%;
-  filter:blur(40px);
-  opacity:0.7;
-  mix-blend-mode:screen;
-}
-.banner-orb.orb-1{
-  width:260px;height:260px;
-  background:rgba(242,194,107,0.7);
-  top:-40px;left:-40px;
-  animation:floatOrb1 18s infinite alternate ease-in-out;
-}
-.banner-orb.orb-2{
-  width:220px;height:220px;
-  background:rgba(255,140,90,0.7);
-  top:40px;right:-60px;
-  animation:floatOrb2 22s infinite alternate ease-in-out;
-}
-.banner-orb.orb-3{
-  width:260px;height:260px;
-  background:rgba(80,120,255,0.7);
-  bottom:-80px;left:50%;
-  transform:translateX(-50%);
-  animation:floatOrb3 26s infinite alternate ease-in-out;
-}
+    --card-radius:18px;
+    --card-radius-lg:22px;
 
-@keyframes floatOrb1{
-  0%{transform:translate(0,0);}
-  100%{transform:translate(40px,40px);}
-}
-@keyframes floatOrb2{
-  0%{transform:translate(0,0);}
-  100%{transform:translate(-40px,30px);}
-}
-@keyframes floatOrb3{
-  0%{transform:translate(-50%,0);}
-  100%{transform:translate(-50%,-40px);}
-}
+    --transition-fast:0.16s ease-out;
+    --transition-med:0.22s ease-out;
+  }
 
-/* BANNER CONTENT LAYOUT */
-.banner-inner{
-  position:relative;
-  z-index:3;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:40px;
-  padding:40px 20px 40px;
-}
-.banner-left{
-  max-width:520px;
-}
+  body.dark-mode{
+    --bg:#020102;
+    --bg-soft:#050304;
+    --bg-card:#0d0705;
+    --bg-card-soft:#140b08;
+    --bg-elevated:#140b08;
 
-/* TITLE — APTOS BLACK */
-.banner-kicker{
-  font-family:'Aharoni',sans-serif;
-  font-size:11px;
-  letter-spacing:0.18em;
-  text-transform:uppercase;
-  color:var(--sub);
-  margin-bottom:10px;
-}
-.banner-title{
-  font-family:'Aptos Black',sans-serif;
-  font-size:40px;
-  line-height:1.15;
-  letter-spacing:0.03em;
-  text-transform:uppercase;
-  margin-bottom:10px;
-  color:#fff7ea;
-}
-.banner-title span{
-  background:linear-gradient(120deg,#ffd27f,#f2c26b,#ff9f6b);
-  -webkit-background-clip:text;
-  color:transparent;
-}
-.banner-sub{
-  font-family:'Aharoni',sans-serif;
-  font-size:15px;
-  color:var(--sub);
-  line-height:1.7;
-  margin-bottom:18px;
-}
+    --text:#fffaf0;
+    --text-sub:#d0c0aa;
 
-/* BANNER TAGS */
-.banner-tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-bottom:18px;
-}
-.banner-tag{
-  font-family:'Aharoni',sans-serif;
-  font-size:11px;
-  padding:4px 10px;
-  border-radius:999px;
-  background:rgba(12,7,5,0.9);
-  border:1px solid rgba(255,255,255,0.12);
-  color:var(--sub);
-}
+    --accent:#ffd27f;
+    --accent-strong:#ffc26b;
+    --accent-soft:rgba(255,210,127,0.45);
 
-/* BANNER BUTTONS */
-.banner-actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-bottom:16px;
-}
-.btn-main{
-  padding:10px 22px;
-  border-radius:999px;
-  background:linear-gradient(135deg,#f2c26b,#ff9f6b);
-  color:#120b07;
-  font-family:'Aptos Black',sans-serif;
-  font-size:14px;
-  cursor:pointer;
-  box-shadow:0 18px 50px rgba(0,0,0,0.9);
-  border:none;
-  transition:transform 0.18s ease,box-shadow 0.18s ease,filter 0.18s ease;
-}
-.btn-main:hover{
-  transform:translateY(-2px) scale(1.02);
-  box-shadow:0 24px 60px rgba(0,0,0,0.95);
-  filter:brightness(1.05);
-}
-.btn-ghost{
-  padding:10px 20px;
-  border-radius:999px;
-  border:1px solid var(--accent);
-  background:rgba(12,7,5,0.8);
-  color:var(--accent);
-  font-family:'Aptos Black',sans-serif;
-  font-size:13px;
-  cursor:pointer;
-  transition:0.18s;
-}
-.btn-ghost:hover{
-  background:rgba(242,194,107,0.12);
-  transform:translateY(-2px);
-}
+    --border-soft:rgba(255,255,255,0.08);
+    --border-strong:rgba(255,255,255,0.16);
+  }
 
-/* BANNER META */
-.banner-meta{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-  font-family:'Aharoni',sans-serif;
-  font-size:12px;
-  color:var(--sub);
-}
-.banner-meta-item{
-  display:flex;
-  gap:8px;
-}
-.banner-meta-dot{
-  width:6px;height:6px;
-  border-radius:50%;
-  background:var(--accent);
-  margin-top:5px;
-  box-shadow:0 0 10px rgba(242,194,107,0.9);
-}
+  *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+  }
 
-/* ANIMATED LOGO + ULTIMATE CARD (RIGHT) */
-.banner-right{
-  position:relative;
-  flex:1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:320px;
-}
+  html,body{
+    height:100%;
+  }
 
-/* LOGO ORBIT BEHIND CARD */
-.logo-orbit{
-  position:absolute;
-  width:260px;height:260px;
-  border-radius:50%;
-  background:radial-gradient(circle at 30% 0%,rgba(242,194,107,0.4),transparent 60%);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:1;
-  animation:pulseOrbit 3.2s infinite ease-in-out;
-  box-shadow:0 0 40px rgba(242,194,107,0.9);
-}
-.logo-ring{
-  position:absolute;
-  inset:-22px;
-  border-radius:50%;
-  border:1px dashed rgba(242,194,107,0.4);
-  animation:spinRing 18s linear infinite;
-}
-.logo-img{
-  width:70%;height:70%;
-  border-radius:20%;
-  overflow:hidden;
-  background:#120b07;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 0 26px rgba(0,0,0,0.8);
-}
-.logo-img img{
-  width:100%;height:100%;
-  object-fit:contain;
-}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Aharoni',sans-serif;
+    overflow-x:hidden;
+    transition:background 0.25s ease,color 0.25s ease;
+  }
 
-/* ULTIMATE FOLLOW-CURSOR CARD */
-.banner-card-wrapper{
-  position:relative;
-  z-index:2;
-  perspective:1200px;
-}
-.banner-card{
-  width:320px;
-  max-width:90vw;
-  border-radius:22px;
-  padding:16px 16px 18px;
-  background:linear-gradient(135deg,rgba(20,12,9,0.96),rgba(10,6,4,0.96));
-  border:1px solid rgba(255,255,255,0.12);
-  box-shadow:0 26px 70px rgba(0,0,0,0.95);
-  backdrop-filter:blur(18px);
-  position:relative;
-  overflow:hidden;
-  transform-style:preserve-3d;
-  transition:transform 0.12s ease-out,box-shadow 0.12s ease-out,border-color 0.12s ease-out;
-}
+  img{
+    max-width:100%;
+    display:block;
+  }
 
-/* GLOW BORDER */
-.banner-card::before{
-  content:"";
-  position:absolute;
-  inset:-1px;
-  border-radius:22px;
-  background:conic-gradient(from 0deg,rgba(242,194,107,0.0),rgba(242,194,107,0.7),rgba(255,159,107,0.0),rgba(80,120,255,0.7),rgba(242,194,107,0.0));
-  opacity:0;
-  transition:opacity 0.25s ease-out;
-  pointer-events:none;
-}
-.banner-card::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:22px;
-  background:radial-gradient(circle at top,rgba(242,194,107,0.22),transparent 60%);
-  opacity:0.4;
-  pointer-events:none;
-}
+  .max-width{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 20px;
+  }
 
-/* PARTICLE DOTS */
-.banner-card-particles{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-}
-.banner-card-dot{
-  position:absolute;
-  width:6px;height:6px;
-  border-radius:50%;
-  background:rgba(242,194,107,0.9);
-  box-shadow:0 0 12px rgba(242,194,107,0.9);
-  opacity:0.0;
-  animation:particleBlink 3.2s infinite ease-in-out;
-}
-.banner-card-dot.dot-1{top:18%;left:16%;animation-delay:0.2s;}
-.banner-card-dot.dot-2{top:32%;right:14%;animation-delay:0.8s;}
-.banner-card-dot.dot-3{bottom:22%;left:24%;animation-delay:1.4s;}
-.banner-card-dot.dot-4{bottom:16%;right:20%;animation-delay:2.0s;}
+  a{
+    color:inherit;
+    text-decoration:none;
+  }
 
-@keyframes particleBlink{
-  0%,100%{opacity:0;}
-  40%{opacity:1;}
-}
+  button{
+    font-family:inherit;
+  }
 
-/* CARD CONTENT */
-.banner-card-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:8px;
-}
-.banner-card-pill{
-  font-family:'Aharoni',sans-serif;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:0.16em;
-  color:var(--sub);
-}
-.banner-card-status{
-  font-family:'Aptos Black',sans-serif;
-  font-size:11px;
-  padding:4px 9px;
-  border-radius:999px;
-  background:rgba(242,194,107,0.16);
-  border:1px solid var(--accent);
-  color:var(--text);
-}
-.banner-card-title{
-  font-family:'Aptos Black',sans-serif;
-  font-size:16px;
-  margin-bottom:4px;
-}
-.banner-card-sub{
-  font-family:'Aharoni',sans-serif;
-  font-size:12px;
-  color:var(--sub);
-  margin-bottom:10px;
-}
-.banner-card-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  gap:10px;
-}
-.banner-card-metrics{
-  display:flex;
-  flex-direction:column;
-  gap:4px;
-  font-family:'Aharoni',sans-serif;
-  font-size:11px;
-  color:var(--sub);
-}
-.banner-card-metric strong{
-  color:var(--accent-strong);
-}
-.banner-card-chip{
-  padding:6px 10px;
-  border-radius:999px;
-  background:rgba(255,255,255,0.96);
-  border:1px solid rgba(0,0,0,0.06);
-  font-family:'Aharoni',sans-serif;
-  font-size:11px;
-  color:#140c09;
-  box-shadow:0 10px 26px rgba(0,0,0,0.7);
-}
+  /* =========================
+     BANNER — TOP, FULL WIDTH
+     ========================= */
+  .banner{
+    position:relative;
+    width:100%;
+    min-height:520px;
+    background:
+      radial-gradient(circle at top left,rgba(242,194,107,0.25),transparent 60%),
+      radial-gradient(circle at top right,rgba(255,140,90,0.25),transparent 60%),
+      radial-gradient(circle at bottom,rgba(80,120,255,0.25),transparent 60%),
+      #050304;
+    overflow:hidden;
+  }
 
-/* HOVER / ACTIVE STATE */
-.banner-card.hovered{
-  box-shadow:0 32px 80px rgba(0,0,0,1);
-  border-color:rgba(242,194,107,0.9);
-}
-.banner-card.hovered::before{
-  opacity:1;
-}
+  .banner::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
+    mix-blend-mode:soft-light;
+    opacity:0.6;
+    pointer-events:none;
+  }
 
-/* BANNER AD UNDER LEFT TEXT */
-.banner-ad{
-  margin-top:18px;
-  padding:10px;
-  border-radius:14px;
-  background:rgba(12,7,5,0.9);
-  border:1px dashed rgba(242,194,107,0.4);
-  max-width:360px;
-}
-.banner-ad-label{
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:0.16em;
-  color:var(--sub);
-  margin-bottom:4px;
-}
-.banner-ad-inner{
-  background:rgba(0,0,0,0.4);
-  border-radius:10px;
-  padding:4px;
-}
+  .banner-orb{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(40px);
+    opacity:0.7;
+    mix-blend-mode:screen;
+  }
 
-/* ORBIT ANIMATIONS */
-@keyframes spinRing{
-  from{transform:rotate(0deg);}
-  to{transform:rotate(360deg);}
-}
-@keyframes pulseOrbit{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.06);}
-  100%{transform:scale(1);}
-}
+  .banner-orb.orb-1{
+    width:260px;
+    height:260px;
+    background:rgba(242,194,107,0.7);
+    top:-40px;
+    left:-40px;
+    animation:floatOrb1 18s infinite alternate ease-in-out;
+  }
 
-/* =========================
-   NAVBAR (BELOW BANNER)
-   ========================= */
-.nav-shell{
-  background:var(--bg-soft);
-  border-bottom:1px solid rgba(255,255,255,0.04);
-}
-.nav{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:14px 0 10px;
-}
-.nav-left{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-.nav-logo{
-  width:32px;height:32px;
-  border-radius:12px;
-  background:radial-gradient(circle at 30% 0%,#f2c26b,#c88b3a 40%,#120b07 100%);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#120b07;
-  font-family:'Aptos Black',sans-serif;
-  font-size:18px;
-  box-shadow:0 0 22px rgba(242,194,107,0.9);
-}
-.nav-title-block{
-  display:flex;
-  flex-direction:column;
-  gap:2px;
-}
-.nav-title-main{
-  font-family:'Aptos Black',sans-serif;
-  font-size:14px;
-  letter-spacing:0.18em;
-  text-transform:uppercase;
-}
-.nav-title-sub{
-  font-family:'Aharoni',sans-serif;
-  font-size:11px;
-  color:var(--sub);
-}
-.nav-links{
-  display:flex;
-  align-items:center;
-  gap:16px;
-  font-size:12px;
-  font-family:'Aharoni',sans-serif;
-  color:var(--sub);
-}
-.nav-link{
-  position:relative;
-  cursor:pointer;
-  padding:4px 0;
-  transition:0.18s;
-}
-.nav-link::after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:-2px;
-  width:0;
-  height:2px;
-  border-radius:999px;
-  background:linear-gradient(90deg,#f2c26b,#ff9f6b);
-  transition:0.18s;
-}
-.nav-link:hover{
-  color:var(--accent);
-}
-.nav-link:hover::after{
-  width:100%;
-}
-.nav-link.active{
-  color:var(--accent);
-}
-.nav-link.active::after{
-  width:100%;
-}
-.nav-right{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-.nav-cta{
-  padding:7px 14px;
-  border-radius:999px;
-  border:1px solid var(--accent);
-  background:rgba(242,194,107,0.12);
-  color:var(--accent);
-  font-family:'Aptos Black',sans-serif;
-  font-size:12px;
-  cursor:pointer;
-  transition:0.2s;
-}
-.nav-cta:hover{
-  background:rgba(242,194,107,0.2);
-  transform:translateY(-1px);
-}
-.nav-toggle{
-  padding:7px 12px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,0.12);
-  background:rgba(12,7,5,0.9);
-  color:var(--sub);
-  font-family:'Aharoni',sans-serif;
-  font-size:11px;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  cursor:pointer;
-  transition:0.2s;
-}
-.nav-toggle:hover{
-  background:rgba(242,194,107,0.12);
-  color:var(--accent);
-}
+  .banner-orb.orb-2{
+    width:220px;
+    height:220px;
+    background:rgba(255,140,90,0.7);
+    top:40px;
+    right:-60px;
+    animation:floatOrb2 22s infinite alternate ease-in-out;
+  }
 
-/* =========================
-   MAIN LAYOUT
-   ========================= */
-.main-shell{
-  background:var(--bg-soft);
-  padding:24px 0 40px;
-}
+  .banner-orb.orb-3{
+    width:260px;
+    height:260px;
+    background:rgba(80,120,255,0.7);
+    bottom:-80px;
+    left:50%;
+    transform:translateX(-50%);
+    animation:floatOrb3 26s infinite alternate ease-in-out;
+  }
 
-/* HERO SECTION (AFTER BANNER) */
-.hero{
-  display:grid;
-  grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);
-  gap:24px;
-}
-.hero-main{
-  background:radial-gradient(circle at top left,rgba(242,194,107,0.12),transparent 60%),
-             radial-gradient(circle at bottom right,rgba(80,120,255,0.12),transparent 60%),
-             #140c09;
-  border-radius:18px;
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
-  padding:18px 18px 20px;
-}
-.hero-pill{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:5px 11px;
-  border-radius:999px;
-  border:1px solid var(--accent);
-  background:rgba(12,7,5,0.9);
-  font-family:'Aharoni',sans-serif;
-  font-size:11px;
-  letter-spacing:0.16em;
-  text-transform:uppercase;
-  color:var(--accent);
-  margin-bottom:10px;
-}
-.hero-pill-dot{
-  width:7px;height:7px;
-  border-radius:50%;
-  background:var(--accent);
-  box-shadow:0 0 12px rgba(242,194,107,0.9);
-}
-.hero-title{
-  font-family:'Aptos Black',sans-serif;
-  font-size:28px;
-  line-height:1.25;
-  margin-bottom:10px;
-}
-.hero-title span{
-  background:linear-gradient(120deg,#ffd27f,#f2c26b,#ff9f6b);
-  -webkit-background-clip:text;
-  color:transparent;
-}
-.hero-sub{
-  font-family:'Aharoni',sans-serif;
-  font-size:14px;
-  color:var(--sub);
-  line-height:1.7;
-  margin-bottom:14px;
-}
-.hero-pills-row{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-bottom:14px;
-}
-.hero-pill-tag{
-  font-family:'Aharoni',sans-serif;
-  font-size:11px;
-  padding:4px 10px;
-  border-radius:999px;
-  background:rgba(12,7,5,0.9);
-  border:1px solid rgba(255,255,255,0.08);
-  color:var(--sub);
-}
-.hero-actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-bottom:14px;
-}
-.hero-meta{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-  font-family:'Aharoni',sans-serif;
-  font-size:12px;
-  color:var(--sub);
-}
-.hero-meta-item{
-  display:flex;
-  gap:8px;
-}
-.hero-meta-dot{
-  width:6px;height:6px;
-  border-radius:50%;
-  background:var(--accent);
-  margin-top:5px;
-  box-shadow:0 0 10px rgba(242,194,107,0.9);
-}
+  @keyframes floatOrb1{
+    0%{transform:translate(0,0);}
+    100%{transform:translate(40px,40px);}
+  }
 
-/* HERO SIDE */
-.hero-side{
-  background:#140c09;
-  border-radius:18px;
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
-  padding:16px 16px 18px;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-.hero-side-label{
-  font-family:'Aharoni',sans-serif;
-  font-size:11px;
-  letter-spacing:0.16em;
-  text-transform:uppercase;
-  color:var(--sub);
-}
-.hero-side-title{
-  font-family:'Aptos Black',sans-serif;
-  font-size:15px;
-}
-.hero-side-sub{
-  font-family:'Aharoni',sans-serif;
-  font-size:12px;
-  color:var(--sub);
-}
-.hero-grid-preview{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:10px;
-  margin-top:4px;
-}
-.preview-card{
-  background:#1a0f0b;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,0.06);
-  padding:10px 10px 11px;
-  cursor:pointer;
-  transition:0.2s;
-  position:relative;
-  overflow:hidden;
-}
-.preview-card::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle at top,rgba(242,194,107,0.18),transparent 60%);
-  opacity:0;
-  transition:0.2s;
-}
-.preview-card:hover{
-  transform:translateY(-3px) scale(1.01);
-  box-shadow:0 18px 40px rgba(0,0,0,0.9);
-  border-color:var(--accent);
-}
-.preview-card:hover::after{
-  opacity:1;
-}
-.preview-tag{
-  font-family:'Aharoni',sans-serif;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:0.16em;
-  color:var(--sub);
-  margin-bottom:4px;
-}
-.preview-title{
-  font-family:'Aptos Black',sans-serif;
-  font-size:13px;
-  margin-bottom:2px;
-}
-.preview-meta{
-  font-family:'Aharoni',sans-serif;
-  font-size:11px;
-  color:var(--sub);
-}
-.hero-side-footer{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-top:6px;
-  font-family:'Aharoni',sans-serif;
-  font-size:11px;
-  color:var(--sub);
-}
-.hero-side-ad{
-  margin-top:6px;
-  padding:8px 10px;
-  border-radius:12px;
-  background:rgba(12,7,5,0.96);
-  border:1px dashed rgba(242,194,107,0.4);
-}
-.hero-side-ad-label{
-  font-family:'Aharoni',sans-serif;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:0.16em;
-  color:var(--sub);
-  margin-bottom:4px;
-}
-.hero-side-ad-inner{
-  background:rgba(0,0,0,0.4);
-  border-radius:10px;
-  padding:4px;
-}
+  @keyframes floatOrb2{
+    0%{transform:translate(0,0);}
+    100%{transform:translate(-40px,30px);}
+  }
 
-/* SECTION HEADER */
-.section{
-  margin-top:34px;
-}
-.section-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  gap:16px;
-  margin-bottom:16px;
-}
-.section-title-block{
-  display:flex;
-  flex-direction:column;
-  gap:4px;
-}
-.section-kicker{
-  font-family:'Aharoni',sans-serif;
-  font-size:11px;
-  letter-spacing:0.16em;
-  text-transform:uppercase;
-  color:var(--sub);
-}
-.section-title{
-  font-family:'Aptos Black',sans-serif;
-  font-size:18px;
-}
-.section-sub{
-  font-family:'Aharoni',sans-serif;
-  font-size:13px;
-  color:var(--sub);
-  max-width:520px;
-}
-.section-cta-inline{
-  padding:7px 12px;
-  border-radius:999px;
-  border:1px solid var(--accent);
-  background:transparent;
-  color:var(--accent);
-  font-family:'Aptos Black',sans-serif;
-  font-size:12px;
-  cursor:pointer;
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  transition:0.2s;
-}
-.section-cta-inline:hover{
-  background:rgba(242,194,107,0.12);
-  transform:translateY(-1px);
-}
+  @keyframes floatOrb3{
+    0%{transform:translate(-50%,0);}
+    100%{transform:translate(-50%,-40px);}
+  }
 
-/* PORTFOLIO GRID */
-.portfolio-grid{
-  display:grid;
-  grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);
-  gap:18px;
-}
-.portfolio-main-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:14px;
-}
-.portfolio-card{
-  background:#140c09;
-  border-radius:16px;
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
-  padding:14px 14px 16px;
-  position:relative;
-  overflow:hidden;
-  transition:0.2s;
-}
-.portfolio-card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle at top,rgba(242,194,107,0.18),transparent 60%);
-  opacity:0;
-  transition:0.2s;
-}
-.portfolio-card:hover{
-  transform:translateY(-4px) scale(1.01);
-  box-shadow:0 26px 70px rgba(0,0,0,1);
-  border-color:var(--accent);
-}
-.portfolio-card:hover::before{
-  opacity:1;
-}
-.portfolio-tag-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:8px;
-}
-.portfolio-tag{
-  font-family:'Aharoni',sans-serif;
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:0.16em;
-  color:var(--sub);
-}
-.portfolio-pill{
-  font-family:'Aharoni',sans-serif;
-  font-size:11px;
-  padding:3px 8px;
-  border-radius:999px;
-  background:rgba(255,255,255,0.9);
-  color:#140c09;
-}
-.portfolio-title{
-  font-family:'Aptos Black',sans-serif;
-  font-size:15px;
-  margin-top:6px;
-}
-.portfolio-desc{
-  font-family:'Aharoni',sans-serif;
-  font-size:12px;
-  color:var(--sub);
-  margin-top:4px;
-}
-.portfolio-meta-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-family:'Aharoni',sans-serif;
-  font-size:11px;
-  color:var(--sub);
-  margin-top:6px;
-}
-.portfolio-meta-pill{
-  padding:3px 8px;
-  border-radius:999px;
-  background:rgba(242,194,107,0.12);
-  border:1px solid var(--accent);
-  color:var(--text);
-}
-
-/* PORTFOLIO SIDE */
-.portfolio-side{
-  background:#140c09;
-  border-radius:16px;
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
-  padding:16px 16px 18px;
-}
-.portfolio-side-title{
-  font-family:'Aptos Black',sans-serif;
-  font-size:15px;
-}
-.portfolio-side-sub{
-  font-family:'Aharoni',sans-serif;
-  font-size:12px;
-  color:var(--sub);
-  margin-top:4px;
-}
-.portfolio-side-list{
-  margin-top:8px;
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-}
-.portfolio-side-item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:6px 8px;
-  border-radius:10px;
-  background:rgba(255,255,255,0.9);
-  border:1px solid rgba(0,0,0,0.04);
-  font-family:'Aharoni',sans-serif;
-  font-size:12px;
-  cursor:pointer;
-  transition:0.2s;
-}
-.portfolio-side-item:hover{
-  background:rgba(242,194,107,0.12);
-  border-color:var(--accent);
-  transform:translateY(-2px);
-}
-.portfolio-side-item span.badge{
-  font-size:10px;
-  padding:3px 7px;
-  border-radius:999px;
-  background:rgba(242,194,107,0.12);
-  border:1px solid var(--accent);
-  color:var(--text);
-}
-.portfolio-side-ad{
-  margin-top:8px;
-  padding:8px 10px;
-  border-radius:12px;
-  background:rgba(12,7,5,0.96);
-  border:1px dashed rgba(242,194,107,0.4);
-}
-.portfolio-side-ad-label{
-  font-family:'Aharoni',sans-serif;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:0.16em;
-  color:var(--sub);
-  margin-bottom:4px;
-}
-.portfolio-side-ad-inner{
-  background:rgba(0,0,0,0.4);
-  border-radius:10px;
-  padding:4px;
-}
-
-/* FEATURES */
-.feature-strip{
-  margin-top:40px;
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:14px;
-}
-.feature-card{
-  background:#140c09;
-  border-radius:18px;
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
-  padding:12px 12px 14px;
-  font-family:'Aharoni',sans-serif;
-  font-size:12px;
-  color:var(--sub);
-  position:relative;
-  overflow:hidden;
-  transition:0.2s;
-}
-.feature-card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle at top,rgba(242,194,107,0.18),transparent 60%);
-  opacity:0;
-  transition:0.2s;
-}
-.feature-card:hover{
-  transform:translateY(-3px) scale(1.01);
-  box-shadow:0 22px 60px rgba(0,0,0,1);
-  border-color:var(--accent);
-}
-.feature-card:hover::before{
-  opacity:1;
-}
-.feature-pill{
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:0.16em;
-  color:var(--sub);
-}
-.feature-title{
-  font-family:'Aptos Black',sans-serif;
-  font-size:13px;
-  margin-top:4px;
-  margin-bottom:4px;
-}
-.feature-ad{
-  margin-top:8px;
-  padding:8px 10px;
-  border-radius:12px;
-  background:rgba(12,7,5,0.96);
-  border:1px dashed rgba(242,194,107,0.4);
-}
-.feature-ad-label{
-  font-family:'Aharoni',sans-serif;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:0.16em;
-  color:var(--sub);
-  margin-bottom:4px;
-}
-.feature-ad-inner{
-  background:rgba(0,0,0,0.4);
-  border-radius:10px;
-  padding:4px;
-}
-
-/* ROADMAP */
-.roadmap{
-  margin-top:44px;
-  background:#140c09;
-  border-radius:18px;
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
-  padding:18px 18px 20px;
-  display:grid;
-  grid-template-columns:minmax(0,1.2fr) minmax(0,1.1fr);
-  gap:18px;
-}
-.roadmap-title{
-  font-family:'Aptos Black',sans-serif;
-  font-size:18px;
-  margin-bottom:6px;
-}
-.roadmap-sub{
-  font-family:'Aharoni',sans-serif;
-  font-size:13px;
-  color:var(--sub);
-  margin-bottom:10px;
-}
-.roadmap-phases{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-.roadmap-phase{
-  padding:8px 10px;
-  border-radius:14px;
-  background:rgba(255,255,255,0.9);
-  border:1px solid rgba(0,0,0,0.04);
-  font-family:'Aharoni',sans-serif;
-  font-size:12px;
-  color:#140c09;
-}
-.roadmap-phase-label{
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:0.16em;
-  margin-bottom:2px;
-}
-.roadmap-phase-title{
-  font-family:'Aptos Black',sans-serif;
-  font-size:13px;
-  margin-bottom:2px;
-}
-.roadmap-metrics{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  font-family:'Aharoni',sans-serif;
-  font-size:12px;
-  color:var(--sub);
-}
-.roadmap-metric{
-  padding:6px 10px;
-  border-radius:999px;
-  background:rgba(255,255,255,0.9);
-  border:1px solid rgba(0,0,0,0.06);
-  color:#140c09;
-}
-.roadmap-ad{
-  margin-top:10px;
-  padding:8px 10px;
-  border-radius:12px;
-  background:rgba(12,7,5,0.96);
-  border:1px dashed rgba(242,194,107,0.4);
-}
-.roadmap-ad-label{
-  font-family:'Aharoni',sans-serif;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:0.16em;
-  color:var(--sub);
-  margin-bottom:4px;
-}
-.roadmap-ad-inner{
-  background:rgba(0,0,0,0.4);
-  border-radius:10px;
-  padding:4px;
-}
-
-/* FOOTER */
-footer{
-  margin-top:40px;
-  padding:20px 0 10px;
-  text-align:center;
-  font-family:'Aharoni',sans-serif;
-  font-size:12px;
-  color:var(--sub);
-}
-footer span.accent{
-  color:var(--accent);
-}
-.footer-ad{
-  margin:14px auto 0;
-  max-width:728px;
-  padding:8px 10px;
-  border-radius:14px;
-  background:rgba(12,7,5,0.96);
-  border:1px dashed rgba(242,194,107,0.4);
-}
-.footer-ad-label{
-  font-family:'Aharoni',sans-serif;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:0.16em;
-  color:var(--sub);
-  margin-bottom:4px;
-}
-.footer-ad-inner{
-  background:rgba(0,0,0,0.4);
-  border-radius:10px;
-  padding:4px;
-}
-
-/* RESPONSIVE */
-@media(max-width:980px){
   .banner-inner{
-    flex-direction:column;
-    align-items:flex-start;
+    position:relative;
+    z-index:3;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:40px;
+    padding:40px 20px 40px;
   }
-  .banner-right{
-    align-self:center;
+
+  .banner-left{
+    max-width:520px;
   }
-  .hero{
-    grid-template-columns:minmax(0,1fr);
+
+  .banner-kicker{
+    font-family:'Aharoni',sans-serif;
+    font-size:11px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--text-sub);
+    margin-bottom:10px;
   }
-  .portfolio-grid{
-    grid-template-columns:minmax(0,1fr);
-  }
-  .roadmap{
-    grid-template-columns:minmax(0,1fr);
-  }
-}
-@media(max-width:760px){
-  .nav-links{display:none;}
-  .portfolio-main-grid{
-    grid-template-columns:minmax(0,1fr);
-  }
-  .feature-strip{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-}
-@media(max-width:520px){
-  .feature-strip{
-    grid-template-columns:minmax(0,1fr);
-  }
-  .hero-grid-preview{
-    grid-template-columns:minmax(0,1fr);
-  }
+
   .banner-title{
-    font-size:32px;
+    font-family:'Aptos Black',sans-serif;
+    font-size:40px;
+    line-height:1.15;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+    margin-bottom:10px;
+    color:#fff7ea;
   }
-}
-</style>
+
+  .banner-title span{
+    background:linear-gradient(120deg,#ffd27f,#f2c26b,#ff9f6b);
+    -webkit-background-clip:text;
+    color:transparent;
+  }
+
+  .banner-sub{
+    font-family:'Aharoni',sans-serif;
+    font-size:15px;
+    color:var(--text-sub);
+    line-height:1.7;
+    margin-bottom:18px;
+  }
+
+  .banner-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:18px;
+  }
+
+  .banner-tag{
+    font-family:'Aharoni',sans-serif;
+    font-size:11px;
+    padding:4px 10px;
+    border-radius:999px;
+    background:rgba(12,7,5,0.9);
+    border:1px solid rgba(255,255,255,0.12);
+    color:var(--text-sub);
+  }
+
+  .banner-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:16px;
+  }
+
+  .btn-main{
+    padding:10px 22px;
+    border-radius:999px;
+    background:linear-gradient(135deg,#f2c26b,#ff9f6b);
+    color:#120b07;
+    font-family:'Aptos Black',sans-serif;
+    font-size:14px;
+    cursor:pointer;
+    box-shadow:0 18px 50px rgba(0,0,0,0.9);
+    border:none;
+    transition:transform var(--transition-fast),box-shadow var(--transition-fast),filter var(--transition-fast);
+  }
+
+  .btn-main:hover{
+    transform:translateY(-2px) scale(1.02);
+    box-shadow:0 24px 60px rgba(0,0,0,0.95);
+    filter:brightness(1.05);
+  }
+
+  .btn-ghost{
+    padding:10px 20px;
+    border-radius:999px;
+    border:1px solid var(--accent);
+    background:rgba(12,7,5,0.8);
+    color:var(--accent);
+    font-family:'Aptos Black',sans-serif;
+    font-size:13px;
+    cursor:pointer;
+    transition:var(--transition-fast);
+  }
+
+  .btn-ghost:hover{
+    background:rgba(242,194,107,0.12);
+    transform:translateY(-2px);
+  }
+
+  .banner-meta{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    font-family:'Aharoni',sans-serif;
+    font-size:12px;
+    color:var(--text-sub);
+  }
+
+  .banner-meta-item{
+    display:flex;
+    gap:8px;
+  }
+
+  .banner-meta-dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--accent);
+    margin-top:5px;
+    box-shadow:0 0 10px rgba(242,194,107,0.9);
+  }
+
+  .banner-ad{
+    margin-top:18px;
+    padding:10px;
+    border-radius:14px;
+    background:rgba(12,7,5,0.9);
+    border:1px dashed rgba(242,194,107,0.4);
+    max-width:360px;
+  }
+
+  .banner-ad-label{
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    color:var(--text-sub);
+    margin-bottom:4px;
+  }
+
+  .banner-ad-inner{
+    background:rgba(0,0,0,0.4);
+    border-radius:10px;
+    padding:4px;
+  }
+
+  .banner-right{
+    position:relative;
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:320px;
+  }
+
+  .logo-orbit{
+    position:absolute;
+    width:260px;
+    height:260px;
+    border-radius:50%;
+    background:radial-gradient(circle at 30% 0%,rgba(242,194,107,0.4),transparent 60%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:1;
+    animation:pulseOrbit 3.2s infinite ease-in-out;
+    box-shadow:0 0 40px rgba(242,194,107,0.9);
+  }
+
+  .logo-ring{
+    position:absolute;
+    inset:-22px;
+    border-radius:50%;
+    border:1px dashed rgba(242,194,107,0.4);
+    animation:spinRing 18s linear infinite;
+  }
+
+  .logo-img{
+    width:70%;
+    height:70%;
+    border-radius:20%;
+    overflow:hidden;
+    background:#120b07;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 0 26px rgba(0,0,0,0.8);
+  }
+
+  .logo-img img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+  }
+
+  .banner-card-wrapper{
+    position:relative;
+    z-index:2;
+  }
+
+  .banner-card{
+    width:320px;
+    max-width:90vw;
+    border-radius:var(--card-radius-lg);
+    padding:16px 16px 18px;
+    background:linear-gradient(135deg,rgba(20,12,9,0.96),rgba(10,6,4,0.96));
+    border:1px solid rgba(255,255,255,0.12);
+    box-shadow:0 26px 70px rgba(0,0,0,0.95);
+    backdrop-filter:blur(18px);
+    position:relative;
+    overflow:hidden;
+    transition:transform var(--transition-fast),box-shadow var(--transition-fast),border-color var(--transition-fast),background 0.25s ease;
+  }
+
+  .banner-card::before{
+    content:"";
+    position:absolute;
+    inset:-1px;
+    border-radius:var(--card-radius-lg);
+    background:conic-gradient(from 0deg,rgba(242,194,107,0.0),rgba(242,194,107,0.7),rgba(255,159,107,0.0),rgba(80,120,255,0.7),rgba(242,194,107,0.0));
+    opacity:0;
+    transition:opacity 0.25s ease-out;
+    pointer-events:none;
+  }
+
+  .banner-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:var(--card-radius-lg);
+    background:radial-gradient(circle at top,rgba(242,194,107,0.22),transparent 60%);
+    opacity:0.4;
+    pointer-events:none;
+  }
+
+  .banner-card.hovered{
+    box-shadow:0 32px 80px rgba(0,0,0,1);
+    border-color:rgba(242,194,107,0.9);
+  }
+
+  .banner-card.hovered::before{
+    opacity:1;
+  }
+
+  .banner-card-particles{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+  }
+
+  .banner-card-dot{
+    position:absolute;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:rgba(242,194,107,0.9);
+    box-shadow:0 0 12px rgba(242,194,107,0.9);
+    opacity:0.0;
+    animation:particleBlink 3.2s infinite ease-in-out;
+  }
+
+  .banner-card-dot.dot-1{top:18%;left:16%;animation-delay:0.2s;}
+  .banner-card-dot.dot-2{top:32%;right:14%;animation-delay:0.8s;}
+  .banner-card-dot.dot-3{bottom:22%;left:24%;animation-delay:1.4s;}
+  .banner-card-dot.dot-4{bottom:16%;right:20%;animation-delay:2.0s;}
+
+  @keyframes particleBlink{
+    0%,100%{opacity:0;}
+    40%{opacity:1;}
+  }
+
+  .banner-card-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:8px;
+  }
+
+  .banner-card-pill{
+    font-family:'Aharoni',sans-serif;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    color:var(--text-sub);
+  }
+
+  .banner-card-status{
+    font-family:'Aptos Black',sans-serif;
+    font-size:11px;
+    padding:4px 9px;
+    border-radius:999px;
+    background:rgba(242,194,107,0.16);
+    border:1px solid var(--accent);
+    color:var(--text);
+  }
+
+  .banner-card-title{
+    font-family:'Aptos Black',sans-serif;
+    font-size:16px;
+    margin-bottom:4px;
+  }
+
+  .banner-card-sub{
+    font-family:'Aharoni',sans-serif;
+    font-size:12px;
+    color:var(--text-sub);
+    margin-bottom:10px;
+  }
+
+  .banner-card-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:10px;
+  }
+
+  .banner-card-metrics{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    font-family:'Aharoni',sans-serif;
+    font-size:11px;
+    color:var(--text-sub);
+  }
+
+  .banner-card-metric strong{
+    color:var(--accent-strong);
+  }
+
+  .banner-card-chip{
+    padding:6px 10px;
+    border-radius:999px;
+    background:rgba(255,255,255,0.96);
+    border:1px solid rgba(0,0,0,0.06);
+    font-family:'Aharoni',sans-serif;
+    font-size:11px;
+    color:#140c09;
+    box-shadow:0 10px 26px rgba(0,0,0,0.7);
+  }
+
+  @keyframes spinRing{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
+  }
+
+  @keyframes pulseOrbit{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.06);}
+    100%{transform:scale(1);}
+  }
+
+  /* =========================
+     NAVBAR (BELOW BANNER)
+     ========================= */
+  .nav-shell{
+    background:var(--bg-soft);
+    border-bottom:1px solid rgba(255,255,255,0.04);
+  }
+
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 0 10px;
+  }
+
+  .nav-left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+
+  .nav-logo{
+    width:32px;
+    height:32px;
+    border-radius:12px;
+    background:radial-gradient(circle at 30% 0%,#f2c26b,#c88b3a 40%,#120b07 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#120b07;
+    font-family:'Aptos Black',sans-serif;
+    font-size:18px;
+    box-shadow:0 0 22px rgba(242,194,107,0.9);
+  }
+
+  .nav-title-block{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+
+  .nav-title-main{
+    font-family:'Aptos Black',sans-serif;
+    font-size:14px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+  }
+
+  .nav-title-sub{
+    font-family:'Aharoni',sans-serif;
+    font-size:11px;
+    color:var(--text-sub);
+  }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    font-size:12px;
+    font-family:'Aharoni',sans-serif;
+    color:var(--text-sub);
+  }
+
+  .nav-link{
+    position:relative;
+    cursor:pointer;
+    padding:4px 0;
+    transition:var(--transition-fast);
+  }
+
+  .nav-link::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-2px;
+    width:0;
+    height:2px;
+    border-radius:999px;
+    background:linear-gradient(90deg,#f2c26b,#ff9f6b);
+    transition:var(--transition-fast);
+  }
+
+  .nav-link:hover{
+    color:var(--accent);
+  }
+
+  .nav-link:hover::after{
+    width:100%;
+  }
+
+  .nav-link.active{
+    color:var(--accent);
+  }
+
+  .nav-link.active::after{
+    width:100%;
+  }
+
+  .nav-right{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+
+  .nav-cta{
+    padding:7px 14px;
+    border-radius:999px;
+    border:1px solid var(--accent);
+    background:rgba(242,194,107,0.12);
+    color:var(--accent);
+    font-family:'Aptos Black',sans-serif;
+    font-size:12px;
+    cursor:pointer;
+    transition:var(--transition-fast);
+  }
+
+  .nav-cta:hover{
+    background:rgba(242,194,107,0.2);
+    transform:translateY(-1px);
+  }
+
+  .nav-toggle{
+    padding:7px 12px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,0.12);
+    background:rgba(12,7,5,0.9);
+    color:var(--text-sub);
+    font-family:'Aharoni',sans-serif;
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:var(--transition-fast);
+  }
+
+  .nav-toggle:hover{
+    background:rgba(242,194,107,0.12);
+    color:var(--accent);
+  }
+
+  /* =========================
+     MAIN SHELL
+     ========================= */
+  .main-shell{
+    background:var(--bg-soft);
+    padding:24px 0 40px;
+  }
+
+  .hero{
+    display:grid;
+    grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);
+    gap:24px;
+  }
+
+  .hero-main{
+    background:
+      radial-gradient(circle at top left,rgba(242,194,107,0.12),transparent 60%),
+      radial-gradient(circle at bottom right,rgba(80,120,255,0.12),transparent 60%),
+      var(--bg-card);
+    border-radius:var(--card-radius);
+    border:1px solid var(--border-soft);
+    box-shadow:var(--shadow-strong);
+    padding:18px 18px 20px;
+  }
+
+  .hero-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:5px 11px;
+    border-radius:999px;
+    border:1px solid var(--accent);
+    background:rgba(12,7,5,0.9);
+    font-family:'Aharoni',sans-serif;
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:10px;
+  }
+
+  .hero-pill-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 12px rgba(242,194,107,0.9);
+  }
+
+  .hero-title{
+    font-family:'Aptos Black',sans-serif;
+    font-size:28px;
+    line-height:1.25;
+    margin-bottom:10px;
+  }
+
+  .hero-title span{
+    background:linear-gradient(120deg,#ffd27f,#f2c26b,#ff9f6b);
+    -webkit-background-clip:text;
+    color:transparent;
+  }
+
+  .hero-sub{
+    font-family:'Aharoni',sans-serif;
+    font-size:14px;
+    color:var(--text-sub);
+    line-height:1.7;
+    margin-bottom:14px;
+  }
+
+  .hero-pills-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:14px;
+  }
+
+  .hero-pill-tag{
+    font-family:'Aharoni',sans-serif;
+    font-size:11px;
+    padding:4px 10px;
+    border-radius:999px;
+    background:rgba(12,7,5,0.9);
+    border:1px solid rgba(255,255,255,0.08);
+    color:var(--text-sub);
+  }
+
+  .hero-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:14px;
+  }
+
+  .hero-meta{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    font-family:'Aharoni',sans-serif;
+    font-size:12px;
+    color:var(--text-sub);
+  }
+
+  .hero-meta-item{
+    display:flex;
+    gap:8px;
+  }
+
+  .hero-meta-dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--accent);
+    margin-top:5px;
+    box-shadow:0 0 10px rgba(242,194,107,0.9);
+  }
+
+  .hero-side{
+    background:var(--bg-card);
+    border-radius:var(--card-radius);
+    border:1px solid var(--border-soft);
+    box-shadow:var(--shadow-strong);
+    padding:16px 16px 18px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .hero-side-label{
+    font-family:'Aharoni',sans-serif;
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--text-sub);
+  }
+
+  .hero-side-title{
+    font-family:'Aptos Black',sans-serif;
+    font-size:15px;
+  }
+
+  .hero-side-sub{
+    font-family:'Aharoni',sans-serif;
+    font-size:12px;
+    color:var(--text-sub);
+  }
+
+  .hero-grid-preview{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+    margin-top:4px;
+  }
+
+  .preview-card{
+    background:var(--bg-card-soft);
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,0.06);
+    padding:10px 10px 11px;
+    cursor:pointer;
+    transition:var(--transition-med);
+    position:relative;
+    overflow:hidden;
+    min-height:80px;
+  }
+
+  .preview-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(circle at top,rgba(242,194,107,0.18),transparent 60%);
+    opacity:0;
+    transition:var(--transition-med);
+  }
+
+  .preview-card:hover{
+    transform:translateY(-3px) scale(1.01);
+    box-shadow:0 18px 40px rgba(0,0,0,0.9);
+    border-color:var(--accent);
+  }
+
+  .preview-card:hover::after{
+    opacity:1;
+  }
+
+  .preview-tag{
+    font-family:'Aharoni',sans-serif;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    color:var(--text-sub);
+    margin-bottom:4px;
+  }
+
+  .preview-title{
+    font-family:'Aptos Black',sans-serif;
+    font-size:13px;
+    margin-bottom:2px;
+  }
+
+  .preview-meta{
+    font-family:'Aharoni',sans-serif;
+    font-size:11px;
+    color:var(--text-sub);
+  }
+
+  .hero-side-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:6px;
+    font-family:'Aharoni',sans-serif;
+    font-size:11px;
+    color:var(--text-sub);
+  }
+
+  .hero-side-ad{
+    margin-top:6px;
+    padding:8px 10px;
+    border-radius:12px;
+    background:rgba(12,7,5,0.96);
+    border:1px dashed rgba(242,194,107,0.4);
+  }
+
+  .hero-side-ad-label{
+    font-family:'Aharoni',sans-serif;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    color:var(--text-sub);
+    margin-bottom:4px;
+  }
+
+  .hero-side-ad-inner{
+    background:rgba(0,0,0,0.4);
+    border-radius:10px;
+    padding:4px;
+  }
+
+  /* RESPONSIVE */
+  @media(max-width:980px){
+    .banner-inner{
+      flex-direction:column;
+      align-items:flex-start;
+    }
+    .banner-right{
+      align-self:center;
+    }
+    .hero{
+      grid-template-columns:minmax(0,1fr);
+    }
+  }
+
+  @media(max-width:760px){
+    .nav-links{display:none;}
+    .hero-grid-preview{
+      grid-template-columns:minmax(0,1fr);
+    }
+  }
+
+  @media(max-width:520px){
+    .banner-title{
+      font-size:32px;
+    }
+  }
+  </style>
 </head>
 
 <body>
 
-<!-- BANNER AT VERY TOP -->
-<section class="banner">
-  <div class="banner-orb orb-1"></div>
-  <div class="banner-orb orb-2"></div>
-  <div class="banner-orb orb-3"></div>
+  <!-- BANNER AT VERY TOP -->
+  <section class="banner">
+    <div class="banner-orb orb-1"></div>
+    <div class="banner-orb orb-2"></div>
+    <div class="banner-orb orb-3"></div>
 
-  <div class="banner-inner max-width">
-    <div class="banner-left">
-      <div class="banner-kicker">Warm AI Portfolio • ALAEAI</div>
-      <h1 class="banner-title">ALAEAI — <span>Build. Learn. Create.</span></h1>
-      <p class="banner-sub">
-        A cinematic, warm AI portfolio — tutorials, tools, news, and projects in one calm, premium environment.
-        Every section is designed to feel focused, intentional, and alive.
-      </p>
-
-      <div class="banner-tags">
-        <span class="banner-tag">Guided AI tutorials</span>
-        <span class="banner-tag">Real projects &amp; experiments</span>
-        <span class="banner-tag">News &amp; tools in one place</span>
-      </div>
-
-      <div class="banner-actions">
-        <button class="btn-main" onclick="scrollToId('hero')">Start Journey</button>
-        <button class="btn-ghost" onclick="scrollToId('portfolio')">View Portfolio</button>
-      </div>
-
-      <div class="banner-meta">
-        <div class="banner-meta-item">
-          <span class="banner-meta-dot"></span>
-          <span>Warm, minimal, and focused on real progress.</span>
-        </div>
-        <div class="banner-meta-item">
-          <span class="banner-meta-dot"></span>
-          <span>Built to grow into a full workspace over time.</span>
-        </div>
-      </div>
-
-      <div class="banner-ad">
-        <div class="banner-ad-label">Sponsored • Banner</div>
-        <div class="banner-ad-inner">
-          <ins class="adsbygoogle"
-               style="display:block"
-               data-ad-client="ca-pub-6065282700750014"
-               data-ad-slot="1234567890"
-               data-ad-format="auto"
-               data-full-width-responsive="true"></ins>
-        </div>
-      </div>
-    </div>
-
-    <div class="banner-right">
-      <!-- LOGO ORBIT -->
-      <div class="logo-orbit">
-        <div class="logo-ring"></div>
-        <div class="logo-img">
-          <img src="assets/logo.png" alt="ALAEAI Logo">
-        </div>
-      </div>
-
-      <!-- ULTIMATE FOLLOW-CURSOR CARD -->
-      <div class="banner-card-wrapper">
-        <div class="banner-card" id="bannerCard">
-          <div class="banner-card-particles">
-            <div class="banner-card-dot dot-1"></div>
-            <div class="banner-card-dot dot-2"></div>
-            <div class="banner-card-dot dot-3"></div>
-            <div class="banner-card-dot dot-4"></div>
-          </div>
-
-          <div class="banner-card-header">
-            <div class="banner-card-pill">Live Workspace Preview</div>
-            <div class="banner-card-status">Active • v1.0</div>
-          </div>
-          <div class="banner-card-title">ALAEAI Warm Dashboard</div>
-          <div class="banner-card-sub">
-            Tutorials, tools, and news flowing into one integrated system — calm, focused, and ready to grow.
-          </div>
-
-          <div class="banner-card-row">
-            <div class="banner-card-metrics">
-              <div class="banner-card-metric"><strong>3</strong> core pillars — Tutorials, News, Tools</div>
-              <div class="banner-card-metric"><strong>20+</strong> levels planned for guided learning</div>
-              <div class="banner-card-metric"><strong>24/7</strong> ready to extend with APIs</div>
-            </div>
-            <div class="banner-card-chip">Follow the cursor • Live</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- NAVBAR BELOW BANNER -->
-<div class="nav-shell">
-  <div class="nav max-width">
-    <div class="nav-left">
-      <div class="nav-logo">A</div>
-      <div class="nav-title-block">
-        <div class="nav-title-main">ALAEAI</div>
-        <div class="nav-title-sub">Warm Portfolio • Build. Learn. Create.</div>
-      </div>
-    </div>
-    <nav class="nav-links">
-      <span class="nav-link active" onclick="scrollToId('hero')">Home</span>
-      <span class="nav-link" onclick="scrollToId('portfolio')">Portfolio</span>
-      <span class="nav-link" onclick="scrollToId('features')">Features</span>
-      <span class="nav-link" onclick="scrollToId('roadmap')">Roadmap</span>
-    </nav>
-    <div class="nav-right">
-      <button class="nav-cta" onclick="scrollToId('hero')">Start Journey</button>
-      <button class="nav-toggle" id="darkToggle">Dark Mode</button>
-    </div>
-  </div>
-</div>
-
-<!-- MAIN CONTENT -->
-<main class="main-shell">
-  <div class="max-width">
-
-    <!-- HERO -->
-    <section class="hero" id="hero">
-      <div class="hero-main">
-        <div class="hero-pill">
-          <span class="hero-pill-dot"></span>
-          <span>Warm AI Portfolio • ALAEAI</span>
-        </div>
-        <h2 class="hero-title">
-          A warm space to<br>
-          <span>build, learn, and show</span> your work.
-        </h2>
-        <p class="hero-sub">
-          ALAEAI is your personal warm portfolio and workspace — tutorials, tools, and projects in one calm,
-          premium environment. Every section is designed to feel intentional, focused, and alive.
+    <div class="banner-inner max-width">
+      <div class="banner-left">
+        <div class="banner-kicker">Warm AI Portfolio • ALAEAI</div>
+        <h1 class="banner-title">ALAEAI — <span>Build. Learn. Create.</span></h1>
+        <p class="banner-sub">
+          A cinematic, warm AI portfolio — tutorials, tools, news, and projects in one calm, premium environment.
+          Every section is designed to feel focused, intentional, and alive.
         </p>
-        <div class="hero-pills-row">
-          <div class="hero-pill-tag">Guided AI tutorials</div>
-          <div class="hero-pill-tag">Real projects &amp; experiments</div>
-          <div class="hero-pill-tag">News &amp; tools in one place</div>
+
+        <div class="banner-tags">
+          <span class="banner-tag">Guided AI tutorials</span>
+          <span class="banner-tag">Real projects &amp; experiments</span>
+          <span class="banner-tag">News &amp; tools in one place</span>
         </div>
-        <div class="hero-actions">
-          <button class="btn-main" onclick="scrollToId('portfolio')">View Portfolio</button>
-          <button class="btn-ghost" onclick="scrollToId('features')">See Features</button>
+
+        <div class="banner-actions">
+          <button class="btn-main" onclick="scrollToId('hero')">Start Journey</button>
+          <button class="btn-ghost" onclick="scrollToId('portfolio')">View Portfolio</button>
         </div>
-        <div class="hero-meta">
-          <div class="hero-meta-item">
-            <span class="hero-meta-dot"></span>
+
+        <div class="banner-meta">
+          <div class="banner-meta-item">
+            <span class="banner-meta-dot"></span>
             <span>Warm, minimal, and focused on real progress.</span>
           </div>
-          <div class="hero-meta-item">
-            <span class="hero-meta-dot"></span>
+          <div class="banner-meta-item">
+            <span class="banner-meta-dot"></span>
             <span>Built to grow into a full workspace over time.</span>
           </div>
         </div>
-      </div>
 
-      <aside class="hero-side">
-        <div class="hero-side-label">Portfolio Snapshot</div>
-        <div class="hero-side-title">A calm grid of what you build.</div>
-        <div class="hero-side-sub">
-          Projects, experiments, and learning paths — all presented in a warm, inviting layout.
-        </div>
-
-        <div class="hero-grid-preview">
-          <div class="preview-card" onclick="scrollToId('portfolio')">
-            <div class="preview-tag">Tutorials</div>
-            <div class="preview-title">Level-based AI learning</div>
-            <div class="preview-meta">Foundations, builder mode, and advanced deep dives.</div>
-          </div>
-          <div class="preview-card" onclick="scrollToId('features')">
-            <div class="preview-tag">News &amp; Tools</div>
-            <div class="preview-title">Real-time tech awareness</div>
-            <div class="preview-meta">Curated updates and utilities that support your builds.</div>
-          </div>
-          <div class="preview-card" onclick="scrollToId('portfolio')">
-            <div class="preview-tag">Projects</div>
-            <div class="preview-title">Small, complete builds</div>
-            <div class="preview-meta">From spam detectors to dashboards and more.</div>
-          </div>
-          <div class="preview-card" onclick="scrollToId('roadmap')">
-            <div class="preview-tag">Roadmap</div>
-            <div class="preview-title">A path that grows with you</div>
-            <div class="preview-meta">From core homepage to full workspace.</div>
-          </div>
-        </div>
-
-        <div class="hero-side-footer">
-          <div>Tutorials • News • Tools • Portfolio</div>
-          <div style="color:var(--accent);">Live • Active</div>
-        </div>
-
-        <div class="hero-side-ad">
-          <div class="hero-side-ad-label">Sponsored • Sidebar</div>
-          <div class="hero-side-ad-inner">
+        <div class="banner-ad">
+          <div class="banner-ad-label">Sponsored • Banner</div>
+          <div class="banner-ad-inner">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-6065282700750014"
-                 data-ad-slot="2345678901"
+                 data-ad-slot="1234567890"
                  data-ad-format="auto"
                  data-full-width-responsive="true"></ins>
           </div>
         </div>
-      </aside>
-    </section>
-
-    <!-- PORTFOLIO -->
-    <section class="section" id="portfolio">
-      <div class="section-header">
-        <div class="section-title-block">
-          <div class="section-kicker">Portfolio</div>
-          <div class="section-title">A warm grid of what ALAEAI can do.</div>
-          <div class="section-sub">
-            Each card represents a direction: tutorials, tools, experiments, and future workspace ideas.
-          </div>
-        </div>
-        <button class="section-cta-inline" onclick="scrollToId('features')">
-          Open Features
-          <span>↗</span>
-        </button>
       </div>
 
-      <div class="portfolio-grid">
-        <div class="portfolio-main-grid">
-          <article class="portfolio-card">
-            <div class="portfolio-tag-row">
-              <div class="portfolio-tag">Tutorials • Level 1–3</div>
-              <div class="portfolio-pill">Learning Path</div>
-            </div>
-            <div class="portfolio-title">Structured AI Tutorials</div>
-            <div class="portfolio-desc">
-              A clear, level-based path from foundations to advanced topics. Designed to feel like a calm,
-              guided journey — not a chaotic course list.
-            </div>
-            <div class="portfolio-meta-row">
-              <div class="portfolio-meta-pill">20+ levels planned</div>
-              <div>Foundations • Builder • Advanced</div>
-            </div>
-          </article>
-
-          <article class="portfolio-card">
-            <div class="portfolio-tag-row">
-              <div class="portfolio-tag">Projects • Builder Mode</div>
-              <div class="portfolio-pill">Hands-on</div>
-            </div>
-            <div class="portfolio-title">Mini AI Projects</div>
-            <div class="portfolio-desc">
-              Spam detectors, recommendation systems, simple chatbots, and more — each project small enough to finish,
-              but real enough to be proud of.
-            </div>
-            <div class="portfolio-meta-row">
-              <div class="portfolio-meta-pill">Real code examples</div>
-              <div>Python • JS • APIs</div>
-            </div>
-          </article>
-
-          <article class="portfolio-card">
-            <div class="portfolio-tag-row">
-              <div class="portfolio-tag">News &amp; Tools</div>
-              <div class="portfolio-pill">Live</div>
-            </div>
-            <div class="portfolio-title">Curated Tech News &amp; Utilities</div>
-            <div class="portfolio-desc">
-              A calm feed of meaningful updates and tools — no noise, no clickbait. Just what helps you think and build better.
-            </div>
-            <div class="portfolio-meta-row">
-              <div class="portfolio-meta-pill">24/7 ready to extend</div>
-              <div>News • Calculators • Generators</div>
-            </div>
-          </article>
-
-          <article class="portfolio-card">
-            <div class="portfolio-tag-row">
-              <div class="portfolio-tag">Workspace Vision</div>
-              <div class="portfolio-pill">Future</div>
-            </div>
-            <div class="portfolio-title">Full ALAEAI Workspace</div>
-            <div class="portfolio-desc">
-              A complete environment with dashboards, stats, and personalized flows — where tutorials, tools, and news
-              feel like one integrated system.
-            </div>
-            <div class="portfolio-meta-row">
-              <div class="portfolio-meta-pill">Roadmap-driven</div>
-              <div>Calm • Focused • Powerful</div>
-            </div>
-          </article>
+      <div class="banner-right">
+        <div class="logo-orbit">
+          <div class="logo-ring"></div>
+          <div class="logo-img">
+            <img src="assets/logo.png" alt="ALAEAI Logo">
+          </div>
         </div>
 
-        <aside class="portfolio-side">
-          <div class="portfolio-side-title">How this portfolio is structured</div>
-          <div class="portfolio-side-sub">
-            Instead of random sections, everything is grouped into clear pillars that match how you actually learn and build.
+        <!-- 2D FOLLOW-CURSOR CARD -->
+        <div class="banner-card-wrapper">
+          <div class="banner-card" id="bannerCard">
+            <div class="banner-card-particles">
+              <div class="banner-card-dot dot-1"></div>
+              <div class="banner-card-dot dot-2"></div>
+              <div class="banner-card-dot dot-3"></div>
+              <div class="banner-card-dot dot-4"></div>
+            </div>
+
+            <div class="banner-card-header">
+              <div class="banner-card-pill">Live Workspace Preview</div>
+              <div class="banner-card-status">Active • v1.1</div>
+            </div>
+            <div class="banner-card-title">ALAEAI Warm Dashboard</div>
+            <div class="banner-card-sub">
+              Tutorials, news, tools, and portfolio — all flowing into one calm, bright, and focused experience.
+            </div>
+
+            <div class="banner-card-row">
+              <div class="banner-card-metrics">
+                <div class="banner-card-metric"><strong>Tutorials</strong> • Learn step by step</div>
+                <div class="banner-card-metric"><strong>News</strong> • Stay aware calmly</div>
+                <div class="banner-card-metric"><strong>Tools</strong> • Build faster, smarter</div>
+              </div>
+              <div class="banner-card-chip">2D follow cursor • Smooth</div>
+            </div>
           </div>
-          <div class="portfolio-side-list">
-            <div class="portfolio-side-item" onclick="scrollToId('hero')">
-              <span>Homepage • Warm first impression</span>
-              <span class="badge">Top</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAVBAR BELOW BANNER -->
+  <div class="nav-shell">
+    <div class="nav max-width">
+      <div class="nav-left">
+        <div class="nav-logo">A</div>
+        <div class="nav-title-block">
+          <div class="nav-title-main">ALAEAI</div>
+          <div class="nav-title-sub">Warm Portfolio • Build. Learn. Create.</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <span class="nav-link active" onclick="scrollToId('hero')">Home</span>
+        <span class="nav-link" onclick="scrollToId('tutorials')">Tutorials</span>
+        <span class="nav-link" onclick="scrollToId('news')">News</span>
+        <span class="nav-link" onclick="scrollToId('tools')">Tools</span>
+        <span class="nav-link" onclick="scrollToId('about')">About</span>
+        <span class="nav-link" onclick="scrollToId('contact')">Contact</span>
+      </nav>
+      <div class="nav-right">
+        <button class="nav-cta" onclick="scrollToId('portfolio')">View Portfolio</button>
+        <button class="nav-toggle" id="darkToggle">Dark Mode</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-shell">
+    <div class="max-width">
+
+      <!-- HERO -->
+      <section class="hero" id="hero">
+        <div class="hero-main">
+          <div class="hero-pill">
+            <span class="hero-pill-dot"></span>
+            <span>Warm AI Portfolio • ALAEAI</span>
+          </div>
+          <h2 class="hero-title">
+            A bright, warm space to<br>
+            <span>build, learn, and show</span> your work.
+          </h2>
+          <p class="hero-sub">
+            ALAEAI is your personal warm portfolio and workspace — tutorials, tools, news, and projects in one calm,
+            premium environment. Every section is designed to feel intentional, focused, and alive.
+          </p>
+          <div class="hero-pills-row">
+            <div class="hero-pill-tag">Tutorials • Level-based</div>
+            <div class="hero-pill-tag">News • Curated &amp; calm</div>
+            <div class="hero-pill-tag">Tools • Practical helpers</div>
+            <div class="hero-pill-tag">About &amp; Contact • Human</div>
+          </div>
+          <div class="hero-actions">
+            <button class="btn-main" onclick="scrollToId('tutorials')">Start Tutorials</button>
+            <button class="btn-ghost" onclick="scrollToId('portfolio')">Explore Portfolio</button>
+          </div>
+          <div class="hero-meta">
+            <div class="hero-meta-item">
+              <span class="hero-meta-dot"></span>
+              <span>Brightened portfolio theme for clarity and focus.</span>
             </div>
-            <div class="portfolio-side-item" onclick="scrollToId('portfolio')">
-              <span>Tutorials • Learn step by step</span>
-              <span class="badge">Start</span>
+            <div class="hero-meta-item">
+              <span class="hero-meta-dot"></span>
+              <span>Shorter cards, more motion, and a calm layout.</span>
             </div>
-            <div class="portfolio-side-item" onclick="scrollToId('features')">
-              <span>News &amp; Tools • Stay aware</span>
-              <span class="badge">Explore</span>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <div class="hero-side-label">Portfolio Snapshot</div>
+          <div class="hero-side-title">A bright grid of what you build.</div>
+          <div class="hero-side-sub">
+            Tutorials, news, tools, and projects — all organized into clear, animated sections.
+          </div>
+
+          <div class="hero-grid-preview">
+            <div class="preview-card" onclick="scrollToId('tutorials')">
+              <div class="preview-tag">Tutorials</div>
+              <div class="preview-title">Level-based learning</div>
+              <div class="preview-meta">From foundations to advanced, step by step.</div>
             </div>
-            <div class="portfolio-side-item" onclick="scrollToId('roadmap')">
-              <span>Roadmap • See the future</span>
-              <span class="badge">View</span>
+            <div class="preview-card" onclick="scrollToId('news')">
+              <div class="preview-tag">News</div>
+              <div class="preview-title">Calm tech awareness</div>
+              <div class="preview-meta">Meaningful updates, no noise.</div>
+            </div>
+            <div class="preview-card" onclick="scrollToId('tools')">
+              <div class="preview-tag">Tools</div>
+              <div class="preview-title">Practical helpers</div>
+              <div class="preview-meta">Utilities that support your builds.</div>
+            </div>
+            <div class="preview-card" onclick="scrollToId('about')">
+              <div class="preview-tag">About</div>
+              <div class="preview-title">The ALAEAI story</div>
+              <div class="preview-meta">Warm, human, and focused.</div>
             </div>
           </div>
 
-          <div class="portfolio-side-ad">
-            <div class="portfolio-side-ad-label">Sponsored • Portfolio</div>
-            <div class="portfolio-side-ad-inner">
+          <div class="hero-side-footer">
+            <div>Tutorials • News • Tools • About • Contact</div>
+            <div style="color:var(--accent);">Live • Bright</div>
+          </div>
+
+          <div class="hero-side-ad">
+            <div class="hero-side-ad-label">Sponsored • Sidebar</div>
+            <div class="hero-side-ad-inner">
               <ins class="adsbygoogle"
                    style="display:block"
                    data-ad-client="ca-pub-6065282700750014"
-                   data-ad-slot="3456789012"
+                   data-ad-slot="2345678901"
                    data-ad-format="auto"
                    data-full-width-responsive="true"></ins>
             </div>
           </div>
         </aside>
-      </div>
-    </section>
+      </section>
 
-    <!-- FEATURES -->
-    <section class="section" id="features">
-      <div class="section-header">
-        <div class="section-title-block">
-          <div class="section-kicker">Core Pillars</div>
-          <div class="section-title">What lives inside ALAEAI.</div>
-          <div class="section-sub">
-            Tutorials, news, tools, and a calm about section — all tuned for a warm, focused experience.
-          </div>
+      <!-- PART 2 WILL CONTINUE: portfolio, tutorials, news, tools, about, contact, footer, scripts -->
+<!-- PORTFOLIO -->
+<section class="section" id="portfolio">
+  <div class="section-header">
+    <div class="section-title-block">
+      <div class="section-kicker">Portfolio</div>
+      <div class="section-title">A bright, organized portfolio.</div>
+      <div class="section-sub">
+        Shorter cards, cleaner layout, and a warm glow — everything designed to feel premium.
+      </div>
+    </div>
+  </div>
+
+  <div class="portfolio-grid">
+    <div class="portfolio-main-grid">
+
+      <!-- CARD 1 -->
+      <article class="portfolio-card">
+        <div class="portfolio-tag-row">
+          <div class="portfolio-tag">Tutorials</div>
+          <div class="portfolio-pill">Learning</div>
+        </div>
+        <div class="portfolio-title">Level‑Based Tutorials</div>
+        <div class="portfolio-desc">
+          A structured path from beginner to advanced — short, clear, and practical.
+        </div>
+        <div class="portfolio-meta-row">
+          <div class="portfolio-meta-pill">20+ Levels</div>
+          <div>Step by step</div>
+        </div>
+      </article>
+
+      <!-- CARD 2 -->
+      <article class="portfolio-card">
+        <div class="portfolio-tag-row">
+          <div class="portfolio-tag">News</div>
+          <div class="portfolio-pill">Live</div>
+        </div>
+        <div class="portfolio-title">Calm Tech News</div>
+        <div class="portfolio-desc">
+          A curated feed of meaningful updates — no noise, no stress.
+        </div>
+        <div class="portfolio-meta-row">
+          <div class="portfolio-meta-pill">Updated Daily</div>
+          <div>AI • Science</div>
+        </div>
+      </article>
+
+      <!-- CARD 3 -->
+      <article class="portfolio-card">
+        <div class="portfolio-tag-row">
+          <div class="portfolio-tag">Tools</div>
+          <div class="portfolio-pill">Utility</div>
+        </div>
+        <div class="portfolio-title">Smart Tools</div>
+        <div class="portfolio-desc">
+          Calculators, generators, and helpers that make building easier.
+        </div>
+        <div class="portfolio-meta-row">
+          <div class="portfolio-meta-pill">Fast</div>
+          <div>Practical</div>
+        </div>
+      </article>
+
+      <!-- CARD 4 -->
+      <article class="portfolio-card">
+        <div class="portfolio-tag-row">
+          <div class="portfolio-tag">About</div>
+          <div class="portfolio-pill">Human</div>
+        </div>
+        <div class="portfolio-title">The ALAEAI Story</div>
+        <div class="portfolio-desc">
+          A warm, personal space built with intention and clarity.
+        </div>
+        <div class="portfolio-meta-row">
+          <div class="portfolio-meta-pill">Warm</div>
+          <div>Minimal</div>
+        </div>
+      </article>
+
+    </div>
+
+    <aside class="portfolio-side">
+      <div class="portfolio-side-title">Quick Navigation</div>
+      <div class="portfolio-side-sub">
+        Jump to any section instantly.
+      </div>
+
+      <div class="portfolio-side-list">
+        <div class="portfolio-side-item" onclick="scrollToId('tutorials')">
+          <span>Tutorials</span>
+          <span class="badge">Start</span>
+        </div>
+        <div class="portfolio-side-item" onclick="scrollToId('news')">
+          <span>News</span>
+          <span class="badge">Live</span>
+        </div>
+        <div class="portfolio-side-item" onclick="scrollToId('tools')">
+          <span>Tools</span>
+          <span class="badge">Utility</span>
+        </div>
+        <div class="portfolio-side-item" onclick="scrollToId('about')">
+          <span>About</span>
+          <span class="badge">Story</span>
+        </div>
+        <div class="portfolio-side-item" onclick="scrollToId('contact')">
+          <span>Contact</span>
+          <span class="badge">Reach</span>
         </div>
       </div>
 
-      <div class="feature-strip">
-        <article class="feature-card">
-          <div class="feature-pill">Interactive Tutorials</div>
-          <div class="feature-title">Step-by-step learning paths</div>
-          <p>
-            Follow structured, level-based tutorials that help you actually understand and apply what you learn.
-          </p>
-          <div class="feature-ad">
-            <div class="feature-ad-label">Sponsored • Tutorials</div>
-            <div class="feature-ad-inner">
-              <ins class="adsbygoogle"
-                   style="display:block"
-                   data-ad-client="ca-pub-6065282700750014"
-                   data-ad-slot="4567890123"
-                   data-ad-format="auto"
-                   data-full-width-responsive="true"></ins>
-            </div>
-          </div>
-        </article>
-
-        <article class="feature-card">
-          <div class="feature-pill">Real-Time News</div>
-          <div class="feature-title">Meaningful tech updates</div>
-          <p>
-            Stay updated with curated, focused news about AI, science, and innovation — not random noise.
-          </p>
-        </article>
-
-        <article class="feature-card">
-          <div class="feature-pill">Smart Tools</div>
-          <div class="feature-title">Utilities that support building</div>
-          <p>
-            Calculators, generators, and helpers that make it easier to test ideas and ship projects faster.
-          </p>
-        </article>
-
-        <article class="feature-card">
-          <div class="feature-pill">About ALAEAI</div>
-          <div class="feature-title">A calm, powerful workspace</div>
-          <p>
-            Built as a warm environment where every section has a purpose — no clutter, just progress.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <!-- ROADMAP -->
-    <section class="section" id="roadmap">
-      <div class="roadmap">
-        <div>
-          <div class="roadmap-title">Roadmap</div>
-          <div class="roadmap-sub">
-            A clear path for how ALAEAI can grow with you over time — from this warm homepage to a full workspace.
-          </div>
-          <div class="roadmap-phases">
-            <div class="roadmap-phase">
-              <div class="roadmap-phase-label">Phase 1 • Now</div>
-              <div class="roadmap-phase-title">Core Warm Homepage</div>
-              <div>
-                A premium landing experience with portfolio, tutorials, news, and tools in one place.
-              </div>
-            </div>
-            <div class="roadmap-phase">
-              <div class="roadmap-phase-label">Phase 2 • Soon</div>
-              <div class="roadmap-phase-title">Dedicated Tutorials Hub</div>
-              <div>
-                A full tutorials page with levels, progress tracking, and interactive exercises.
-              </div>
-            </div>
-            <div class="roadmap-phase">
-              <div class="roadmap-phase-label">Phase 3 • Next</div>
-              <div class="roadmap-phase-title">Live News Integration</div>
-              <div>
-                Real-time news feeds connected to your backend or APIs, filtered by topics you care about.
-              </div>
-            </div>
-            <div class="roadmap-phase">
-              <div class="roadmap-phase-label">Phase 4 • Future</div>
-              <div class="roadmap-phase-title">Full ALAEAI Workspace</div>
-              <div>
-                A complete learning and building environment with dashboards, stats, and personalized flows.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="roadmap-title">Workspace Snapshot</div>
-          <div class="roadmap-sub">
-            A quick look at what this warm portfolio is already ready to support.
-          </div>
-          <div class="roadmap-metrics">
-            <div class="roadmap-metric">
-              <strong>3</strong> core pillars — Tutorials, News, Tools
-            </div>
-            <div class="roadmap-metric">
-              <strong>20+</strong> tutorial levels planned
-            </div>
-            <div class="roadmap-metric">
-              <strong>24/7</strong> news &amp; tools ready to extend
-            </div>
-            <div class="roadmap-metric">
-              <strong>1</strong> warm portfolio homepage to welcome everyone
-            </div>
-          </div>
-
-          <div class="roadmap-ad">
-            <div class="roadmap-ad-label">Sponsored • Roadmap</div>
-            <div class="roadmap-ad-inner">
-              <ins class="adsbygoogle"
-                   style="display:block"
-                   data-ad-client="ca-pub-6065282700750014"
-                   data-ad-slot="5678901234"
-                   data-ad-format="auto"
-                   data-full-width-responsive="true"></ins>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-      © 2026 <span class="accent">ALAEAI</span> — Warm Portfolio • Build. Learn. Create.
-      <div class="footer-ad">
-        <div class="footer-ad-label">Sponsored • Footer</div>
-        <div class="footer-ad-inner">
+      <div class="portfolio-side-ad">
+        <div class="portfolio-side-ad-label">Sponsored • Portfolio</div>
+        <div class="portfolio-side-ad-inner">
           <ins class="adsbygoogle"
                style="display:block"
                data-ad-client="ca-pub-6065282700750014"
-               data-ad-slot="6789012345"
+               data-ad-slot="3456789012"
                data-ad-format="auto"
                data-full-width-responsive="true"></ins>
         </div>
       </div>
-    </footer>
-
+    </aside>
   </div>
+</section>
+
+<!-- TUTORIALS -->
+<section class="section" id="tutorials">
+  <div class="section-header">
+    <div class="section-title-block">
+      <div class="section-kicker">Tutorials</div>
+      <div class="section-title">Learn step by step.</div>
+      <div class="section-sub">Short, clear, level‑based tutorials.</div>
+    </div>
+  </div>
+
+  <div class="feature-strip">
+    <article class="feature-card">
+      <div class="feature-pill">Level 1</div>
+      <div class="feature-title">Foundations</div>
+      <p>Start with the basics — simple, clean, and practical.</p>
+    </article>
+
+    <article class="feature-card">
+      <div class="feature-pill">Level 2</div>
+      <div class="feature-title">Builder Mode</div>
+      <p>Build small real projects with confidence.</p>
+    </article>
+
+    <article class="feature-card">
+      <div class="feature-pill">Level 3</div>
+      <div class="feature-title">Advanced</div>
+      <p>Deep dives into more complex topics.</p>
+    </article>
+
+    <article class="feature-card">
+      <div class="feature-pill">More</div>
+      <div class="feature-title">Coming Soon</div>
+      <p>More levels and interactive lessons.</p>
+    </article>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section class="section" id="news">
+  <div class="section-header">
+    <div class="section-title-block">
+      <div class="section-kicker">News</div>
+      <div class="section-title">Calm, meaningful updates.</div>
+      <div class="section-sub">AI, science, and innovation — without noise.</div>
+    </div>
+  </div>
+
+  <div class="feature-strip">
+    <article class="feature-card">
+      <div class="feature-pill">AI</div>
+      <div class="feature-title">Latest AI Trends</div>
+      <p>Daily curated updates.</p>
+    </article>
+
+    <article class="feature-card">
+      <div class="feature-pill">Science</div>
+      <div class="feature-title">Breakthroughs</div>
+      <p>Important discoveries simplified.</p>
+    </article>
+
+    <article class="feature-card">
+      <div class="feature-pill">Tech</div>
+      <div class="feature-title">Industry News</div>
+      <p>Calm, focused summaries.</p>
+    </article>
+
+    <article class="feature-card">
+      <div class="feature-pill">More</div>
+      <div class="feature-title">Coming Soon</div>
+      <p>Live API integration.</p>
+    </article>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="section" id="tools">
+  <div class="section-header">
+    <div class="section-title-block">
+      <div class="section-kicker">Tools</div>
+      <div class="section-title">Build smarter.</div>
+      <div class="section-sub">Practical utilities to support your projects.</div>
+    </div>
+  </div>
+
+  <div class="feature-strip">
+    <article class="feature-card">
+      <div class="feature-pill">Tool</div>
+      <div class="feature-title">Text Cleaner</div>
+      <p>Remove noise from text instantly.</p>
+    </article>
+
+    <article class="feature-card">
+      <div class="feature-pill">Tool</div>
+      <div class="feature-title">JSON Formatter</div>
+      <p>Clean and format JSON easily.</p>
+    </article>
+
+    <article class="feature-card">
+      <div class="feature-pill">Tool</div>
+      <div class="feature-title">Color Picker</div>
+      <p>Pick and copy colors quickly.</p>
+    </article>
+
+    <article class="feature-card">
+      <div class="feature-pill">More</div>
+      <div class="feature-title">Coming Soon</div>
+      <p>More utilities on the way.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-header">
+    <div class="section-title-block">
+      <div class="section-kicker">About</div>
+      <div class="section-title">The ALAEAI Story.</div>
+      <div class="section-sub">Warm, human, intentional.</div>
+    </div>
+  </div>
+
+  <div class="roadmap">
+    <div>
+      <div class="roadmap-title">Why ALAEAI?</div>
+      <div class="roadmap-sub">
+        A calm, warm space built to help you grow.
+      </div>
+      <p style="font-family:'Aharoni';font-size:13px;color:var(--text-sub);line-height:1.7;">
+        ALAEAI is designed to feel like a personal creative studio — warm, minimal, and focused.
+        Tutorials, tools, news, and portfolio all live together in harmony.
+      </p>
+    </div>
+
+    <div>
+      <div class="roadmap-title">Vision</div>
+      <div class="roadmap-sub">A complete workspace.</div>
+      <p style="font-family:'Aharoni';font-size:13px;color:var(--text-sub);line-height:1.7;">
+        The goal is to evolve into a full creative environment with dashboards, stats, and personalized flows.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="section-header">
+    <div class="section-title-block">
+      <div class="section-kicker">Contact</div>
+      <div class="section-title">Let’s connect.</div>
+      <div class="section-sub">Reach out anytime.</div>
+    </div>
+  </div>
+
+  <div class="feature-strip">
+    <article class="feature-card">
+      <div class="feature-pill">Email</div>
+      <div class="feature-title">Get in touch</div>
+      <p>contact@alaeai.com</p>
+    </article>
+
+    <article class="feature-card">
+      <div class="feature-pill">Social</div>
+      <div class="feature-title">Instagram</div>
+      <p>@alaeai</p>
+    </article>
+
+    <article class="feature-card">
+      <div class="feature-pill">Social</div>
+      <div class="feature-title">GitHub</div>
+      <p>github.com/alaeai</p>
+    </article>
+
+    <article class="feature-card">
+      <div class="feature-pill">More</div>
+      <div class="feature-title">Coming Soon</div>
+      <p>More ways to connect.</p>
+    </article>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 <span class="accent">ALAEAI</span> — Warm Portfolio • Build. Learn. Create.
+  <div class="footer-ad">
+    <div class="footer-ad-label">Sponsored • Footer</div>
+    <div class="footer-ad-inner">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6065282700750014"
+           data-ad-slot="6789012345"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+    </div>
+  </div>
+</footer>
+
+</div>
 </main>
 
 <script>
+/* Smooth scroll */
 function scrollToId(id){
   const el=document.getElementById(id);
   if(el) el.scrollIntoView({behavior:"smooth",block:"start"});
 }
 
-/* Dark toggle */
+/* Dark mode */
 const toggle=document.getElementById("darkToggle");
-let dark=false;
-if(toggle){
-  toggle.addEventListener("click",()=>{
-    dark=!dark;
-    document.body.style.background=dark?"#020102":"#050304";
-    toggle.textContent=dark?"Light Mode":"Dark Mode";
+toggle.addEventListener("click",()=>{
+  document.body.classList.toggle("dark-mode");
+  toggle.textContent=document.body.classList.contains("dark-mode")
+    ?"Light Mode"
+    :"Dark Mode";
+});
+
+/* 2D follow cursor card */
+const card=document.getElementById("bannerCard");
+if(card){
+  card.addEventListener("mousemove",(e)=>{
+    const rect=card.getBoundingClientRect();
+    const x=(e.clientX-rect.left)/rect.width;
+    const y=(e.clientY-rect.top)/rect.height;
+    const moveX=(x-0.5)*20;
+    const moveY=(y-0.5)*20;
+    card.style.transform=`translate(${moveX}px,${moveY}px)`;
+    card.classList.add("hovered");
+  });
+
+  card.addEventListener("mouseleave",()=>{
+    card.style.transform="translate(0,0)";
+    card.classList.remove("hovered");
   });
 }
 
-/* Ultimate follow-cursor card */
-const bannerCard=document.getElementById("bannerCard");
-if(bannerCard){
-  const maxRotate=12; // degrees
-  const maxTranslate=18; // px
-
-  bannerCard.addEventListener("mousemove",(e)=>{
-    const rect=bannerCard.getBoundingClientRect();
-    const x=(e.clientX-rect.left)/rect.width;  // 0..1
-    const y=(e.clientY-rect.top)/rect.height; // 0..1
-    const rotateY=(x-0.5)*maxRotate*2;
-    const rotateX=(0.5-y)*maxRotate*2;
-    const translateX=(x-0.5)*maxTranslate*2;
-    const translateY=(y-0.5)*maxTranslate*2;
-
-    bannerCard.style.transform=
-      `translate3d(${translateX}px,${translateY}px,0) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-    bannerCard.classList.add("hovered");
-  });
-
-  bannerCard.addEventListener("mouseleave",()=>{
-    bannerCard.style.transform="translate3d(0,0,0) rotateX(0deg) rotateY(0deg)";
-    bannerCard.classList.remove("hovered");
-  });
-}
-
-/* Ads init (multiple slots) */
+/* Ads init */
 try{
-  (adsbygoogle=window.adsbygoogle||[]).push({});
-  (adsbygoogle=window.adsbygoogle||[]).push({});
-  (adsbygoogle=window.adsbygoogle||[]).push({});
   (adsbygoogle=window.adsbygoogle||[]).push({});
   (adsbygoogle=window.adsbygoogle||[]).push({});
   (adsbygoogle=window.adsbygoogle||[]).push({});
