@@ -5,6 +5,9 @@
   <title>ALAEAI — Warm Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6065282700750014" crossorigin="anonymous"></script>
+
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet" />
 
@@ -76,6 +79,11 @@
       position: relative;
     }
 
+    .ad-container {
+      margin: 26px 0;
+      text-align: center;
+    }
+
     .bg-orb {
       position: fixed;
       border-radius: 50%;
@@ -110,7 +118,6 @@
       left: 60%;
     }
 
-    /* TOP BANNER (like tutorials) */
     .top-banner {
       width: 100%;
       height: 420px;
@@ -194,7 +201,6 @@
       }
     }
 
-    /* NAVBAR */
     .nav {
       display: flex;
       align-items: center;
@@ -222,7 +228,6 @@
       gap: 12px;
     }
 
-    /* NO IMAGE HERE ANYMORE */
     .nav-logo-wrap {
       width: 40px;
       height: 40px;
@@ -346,755 +351,17 @@
       color: var(--text);
     }
 
-    /* HERO */
-    .hero {
-      margin-top: 30px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-      gap: 26px;
-      align-items: stretch;
-    }
-
-    .hero-main {
-      background: radial-gradient(circle at top left, rgba(242, 194, 107, 0.18), rgba(255, 255, 255, 0.96));
-      border-radius: var(--radius-lg);
-      padding: 24px 24px 26px;
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
-      position: relative;
-      overflow: hidden;
-      transform: translateY(18px);
-      opacity: 0;
-      animation: heroIn 0.9s var(--transition-med) forwards;
-    }
-
-    body.dark .hero-main {
-      background: radial-gradient(circle at top left, rgba(242, 194, 107, 0.18), rgba(18, 12, 8, 0.98));
-    }
-
-    .hero-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      color: var(--subtext);
-      font-size: 11px;
-      margin-bottom: 12px;
-    }
-
-    body.dark .hero-pill {
-      background: rgba(10, 6, 4, 0.96);
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .hero-pill-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #3cff8f;
-      box-shadow: 0 0 10px rgba(60, 255, 143, 0.9);
-    }
-
-    .hero-title {
-      font-family: "Poppins", system-ui;
-      font-weight: 800;
-      font-size: 36px;
-      line-height: 1.05;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .hero-title span.accent {
-      background: linear-gradient(120deg, #f2c26b, #ffe3b0);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-sub {
-      font-size: 14px;
-      color: var(--subtext);
-      max-width: 520px;
-      margin-bottom: 18px;
-    }
-
-    .hero-pills-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 18px;
-    }
-
-    .hero-pill-tag {
-      font-size: 11px;
-      padding: 5px 11px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      background: rgba(255, 255, 255, 0.9);
-      color: var(--subtext);
-    }
-
-    body.dark .hero-pill-tag {
-      background: rgba(10, 6, 4, 0.96);
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .btn-primary {
-      padding: 10px 20px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(242, 194, 107, 0.9);
-      background: radial-gradient(circle at 0 0, rgba(242, 194, 107, 0.7), rgba(242, 194, 107, 0.2));
-      color: #2b1a0d;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      box-shadow: 0 0 22px rgba(242, 194, 107, 0.9);
-      cursor: pointer;
-      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 0 28px rgba(242, 194, 107, 1);
-      background: radial-gradient(circle at 0 0, rgba(242, 194, 107, 0.85), rgba(242, 194, 107, 0.26));
-    }
-
-    .btn-ghost {
-      padding: 10px 18px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(0, 0, 0, 0.12);
-      background: rgba(255, 255, 255, 0.9);
-      color: var(--subtext);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), color var(--transition-fast);
-    }
-
-    body.dark .btn-ghost {
-      background: rgba(10, 6, 4, 0.96);
-      border-color: rgba(255, 255, 255, 0.12);
-      color: var(--subtext);
-    }
-
-    .btn-ghost:hover {
-      transform: translateY(-2px);
-      background: rgba(242, 194, 107, 0.12);
-      border-color: rgba(242, 194, 107, 0.6);
-      color: var(--text);
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      font-size: 11px;
-      color: var(--subtext);
-    }
-
-    .hero-meta-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .hero-meta-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: rgba(242, 194, 107, 0.9);
-      box-shadow: 0 0 10px rgba(242, 194, 107, 0.9);
-    }
-
-    .hero-side {
-      background: radial-gradient(circle at top, rgba(242, 194, 107, 0.22), rgba(255, 255, 255, 0.96));
-      border-radius: var(--radius-lg);
-      padding: 18px 18px 20px;
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-strong);
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      position: relative;
-      overflow: hidden;
-      transform: translateY(24px) translateX(12px);
-      opacity: 0;
-      animation: heroSideIn 1s var(--transition-med) forwards;
-    }
-
-    body.dark .hero-side {
-      background: radial-gradient(circle at top, rgba(242, 194, 107, 0.22), rgba(18, 12, 8, 0.98));
-    }
-
-    .hero-side-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--subtext);
-    }
-
-    .hero-side-title {
-      font-family: "Poppins", system-ui;
-      font-weight: 700;
-      font-size: 16px;
-      margin-bottom: 4px;
-    }
-
-    .hero-side-sub {
-      font-size: 12px;
-      color: var(--subtext);
-      margin-bottom: 8px;
-    }
-
-    .hero-grid-preview {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .preview-card {
-      border-radius: 16px;
-      padding: 10px 10px 12px;
-      background: rgba(255, 255, 255, 0.96);
-      border: 1px solid rgba(0, 0, 0, 0.04);
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      cursor: pointer;
-      transform: translateY(0) translateZ(0);
-      transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med), background var(--transition-med);
-    }
-
-    body.dark .preview-card {
-      background: rgba(18, 12, 8, 0.98);
-      border-color: rgba(255, 255, 255, 0.06);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.9);
-    }
-
-    .preview-card:hover {
-      transform: translateY(-6px) translateZ(0) rotate3d(1, -1, 0, 4deg);
-      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.25);
-      border-color: rgba(242, 194, 107, 0.7);
-      background: rgba(255, 255, 255, 1);
-    }
-
-    body.dark .preview-card:hover {
-      background: rgba(22, 14, 9, 1);
-    }
-
-    .preview-tag {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--subtext);
-    }
-
-    .preview-title {
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .preview-meta {
-      font-size: 11px;
-      color: var(--subtext);
-    }
-
-    .hero-side-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      color: var(--subtext);
-      margin-top: 6px;
-    }
-
-    .hero-side-tag {
-      padding: 4px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      background: rgba(255, 255, 255, 0.9);
-    }
-
-    body.dark .hero-side-tag {
-      background: rgba(10, 6, 4, 0.96);
-      border-color: rgba(255, 255, 255, 0.12);
-    }
-
-    .section {
-      margin-top: 40px;
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .section-title-block {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .section-kicker {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--subtext);
-    }
-
-    .section-title {
-      font-family: "Poppins", system-ui;
-      font-weight: 700;
-      font-size: 20px;
-    }
-
-    .section-sub {
-      font-size: 13px;
-      color: var(--subtext);
-    }
-
-    .section-cta-inline {
-      font-size: 11px;
-      color: var(--accent);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(242, 194, 107, 0.4);
-      background: rgba(255, 255, 255, 0.9);
-      transition: background var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
-    }
-
-    body.dark .section-cta-inline {
-      background: rgba(10, 6, 4, 0.96);
-      border-color: rgba(242, 194, 107, 0.5);
-    }
-
-    .section-cta-inline:hover {
-      background: rgba(242, 194, 107, 0.12);
-      transform: translateY(-1px);
-      border-color: rgba(242, 194, 107, 0.7);
-      color: var(--text);
-    }
-
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: 1.4fr 1.1fr;
-      gap: 18px;
-    }
-
-    .portfolio-main-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .portfolio-card {
-      background: var(--card);
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
-      padding: 14px 14px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      transform: translateY(18px);
-      opacity: 0;
-    }
-
-    .portfolio-card:nth-child(1) { animation: cardIn 0.7s 0.1s forwards; }
-    .portfolio-card:nth-child(2) { animation: cardIn 0.7s 0.2s forwards; }
-    .portfolio-card:nth-child(3) { animation: cardIn 0.7s 0.3s forwards; }
-    .portfolio-card:nth-child(4) { animation: cardIn 0.7s 0.4s forwards; }
-
-    .portfolio-card::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle at top left, var(--accent-soft), transparent 55%);
-      opacity: 0;
-      transition: opacity var(--transition-med);
-      pointer-events: none;
-    }
-
-    .portfolio-card:hover::before {
-      opacity: 1;
-    }
-
-    .portfolio-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-strong);
-      border-color: rgba(242, 194, 107, 0.7);
-    }
-
-    .portfolio-tag-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .portfolio-tag {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--subtext);
-    }
-
-    .portfolio-pill {
-      font-size: 11px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      background: rgba(255, 255, 255, 0.9);
-      color: var(--subtext);
-    }
-
-    body.dark .portfolio-pill {
-      background: rgba(10, 6, 4, 0.96);
-      border-color: rgba(255, 255, 255, 0.12);
-    }
-
-    .portfolio-title {
-      font-family: "Poppins", system-ui;
-      font-weight: 600;
-      font-size: 15px;
-    }
-
-    .portfolio-desc {
-      font-size: 12px;
-      color: var(--subtext);
-    }
-
-    .portfolio-meta-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      color: var(--subtext);
-      margin-top: 4px;
-    }
-
-    .portfolio-meta-pill {
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(242, 194, 107, 0.12);
-      border: 1px solid rgba(242, 194, 107, 0.6);
-      color: var(--text);
-    }
-
-    .portfolio-side {
-      background: var(--card);
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
-      padding: 16px 16px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      transform: translateY(24px);
-      opacity: 0;
-      animation: cardIn 0.7s 0.45s forwards;
-    }
-
-    .portfolio-side-title {
-      font-family: "Poppins", system-ui;
-      font-weight: 600;
-      font-size: 15px;
-    }
-
-    .portfolio-side-sub {
-      font-size: 12px;
-      color: var(--subtext);
-    }
-
-    .portfolio-side-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      font-size: 12px;
-      color: var(--subtext);
-    }
-
-    .portfolio-side-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 6px 8px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(0, 0, 0, 0.04);
-      cursor: pointer;
-      transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
-    }
-
-    body.dark .portfolio-side-item {
-      background: rgba(10, 6, 4, 0.96);
-      border-color: rgba(255, 255, 255, 0.06);
-    }
-
-    .portfolio-side-item:hover {
-      background: rgba(242, 194, 107, 0.12);
-      border-color: rgba(242, 194, 107, 0.6);
-      transform: translateY(-2px);
-    }
-
-    .portfolio-side-item span.badge {
-      font-size: 10px;
-      padding: 3px 7px;
-      border-radius: 999px;
-      background: rgba(242, 194, 107, 0.12);
-      border: 1px solid rgba(242, 194, 107, 0.6);
-      color: var(--text);
-    }
-
-    .feature-strip {
-      margin-top: 40px;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .feature-card {
-      background: var(--card);
-      border-radius: 18px;
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
-      padding: 12px 12px 14px;
-      font-size: 12px;
-      color: var(--subtext);
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      transform: translateY(18px);
-      opacity: 0;
-    }
-
-    .feature-card:nth-child(1) { animation: cardIn 0.7s 0.55s forwards; }
-    .feature-card:nth-child(2) { animation: cardIn 0.7s 0.65s forwards; }
-    .feature-card:nth-child(3) { animation: cardIn 0.7s 0.75s forwards; }
-    .feature-card:nth-child(4) { animation: cardIn 0.7s 0.85s forwards; }
-
-    .feature-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(242, 194, 107, 0.16), transparent 60%);
-      opacity: 0;
-      transition: opacity var(--transition-med);
-      pointer-events: none;
-    }
-
-    .feature-card:hover::after {
-      opacity: 1;
-    }
-
-    .feature-title {
-      font-family: "Poppins", system-ui;
-      font-weight: 600;
-      font-size: 13px;
-      color: var(--text);
-    }
-
-    .feature-pill {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--subtext);
-    }
-
-    .roadmap {
-      margin-top: 44px;
-      background: var(--card);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
-      padding: 18px 18px 20px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
-      gap: 18px;
-      transform: translateY(24px);
-      opacity: 0;
-      animation: cardIn 0.7s 0.95s forwards;
-    }
-
-    .roadmap-title {
-      font-family: "Poppins", system-ui;
-      font-weight: 700;
-      font-size: 18px;
-      margin-bottom: 6px;
-    }
-
-    .roadmap-sub {
-      font-size: 13px;
-      color: var(--subtext);
-      margin-bottom: 10px;
-    }
-
-    .roadmap-phases {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      font-size: 12px;
-      color: var(--subtext);
-    }
-
-    .roadmap-phase {
-      padding: 8px 10px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(0, 0, 0, 0.04);
-      transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
-    }
-
-    body.dark .roadmap-phase {
-      background: rgba(10, 6, 4, 0.96);
-      border-color: rgba(255, 255, 255, 0.06);
-    }
-
-    .roadmap-phase:hover {
-      background: rgba(242, 194, 107, 0.12);
-      border-color: rgba(242, 194, 107, 0.6);
-      transform: translateY(-2px);
-    }
-
-    .roadmap-phase-title {
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 2px;
-    }
-
-    .roadmap-phase-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--subtext);
-      margin-bottom: 2px;
-    }
-
-    .roadmap-metrics {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      font-size: 12px;
-      color: var(--subtext);
-    }
-
-    .roadmap-metric {
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      background: rgba(255, 255, 255, 0.9);
-    }
-
-    body.dark .roadmap-metric {
-      background: rgba(10, 6, 4, 0.96);
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    footer {
-      margin-top: 40px;
-      padding: 20px 0 10px;
-      font-size: 12px;
-      color: var(--subtext);
-      text-align: center;
-    }
-
-    footer span.accent {
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    @media (max-width: 980px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .hero-side {
-        transform: translateY(18px);
-      }
-      .portfolio-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .roadmap {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    @media (max-width: 760px) {
-      .nav {
-        padding-inline: 12px;
-      }
-      .nav-links {
-        display: none;
-      }
-      .hero-title {
-        font-size: 30px;
-      }
-      .portfolio-main-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .feature-strip {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-      .page-shell {
-        padding-inline: 14px;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .feature-strip {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    @keyframes heroIn {
-      from { opacity: 0; transform: translateY(26px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes heroSideIn {
-      from { opacity: 0; transform: translateY(30px) translateX(12px); }
-      to { opacity: 1; transform: translateY(0) translateX(0); }
-    }
-
-    @keyframes cardIn {
-      from { opacity: 0; transform: translateY(26px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
   </style>
 </head>
+
 <body>
+
   <!-- ORBS -->
   <div class="bg-orb orb-1"></div>
   <div class="bg-orb orb-2"></div>
   <div class="bg-orb orb-3"></div>
 
-  <!-- TOP BANNER (ONLY PLACE WHERE assets/logo.png IS USED) -->
+  <!-- TOP BANNER -->
   <section class="top-banner">
     <img src="assets/logo.png" alt="AlaeAI Banner" class="top-banner-img">
     <div class="top-banner-overlay"></div>
@@ -1106,7 +373,8 @@
   </section>
 
   <div class="page-shell">
-    <!-- NAVBAR (NO IMAGE HERE) -->
+
+    <!-- NAVBAR -->
     <header class="nav">
       <div class="nav-left">
         <div class="nav-logo-wrap">A</div>
@@ -1126,6 +394,17 @@
         <button class="nav-toggle" id="darkToggle">Dark Mode</button>
       </div>
     </header>
+
+    <!-- TOP AD -->
+    <div class="ad-container">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6065282700750014"
+           data-ad-slot="6794664785"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
 
     <!-- HERO -->
     <section class="hero" id="hero">
@@ -1175,6 +454,7 @@
           <div class="preview-card" onclick="scrollToId('portfolio')">
             <div class="preview-tag">Tutorials</div>
             <div class="preview-title">Level-based AI learning</div>
+            <div class="preview-meta">Foundations, builder mode, and advanced
             <div class="preview-meta">Foundations, builder mode, and advanced deep dives.</div>
           </div>
           <div class="preview-card" onclick="scrollToId('features')">
@@ -1282,12 +562,25 @@
             </div>
           </article>
         </div>
+        </div>
 
         <aside class="portfolio-side">
           <div class="portfolio-side-title">How this portfolio is structured</div>
           <div class="portfolio-side-sub">
             Instead of random sections, everything is grouped into clear pillars that match how you actually learn and build.
           </div>
+
+          <!-- SIDEBAR AD -->
+          <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-6065282700750014"
+                 data-ad-slot="4826976992"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          </div>
+
           <div class="portfolio-side-list">
             <div class="portfolio-side-item" onclick="location.href='tutorials.html'">
               <span>Tutorials • Learn step by step</span>
@@ -1424,6 +717,18 @@
     <footer>
       © 2026 <span class="accent">ALAEAI</span> — Warm Portfolio • Build. Learn. Create.
     </footer>
+
+    <!-- FOOTER AD -->
+    <div class="ad-container">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6065282700750014"
+           data-ad-slot="4678697983"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
   </div>
 
   <script>
@@ -1465,5 +770,6 @@
       });
     });
   </script>
+
 </body>
 </html>
