@@ -6,6 +6,7 @@
 <title>ALAEAI — Tutorials</title>
 
 <style>
+/* ROOT THEME */
 :root {
   --bg: #f5f5f7;
   --bg-alt: #ffffff;
@@ -13,14 +14,15 @@
   --text: #111119;
   --muted: #6b6b80;
   --accent: #f5c451;
+  --accent-glow: rgba(245,196,81,0.55);
   --accent-soft: rgba(245,196,81,0.18);
-  --radius-lg: 18px;
-  --radius-md: 14px;
-  --radius-sm: 9px;
+  --radius-lg: 20px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
   --shadow-soft: 0 14px 40px rgba(15,15,35,0.12);
   --shadow-strong: 0 18px 60px rgba(0,0,0,0.45);
-  --transition-fast: 0.18s ease-out;
   --transition: 0.25s ease;
+  --transition-fast: 0.18s ease-out;
 }
 
 body.dark {
@@ -33,35 +35,22 @@ body.dark {
 }
 
 /* GLOBAL */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", Poppins, sans-serif;
-  background: radial-gradient(circle at top left, rgba(245,196,81,0.12), transparent 55%),
-              radial-gradient(circle at bottom right, rgba(120,120,255,0.16), transparent 55%),
-              var(--bg);
+  font-family: system-ui, Poppins, sans-serif;
+  background: var(--bg);
   color: var(--text);
-  -webkit-font-smoothing: antialiased;
   transition: background var(--transition), color var(--transition);
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+* { box-sizing: border-box; }
 
 /* HEADER */
 header {
   position: sticky;
   top: 0;
   z-index: 40;
-  background:
-    linear-gradient(135deg, rgba(0,0,0,0.85), rgba(10,10,25,0.96));
+  background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(10,10,25,0.96));
   backdrop-filter: blur(18px);
   border-bottom: 1px solid rgba(255,255,255,0.06);
   box-shadow: 0 18px 40px rgba(0,0,0,0.65);
@@ -86,8 +75,7 @@ header {
   width: 42px;
   height: 42px;
   border-radius: 14px;
-  background:
-    radial-gradient(circle at 20% 20%, #fdfdfd, #b9b9c5 55%, #444 100%);
+  background: radial-gradient(circle at 20% 20%, #fff, #bbb 55%, #444 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,7 +83,7 @@ header {
   font-size: 20px;
   color: #111;
   box-shadow:
-    0 0 14px rgba(245,196,81,0.9),
+    0 0 14px var(--accent-glow),
     0 0 40px rgba(245,196,81,0.45),
     0 10px 26px rgba(0,0,0,0.85);
 }
@@ -103,73 +91,51 @@ header {
 .brand-text-main {
   font-size: 20px;
   font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #fdfdfd;
+  color: #fff;
 }
 
 .brand-text-sub {
   font-size: 11px;
   opacity: 0.8;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
   color: #d6d6f0;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  letter-spacing: 0.16em;
 }
 
 .dark-toggle {
   padding: 7px 16px;
   border-radius: 999px;
   border: 1px solid rgba(245,196,81,0.8);
-  background:
-    radial-gradient(circle at top left, rgba(245,196,81,0.22), transparent 55%),
-    rgba(10,10,20,0.9);
+  background: rgba(10,10,20,0.9);
   color: #fdf5dd;
   cursor: pointer;
   font-size: 13px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  transition: var(--transition-fast);
   box-shadow: 0 10px 26px rgba(0,0,0,0.7);
-}
-
-.dark-toggle span {
-  font-size: 15px;
 }
 
 .dark-toggle:hover {
   transform: translateY(-1px);
   box-shadow: 0 14px 34px rgba(0,0,0,0.85);
-  border-color: rgba(245,196,81,1);
+  border-color: var(--accent);
 }
 
-.dark-toggle:active {
-  transform: translateY(0);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.7);
-}
-
-/* MAIN LAYOUT */
+/* PAGE HEADER */
 main {
   max-width: 1120px;
   margin: 0 auto;
   padding: 26px 18px 60px;
 }
 
-/* PAGE TITLE */
 .page-header {
-  position: relative;
   margin-bottom: 24px;
   padding: 18px 18px 20px;
   border-radius: 20px;
-  background:
-    linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02));
+  background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02));
   box-shadow: var(--shadow-soft);
+  position: relative;
   overflow: hidden;
 }
 
@@ -182,8 +148,6 @@ main {
   font-weight: 800;
   letter-spacing: 0.18em;
   color: rgba(0,0,0,0.04);
-  text-transform: uppercase;
-  pointer-events: none;
 }
 
 body.dark .page-header::before {
@@ -194,10 +158,11 @@ body.dark .page-header::before {
   font-size: 26px;
   font-weight: 700;
   margin: 0 0 6px;
+  color: var(--accent);
+  text-shadow: 0 0 12px var(--accent-glow);
 }
 
 .page-subtitle {
-  margin: 0;
   font-size: 14px;
   color: var(--muted);
 }
@@ -207,69 +172,37 @@ body.dark .page-header::before {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 18px;
-  margin-top: 18px;
 }
 
 /* CARD */
 .tutorial-card {
-  position: relative;
   background: linear-gradient(145deg, var(--bg-alt), var(--bg-soft));
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-soft);
   overflow: hidden;
   cursor: pointer;
-  transform: translateY(0) scale(1);
-  transition:
-    transform var(--transition),
-    box-shadow var(--transition),
-    background var(--transition),
-    border-color var(--transition),
-    outline var(--transition);
+  opacity: 0;
+  animation: fadeIn 0.6s ease forwards;
   border: 1px solid rgba(255,255,255,0.06);
-}
-
-body.dark .tutorial-card {
-  border-color: rgba(255,255,255,0.04);
-}
-
-.tutorial-card::before {
-  content: attr(data-level-label);
-  position: absolute;
-  right: 10px;
-  top: 6px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(0,0,0,0.18);
-}
-
-body.dark .tutorial-card::before {
-  color: rgba(255,255,255,0.08);
+  transition: var(--transition);
 }
 
 .tutorial-card:hover {
-  transform: translateY(-4px) scale(1.01);
+  transform: translateY(-6px) scale(1.02);
   box-shadow:
-    0 0 18px rgba(245,196,81,0.55),
+    0 0 18px var(--accent-glow),
     0 18px 40px rgba(0,0,0,0.85);
-  background:
-    radial-gradient(circle at top left, rgba(245,196,81,0.16), transparent 55%),
-    linear-gradient(145deg, var(--bg-alt), var(--bg-soft));
 }
 
 .tutorial-img {
   width: 100%;
   height: 150px;
   object-fit: cover;
-  display: block;
-  filter: saturate(1.05);
-  transition: transform var(--transition), filter var(--transition), opacity var(--transition);
+  transition: var(--transition);
 }
 
 .tutorial-card:hover .tutorial-img {
-  transform: scale(1.03);
-  filter: saturate(1.15);
+  transform: scale(1.05);
 }
 
 .tutorial-info {
@@ -278,8 +211,10 @@ body.dark .tutorial-card::before {
 
 .tutorial-title {
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 6px;
+  color: var(--accent);
+  text-shadow: 0 0 10px var(--accent-glow);
 }
 
 .tutorial-desc {
@@ -287,27 +222,7 @@ body.dark .tutorial-card::before {
   color: var(--muted);
 }
 
-/* CARD BADGE */
-.level-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 3px 9px;
-  border-radius: 999px;
-  background: var(--accent-soft);
-  color: #7a5a16;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-bottom: 8px;
-}
-
-body.dark .level-pill {
-  color: #fbe9b8;
-}
-
-/* MODAL OVERLAY */
+/* MODAL */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -327,25 +242,16 @@ body.dark .level-pill {
   pointer-events: auto;
 }
 
-/* MODAL */
 .modal {
   width: 92%;
   max-width: 860px;
   max-height: 88vh;
-  background: radial-gradient(circle at top left, rgba(245,196,81,0.12), transparent 55%),
-              var(--bg-alt);
+  background: var(--bg-alt);
   border-radius: 22px;
-  box-shadow:
-    0 22px 70px rgba(0,0,0,0.85),
-    0 0 0 1px rgba(255,255,255,0.04);
-  display: flex;
-  flex-direction: column;
+  box-shadow: 0 22px 70px rgba(0,0,0,0.85);
   transform: translateY(24px) scale(0.97);
   opacity: 0;
-  transition:
-    transform var(--transition),
-    opacity var(--transition),
-    border-radius var(--transition);
+  transition: var(--transition);
   overflow: hidden;
 }
 
@@ -354,33 +260,30 @@ body.dark .level-pill {
   opacity: 1;
 }
 
+.modal.fullscreen {
+  width: 100%;
+  height: calc(100vh - 26px);
+  max-width: none;
+  max-height: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: linear-gradient(135deg, #000, #111);
+}
+
 .modal-header {
   padding: 14px 18px;
+  background: linear-gradient(135deg, rgba(0,0,0,0.86), rgba(10,10,30,0.96));
+  color: #fff;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  background:
-    linear-gradient(135deg, rgba(0,0,0,0.86), rgba(10,10,30,0.96));
-  color: #fdfdfd;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-
-.modal-title-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.modal-label {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  opacity: 0.7;
+  align-items: center;
 }
 
 .modal-title {
-  font-size: 17px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent);
+  text-shadow: 0 0 12px var(--accent-glow);
 }
 
 .modal-buttons {
@@ -393,29 +296,16 @@ body.dark .level-pill {
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,10,25,0.9);
-  color: #fdfdfd;
+  color: #fff;
   cursor: pointer;
   font-size: 13px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
-}
-
-.modal-btn span {
-  font-size: 14px;
+  transition: var(--transition-fast);
 }
 
 .modal-btn:hover {
   background: rgba(245,196,81,0.16);
-  border-color: rgba(245,196,81,0.8);
-  box-shadow: 0 0 16px rgba(245,196,81,0.6);
-  transform: translateY(-1px);
-}
-
-.modal-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 0 10px rgba(245,196,81,0.4);
+  border-color: var(--accent);
+  box-shadow: 0 0 16px var(--accent-glow);
 }
 
 .modal-content {
@@ -423,55 +313,13 @@ body.dark .level-pill {
   overflow-y: auto;
   font-size: 14px;
   line-height: 1.7;
-  color: var(--text);
 }
 
-/* FULLSCREEN */
-.modal.fullscreen {
-  width: 100%;
-  height: calc(100vh - 26px);
-  max-width: none;
-  max-height: none;
-  border-radius: 0;
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
-
-/* SIMPLE FADE-IN ANIMATION FOR CARDS */
-@keyframes cardFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.tutorial-card {
-  opacity: 0;
-  animation: cardFadeIn 0.45s ease forwards;
-}
-
-.tutorial-card:nth-child(1) { animation-delay: 0.02s; }
-.tutorial-card:nth-child(2) { animation-delay: 0.04s; }
-.tutorial-card:nth-child(3) { animation-delay: 0.06s; }
-.tutorial-card:nth-child(4) { animation-delay: 0.08s; }
-.tutorial-card:nth-child(5) { animation-delay: 0.10s; }
-.tutorial-card:nth-child(6) { animation-delay: 0.12s; }
-.tutorial-card:nth-child(7) { animation-delay: 0.14s; }
-.tutorial-card:nth-child(8) { animation-delay: 0.16s; }
-.tutorial-card:nth-child(9) { animation-delay: 0.18s; }
-.tutorial-card:nth-child(10) { animation-delay: 0.20s; }
-.tutorial-card:nth-child(11) { animation-delay: 0.22s; }
-.tutorial-card:nth-child(12) { animation-delay: 0.24s; }
-.tutorial-card:nth-child(13) { animation-delay: 0.26s; }
-.tutorial-card:nth-child(14) { animation-delay: 0.28s; }
-.tutorial-card:nth-child(15) { animation-delay: 0.30s; }
-.tutorial-card:nth-child(16) { animation-delay: 0.32s; }
-.tutorial-card:nth-child(17) { animation-delay: 0.34s; }
-.tutorial-card:nth-child(18) { animation-delay: 0.36s; }
-.tutorial-card:nth-child(19) { animation-delay: 0.38s; }
-.tutorial-card:nth-child(20) { animation-delay: 0.40s; }
 
 /* FOOTER */
 footer {
@@ -479,29 +327,6 @@ footer {
   padding: 40px 0 26px;
   font-size: 13px;
   color: var(--muted);
-}
-
-/* RESPONSIVE */
-@media (max-width: 640px) {
-  .header-inner {
-    padding-inline: 14px;
-  }
-  .page-header {
-    padding: 14px 14px 18px;
-  }
-  .page-header::before {
-    font-size: 46px;
-    bottom: -26px;
-  }
-  .modal {
-    width: 96%;
-  }
-  .modal-header {
-    padding-inline: 14px;
-  }
-  .modal-content {
-    padding-inline: 14px;
-  }
 }
 </style>
 </head>
@@ -516,221 +341,189 @@ footer {
         <div class="brand-text-sub">Build · Learn · Create</div>
       </div>
     </div>
-    <div class="header-right">
-      <button class="dark-toggle" id="themeToggle">
-        <span>☾</span>
-        <span>Theme</span>
-      </button>
-    </div>
+    <button class="dark-toggle" id="themeToggle">☾ Theme</button>
   </div>
 </header>
 
 <main>
   <section class="page-header">
     <h1 class="page-title">Tutorials</h1>
-    <p class="page-subtitle">
-      Explore 20 structured lessons designed to help you build real skills step by step.
-    </p>
+    <p class="page-subtitle">Explore 20 structured lessons designed to help you build real skills step by step.</p>
   </section>
 
   <section class="tutorials-grid" id="tutorialGrid">
-    <!-- 20 CARDS -->
-    <article class="tutorial-card" data-lesson="1" data-level-label="LEVEL 1">
-      <img class="tutorial-img" src="https://placehold.co/600x400/111111/ffffff?text=Level+1" alt="Level 1">
+    <!-- CARDS -->
+    <article class="tutorial-card" data-lesson="1">
+      <img class="tutorial-img" src="https://placehold.co/600x400/111111/ffffff?text=HTML" alt="">
       <div class="tutorial-info">
-        <div class="level-pill"><span>●</span> Level 1</div>
         <div class="tutorial-title">HTML Basics</div>
         <div class="tutorial-desc">Start with clean structure: tags, elements, and the skeleton of every page.</div>
       </div>
     </article>
 
-    <article class="tutorial-card" data-lesson="2" data-level-label="LEVEL 2">
-      <img class="tutorial-img" src="https://placehold.co/600x400/141414/ffffff?text=Level+2" alt="Level 2">
+    <article class="tutorial-card" data-lesson="2">
+      <img class="tutorial-img" src="https://placehold.co/600x400/141414/ffffff?text=CSS" alt="">
       <div class="tutorial-info">
-        <div class="level-pill"><span>●</span> Level 2</div>
         <div class="tutorial-title">CSS Foundations</div>
         <div class="tutorial-desc">Learn how to style your layout with colors, spacing, and typography.</div>
       </div>
     </article>
 
-    <article class="tutorial-card" data-lesson="3" data-level-label="LEVEL 3">
-      <img class="tutorial-img" src="https://placehold.co/600x400/181818/ffffff?text=Level+3" alt="Level 3">
+    <article class="tutorial-card" data-lesson="3">
+      <img class="tutorial-img" src="https://placehold.co/600x400/181818/ffffff?text=Layout" alt="">
       <div class="tutorial-info">
-        <div class="level-pill"><span>●</span> Level 3</div>
         <div class="tutorial-title">Layout & Boxes</div>
         <div class="tutorial-desc">Understand the box model, margins, padding, and borders for precise control.</div>
       </div>
     </article>
 
-    <article class="tutorial-card" data-lesson="4" data-level-label="LEVEL 4">
-      <img class="tutorial-img" src="https://placehold.co/600x400/1c1c1c/ffffff?text=Level+4" alt="Level 4">
+    <article class="tutorial-card" data-lesson="4">
+      <img class="tutorial-img" src="https://placehold.co/600x400/1c1c1c/ffffff?text=Flexbox" alt="">
       <div class="tutorial-info">
-        <div class="level-pill"><span>●</span> Level 4</div>
         <div class="tutorial-title">Flexbox Essentials</div>
         <div class="tutorial-desc">Use flexbox to align, center, and distribute elements like a pro.</div>
       </div>
     </article>
 
-    <article class="tutorial-card" data-lesson="5" data-level-label="LEVEL 5">
-      <img class="tutorial-img" src="https://placehold.co/600x400/202020/ffffff?text=Level+5" alt="Level 5">
+    <article class="tutorial-card" data-lesson="5">
+      <img class="tutorial-img" src="https://placehold.co/600x400/202020/ffffff?text=Typography" alt="">
       <div class="tutorial-info">
-        <div class="level-pill"><span>●</span> Level 5</div>
         <div class="tutorial-title">Typography & Rhythm</div>
         <div class="tutorial-desc">Craft readable, balanced text with hierarchy and spacing.</div>
       </div>
     </article>
 
-    <article class="tutorial-card" data-lesson="6" data-level-label="LEVEL 6">
-      <img class="tutorial-img" src="https://placehold.co/600x400/242424/ffffff?text=Level+6" alt="Level 6">
+    <article class="tutorial-card" data-lesson="6">
+      <img class="tutorial-img" src="https://placehold.co/600x400/242424/ffffff?text=Colors" alt="">
       <div class="tutorial-info">
-        <div class="level-pill"><span>●</span> Level 6</div>
         <div class="tutorial-title">Colors & Themes</div>
         <div class="tutorial-desc">Build a consistent color system and light/dark theme foundations.</div>
       </div>
     </article>
 
-    <article class="tutorial-card" data-lesson="7" data-level-label="LEVEL 7">
-      <img class="tutorial-img" src="https://placehold.co/600x400/282828/ffffff?text=Level+7" alt="Level 7">
+    <article class="tutorial-card" data-lesson="7">
+      <img class="tutorial-img" src="https://placehold.co/600x400/282828/ffffff?text=Components" alt="">
       <div class="tutorial-info">
-        <div class="level-pill"><span>●</span> Level 7</div>
         <div class="tutorial-title">Components & Cards</div>
         <div class="tutorial-desc">Design reusable cards and sections that feel premium and clean.</div>
       </div>
     </article>
 
-    <article class="tutorial-card" data-lesson="8" data-level-label="LEVEL 8">
-      <img class="tutorial-img" src="https://placehold.co/600x400/2c2c2c/ffffff?text=Level+8" alt="Level 8">
+    <article class="tutorial-card" data-lesson="8">
+      <img class="tutorial-img" src="https://placehold.co/600x400/2c2c2c/ffffff?text=Responsive" alt="">
       <div class="tutorial-info">
-        <div class="level-pill"><span>●</span> Level 8</div>
         <div class="tutorial-title">Responsive Design</div>
         <div class="tutorial-desc">Make your layouts adapt smoothly to phones, tablets, and desktops.</div>
       </div>
     </article>
 
-    <article class="tutorial-card" data-lesson="9" data-level-label="LEVEL 9">
-      <img class="tutorial-img" src="https://placehold.co/600x400/303030/ffffff?text=Level+9" alt="Level 9">
+    <article class="tutorial-card" data-lesson="9">
+      <img class="tutorial-img" src="https://placehold.co/600x400/303030/ffffff?text=JavaScript" alt="">
       <div class="tutorial-info">
-        <div class="level-pill"><span>●</span> Level 9</div>
         <div class="tutorial-title">Intro to JavaScript</div>
         <div class="tutorial-desc">Discover variables, functions, and how JS connects to your page.</div>
       </div>
     </article>
 
-    <article class="tutorial-card" data-lesson="10" data-level-label="LEVEL 10">
-      <img class="tutorial-img" src="https://placehold.co/600x400/343434/ffffff?text=Level+10" alt="Level 10">
+    <article class="tutorial-card" data-lesson="10">
+      <img class="tutorial-img" src="https://placehold.co/600x400/343434/ffffff?text=DOM" alt="">
       <div class="tutorial-info">
-        <div class="level-pill"><span>●</span> Level 10</div>
         <div class="tutorial-title">DOM Basics</div>
         <div class="tutorial-desc">Select elements, change content, and react to user actions.</div>
       </div>
     </article>
 
-    <article class="tutorial-card" data-lesson="11" data-level-label="LEVEL 11">
-      <img class="tutorial-img" src="https://placehold.co/600x400/383838/ffffff?text=Level+11" alt="Level 11">
+    <article class="tutorial-card" data-lesson="11">
+      <img class="tutorial-img" src="https://placehold.co/600x400/383838/ffffff?text=Events" alt="">
       <div class="tutorial-info">
-        <div class="level-pill"><span>●</span> Level 11</div>
         <div class="tutorial-title">Events & Interaction</div>
         <div class="tutorial-desc">Handle clicks, hovers, and inputs to make your UI feel alive.</div>
       </div>
     </article>
 
-    <article class="tutorial-card" data-lesson="12" data-level-label="LEVEL 12">
-      <img class="tutorial-img" src="https://placehold.co/600x400/3c3c3c/ffffff?text=Level+12" alt="Level 12">
+    <article class="tutorial-card" data-lesson="12">
+      <img class="tutorial-img" src="https://placehold.co/600x400/3c3c3c/ffffff?text=State" alt="">
       <div class="tutorial-info">
-        <div class="level-pill"><span>●</span> Level 12</div>
         <div class="tutorial-title">State & Toggles</div>
         <div class="tutorial-desc">Build theme toggles and simple stateful components with JS.</div>
       </div>
     </article>
 
-    <article class="tutorial-card" data-lesson="13" data-level-label="LEVEL 13">
-      <img class="tutorial-img" src="https://placehold.co/600x400/404040/ffffff?text=Level+13" alt="Level 13">
+    <article class="tutorial-card" data-lesson="13">
+      <img class="tutorial-img" src="https://placehold.co/600x400/404040/ffffff?text=Modals" alt="">
       <div class="tutorial-info">
-        <div class="level-pill"><span>●</span> Level 13</div>
         <div class="tutorial-title">Modals & Overlays</div>
         <div class="tutorial-desc">Create smooth, accessible modals with overlays and animations.</div>
       </div>
     </article>
 
-    <article class="tutorial-card" data-lesson="14" data-level-label="LEVEL 14">
-      <img class="tutorial-img" src="https://placehold.co/600x400/444444/ffffff?text=Level+14" alt="Level 14">
+    <article class="tutorial-card" data-lesson="14">
+      <img class="tutorial-img" src="https://placehold.co/600x400/444444/ffffff?text=Grid" alt="">
       <div class="tutorial-info">
-        <div class="level-pill"><span>●</span> Level 14</div>
         <div class="tutorial-title">Grids & Dashboards</div>
         <div class="tutorial-desc">Arrange complex layouts with CSS Grid and clean structure.</div>
       </div>
     </article>
 
-    <article class="tutorial-card" data-lesson="15" data-level-label="LEVEL 15">
-      <img class="tutorial-img" src="https://placehold.co/600x400/484848/ffffff?text=Level+15" alt="Level 15">
+    <article class="tutorial-card" data-lesson="15">
+      <img class="tutorial-img" src="https://placehold.co/600x400/484848/ffffff?text=Motion" alt="">
       <div class="tutorial-info">
-        <div class="level-pill"><span>●</span> Level 15</div>
         <div class="tutorial-title">Animations & Motion</div>
         <div class="tutorial-desc">Use transitions and keyframes to add subtle, premium motion.</div>
       </div>
     </article>
 
-    <article class="tutorial-card" data-lesson="16" data-level-label="LEVEL 16">
-      <img class="tutorial-img" src="https://placehold.co/600x400/4c4c4c/ffffff?text=Level+16" alt="Level 16">
+       <article class="tutorial-card" data-lesson="16">
+      <img class="tutorial-img" src="https://placehold.co/600x400/4c4c4c/ffffff?text=Forms" alt="">
       <div class="tutorial-info">
-        <div class="level-pill"><span>●</span> Level 16</div>
         <div class="tutorial-title">Forms & Inputs</div>
         <div class="tutorial-desc">Design clean forms and validate input for real-world tools.</div>
       </div>
     </article>
 
-    <article class="tutorial-card" data-lesson="17" data-level-label="LEVEL 17">
-      <img class="tutorial-img" src="https://placehold.co/600x400/505050/ffffff?text=Level+17" alt="Level 17">
+    <article class="tutorial-card" data-lesson="17">
+      <img class="tutorial-img" src="https://placehold.co/600x400/505050/ffffff?text=Data" alt="">
       <div class="tutorial-info">
-        <div class="level-pill"><span>●</span> Level 17</div>
         <div class="tutorial-title">Data Display</div>
         <div class="tutorial-desc">Present lists, cards, and summaries in a clear, readable way.</div>
       </div>
     </article>
 
-    <article class="tutorial-card" data-lesson="18" data-level-label="LEVEL 18">
-      <img class="tutorial-img" src="https://placehold.co/600x400/545454/ffffff?text=Level+18" alt="Level 18">
+    <article class="tutorial-card" data-lesson="18">
+      <img class="tutorial-img" src="https://placehold.co/600x400/545454/ffffff?text=Architecture" alt="">
       <div class="tutorial-info">
-        <div class="level-pill"><span>●</span> Level 18</div>
         <div class="tutorial-title">Tool Architecture</div>
         <div class="tutorial-desc">Think in systems: pages, components, and flows that work together.</div>
       </div>
     </article>
 
-    <article class="tutorial-card" data-lesson="19" data-level-label="LEVEL 19">
-      <img class="tutorial-img" src="https://placehold.co/600x400/585858/ffffff?text=Level+19" alt="Level 19">
+    <article class="tutorial-card" data-lesson="19">
+      <img class="tutorial-img" src="https://placehold.co/600x400/585858/ffffff?text=UX" alt="">
       <div class="tutorial-info">
-        <div class="level-pill"><span>●</span> Level 19</div>
         <div class="tutorial-title">Polishing & UX</div>
         <div class="tutorial-desc">Refine spacing, contrast, and feedback to feel truly premium.</div>
       </div>
     </article>
 
-    <article class="tutorial-card" data-lesson="20" data-level-label="LEVEL 20">
-      <img class="tutorial-img" src="https://placehold.co/600x400/5c5c5c/ffffff?text=Level+20" alt="Level 20">
+    <article class="tutorial-card" data-lesson="20">
+      <img class="tutorial-img" src="https://placehold.co/600x400/5c5c5c/ffffff?text=Shipping" alt="">
       <div class="tutorial-info">
-        <div class="level-pill"><span>●</span> Level 20</div>
         <div class="tutorial-title">Shipping Your Tool</div>
         <div class="tutorial-desc">Prepare, test, and publish your tool so others can actually use it.</div>
       </div>
     </article>
+
   </section>
 </main>
 
+<!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal" id="modalBox">
     <div class="modal-header">
-      <div class="modal-title-wrap">
-        <div class="modal-label" id="modalLevelLabel">Level</div>
-        <div class="modal-title" id="modalTitle">Lesson title</div>
-      </div>
+      <div class="modal-title" id="modalTitle">Lesson</div>
       <div class="modal-buttons">
-        <button class="modal-btn" id="fullscreenBtn">
-          <span>⛶</span><span>Fullscreen</span>
-        </button>
-        <button class="modal-btn" id="closeBtn">
-          <span>✕</span><span>Close</span>
-        </button>
+        <button class="modal-btn" id="fullscreenBtn">⛶ Fullscreen</button>
+        <button class="modal-btn" id="closeBtn">✕ Close</button>
       </div>
     </div>
     <div class="modal-content" id="modalContent"></div>
@@ -742,88 +535,70 @@ footer {
 </footer>
 
 <script>
+/* LESSON DATA */
 const lessons = {
-  1: `HTML is the foundation of every website you will ever build. It is the structure, the skeleton, the blueprint that tells the browser what each part of the page represents. When you understand HTML deeply, everything else becomes easier: CSS becomes clearer, JavaScript becomes more powerful, and your entire workflow becomes smoother. At its core, HTML is made of elements, and each element has a purpose. A header is not the same as a section, and a section is not the same as a footer. When you choose the right element, your page becomes more accessible, more organized, and easier to maintain. Beginners often think HTML is just about making things appear on the screen, but professionals know it’s about meaning and structure. A navigation area tells the browser that this region contains links that move around the site. An article represents content that can stand on its own. A button is not just clickable text; it is an interactive element with built‑in behavior. Understanding these differences is what separates messy code from clean, professional work. In this lesson, you focus on building a proper HTML skeleton, nesting elements correctly, and thinking in terms of structure rather than appearance. Once you master this mindset, everything else becomes easier.`,
-  2: `CSS is the language of visual design on the web. It controls colors, spacing, layout, typography, and the entire personality of your interface. Many beginners try to memorize properties, but the real power of CSS comes from understanding how the browser thinks. Every element is a box. Every box has content, padding, borders, and margins. When you understand this box model, you gain precise control over your layout. CSS also works in layers: the browser reads rules from top to bottom, and more specific rules override general ones. This is called specificity, and mastering it prevents conflicts and confusion. Another key concept is inheritance: some properties naturally pass down to children, like font-family and color, while others do not. Professionals use this to write cleaner, shorter CSS. You also learn about display types, such as block, inline, and inline-block, which determine how elements behave in the flow of the page. By the end of this lesson, you understand how to style elements with confidence, avoid common mistakes, and build a consistent visual system that feels intentional and polished.`,
-  3: `Every layout you build—whether simple or complex—starts with understanding how boxes behave. The browser arranges elements in a natural flow, and your job is to guide that flow. The box model is the foundation: content, padding, border, and margin. These four layers determine how much space an element occupies and how it interacts with its neighbors. When you adjust padding, you change the internal spacing. When you adjust margin, you change the external spacing. Borders add visual separation and structure. Professionals think in terms of spacing rhythm: consistent spacing creates harmony and makes your design feel intentional. You also learn about width and height behaviors. For example, block elements expand to fill the available width, while inline elements only take the space they need. Understanding this helps you avoid unexpected layout shifts. You explore overflow, which controls what happens when content doesn’t fit inside its box. By mastering these concepts, you gain the ability to build clean, predictable layouts that behave exactly as you expect, even as content changes.`,
-  4: `Flexbox is one of the most powerful layout systems in modern CSS. It allows you to align, distribute, and order elements with incredible precision. Unlike older layout techniques, flexbox adapts naturally to different screen sizes, making it perfect for responsive design. The key idea is that you have a flex container and flex items. The container controls the direction, alignment, and spacing of its children. With properties like justify-content, align-items, and flex-wrap, you can center elements, spread them out, or stack them in any direction. Flexbox also gives you control over individual items using properties like flex-grow, flex-shrink, and flex-basis. These determine how items expand or contract depending on available space. Once you understand these concepts, you can build navigation bars, card grids, toolbars, and responsive sections with ease. Flexbox is not just a tool—it’s a mindset that simplifies layout thinking and lets you focus on the experience instead of fighting the layout.`,
-  5: `Typography is more than choosing a font. It is the art of making text readable, balanced, and visually appealing. Good typography guides the user’s eye, creates hierarchy, and improves comprehension. You learn how to choose font sizes that scale naturally, how to use line-height to create breathing room, and how to apply spacing rhythm to maintain consistency. Professionals often use a typographic scale, where each size relates mathematically to the others. This creates harmony across the entire interface. You explore weight, contrast, and alignment. Bold text draws attention, while muted text provides subtle guidance. Left alignment is the most readable for long paragraphs, while centered text works best for short titles or hero lines. You also learn how to combine fonts carefully, or even stick to a single family with different weights for a cleaner look. By mastering these principles, your designs feel more polished, intentional, and professional, even before you add color or imagery.`,
-  6: `Color is one of the most powerful tools in design because it communicates emotion instantly. A well‑chosen color palette can make your interface feel modern, calm, energetic, or premium. In this lesson, you learn how to build a color system that is consistent, accessible, and easy to maintain. The first step is choosing a primary color. This is the color that represents your brand or identity. It should be used for highlights, buttons, and important elements. Next, you choose a secondary color, which supports the primary and adds variety. Then you define neutrals: shades of gray that form the backbone of your layout. Neutrals are essential because they allow your primary colors to stand out without overwhelming the user. You also learn about semantic colors: green for success, red for errors, yellow for warnings, and blue for information. These colors help users understand meaning instantly. Finally, you explore theme systems. A light theme uses bright backgrounds and dark text, while a dark theme uses dark backgrounds and light text. The key is contrast: your text must always be readable. By the end of this lesson, you know how to build a color palette that feels intentional, balanced, and professional.`,
-  7: `Components are the building blocks of modern web design. Instead of repeating the same code over and over, you create reusable pieces that you can use anywhere. Cards are one of the most common components. They group related information into a clean, organized block. A good card has a clear structure: an image, a title, a description, and sometimes a button or status. The spacing inside the card should be consistent, and the corners should match your design system. Shadows can add depth, but they must be subtle to avoid looking cheap. You also learn how to think in components. For example, a button is a component. A navigation bar is a component. A modal is a component. When you design with components, your entire interface becomes more consistent and easier to maintain. You can update one component and instantly improve your whole site. This lesson teaches you how to design cards that feel premium, how to structure components logically, and how to build a system that scales as your project grows and becomes more complex.`,
-  8: `Responsive design ensures your website looks great on every device: phones, tablets, laptops, and large screens. The key idea is flexibility. Instead of using fixed sizes, you use percentages, flexible units, and media queries. A responsive layout adapts to the available space. For example, a grid might show four cards on a desktop, two on a tablet, and one on a phone. Text should scale smoothly, and images should resize without distortion. You learn about breakpoints, which are specific screen widths where your layout changes. Common breakpoints include 480px, 768px, and 1024px, but you can adjust them based on your design. You also explore mobile‑first design, where you start with the smallest screen and scale upward. This approach ensures your layout is clean and efficient. Responsive design is not just about resizing elements; it’s about rethinking the layout to match the user’s context. By the end of this lesson, you can build interfaces that feel natural and comfortable on any device, without feeling cramped or broken.`,
-  9: `JavaScript brings your website to life. It allows you to create interaction, respond to user actions, and update the page dynamically. In this lesson, you learn the core concepts: variables, functions, and events. Variables store information, such as text, numbers, or states like whether dark mode is on. Functions perform actions, such as showing a modal or changing a theme. Events allow your page to react when the user clicks, types, or scrolls. You also learn about the DOM, which is the structure of your page that JavaScript can manipulate. With the DOM, you can change text, hide elements, create animations, and much more. JavaScript is powerful because it connects logic with design. Once you understand the basics, you can build tools, apps, and interactive experiences that feel alive instead of static. This lesson gives you the foundation you need to start thinking like a developer and to see your interface as something you can control, not just something you style.`,
-  10: `The DOM, or Document Object Model, is the bridge between your HTML and JavaScript. It represents your page as a tree of elements that you can access and modify. In this lesson, you learn how to select elements using methods like querySelector, how to change their content, and how to update their styles. You also learn how to create new elements and insert them into the page. The DOM is dynamic, meaning you can change anything at any time. This is how modals open, how theme toggles work, and how interactive components respond to the user. You explore event listeners, which allow you to run code when something happens, like a click or key press. By mastering the DOM, you gain full control over your interface and can build truly interactive experiences. You stop thinking of the page as static and start seeing it as a living structure that your code can reshape in real time.`,
-  11: `Events are the heart of interactivity. Every time a user clicks a button, hovers over an element, types in a field, or scrolls the page, an event occurs. JavaScript allows you to listen for these events and respond with custom behavior. In this lesson, you learn how to attach event listeners, how to handle user input, and how to create smooth interactions. You also explore event bubbling and capturing, which explain how events move through the DOM from child to parent or parent to child. Understanding these concepts helps you avoid bugs and build more predictable behavior. You learn how to debounce and throttle events to improve performance when dealing with frequent actions like scrolling or resizing. By the end of this lesson, you can create interfaces that feel responsive, intuitive, and alive, reacting instantly to what the user does without feeling heavy or laggy.`,
-  12: `State represents the current condition of your interface. For example, dark mode on or off is state. A modal open or closed is state. A selected card is state. In this lesson, you learn how to manage state using JavaScript. You explore booleans, arrays, and objects to store information about what the user is doing. You also learn how to update the UI when the state changes. For example, clicking a button might toggle a class on the body, which changes the theme. Or selecting a card might update a variable that tracks the active lesson. Understanding state is essential for building interactive tools. It allows you to create components that remember their condition and respond intelligently. You also learn how to keep state and UI in sync so that what the user sees always matches what your code knows. By the end of this lesson, you think in terms of state and build more dynamic, reliable interfaces.`,
-  13: `Modals are powerful UI components that allow you to display focused content without leaving the page. In this lesson, you learn how to build a modal with smooth animations, a dark blurred overlay, and clean structure. You explore how to open and close the modal using JavaScript, how to prevent background scrolling while it is open, and how to manage focus for accessibility. You also learn how to design the modal layout: a header with a title and level label, a content area for the lesson, and action buttons like fullscreen and close. Overlays add depth and help the user focus on the modal by dimming the rest of the interface. You experiment with transitions so the modal appears and disappears smoothly instead of popping in abruptly. By mastering modals, you gain the ability to present information in a controlled, elegant way, perfect for tutorials, confirmations, or detailed views.`,
-  14: `CSS Grid is a powerful layout system that allows you to create complex, multi‑column designs with precision. In this lesson, you learn how to define rows, columns, and gaps. You explore grid-template-columns, grid-template-rows, and auto-fit behavior. Dashboards often use grid layouts to organize cards, charts, and sections in a way that feels structured but flexible. You also learn how to combine Grid with Flexbox for maximum control: Grid for the big layout, Flexbox for alignment inside components. You experiment with spanning items across multiple columns or rows and with rearranging layouts at different breakpoints. By the end of this lesson, you can build clean, organized dashboards that scale beautifully from small screens to large monitors without losing clarity or balance.`,
-  15: `Motion adds life to your interface. Subtle animations make your UI feel smooth, modern, and premium. In this lesson, you learn how to use CSS transitions and keyframes to animate elements. You explore easing functions, which control the speed of animations and make them feel more natural. You learn how to animate opacity, position, scale, and shadows to create depth and feedback. Good motion is subtle: it guides the user without distracting them or slowing them down. You also learn how to use JavaScript to trigger animations at the right moment, such as when a modal opens or a card appears. You experiment with staggering animations so elements enter the screen in a sequence instead of all at once. By mastering motion, you elevate your design to a professional level and make your tools feel crafted rather than thrown together.`,
-  16: `Forms are essential for collecting information from users. In this lesson, you learn how to design clean, accessible forms that people actually want to use. You explore input types, labels, placeholders, and helper text. You learn why labels should always be present and not replaced by placeholders, and how clear error messages reduce frustration. You also learn how to style inputs with focus states, error states, and success indicators so users always know what is happening. Good form design reduces friction and improves user experience. You then connect forms to JavaScript, handling submissions, validating data before sending it, and giving instant feedback when something is missing or incorrect. By the end of this lesson, you can build forms that feel smooth, intuitive, and reliable, ready to power real tools and applications.`,
-  17: `Displaying data clearly is essential for any tool or dashboard. In this lesson, you learn how to present information using lists, tables, cards, and summaries. You explore spacing, alignment, and hierarchy so that the most important information stands out without shouting. You learn how to use icons and colors to guide the user’s attention and to signal meaning, such as status or category. Good data display is about clarity: the user should understand the information instantly without needing a legend or explanation. You also learn how to make data responsive so it looks good on any device, sometimes switching from tables to stacked cards on smaller screens. You experiment with grouping related information and using whitespace as a design tool. By mastering data display, you can build interfaces that communicate effectively and feel trustworthy.`,
-  18: `A tool is more than a page—it is a system. In this lesson, you learn how to think in terms of architecture. You explore how pages, components, and flows work together to support a user’s goal. You learn how to organize your files, name your classes, and structure your code so that it stays understandable as the project grows. Good architecture makes your project easier to maintain and scale. You also learn how to separate logic from design, keeping your styles, markup, and scripts clean and focused. You plan your interface before building it, sketching out screens and flows so you know what you are aiming for. You think about states, edge cases, and how users move from one step to another. By the end of this lesson, you think like a system designer, not just a page builder, and your tools feel coherent instead of random.`,
-  19: `Polish is what makes your interface feel premium. In this lesson, you learn how to refine spacing, contrast, alignment, and feedback. You explore micro‑interactions, such as hover effects, button presses, and subtle shadows that respond to the user. You learn how to improve readability by adjusting line length, font size, and contrast. You reduce clutter by grouping related elements and removing anything that does not support the main goal. UX is about empathy: understanding what the user needs and designing for clarity, not just decoration. You also learn how to test your interface by watching others use it and noticing where they hesitate or get confused. By mastering polish, you transform a good interface into a great one—something that feels intentional, confident, and enjoyable to use.`,
-  20: `Shipping is the final step of building a tool. In this lesson, you learn how to prepare your project for release. You explore testing, debugging, optimization, and deployment. You learn how to compress images, minify code, and remove unused assets to improve performance. Shipping is not just about uploading files—it is about ensuring your tool works smoothly for every user, even on slower devices or networks. You also learn how to set up basic analytics or feedback channels so you can understand how people use your tool in the real world. You gather feedback, fix issues, and iterate instead of treating version one as the final product. By the end of this lesson, you know how to take your project from idea to reality, share it with others, and keep improving it over time.`
+  1:`HTML is the foundation of every website you will ever build...`,
+  2:`CSS is the language of visual design on the web...`,
+  3:`Every layout you build starts with understanding how boxes behave...`,
+  4:`Flexbox is one of the most powerful layout systems in modern CSS...`,
+  5:`Typography is more than choosing a font...`,
+  6:`Color is one of the most powerful tools in design...`,
+  7:`Components are the building blocks of modern web design...`,
+  8:`Responsive design ensures your website looks great on every device...`,
+  9:`JavaScript brings your website to life...`,
+  10:`The DOM is the bridge between your HTML and JavaScript...`,
+  11:`Events are the heart of interactivity...`,
+  12:`State represents the current condition of your interface...`,
+  13:`Modals are powerful UI components...`,
+  14:`CSS Grid is a powerful layout system...`,
+  15:`Motion adds life to your interface...`,
+  16:`Forms are essential for collecting information...`,
+  17:`Displaying data clearly is essential...`,
+  18:`A tool is more than a page—it is a system...`,
+  19:`Polish is what makes your interface feel premium...`,
+  20:`Shipping is the final step of building a tool...`
 };
 
+/* MODAL LOGIC */
 const modalOverlay = document.getElementById("modalOverlay");
 const modalBox = document.getElementById("modalBox");
 const modalTitle = document.getElementById("modalTitle");
-const modalLevelLabel = document.getElementById("modalLevelLabel");
 const modalContent = document.getElementById("modalContent");
-const fullscreenBtn = document.getElementById("fullscreenBtn");
-const closeBtn = document.getElementById("closeBtn");
-const themeToggle = document.getElementById("themeToggle");
 
 document.querySelectorAll(".tutorial-card").forEach(card => {
   card.addEventListener("click", () => {
     const id = card.getAttribute("data-lesson");
     const title = card.querySelector(".tutorial-title").textContent;
-    const levelText = card.querySelector(".level-pill")?.textContent || `Level ${id}`;
     modalTitle.textContent = title;
-    modalLevelLabel.textContent = levelText;
-    modalContent.textContent = lessons[id] || "Lesson content coming soon.";
+    modalContent.textContent = lessons[id];
     modalOverlay.classList.add("active");
     modalBox.classList.add("active");
     document.body.style.overflow = "hidden";
   });
 });
 
-function closeModal() {
+document.getElementById("closeBtn").addEventListener("click", () => {
   modalOverlay.classList.remove("active");
   modalBox.classList.remove("active");
   modalBox.classList.remove("fullscreen");
   document.body.style.overflow = "";
-}
-
-modalOverlay.addEventListener("click", (e) => {
-  if (e.target === modalOverlay) {
-    closeModal();
-  }
 });
 
-closeBtn.addEventListener("click", closeModal);
-
-fullscreenBtn.addEventListener("click", () => {
+document.getElementById("fullscreenBtn").addEventListener("click", () => {
   modalBox.classList.toggle("fullscreen");
 });
 
 /* THEME */
-function applyStoredTheme() {
-  const stored = localStorage.getItem("alaeai-theme");
-  if (stored === "dark") {
-    document.body.classList.add("dark");
-  } else if (stored === "light") {
-    document.body.classList.remove("dark");
-  }
-}
-
-applyStoredTheme();
-
+const themeToggle = document.getElementById("themeToggle");
 themeToggle.addEventListener("click", () => {
   document.body.classList.toggle("dark");
-  const isDark = document.body.classList.contains("dark");
-  localStorage.setItem("alaeai-theme", isDark ? "dark" : "light");
+  localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
 });
+
+if (localStorage.getItem("theme") === "dark") {
+  document.body.classList.add("dark");
+}
 </script>
+
 </body>
 </html>
