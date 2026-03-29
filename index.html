@@ -2,50 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>ALAEAI — Warm Portfolio</title>
+  <title>ALAEAI — Build. Learn. Create.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6065282700750014" crossorigin="anonymous"></script>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     :root {
-      --bg: #f5efe6;
-      --bg-soft: #f9f3ea;
-      --bg-deep: #1b1714;
-      --text: #1f130b;
-      --subtext: #7a6250;
-      --card: #ffffff;
+      --bg: #0b0908;
+      --bg-soft: #15100d;
+      --bg-soft-2: #1c130f;
+      --bg-deep: #050304;
+      --bg-elevated: #18100c;
+      --text: #f7f2ec;
+      --text-soft: #d7c9bc;
+      --subtext: #b9a89a;
+      --muted: #8f7c6b;
+      --card: #15100d;
+      --card-soft: #1b130e;
       --accent: #f2c26b;
       --accent-soft: rgba(242, 194, 107, 0.18);
-      --accent-strong: rgba(242, 194, 107, 0.45);
-      --border-subtle: rgba(0, 0, 0, 0.06);
-      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.18);
-      --shadow-strong: 0 26px 70px rgba(0, 0, 0, 0.35);
+      --accent-strong: rgba(242, 194, 107, 0.55);
+      --accent-glow: rgba(242, 194, 107, 0.9);
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-strong: rgba(242, 194, 107, 0.7);
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.75);
+      --shadow-strong: 0 30px 80px rgba(0, 0, 0, 0.9);
+      --shadow-glow: 0 0 40px rgba(242, 194, 107, 0.8);
       --radius-lg: 26px;
       --radius-md: 18px;
+      --radius-sm: 12px;
       --radius-pill: 999px;
       --transition-fast: 0.18s ease-out;
       --transition-med: 0.28s ease-out;
       --transition-slow: 0.45s ease-out;
-    }
-
-    body.dark {
-      --bg: #0b0908;
-      --bg-soft: #15100d;
-      --bg-deep: #050304;
-      --text: #f7f2ec;
-      --subtext: #b9a89a;
-      --card: #15100d;
-      --accent: #f2c26b;
-      --accent-soft: rgba(242, 194, 107, 0.22);
-      --accent-strong: rgba(242, 194, 107, 0.55);
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.75);
-      --shadow-strong: 0 30px 80px rgba(0, 0, 0, 0.9);
+      --glass-light: rgba(255, 255, 255, 0.04);
+      --glass-strong: rgba(255, 255, 255, 0.08);
+      --danger: #ff6b6b;
+      --success: #3cff8f;
+      --info: #5bc0ff;
     }
 
     * {
@@ -60,7 +59,10 @@
 
     body {
       font-family: "Rubik", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, var(--bg-soft) 0, var(--bg) 40%, var(--bg-deep) 100%);
+      background:
+        radial-gradient(circle at top, rgba(242, 194, 107, 0.12), transparent 55%),
+        radial-gradient(circle at bottom, rgba(242, 194, 107, 0.08), transparent 60%),
+        linear-gradient(135deg, var(--bg-deep), var(--bg));
       color: var(--text);
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
@@ -72,16 +74,16 @@
       text-decoration: none;
     }
 
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
     .page-shell {
       max-width: 1240px;
       margin: 0 auto;
-      padding: 20px 18px 60px;
+      padding: 20px 18px 80px;
       position: relative;
-    }
-
-    .ad-container {
-      margin: 26px 0;
-      text-align: center;
     }
 
     .bg-orb {
@@ -113,9 +115,14 @@
     .bg-orb.orb-3 {
       width: 220px;
       height: 220px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.35), transparent 70%);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.25), transparent 70%);
       top: 40%;
       left: 60%;
+    }
+
+    .ad-container {
+      margin: 26px 0;
+      text-align: center;
     }
 
     .top-banner {
@@ -124,81 +131,345 @@
       position: relative;
       overflow: hidden;
       margin-bottom: 18px;
+      border-radius: 0 0 32px 32px;
+      box-shadow: 0 26px 80px rgba(0, 0, 0, 0.9);
+      background: radial-gradient(circle at top, #1b130f, #050304);
+    }
+
+    .top-banner-img-wrap {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
     }
 
     .top-banner-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
+      transform: scale(1.08);
+      filter: saturate(1.1) contrast(1.05) brightness(0.9);
     }
 
     .top-banner-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        rgba(0,0,0,0.45),
-        rgba(0,0,0,0.45)
-      );
+      background:
+        radial-gradient(circle at top, rgba(242, 194, 107, 0.35), transparent 60%),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.9));
+      mix-blend-mode: multiply;
+    }
+
+    .top-banner-gradient {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(242, 194, 107, 0.4), transparent 55%),
+        radial-gradient(circle at 90% 0%, rgba(242, 194, 107, 0.25), transparent 60%);
+      opacity: 0.7;
     }
 
     .top-banner-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      align-items: center;
+      padding: 0 40px;
       color: #ffffff;
-      padding: 0 18px;
     }
 
-    .top-banner-content h1 {
+    .top-banner-left {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transform: translateY(18px);
+      opacity: 0;
+      animation: heroIn 0.9s var(--transition-med) forwards;
+    }
+
+    .top-banner-logo-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .top-banner-logo-wrap {
+      width: 60px;
+      height: 60px;
+      border-radius: 18px;
+      background: radial-gradient(circle at 20% 0%, #f2c26b 0, #b8863b 40%, #3a2614 100%);
+      box-shadow: 0 0 26px rgba(242, 194, 107, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .top-banner-logo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .top-banner-logo-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .top-banner-logo-title {
       font-family: "Poppins", system-ui;
       font-weight: 800;
-      font-size: 34px;
-      letter-spacing: 0.08em;
+      font-size: 22px;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      margin-bottom: 10px;
     }
 
-    .top-banner-content p {
-      font-size: 15px;
-      max-width: 620px;
-      opacity: 0.9;
-      margin: 0 auto 18px;
+    .top-banner-logo-sub {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.78);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
-    .top-banner-content button {
+    .top-banner-kicker {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .top-banner-title {
+      font-family: "Poppins", system-ui;
+      font-weight: 800;
+      font-size: 32px;
+      line-height: 1.1;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
+    }
+
+    .top-banner-title span.accent {
+      background: linear-gradient(120deg, #f2c26b, #ffe3b0);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .top-banner-sub {
+      font-size: 14px;
+      max-width: 520px;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    .top-banner-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .btn-primary {
       padding: 11px 24px;
       border-radius: var(--radius-pill);
-      border: none;
-      background: var(--accent);
+      border: 1px solid rgba(242, 194, 107, 0.9);
+      background: radial-gradient(circle at 0 0, rgba(242, 194, 107, 0.8), rgba(242, 194, 107, 0.2));
       color: #2b1a0d;
       font-size: 12px;
       font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      box-shadow: 0 0 26px rgba(242, 194, 107, 0.95);
+      cursor: pointer;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 0 32px rgba(242, 194, 107, 1);
+      background: radial-gradient(circle at 0 0, rgba(242, 194, 107, 0.95), rgba(242, 194, 107, 0.3));
+      color: #1b1008;
+    }
+
+    .btn-ghost {
+      padding: 11px 20px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      background: rgba(0, 0, 0, 0.35);
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 12px;
+      font-weight: 500;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       cursor: pointer;
-      box-shadow: 0 0 22px rgba(242, 194, 107, 0.9);
-      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+      transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), color var(--transition-fast);
     }
 
-    .top-banner-content button:hover {
-      transform: translateY(-3px) scale(1.04);
-      box-shadow: 0 0 28px rgba(242, 194, 107, 1);
-      background: #ffd27f;
+    .btn-ghost:hover {
+      transform: translateY(-2px);
+      background: rgba(0, 0, 0, 0.6);
+      border-color: rgba(242, 194, 107, 0.7);
+      color: #ffffff;
+    }
+
+    .top-banner-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 10px;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .top-banner-meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .top-banner-meta-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #3cff8f;
+      box-shadow: 0 0 10px rgba(60, 255, 143, 0.9);
+    }
+
+    .top-banner-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transform: translateY(24px);
+      opacity: 0;
+      animation: heroSideIn 1s var(--transition-med) forwards;
+    }
+
+    .top-banner-orbit {
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      border: 1px solid rgba(242, 194, 107, 0.4);
+      box-shadow: 0 0 40px rgba(242, 194, 107, 0.6);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 30% 0%, rgba(242, 194, 107, 0.3), transparent 60%),
+        radial-gradient(circle at 70% 100%, rgba(242, 194, 107, 0.2), transparent 60%),
+        radial-gradient(circle at center, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 1));
+      overflow: hidden;
+    }
+
+    .top-banner-orbit-inner {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 1px solid rgba(242, 194, 107, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.9);
+    }
+
+    .top-banner-orbit-core {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 0%, rgba(242, 194, 107, 0.9), rgba(242, 194, 107, 0.2)),
+        radial-gradient(circle at 70% 100%, rgba(242, 194, 107, 0.6), rgba(0, 0, 0, 1));
+      box-shadow: 0 0 40px rgba(242, 194, 107, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1b1008;
+      font-family: "Poppins", system-ui;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .top-banner-orbit-ring {
+      position: absolute;
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      border: 1px dashed rgba(242, 194, 107, 0.4);
+      animation: orbitSpin 18s linear infinite;
+    }
+
+    .top-banner-orbit-pill {
+      position: absolute;
+      top: 10px;
+      right: 18px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(242, 194, 107, 0.7);
+      color: rgba(242, 194, 107, 0.95);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .top-banner-orbit-pill.bottom {
+      top: auto;
+      bottom: 10px;
+      left: 18px;
+    }
+
+    @media (max-width: 980px) {
+      .top-banner {
+        height: auto;
+        min-height: 420px;
+      }
+      .top-banner-content {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 24px 18px 30px;
+        row-gap: 24px;
+      }
+      .top-banner-right {
+        order: -1;
+      }
+      .top-banner-orbit {
+        width: 220px;
+        height: 220px;
+      }
+      .top-banner-orbit-inner {
+        width: 160px;
+        height: 160px;
+      }
+      .top-banner-orbit-core {
+        width: 100px;
+        height: 100px;
+      }
     }
 
     @media (max-width: 720px) {
-      .top-banner {
-        height: 340px;
+      .top-banner-logo-title {
+        font-size: 18px;
       }
-      .top-banner-content h1 {
+      .top-banner-title {
         font-size: 26px;
       }
-      .top-banner-content p {
-        font-size: 14px;
+      .top-banner-content {
+        padding-inline: 16px;
       }
+    }
+
+    .nav-shell {
+      position: relative;
+      z-index: 10;
+      margin-top: -26px;
     }
 
     .nav {
@@ -207,19 +478,13 @@
       justify-content: space-between;
       padding: 10px 16px;
       border-radius: 999px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(249, 240, 228, 0.96));
-      border: 1px solid rgba(0, 0, 0, 0.04);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+      background: linear-gradient(135deg, rgba(18, 12, 8, 0.96), rgba(10, 6, 4, 0.96));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
       position: sticky;
       top: 14px;
       z-index: 40;
       backdrop-filter: blur(18px);
-    }
-
-    body.dark .nav {
-      background: linear-gradient(135deg, rgba(18, 12, 8, 0.96), rgba(10, 6, 4, 0.96));
-      border-color: rgba(255, 255, 255, 0.06);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
     }
 
     .nav-left {
@@ -257,6 +522,7 @@
       font-size: 18px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+      color: #f7f2ec;
     }
 
     .nav-title-sub {
@@ -281,20 +547,16 @@
     }
 
     .nav-link:hover {
-      background: rgba(0, 0, 0, 0.03);
-      border-color: rgba(0, 0, 0, 0.08);
-      transform: translateY(-1px);
-    }
-
-    body.dark .nav-link:hover {
       background: rgba(242, 194, 107, 0.08);
       border-color: rgba(242, 194, 107, 0.4);
+      transform: translateY(-1px);
+      color: #f7f2ec;
     }
 
     .nav-link.active {
       background: radial-gradient(circle at 0 0, rgba(242, 194, 107, 0.4), rgba(242, 194, 107, 0.08));
       border-color: rgba(242, 194, 107, 0.7);
-      color: var(--text);
+      color: #f7f2ec;
     }
 
     .nav-right {
@@ -327,8 +589,8 @@
     .nav-toggle {
       padding: 7px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(0, 0, 0, 0.12);
-      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(10, 6, 4, 0.96);
       color: var(--subtext);
       font-size: 11px;
       font-weight: 500;
@@ -338,64 +600,1297 @@
       transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
     }
 
-    body.dark .nav-toggle {
-      background: rgba(10, 6, 4, 0.96);
-      border-color: rgba(255, 255, 255, 0.16);
-      color: var(--subtext);
-    }
-
     .nav-toggle:hover {
       transform: translateY(-1px);
       background: rgba(242, 194, 107, 0.12);
       border-color: rgba(242, 194, 107, 0.6);
+      color: #f7f2ec;
+    }
+
+    .nav-menu-toggle {
+      display: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(0, 0, 0, 0.6);
+      color: #f7f2ec;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    @media (max-width: 860px) {
+      .nav-links {
+        display: none;
+      }
+      .nav-menu-toggle {
+        display: flex;
+      }
+    }
+
+    .nav-mobile {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(18px);
+      z-index: 50;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .nav-mobile.open {
+      display: flex;
+    }
+
+    .nav-mobile-link {
+      font-size: 18px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #f7f2ec;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(242, 194, 107, 0.6);
+      background: rgba(0, 0, 0, 0.6);
+      cursor: pointer;
+      transition: transform var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .nav-mobile-link:hover {
+      transform: translateY(-2px);
+      background: rgba(242, 194, 107, 0.12);
+      border-color: rgba(242, 194, 107, 0.9);
+    }
+
+    .nav-mobile-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(0, 0, 0, 0.6);
+      color: #f7f2ec;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .hero {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .hero-main {
+      background: radial-gradient(circle at top left, rgba(242, 194, 107, 0.18), rgba(18, 12, 8, 0.98));
+      border-radius: var(--radius-lg);
+      padding: 24px 24px 26px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+      transform: translateY(18px);
+      opacity: 0;
+      animation: heroIn 0.9s var(--transition-med) forwards;
+    }
+
+    .hero-main::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top left, rgba(242, 194, 107, 0.18), transparent 55%);
+      opacity: 0.7;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(10, 6, 4, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--subtext);
+      font-size: 11px;
+      margin-bottom: 12px;
+    }
+
+    .hero-pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #3cff8f;
+      box-shadow: 0 0 10px rgba(60, 255, 143, 0.9);
+    }
+
+    .hero-title {
+      font-family: "Poppins", system-ui;
+      font-weight: 800;
+      font-size: 32px;
+      line-height: 1.1;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .hero-title span.accent {
+      background: linear-gradient(120deg, #f2c26b, #ffe3b0);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      color: var(--subtext);
+      max-width: 520px;
+      margin-bottom: 18px;
+    }
+
+    .hero-pills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .hero-pill-tag {
+      font-size: 11px;
+      padding: 5px 11px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(10, 6, 4, 0.96);
+      color: var(--subtext);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 11px;
+      color: var(--subtext);
+    }
+
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-meta-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(242, 194, 107, 0.9);
+      box-shadow: 0 0 10px rgba(242, 194, 107, 0.9);
+    }
+
+    .hero-side {
+      background: radial-gradient(circle at top, rgba(242, 194, 107, 0.22), rgba(18, 12, 8, 0.98));
+      border-radius: var(--radius-lg);
+      padding: 18px 18px 20px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-strong);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+      transform: translateY(24px) translateX(12px);
+      opacity: 0;
+      animation: heroSideIn 1s var(--transition-med) forwards;
+    }
+
+    .hero-side::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top, rgba(242, 194, 107, 0.18), transparent 60%);
+      opacity: 0.7;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .hero-side-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--subtext);
+    }
+
+    .hero-side-title {
+      font-family: "Poppins", system-ui;
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .hero-side-sub {
+      font-size: 12px;
+      color: var(--subtext);
+      margin-bottom: 8px;
+    }
+
+    .hero-grid-preview {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .preview-card {
+      border-radius: 16px;
+      padding: 10px 10px 12px;
+      background: rgba(18, 12, 8, 0.98);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.9);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+      transform: translateY(0) translateZ(0);
+      transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med), background var(--transition-med);
+    }
+
+    .preview-card:hover {
+      transform: translateY(-6px) translateZ(0) rotate3d(1, -1, 0, 4deg);
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.25);
+      border-color: rgba(242, 194, 107, 0.7);
+      background: rgba(22, 14, 9, 1);
+    }
+
+    .preview-tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--subtext);
+    }
+
+    .preview-title {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .preview-meta {
+      font-size: 11px;
+      color: var(--subtext);
+    }
+
+    .hero-side-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--subtext);
+      margin-top: 6px;
+    }
+
+    .hero-side-tag {
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(10, 6, 4, 0.96);
+    }
+
+    .section {
+      margin-top: 40px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .section-title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .section-kicker {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--subtext);
+    }
+
+    .section-title {
+      font-family: "Poppins", system-ui;
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: var(--subtext);
+    }
+
+    .section-cta-inline {
+      font-size: 11px;
+      color: var(--accent);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(242, 194, 107, 0.5);
+      background: rgba(10, 6, 4, 0.96);
+      transition: background var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+    }
+
+    .section-cta-inline:hover {
+      background: rgba(242, 194, 107, 0.12);
+      transform: translateY(-1px);
+      border-color: rgba(242, 194, 107, 0.7);
+      color: #f7f2ec;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1.1fr;
+      gap: 18px;
+    }
+
+    .portfolio-main-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .portfolio-card {
+      background: var(--card);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 14px 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transform: translateY(18px);
+      opacity: 0;
+    }
+
+    .portfolio-card:nth-child(1) { animation: cardIn 0.7s 0.1s forwards; }
+    .portfolio-card:nth-child(2) { animation: cardIn 0.7s 0.2s forwards; }
+    .portfolio-card:nth-child(3) { animation: cardIn 0.7s 0.3s forwards; }
+    .portfolio-card:nth-child(4) { animation: cardIn 0.7s 0.4s forwards; }
+
+    .portfolio-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top left, var(--accent-soft), transparent 55%);
+      opacity: 0;
+      transition: opacity var(--transition-med);
+      pointer-events: none;
+    }
+
+    .portfolio-card:hover::before {
+      opacity: 1;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-strong);
+      border-color: rgba(242, 194, 107, 0.7);
+    }
+
+    .portfolio-tag-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .portfolio-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--subtext);
+    }
+
+    .portfolio-pill {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(10, 6, 4, 0.96);
+      color: var(--subtext);
+    }
+
+    .portfolio-title {
+      font-family: "Poppins", system-ui;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .portfolio-desc {
+      font-size: 12px;
+      color: var(--subtext);
+    }
+
+    .portfolio-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--subtext);
+      margin-top: 4px;
+    }
+
+    .portfolio-meta-pill {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(242, 194, 107, 0.12);
+      border: 1px solid rgba(242, 194, 107, 0.6);
       color: var(--text);
     }
 
+    .portfolio-side {
+      background: var(--card);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 16px 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transform: translateY(24px);
+      opacity: 0;
+      animation: cardIn 0.7s 0.45s forwards;
+    }
+
+    .portfolio-side-title {
+      font-family: "Poppins", system-ui;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .portfolio-side-sub {
+      font-size: 12px;
+      color: var(--subtext);
+    }
+
+    .portfolio-side-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--subtext);
+    }
+
+    .portfolio-side-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 8px;
+      border-radius: 10px;
+      background: rgba(18, 12, 8, 0.98);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      cursor: pointer;
+      transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .portfolio-side-item:hover {
+      background: rgba(242, 194, 107, 0.12);
+      border-color: rgba(242, 194, 107, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .portfolio-side-item span.badge {
+      font-size: 10px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(242, 194, 107, 0.12);
+      border: 1px solid rgba(242, 194, 107, 0.6);
+      color: var(--text);
+    }
+
+    .feature-strip {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border-radius: 18px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 12px 12px 14px;
+      font-size: 12px;
+      color: var(--subtext);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transform: translateY(18px);
+      opacity: 0;
+    }
+
+    .feature-card:nth-child(1) { animation: cardIn 0.7s 0.55s forwards; }
+    .feature-card:nth-child(2) { animation: cardIn 0.7s 0.65s forwards; }
+    .feature-card:nth-child(3) { animation: cardIn 0.7s 0.75s forwards; }
+    .feature-card:nth-child(4) { animation: cardIn 0.7s 0.85s forwards; }
+
+    .feature-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(242, 194, 107, 0.16), transparent 60%);
+      opacity: 0;
+      transition: opacity var(--transition-med);
+      pointer-events: none;
+    }
+
+    .feature-card:hover::after {
+      opacity: 1;
+    }
+
+    .feature-title {
+      font-family: "Poppins", system-ui;
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .feature-pill {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--subtext);
+    }
+
+    .feature-meta {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .feature-footer {
+      margin-top: 4px;
+      font-size: 11px;
+      color: var(--subtext);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .feature-footer-pill {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(242, 194, 107, 0.6);
+      background: rgba(242, 194, 107, 0.12);
+      font-size: 10px;
+    }
+
+    .roadmap {
+      margin-top: 44px;
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 18px 20px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
+      gap: 18px;
+      transform: translateY(24px);
+      opacity: 0;
+      animation: cardIn 0.7s 0.95s forwards;
+    }
+
+    .roadmap-title {
+      font-family: "Poppins", system-ui;
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .roadmap-sub {
+      font-size: 13px;
+      color: var(--subtext);
+      margin-bottom: 10px;
+    }
+
+    .roadmap-phases {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--subtext);
+    }
+
+    .roadmap-phase {
+      padding: 8px 10px;
+      border-radius: 14px;
+      background: rgba(18, 12, 8, 0.98);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .roadmap-phase:hover {
+      background: rgba(242, 194, 107, 0.12);
+      border-color: rgba(242, 194, 107, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .roadmap-phase-title {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .roadmap-phase-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--subtext);
+      margin-bottom: 2px;
+    }
+
+    .roadmap-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--subtext);
+    }
+
+    .roadmap-metric {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(18, 12, 8, 0.98);
+    }
+
+    .roadmap-metric strong {
+      color: var(--accent);
+      margin-right: 4px;
+    }
+
+    .about-grid {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
+      gap: 20px;
+    }
+
+    .about-card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .about-title {
+      font-family: "Poppins", system-ui;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .about-sub {
+      font-size: 13px;
+      color: var(--subtext);
+    }
+
+    .about-list {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--subtext);
+    }
+
+    .about-list-item {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .about-list-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      margin-top: 5px;
+    }
+
+    .about-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .about-pill {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(242, 194, 107, 0.6);
+      background: rgba(242, 194, 107, 0.12);
+      color: var(--text);
+    }
+
+    .about-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .about-metric-card {
+      background: rgba(18, 12, 8, 0.98);
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 10px;
+      font-size: 12px;
+      color: var(--subtext);
+    }
+
+    .about-metric-card strong {
+      display: block;
+      font-size: 16px;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .levels-grid {
+      margin-top: 40px;
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 18px 20px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
+      gap: 18px;
+    }
+
+    .levels-title {
+      font-family: "Poppins", system-ui;
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .levels-sub {
+      font-size: 13px;
+      color: var(--subtext);
+      margin-bottom: 10px;
+    }
+
+    .levels-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--subtext);
+    }
+
+    .levels-item {
+      padding: 8px 10px;
+      border-radius: 14px;
+      background: rgba(18, 12, 8, 0.98);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .levels-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--subtext);
+    }
+
+    .levels-item-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .levels-item-meta {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .levels-progress {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--subtext);
+    }
+
+    .levels-progress-bar {
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .levels-progress-fill {
+      position: absolute;
+      inset: 0;
+      width: 60%;
+      background: linear-gradient(90deg, rgba(242, 194, 107, 0.2), rgba(242, 194, 107, 0.9));
+      border-radius: 999px;
+      box-shadow: 0 0 18px rgba(242, 194, 107, 0.8);
+    }
+
+    .levels-progress-label {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .tools-grid {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .tool-card {
+      background: var(--card);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 14px 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--subtext);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tool-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top, rgba(242, 194, 107, 0.16), transparent 60%);
+      opacity: 0;
+      transition: opacity var(--transition-med);
+      pointer-events: none;
+    }
+
+    .tool-card:hover::before {
+      opacity: 1;
+    }
+
+    .tool-title {
+      font-family: "Poppins", system-ui;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .tool-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--subtext);
+    }
+
+    .tool-pill {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(18, 12, 8, 0.98);
+    }
+
+    .tool-meta {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .tool-footer {
+      margin-top: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--subtext);
+    }
+
+    .tool-footer-pill {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(242, 194, 107, 0.6);
+      background: rgba(242, 194, 107, 0.12);
+      font-size: 10px;
+    }
+
+    .news-grid {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+      gap: 18px;
+    }
+
+    .news-main {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 16px 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .news-main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .news-main-title {
+      font-family: "Poppins", system-ui;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .news-main-sub {
+      font-size: 12px;
+      color: var(--subtext);
+    }
+
+    .news-list {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--subtext);
+    }
+
+    .news-item {
+      padding: 8px 10px;
+      border-radius: 14px;
+      background: rgba(18, 12, 8, 0.98);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      cursor: pointer;
+      transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .news-item:hover {
+      background: rgba(242, 194, 107, 0.12);
+      border-color: rgba(242, 194, 107, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .news-item-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .news-item-meta {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .news-side {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 16px 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--subtext);
+    }
+
+    .news-side-title {
+      font-family: "Poppins", system-ui;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .news-side-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 11px;
+    }
+
+    .news-side-pill {
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(18, 12, 8, 0.98);
+    }
+
+    .cta-banner {
+      margin-top: 40px;
+      background: radial-gradient(circle at top left, rgba(242, 194, 107, 0.22), rgba(18, 12, 8, 0.98));
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .cta-banner-title {
+      font-family: "Poppins", system-ui;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .cta-banner-sub {
+      font-size: 13px;
+      color: var(--subtext);
+      max-width: 520px;
+    }
+
+    .cta-banner-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 20px 0 10px;
+      font-size: 12px;
+      color: var(--subtext);
+      text-align: center;
+    }
+
+    footer span.accent {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-side {
+        transform: translateY(18px);
+      }
+      .portfolio-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .roadmap {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .about-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .levels-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .news-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        padding-inline: 12px;
+      }
+      .hero-title {
+        font-size: 26px;
+      }
+      .portfolio-main-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .feature-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .page-shell {
+        padding-inline: 14px;
+      }
+      .tools-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      .feature-strip {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .tools-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .about-metrics {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @keyframes heroIn {
+      from { opacity: 0; transform: translateY(26px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes heroSideIn {
+      from { opacity: 0; transform: translateY(30px) translateX(12px); }
+      to { opacity: 1; transform: translateY(0) translateX(0); }
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(26px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes orbitSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
   </style>
 </head>
-
 <body>
-
-  <!-- ORBS -->
   <div class="bg-orb orb-1"></div>
   <div class="bg-orb orb-2"></div>
   <div class="bg-orb orb-3"></div>
 
-  <!-- TOP BANNER -->
   <section class="top-banner">
-    <img src="assets/logo.png" alt="AlaeAI Banner" class="top-banner-img">
+    <div class="top-banner-img-wrap">
+      <img src="assets/logo.png" alt="AlaeAI Banner" class="top-banner-img">
+    </div>
     <div class="top-banner-overlay"></div>
+    <div class="top-banner-gradient"></div>
     <div class="top-banner-content">
-      <h1>AlaeAI — Build. Learn. Create.</h1>
-      <p>A warm, premium portfolio for your AI journey — tutorials, tools, news, and projects in one calm space.</p>
-      <button onclick="scrollToId('hero')">Explore the Homepage</button>
+      <div class="top-banner-left">
+        <div class="top-banner-logo-row">
+          <div class="top-banner-logo-wrap">
+            <img src="assets/logo.png" alt="ALAEAI Logo">
+          </div>
+          <div class="top-banner-logo-text">
+            <div class="top-banner-logo-title">ALAEAI</div>
+            <div class="top-banner-logo-sub">Build • Learn • Create</div>
+          </div>
+        </div>
+        <div class="top-banner-kicker">Warm AI Portfolio • ALAEAI</div>
+        <h1 class="top-banner-title">
+          A warm space to<br>
+          <span class="accent">build, learn, and show</span>
+          your work.
+        </h1>
+        <p class="top-banner-sub">
+          ALAEAI is your personal, warm portfolio and workspace — tutorials, tools, news, and projects in one calm,
+          premium environment. Every section is designed to feel intentional, focused, and alive.
+        </p>
+        <div class="top-banner-actions">
+          <button class="btn-primary" onclick="scrollToId('hero')">Explore the Homepage</button>
+          <button class="btn-ghost" onclick="scrollToId('portfolio')">View Portfolio Grid</button>
+        </div>
+        <div class="top-banner-meta-row">
+          <div class="top-banner-meta-item">
+            <span class="top-banner-meta-dot"></span>
+            <span>Warm, minimal, and focused on real progress.</span>
+          </div>
+          <div class="top-banner-meta-item">
+            <span class="top-banner-meta-dot"></span>
+            <span>Built to grow into a full workspace over time.</span>
+          </div>
+        </div>
+      </div>
+      <div class="top-banner-right">
+        <div class="top-banner-orbit">
+          <div class="top-banner-orbit-ring"></div>
+          <div class="top-banner-orbit-inner">
+            <div class="top-banner-orbit-core">AI</div>
+            <div class="top-banner-orbit-pill">Tutorials • Tools</div>
+            <div class="top-banner-orbit-pill bottom">News • Portfolio</div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <div class="page-shell">
-
-    <!-- NAVBAR -->
-    <header class="nav">
-      <div class="nav-left">
-        <div class="nav-logo-wrap">A</div>
-        <div class="nav-title-block">
-          <div class="nav-title-main">ALAEAI</div>
-          <div class="nav-title-sub">Warm Portfolio • Build. Learn. Create.</div>
+    <div class="nav-shell">
+      <header class="nav">
+        <div class="nav-left">
+          <div class="nav-logo-wrap">A</div>
+          <div class="nav-title-block">
+            <div class="nav-title-main">ALAEAI</div>
+            <div class="nav-title-sub">Warm Portfolio • Build. Learn. Create.</div>
+          </div>
         </div>
-      </div>
-      <nav class="nav-links">
-        <span class="nav-link active" onclick="scrollToId('hero')">Home</span>
-        <span class="nav-link" onclick="scrollToId('portfolio')">Portfolio</span>
-        <span class="nav-link" onclick="scrollToId('features')">Features</span>
-        <span class="nav-link" onclick="scrollToId('roadmap')">Roadmap</span>
-      </nav>
-      <div class="nav-right">
-        <button class="nav-cta" onclick="location.href='tutorials.html'">Start Tutorials</button>
-        <button class="nav-toggle" id="darkToggle">Dark Mode</button>
-      </div>
-    </header>
+        <nav class="nav-links">
+          <span class="nav-link active" onclick="scrollToId('hero')">Home</span>
+          <span class="nav-link" onclick="scrollToId('portfolio')">Portfolio</span>
+          <span class="nav-link" onclick="scrollToId('features')">Features</span>
+          <span class="nav-link" onclick="scrollToId('roadmap')">Roadmap</span>
+          <span class="nav-link" onclick="scrollToId('about')">About</span>
+          <span class="nav-link" onclick="scrollToId('tools')">Tools</span>
+          <span class="nav-link" onclick="scrollToId('news')">News</span>
+        </nav>
+        <div class="nav-right">
+          <button class="nav-cta" onclick="location.href='tutorials.html'">Start Tutorials</button>
+          <button class="nav-toggle" id="darkToggle">Dark Mode</button>
+          <button class="nav-menu-toggle" id="navMenuToggle">☰</button>
+        </div>
+      </header>
+    </div>
 
-    <!-- TOP AD -->
+    <div class="nav-mobile" id="navMobile">
+      <button class="nav-mobile-close" id="navMobileClose">✕</button>
+      <button class="nav-mobile-link" onclick="scrollToId('hero'); closeMobileNav();">Home</button>
+      <button class="nav-mobile-link" onclick="scrollToId('portfolio'); closeMobileNav();">Portfolio</button>
+      <button class="nav-mobile-link" onclick="scrollToId('features'); closeMobileNav();">Features</button>
+      <button class="nav-mobile-link" onclick="scrollToId('roadmap'); closeMobileNav();">Roadmap</button>
+      <button class="nav-mobile-link" onclick="scrollToId('about'); closeMobileNav();">About</button>
+      <button class="nav-mobile-link" onclick="scrollToId('tools'); closeMobileNav();">Tools</button>
+      <button class="nav-mobile-link" onclick="scrollToId('news'); closeMobileNav();">News</button>
+      <button class="nav-mobile-link" onclick="location.href='tutorials.html'">Start Tutorials</button>
+    </div>
+
     <div class="ad-container">
       <ins class="adsbygoogle"
            style="display:block"
@@ -406,18 +1901,17 @@
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
-    <!-- HERO -->
     <section class="hero" id="hero">
       <div class="hero-main">
         <div class="hero-pill">
           <span class="hero-pill-dot"></span>
           <span>Warm AI Portfolio • ALAEAI</span>
         </div>
-        <h1 class="hero-title">
+        <h2 class="hero-title">
           A warm space to<br>
           <span class="accent">build, learn, and show</span>
           your work.
-        </h1>
+        </h2>
         <p class="hero-sub">
           ALAEAI is your personal, warm portfolio and workspace — tutorials, tools, and projects in one calm,
           premium environment. Every section is designed to feel intentional, focused, and alive.
@@ -426,6 +1920,7 @@
           <div class="hero-pill-tag">Guided AI tutorials</div>
           <div class="hero-pill-tag">Real projects &amp; experiments</div>
           <div class="hero-pill-tag">News &amp; tools in one place</div>
+          <div class="hero-pill-tag">Calm, focused design</div>
         </div>
         <div class="hero-actions">
           <button class="btn-primary" onclick="location.href='tutorials.html'">Resume Tutorials</button>
@@ -454,7 +1949,6 @@
           <div class="preview-card" onclick="scrollToId('portfolio')">
             <div class="preview-tag">Tutorials</div>
             <div class="preview-title">Level-based AI learning</div>
-            <div class="preview-meta">Foundations, builder mode, and advanced
             <div class="preview-meta">Foundations, builder mode, and advanced deep dives.</div>
           </div>
           <div class="preview-card" onclick="scrollToId('features')">
@@ -481,7 +1975,6 @@
       </aside>
     </section>
 
-    <!-- PORTFOLIO GRID -->
     <section class="section" id="portfolio">
       <div class="section-header">
         <div class="section-title-block">
@@ -562,7 +2055,6 @@
             </div>
           </article>
         </div>
-        </div>
 
         <aside class="portfolio-side">
           <div class="portfolio-side-title">How this portfolio is structured</div>
@@ -570,7 +2062,6 @@
             Instead of random sections, everything is grouped into clear pillars that match how you actually learn and build.
           </div>
 
-          <!-- SIDEBAR AD -->
           <div class="ad-container">
             <ins class="adsbygoogle"
                  style="display:block"
@@ -603,7 +2094,6 @@
       </div>
     </section>
 
-    <!-- FEATURE STRIP -->
     <section class="section" id="features">
       <div class="section-header">
         <div class="section-title-block">
@@ -622,6 +2112,11 @@
           <p>
             Follow structured, level-based tutorials that help you actually understand and apply what you learn.
           </p>
+          <div class="feature-meta">From foundations to advanced design — always calm, never chaotic.</div>
+          <div class="feature-footer">
+            <span class="feature-footer-pill">20+ levels planned</span>
+            <span>Foundations • Builder • Advanced</span>
+          </div>
         </article>
 
         <article class="feature-card">
@@ -630,6 +2125,11 @@
           <p>
             Stay updated with curated, focused news about AI, science, and innovation — not random noise.
           </p>
+          <div class="feature-meta">Designed to keep you aware without overwhelming you.</div>
+          <div class="feature-footer">
+            <span class="feature-footer-pill">Curated feed</span>
+            <span>AI • Science • Tools</span>
+          </div>
         </article>
 
         <article class="feature-card">
@@ -638,6 +2138,11 @@
           <p>
             Calculators, generators, and helpers that make it easier to test ideas and ship projects faster.
           </p>
+          <div class="feature-meta">No overload — just what helps you think and build better.</div>
+          <div class="feature-footer">
+            <span class="feature-footer-pill">Builder mode</span>
+            <span>Dashboards • Helpers</span>
+          </div>
         </article>
 
         <article class="feature-card">
@@ -646,11 +2151,25 @@
           <p>
             Built as a warm environment where every section has a purpose — no clutter, just progress.
           </p>
+          <div class="feature-meta">A portfolio that feels like a workspace, not just a gallery.</div>
+          <div class="feature-footer">
+            <span class="feature-footer-pill">Warm design</span>
+            <span>Intentional • Focused</span>
+          </div>
         </article>
       </div>
     </section>
 
-    <!-- ROADMAP -->
+    <div class="ad-container">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-6065282700750014"
+           data-ad-slot="4678697983"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <section class="section" id="roadmap">
       <div class="roadmap">
         <div>
@@ -713,22 +2232,269 @@
       </div>
     </section>
 
-    <!-- FOOTER -->
+    <section class="section" id="about">
+      <div class="section-header">
+        <div class="section-title-block">
+          <div class="section-kicker">About</div>
+          <div class="section-title">A calm, personal AI workspace.</div>
+          <div class="section-sub">
+            ALAEAI is built to feel like a warm studio — not a noisy dashboard.
+          </div>
+        </div>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="about-title">Why this portfolio exists</div>
+          <div class="about-sub">
+            To give you a single, calm place where learning, building, and showing your work feel connected.
+          </div>
+          <div class="about-list">
+            <div class="about-list-item">
+              <div class="about-list-dot"></div>
+              <div>One home for tutorials, tools, news, and projects — not scattered tabs.</div>
+            </div>
+            <div class="about-list-item">
+              <div class="about-list-dot"></div>
+              <div>Designed to feel warm and focused, not cold or overloaded.</div>
+            </div>
+            <div class="about-list-item">
+              <div class="about-list-dot"></div>
+              <div>Built to grow with you — from first tutorial to full workspace.</div>
+            </div>
+          </div>
+          <div class="about-pill-row">
+            <div class="about-pill">Warm design</div>
+            <div class="about-pill">Real projects</div>
+            <div class="about-pill">Calm learning</div>
+            <div class="about-pill">Future-ready</div>
+          </div>
+        </div>
+
+        <div class="about-card">
+          <div class="about-title">What you can do here</div>
+          <div class="about-sub">
+            Learn, build, and present — all inside one consistent, premium environment.
+          </div>
+          <div class="about-metrics">
+            <div class="about-metric-card">
+              <strong>Learn</strong>
+              Level-based tutorials, guided exercises, and structured paths.
+            </div>
+            <div class="about-metric-card">
+              <strong>Build</strong>
+              Mini projects, tools, and experiments that feel real.
+            </div>
+            <div class="about-metric-card">
+              <strong>Show</strong>
+              A portfolio that feels like a story, not just a list.
+            </div>
+            <div class="about-metric-card">
+              <strong>Grow</strong>
+              A roadmap that turns this into a full workspace.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="levels">
+      <div class="section-header">
+        <div class="section-title-block">
+          <div class="section-kicker">Tutorial Levels</div>
+          <div class="section-title">A path that grows with you.</div>
+          <div class="section-sub">
+            From foundations to advanced systems — each level is small enough to finish, big enough to matter.
+          </div>
+        </div>
+        <button class="section-cta-inline" onclick="location.href='tutorials.html'">
+          View All Levels
+          <span>↗</span>
+        </button>
+      </div>
+
+      <div class="levels-grid">
+        <div>
+          <div class="levels-title">Level-based learning</div>
+          <div class="levels-sub">
+            Each level is designed to feel like a calm, guided step — not a chaotic jump.
+          </div>
+          <div class="levels-list">
+            <div class="levels-item">
+              <div class="levels-item-header">
+                <span>Level 1–3</span>
+                <span>Foundations</span>
+              </div>
+              <div class="levels-item-title">Core AI &amp; logic</div>
+              <div class="levels-item-meta">Concepts, intuition, and simple hands-on tasks.</div>
+            </div>
+            <div class="levels-item">
+              <div class="levels-item-header">
+                <span>Level 4–8</span>
+                <span>Builder Mode</span>
+              </div>
+              <div class="levels-item-title">Projects &amp; tools</div>
+              <div class="levels-item-meta">Spam detectors, dashboards, and small systems.</div>
+            </div>
+            <div class="levels-item">
+              <div class="levels-item-header">
+                <span>Level 9–12</span>
+                <span>Advanced</span>
+              </div>
+              <div class="levels-item-title">Deeper systems</div>
+              <div class="levels-item-meta">APIs, integrations, and more complex flows.</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="levels-title">Progress snapshot</div>
+          <div class="levels-sub">
+            A quick look at how far this portfolio is ready to go.
+          </div>
+          <div class="levels-progress">
+            <div class="levels-progress-bar">
+              <div class="levels-progress-fill"></div>
+            </div>
+            <div class="levels-progress-label">
+              Current focus: Foundations &amp; Builder Mode — advanced levels ready to unlock.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tools">
+      <div class="section-header">
+        <div class="section-title-block">
+          <div class="section-kicker">Tools</div>
+          <div class="section-title">Utilities that support building.</div>
+          <div class="section-sub">
+            Calculators, generators, and helpers that make it easier to test ideas and ship projects faster.
+          </div>
+        </div>
+      </div>
+
+      <div class="tools-grid">
+        <article class="tool-card">
+          <div class="tool-title">Prompt Playground</div>
+          <div class="tool-pill-row">
+            <div class="tool-pill">Text</div>
+            <div class="tool-pill">Ideas</div>
+          </div>
+          <p>
+            A calm space to test prompts, compare outputs, and refine your thinking without noise.
+          </p>
+          <div class="tool-meta">Designed for experimentation, not perfection.</div>
+          <div class="tool-footer">
+            <span class="tool-footer-pill">Experiment</span>
+            <span>Prompt • Compare</span>
+          </div>
+        </article>
+
+        <article class="tool-card">
+          <div class="tool-title">Model Notes</div>
+          <div class="tool-pill-row">
+            <div class="tool-pill">Docs</div>
+            <div class="tool-pill">Memory</div>
+          </div>
+          <p>
+            A structured way to keep track of what each model does, how it behaves, and what it needs.
+          </p>
+          <div class="tool-meta">Because good memory beats guessing.</div>
+          <div class="tool-footer">
+            <span class="tool-footer-pill">Document</span>
+            <span>Models • Behavior</span>
+          </div>
+        </article>
+
+        <article class="tool-card">
+          <div class="tool-title">Dataset Sketchpad</div>
+          <div class="tool-pill-row">
+            <div class="tool-pill">Data</div>
+            <div class="tool-pill">Planning</div>
+          </div>
+          <p>
+            A place to sketch dataset ideas, columns, and examples before you ever open a spreadsheet.
+          </p>
+          <div class="tool-meta">From vague idea to clear structure.</div>
+          <div class="tool-footer">
+            <span class="tool-footer-pill">Plan</span>
+            <span>Columns • Samples</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="news">
+      <div class="section-header">
+        <div class="section-title-block">
+          <div class="section-kicker">News &amp; Awareness</div>
+          <div class="section-title">Stay aware without getting overwhelmed.</div>
+          <div class="section-sub">
+            A calm feed of meaningful updates and tools — no noise, no clickbait.
+          </div>
+        </div>
+      </div>
+
+      <div class="news-grid">
+        <div class="news-main">
+          <div class="news-main-header">
+            <div>
+              <div class="news-main-title">Curated AI &amp; Tech News</div>
+              <div class="news-main-sub">
+                A small, focused stream of updates that actually matter for building and learning.
+              </div>
+            </div>
+          </div>
+          <div class="news-list">
+            <div class="news-item">
+              <div class="news-item-title">New model architectures for smaller devices</div>
+              <div class="news-item-meta">Edge AI • Efficiency • Real-world deployment</div>
+            </div>
+            <div class="news-item">
+              <div class="news-item-title">Tools that make dataset cleaning less painful</div>
+              <div class="news-item-meta">Data prep • Automation • Quality</div>
+            </div>
+            <div class="news-item">
+              <div class="news-item-title">How teams are using AI to prototype faster</div>
+              <div class="news-item-meta">Workflows • Prototyping • Collaboration</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="news-side">
+          <div class="news-side-title">Topics you can track</div>
+          <div class="news-side-pill-row">
+            <div class="news-side-pill">Model updates</div>
+            <div class="news-side-pill">Tools &amp; platforms</div>
+            <div class="news-side-pill">Data &amp; ethics</div>
+            <div class="news-side-pill">Science &amp; research</div>
+          </div>
+          <p>
+            The goal is not to chase every headline — it’s to stay aware of the things that actually shape how you build.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="cta-banner">
+        <div class="cta-banner-title">Ready to keep building?</div>
+        <div class="cta-banner-sub">
+          ALAEAI is designed to grow with you — from your first tutorial to your most complex project.
+          When you’re ready, the next step is always clear, calm, and within reach.
+        </div>
+        <div class="cta-banner-row">
+          <button class="btn-primary" onclick="location.href='tutorials.html'">Continue Tutorials</button>
+          <button class="btn-ghost" onclick="scrollToId('portfolio')">Review Portfolio</button>
+        </div>
+      </div>
+    </section>
+
     <footer>
       © 2026 <span class="accent">ALAEAI</span> — Warm Portfolio • Build. Learn. Create.
     </footer>
-
-    <!-- FOOTER AD -->
-    <div class="ad-container">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-6065282700750014"
-           data-ad-slot="4678697983"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
   </div>
 
   <script>
@@ -769,7 +2535,34 @@
         orb.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
       });
     });
-  </script>
 
+    const navMenuToggle = document.getElementById("navMenuToggle");
+    const navMobile = document.getElementById("navMobile");
+    const navMobileClose = document.getElementById("navMobileClose");
+
+    function openMobileNav() {
+      if (navMobile) navMobile.classList.add("open");
+    }
+
+    function closeMobileNav() {
+      if (navMobile) navMobile.classList.remove("open");
+    }
+
+    if (navMenuToggle) {
+      navMenuToggle.onclick = () => {
+        if (navMobile && navMobile.classList.contains("open")) {
+          closeMobileNav();
+        } else {
+          openMobileNav();
+        }
+      };
+    }
+
+    if (navMobileClose) {
+      navMobileClose.onclick = () => {
+        closeMobileNav();
+      };
+    }
+  </script>
 </body>
 </html>
