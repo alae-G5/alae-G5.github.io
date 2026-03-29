@@ -16,48 +16,51 @@
 
   <style>
   :root{
-    --bg:#050304;
-    --bg-soft:#0b0705;
-    --bg-card:#140c09;
-    --bg-card-soft:#1a0f0b;
-    --bg-elevated:#1b100b;
+    --bg-main:#f7efe4;
+    --bg-soft:#f1e4d4;
+    --bg-card:#ffffff;
+    --bg-card-soft:#f8eee2;
+    --bg-elevated:#ffffff;
 
-    --text:#fff7ea;
-    --text-sub:#c9b7a0;
+    --text-main:#1b120b;
+    --text-sub:#6b5744;
 
-    --accent:#f2c26b;
-    --accent-strong:#ffb45c;
-    --accent-soft:rgba(242,194,107,0.4);
+    --accent:#f2b45f;
+    --accent-strong:#ff9f4f;
+    --accent-soft:rgba(242,180,95,0.25);
 
-    --border-soft:rgba(255,255,255,0.06);
-    --border-strong:rgba(255,255,255,0.12);
+    --border-soft:rgba(0,0,0,0.06);
+    --border-strong:rgba(0,0,0,0.12);
 
-    --shadow-strong:0 22px 60px rgba(0,0,0,0.9);
-    --shadow-soft:0 14px 40px rgba(0,0,0,0.7);
+    --shadow-soft:0 14px 40px rgba(0,0,0,0.08);
+    --shadow-strong:0 22px 60px rgba(0,0,0,0.12);
 
-    --card-radius:18px;
-    --card-radius-lg:22px;
+    --radius-card:18px;
+    --radius-lg:22px;
 
     --transition-fast:0.16s ease-out;
     --transition-med:0.22s ease-out;
   }
 
-  body.dark-mode{
-    --bg:#020102;
-    --bg-soft:#050304;
-    --bg-card:#0d0705;
-    --bg-card-soft:#140b08;
-    --bg-elevated:#140b08;
+  body.theme-dark{
+    --bg-main:#050304;
+    --bg-soft:#0b0705;
+    --bg-card:#140c09;
+    --bg-card-soft:#1a0f0b;
+    --bg-elevated:#1b100b;
 
-    --text:#fffaf0;
-    --text-sub:#d0c0aa;
+    --text-main:#fff7ea;
+    --text-sub:#c9b7a0;
 
-    --accent:#ffd27f;
-    --accent-strong:#ffc26b;
-    --accent-soft:rgba(255,210,127,0.45);
+    --accent:#f2c26b;
+    --accent-strong:#ffb45c;
+    --accent-soft:rgba(242,194,107,0.25);
 
-    --border-soft:rgba(255,255,255,0.08);
+    --border-soft:rgba(255,255,255,0.06);
     --border-strong:rgba(255,255,255,0.16);
+
+    --shadow-soft:0 14px 40px rgba(0,0,0,0.7);
+    --shadow-strong:0 22px 60px rgba(0,0,0,0.9);
   }
 
   *{
@@ -71,8 +74,8 @@
   }
 
   body{
-    background:var(--bg);
-    color:var(--text);
+    background:var(--bg-main);
+    color:var(--text-main);
     font-family:'Aharoni',sans-serif;
     overflow-x:hidden;
     transition:background 0.25s ease,color 0.25s ease;
@@ -81,12 +84,6 @@
   img{
     max-width:100%;
     display:block;
-  }
-
-  .max-width{
-    max-width:1120px;
-    margin:0 auto;
-    padding:0 20px;
   }
 
   a{
@@ -98,90 +95,52 @@
     font-family:inherit;
   }
 
+  .max-width{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 20px;
+  }
+
   /* =========================
-     BANNER — TOP, FULL WIDTH
+     BANNER — TOP
      ========================= */
   .banner{
     position:relative;
     width:100%;
-    min-height:520px;
+    min-height:420px;
+    background:
+      radial-gradient(circle at top left,rgba(242,180,95,0.35),transparent 60%),
+      radial-gradient(circle at top right,rgba(255,180,140,0.35),transparent 60%),
+      radial-gradient(circle at bottom,rgba(255,255,255,0.9),transparent 70%),
+      #f7efe4;
+    overflow:hidden;
+  }
+
+  body.theme-dark .banner{
     background:
       radial-gradient(circle at top left,rgba(242,194,107,0.25),transparent 60%),
       radial-gradient(circle at top right,rgba(255,140,90,0.25),transparent 60%),
       radial-gradient(circle at bottom,rgba(80,120,255,0.25),transparent 60%),
       #050304;
-    overflow:hidden;
   }
 
-  .banner::after{
-    content:"";
+  .banner-noise{
     position:absolute;
     inset:0;
-    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.16'/%3E%3C/svg%3E");
     mix-blend-mode:soft-light;
     opacity:0.6;
     pointer-events:none;
   }
 
-  .banner-orb{
-    position:absolute;
-    border-radius:50%;
-    filter:blur(40px);
-    opacity:0.7;
-    mix-blend-mode:screen;
-  }
-
-  .banner-orb.orb-1{
-    width:260px;
-    height:260px;
-    background:rgba(242,194,107,0.7);
-    top:-40px;
-    left:-40px;
-    animation:floatOrb1 18s infinite alternate ease-in-out;
-  }
-
-  .banner-orb.orb-2{
-    width:220px;
-    height:220px;
-    background:rgba(255,140,90,0.7);
-    top:40px;
-    right:-60px;
-    animation:floatOrb2 22s infinite alternate ease-in-out;
-  }
-
-  .banner-orb.orb-3{
-    width:260px;
-    height:260px;
-    background:rgba(80,120,255,0.7);
-    bottom:-80px;
-    left:50%;
-    transform:translateX(-50%);
-    animation:floatOrb3 26s infinite alternate ease-in-out;
-  }
-
-  @keyframes floatOrb1{
-    0%{transform:translate(0,0);}
-    100%{transform:translate(40px,40px);}
-  }
-
-  @keyframes floatOrb2{
-    0%{transform:translate(0,0);}
-    100%{transform:translate(-40px,30px);}
-  }
-
-  @keyframes floatOrb3{
-    0%{transform:translate(-50%,0);}
-    100%{transform:translate(-50%,-40px);}
-  }
-
   .banner-inner{
     position:relative;
-    z-index:3;
+    z-index:2;
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap:40px;
-    padding:40px 20px 40px;
+    padding:32px 20px 32px;
   }
 
   .banner-left{
@@ -194,20 +153,26 @@
     letter-spacing:0.18em;
     text-transform:uppercase;
     color:var(--text-sub);
-    margin-bottom:10px;
+    margin-bottom:8px;
   }
 
   .banner-title{
     font-family:'Aptos Black',sans-serif;
-    font-size:40px;
+    font-size:36px;
     line-height:1.15;
     letter-spacing:0.03em;
     text-transform:uppercase;
-    margin-bottom:10px;
-    color:#fff7ea;
+    margin-bottom:8px;
+    color:var(--text-main);
   }
 
   .banner-title span{
+    background:linear-gradient(120deg,#f2b45f,#ff9f4f,#ff7f5f);
+    -webkit-background-clip:text;
+    color:transparent;
+  }
+
+  body.theme-dark .banner-title span{
     background:linear-gradient(120deg,#ffd27f,#f2c26b,#ff9f6b);
     -webkit-background-clip:text;
     color:transparent;
@@ -215,17 +180,17 @@
 
   .banner-sub{
     font-family:'Aharoni',sans-serif;
-    font-size:15px;
+    font-size:14px;
     color:var(--text-sub);
     line-height:1.7;
-    margin-bottom:18px;
+    margin-bottom:16px;
   }
 
   .banner-tags{
     display:flex;
     flex-wrap:wrap;
     gap:8px;
-    margin-bottom:18px;
+    margin-bottom:16px;
   }
 
   .banner-tag{
@@ -233,52 +198,62 @@
     font-size:11px;
     padding:4px 10px;
     border-radius:999px;
-    background:rgba(12,7,5,0.9);
-    border:1px solid rgba(255,255,255,0.12);
+    background:rgba(255,255,255,0.9);
+    border:1px solid var(--border-soft);
     color:var(--text-sub);
+  }
+
+  body.theme-dark .banner-tag{
+    background:rgba(12,7,5,0.9);
+    border-color:rgba(255,255,255,0.12);
   }
 
   .banner-actions{
     display:flex;
     flex-wrap:wrap;
     gap:10px;
-    margin-bottom:16px;
+    margin-bottom:14px;
   }
 
   .btn-main{
-    padding:10px 22px;
+    padding:9px 20px;
     border-radius:999px;
-    background:linear-gradient(135deg,#f2c26b,#ff9f6b);
-    color:#120b07;
+    background:linear-gradient(135deg,#f2b45f,#ff9f4f);
+    color:#1b120b;
     font-family:'Aptos Black',sans-serif;
-    font-size:14px;
+    font-size:13px;
     cursor:pointer;
-    box-shadow:0 18px 50px rgba(0,0,0,0.9);
     border:none;
+    box-shadow:0 16px 40px rgba(0,0,0,0.18);
     transition:transform var(--transition-fast),box-shadow var(--transition-fast),filter var(--transition-fast);
   }
 
   .btn-main:hover{
     transform:translateY(-2px) scale(1.02);
-    box-shadow:0 24px 60px rgba(0,0,0,0.95);
+    box-shadow:0 22px 60px rgba(0,0,0,0.22);
     filter:brightness(1.05);
   }
 
   .btn-ghost{
-    padding:10px 20px;
+    padding:9px 18px;
     border-radius:999px;
     border:1px solid var(--accent);
-    background:rgba(12,7,5,0.8);
-    color:var(--accent);
+    background:rgba(255,255,255,0.9);
+    color:var(--accent-strong);
     font-family:'Aptos Black',sans-serif;
-    font-size:13px;
+    font-size:12px;
     cursor:pointer;
     transition:var(--transition-fast);
   }
 
   .btn-ghost:hover{
-    background:rgba(242,194,107,0.12);
+    background:rgba(242,180,95,0.12);
     transform:translateY(-2px);
+  }
+
+  body.theme-dark .btn-ghost{
+    background:rgba(12,7,5,0.9);
+    color:var(--accent);
   }
 
   .banner-meta{
@@ -301,16 +276,21 @@
     border-radius:50%;
     background:var(--accent);
     margin-top:5px;
-    box-shadow:0 0 10px rgba(242,194,107,0.9);
+    box-shadow:0 0 10px rgba(242,180,95,0.9);
   }
 
   .banner-ad{
-    margin-top:18px;
+    margin-top:16px;
     padding:10px;
     border-radius:14px;
-    background:rgba(12,7,5,0.9);
-    border:1px dashed rgba(242,194,107,0.4);
+    background:rgba(255,255,255,0.9);
+    border:1px dashed rgba(242,180,95,0.6);
     max-width:360px;
+  }
+
+  body.theme-dark .banner-ad{
+    background:rgba(12,7,5,0.96);
+    border-color:rgba(242,194,107,0.4);
   }
 
   .banner-ad-label{
@@ -322,9 +302,13 @@
   }
 
   .banner-ad-inner{
-    background:rgba(0,0,0,0.4);
+    background:rgba(0,0,0,0.02);
     border-radius:10px;
     padding:4px;
+  }
+
+  body.theme-dark .banner-ad-inner{
+    background:rgba(0,0,0,0.4);
   }
 
   .banner-right{
@@ -333,29 +317,25 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    min-height:320px;
+    min-height:260px;
   }
 
   .logo-orbit{
     position:absolute;
-    width:260px;
-    height:260px;
+    width:220px;
+    height:220px;
     border-radius:50%;
-    background:radial-gradient(circle at 30% 0%,rgba(242,194,107,0.4),transparent 60%);
+    background:radial-gradient(circle at 30% 0%,rgba(242,180,95,0.4),transparent 60%);
     display:flex;
     align-items:center;
     justify-content:center;
-    z-index:1;
+    box-shadow:0 0 30px rgba(242,180,95,0.7);
     animation:pulseOrbit 3.2s infinite ease-in-out;
-    box-shadow:0 0 40px rgba(242,194,107,0.9);
   }
 
-  .logo-ring{
-    position:absolute;
-    inset:-22px;
-    border-radius:50%;
-    border:1px dashed rgba(242,194,107,0.4);
-    animation:spinRing 18s linear infinite;
+  body.theme-dark .logo-orbit{
+    background:radial-gradient(circle at 30% 0%,rgba(242,194,107,0.4),transparent 60%);
+    box-shadow:0 0 40px rgba(242,194,107,0.9);
   }
 
   .logo-img{
@@ -363,10 +343,15 @@
     height:70%;
     border-radius:20%;
     overflow:hidden;
-    background:#120b07;
+    background:#f5e6d4;
     display:flex;
     align-items:center;
     justify-content:center;
+    box-shadow:0 0 20px rgba(0,0,0,0.18);
+  }
+
+  body.theme-dark .logo-img{
+    background:#120b07;
     box-shadow:0 0 26px rgba(0,0,0,0.8);
   }
 
@@ -378,85 +363,56 @@
 
   .banner-card-wrapper{
     position:relative;
-    z-index:2;
+    z-index:3;
   }
 
   .banner-card{
-    width:320px;
+    width:300px;
     max-width:90vw;
-    border-radius:var(--card-radius-lg);
-    padding:16px 16px 18px;
-    background:linear-gradient(135deg,rgba(20,12,9,0.96),rgba(10,6,4,0.96));
-    border:1px solid rgba(255,255,255,0.12);
-    box-shadow:0 26px 70px rgba(0,0,0,0.95);
-    backdrop-filter:blur(18px);
+    border-radius:var(--radius-lg);
+    padding:14px 14px 16px;
+    background:linear-gradient(135deg,#ffffff,#f7efe4);
+    border:1px solid rgba(0,0,0,0.06);
+    box-shadow:0 18px 50px rgba(0,0,0,0.16);
     position:relative;
     overflow:hidden;
     transition:transform var(--transition-fast),box-shadow var(--transition-fast),border-color var(--transition-fast),background 0.25s ease;
   }
 
-  .banner-card::before{
-    content:"";
-    position:absolute;
-    inset:-1px;
-    border-radius:var(--card-radius-lg);
-    background:conic-gradient(from 0deg,rgba(242,194,107,0.0),rgba(242,194,107,0.7),rgba(255,159,107,0.0),rgba(80,120,255,0.7),rgba(242,194,107,0.0));
-    opacity:0;
-    transition:opacity 0.25s ease-out;
-    pointer-events:none;
+  body.theme-dark .banner-card{
+    background:linear-gradient(135deg,rgba(20,12,9,0.96),rgba(10,6,4,0.96));
+    border-color:rgba(255,255,255,0.12);
+    box-shadow:0 26px 70px rgba(0,0,0,0.95);
   }
 
   .banner-card::after{
     content:"";
     position:absolute;
     inset:0;
-    border-radius:var(--card-radius-lg);
-    background:radial-gradient(circle at top,rgba(242,194,107,0.22),transparent 60%);
+    border-radius:var(--radius-lg);
+    background:radial-gradient(circle at top,rgba(242,180,95,0.22),transparent 60%);
     opacity:0.4;
     pointer-events:none;
   }
 
+  body.theme-dark .banner-card::after{
+    background:radial-gradient(circle at top,rgba(242,194,107,0.22),transparent 60%);
+  }
+
   .banner-card.hovered{
+    box-shadow:0 24px 70px rgba(0,0,0,0.22);
+    border-color:var(--accent-strong);
+  }
+
+  body.theme-dark .banner-card.hovered{
     box-shadow:0 32px 80px rgba(0,0,0,1);
-    border-color:rgba(242,194,107,0.9);
-  }
-
-  .banner-card.hovered::before{
-    opacity:1;
-  }
-
-  .banner-card-particles{
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-  }
-
-  .banner-card-dot{
-    position:absolute;
-    width:6px;
-    height:6px;
-    border-radius:50%;
-    background:rgba(242,194,107,0.9);
-    box-shadow:0 0 12px rgba(242,194,107,0.9);
-    opacity:0.0;
-    animation:particleBlink 3.2s infinite ease-in-out;
-  }
-
-  .banner-card-dot.dot-1{top:18%;left:16%;animation-delay:0.2s;}
-  .banner-card-dot.dot-2{top:32%;right:14%;animation-delay:0.8s;}
-  .banner-card-dot.dot-3{bottom:22%;left:24%;animation-delay:1.4s;}
-  .banner-card-dot.dot-4{bottom:16%;right:20%;animation-delay:2.0s;}
-
-  @keyframes particleBlink{
-    0%,100%{opacity:0;}
-    40%{opacity:1;}
   }
 
   .banner-card-header{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:8px;
+    margin-bottom:6px;
   }
 
   .banner-card-pill{
@@ -470,37 +426,42 @@
   .banner-card-status{
     font-family:'Aptos Black',sans-serif;
     font-size:11px;
-    padding:4px 9px;
+    padding:3px 8px;
     border-radius:999px;
-    background:rgba(242,194,107,0.16);
+    background:rgba(242,180,95,0.16);
     border:1px solid var(--accent);
-    color:var(--text);
+    color:var(--text-main);
+  }
+
+  body.theme-dark .banner-card-status{
+    background:rgba(242,194,107,0.16);
+    color:var(--text-main);
   }
 
   .banner-card-title{
     font-family:'Aptos Black',sans-serif;
-    font-size:16px;
-    margin-bottom:4px;
+    font-size:15px;
+    margin-bottom:3px;
   }
 
   .banner-card-sub{
     font-family:'Aharoni',sans-serif;
     font-size:12px;
     color:var(--text-sub);
-    margin-bottom:10px;
+    margin-bottom:8px;
   }
 
   .banner-card-row{
     display:flex;
     justify-content:space-between;
     align-items:flex-end;
-    gap:10px;
+    gap:8px;
   }
 
   .banner-card-metrics{
     display:flex;
     flex-direction:column;
-    gap:4px;
+    gap:3px;
     font-family:'Aharoni',sans-serif;
     font-size:11px;
     color:var(--text-sub);
@@ -511,40 +472,39 @@
   }
 
   .banner-card-chip{
-    padding:6px 10px;
+    padding:5px 9px;
     border-radius:999px;
-    background:rgba(255,255,255,0.96);
-    border:1px solid rgba(0,0,0,0.06);
+    background:#1b120b;
+    color:#f7efe4;
     font-family:'Aharoni',sans-serif;
     font-size:11px;
-    color:#140c09;
-    box-shadow:0 10px 26px rgba(0,0,0,0.7);
+    box-shadow:0 10px 26px rgba(0,0,0,0.3);
   }
 
-  @keyframes spinRing{
-    from{transform:rotate(0deg);}
-    to{transform:rotate(360deg);}
+  body.theme-dark .banner-card-chip{
+    background:#ffffff;
+    color:#140c09;
   }
 
   @keyframes pulseOrbit{
     0%{transform:scale(1);}
-    50%{transform:scale(1.06);}
+    50%{transform:scale(1.05);}
     100%{transform:scale(1);}
   }
 
   /* =========================
-     NAVBAR (BELOW BANNER)
+     NAVBAR
      ========================= */
   .nav-shell{
     background:var(--bg-soft);
-    border-bottom:1px solid rgba(255,255,255,0.04);
+    border-bottom:1px solid var(--border-soft);
   }
 
   .nav{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:14px 0 10px;
+    padding:10px 0 8px;
   }
 
   .nav-left{
@@ -554,16 +514,22 @@
   }
 
   .nav-logo{
-    width:32px;
-    height:32px;
+    width:30px;
+    height:30px;
     border-radius:12px;
-    background:radial-gradient(circle at 30% 0%,#f2c26b,#c88b3a 40%,#120b07 100%);
+    background:radial-gradient(circle at 30% 0%,#f2b45f,#c88b3a 40%,#1b120b 100%);
     display:flex;
     align-items:center;
     justify-content:center;
-    color:#120b07;
+    color:#1b120b;
     font-family:'Aptos Black',sans-serif;
-    font-size:18px;
+    font-size:16px;
+    box-shadow:0 0 18px rgba(242,180,95,0.8);
+  }
+
+  body.theme-dark .nav-logo{
+    background:radial-gradient(circle at 30% 0%,#f2c26b,#c88b3a 40%,#120b07 100%);
+    color:#120b07;
     box-shadow:0 0 22px rgba(242,194,107,0.9);
   }
 
@@ -586,78 +552,17 @@
     color:var(--text-sub);
   }
 
-  .nav-links{
-    display:flex;
-    align-items:center;
-    gap:16px;
-    font-size:12px;
-    font-family:'Aharoni',sans-serif;
-    color:var(--text-sub);
-  }
-
-  .nav-link{
-    position:relative;
-    cursor:pointer;
-    padding:4px 0;
-    transition:var(--transition-fast);
-  }
-
-  .nav-link::after{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:-2px;
-    width:0;
-    height:2px;
-    border-radius:999px;
-    background:linear-gradient(90deg,#f2c26b,#ff9f6b);
-    transition:var(--transition-fast);
-  }
-
-  .nav-link:hover{
-    color:var(--accent);
-  }
-
-  .nav-link:hover::after{
-    width:100%;
-  }
-
-  .nav-link.active{
-    color:var(--accent);
-  }
-
-  .nav-link.active::after{
-    width:100%;
-  }
-
   .nav-right{
     display:flex;
     align-items:center;
     gap:10px;
   }
 
-  .nav-cta{
-    padding:7px 14px;
-    border-radius:999px;
-    border:1px solid var(--accent);
-    background:rgba(242,194,107,0.12);
-    color:var(--accent);
-    font-family:'Aptos Black',sans-serif;
-    font-size:12px;
-    cursor:pointer;
-    transition:var(--transition-fast);
-  }
-
-  .nav-cta:hover{
-    background:rgba(242,194,107,0.2);
-    transform:translateY(-1px);
-  }
-
   .nav-toggle{
     padding:7px 12px;
     border-radius:999px;
-    border:1px solid rgba(255,255,255,0.12);
-    background:rgba(12,7,5,0.9);
+    border:1px solid var(--border-strong);
+    background:rgba(255,255,255,0.9);
     color:var(--text-sub);
     font-family:'Aharoni',sans-serif;
     font-size:11px;
@@ -667,237 +572,103 @@
     transition:var(--transition-fast);
   }
 
+  body.theme-dark .nav-toggle{
+    background:rgba(12,7,5,0.9);
+    color:var(--text-sub);
+  }
+
   .nav-toggle:hover{
+    border-color:var(--accent);
+    color:var(--accent-strong);
+  }
+
+  .nav-cta{
+    padding:7px 14px;
+    border-radius:999px;
+    border:1px solid var(--accent);
+    background:rgba(242,180,95,0.12);
+    color:var(--accent-strong);
+    font-family:'Aptos Black',sans-serif;
+    font-size:12px;
+    cursor:pointer;
+    transition:var(--transition-fast);
+  }
+
+  body.theme-dark .nav-cta{
     background:rgba(242,194,107,0.12);
     color:var(--accent);
   }
 
+  .nav-cta:hover{
+    transform:translateY(-1px);
+  }
+
   /* =========================
-     MAIN SHELL
+     MAIN SHELL + CATEGORY SWITCHER
      ========================= */
   .main-shell{
     background:var(--bg-soft);
-    padding:24px 0 40px;
+    padding:20px 0 40px;
   }
 
-  .hero{
-    display:grid;
-    grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);
-    gap:24px;
-  }
-
-  .hero-main{
-    background:
-      radial-gradient(circle at top left,rgba(242,194,107,0.12),transparent 60%),
-      radial-gradient(circle at bottom right,rgba(80,120,255,0.12),transparent 60%),
-      var(--bg-card);
-    border-radius:var(--card-radius);
-    border:1px solid var(--border-soft);
-    box-shadow:var(--shadow-strong);
-    padding:18px 18px 20px;
-  }
-
-  .hero-pill{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:5px 11px;
-    border-radius:999px;
-    border:1px solid var(--accent);
-    background:rgba(12,7,5,0.9);
-    font-family:'Aharoni',sans-serif;
-    font-size:11px;
-    letter-spacing:0.16em;
-    text-transform:uppercase;
-    color:var(--accent);
-    margin-bottom:10px;
-  }
-
-  .hero-pill-dot{
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:var(--accent);
-    box-shadow:0 0 12px rgba(242,194,107,0.9);
-  }
-
-  .hero-title{
-    font-family:'Aptos Black',sans-serif;
-    font-size:28px;
-    line-height:1.25;
-    margin-bottom:10px;
-  }
-
-  .hero-title span{
-    background:linear-gradient(120deg,#ffd27f,#f2c26b,#ff9f6b);
-    -webkit-background-clip:text;
-    color:transparent;
-  }
-
-  .hero-sub{
-    font-family:'Aharoni',sans-serif;
-    font-size:14px;
-    color:var(--text-sub);
-    line-height:1.7;
-    margin-bottom:14px;
-  }
-
-  .hero-pills-row{
+  .category-bar{
+    margin-top:14px;
+    margin-bottom:18px;
     display:flex;
     flex-wrap:wrap;
     gap:8px;
-    margin-bottom:14px;
   }
 
-  .hero-pill-tag{
-    font-family:'Aharoni',sans-serif;
-    font-size:11px;
-    padding:4px 10px;
+  .category-pill{
+    padding:7px 14px;
     border-radius:999px;
-    background:rgba(12,7,5,0.9);
-    border:1px solid rgba(255,255,255,0.08);
-    color:var(--text-sub);
-  }
-
-  .hero-actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-bottom:14px;
-  }
-
-  .hero-meta{
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-    font-family:'Aharoni',sans-serif;
-    font-size:12px;
-    color:var(--text-sub);
-  }
-
-  .hero-meta-item{
-    display:flex;
-    gap:8px;
-  }
-
-  .hero-meta-dot{
-    width:6px;
-    height:6px;
-    border-radius:50%;
-    background:var(--accent);
-    margin-top:5px;
-    box-shadow:0 0 10px rgba(242,194,107,0.9);
-  }
-
-  .hero-side{
-    background:var(--bg-card);
-    border-radius:var(--card-radius);
     border:1px solid var(--border-soft);
-    box-shadow:var(--shadow-strong);
-    padding:16px 16px 18px;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-  }
-
-  .hero-side-label{
-    font-family:'Aharoni',sans-serif;
-    font-size:11px;
-    letter-spacing:0.16em;
-    text-transform:uppercase;
+    background:rgba(255,255,255,0.9);
     color:var(--text-sub);
-  }
-
-  .hero-side-title{
-    font-family:'Aptos Black',sans-serif;
-    font-size:15px;
-  }
-
-  .hero-side-sub{
     font-family:'Aharoni',sans-serif;
     font-size:12px;
-    color:var(--text-sub);
-  }
-
-  .hero-grid-preview{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:10px;
-    margin-top:4px;
-  }
-
-  .preview-card{
-    background:var(--bg-card-soft);
-    border-radius:14px;
-    border:1px solid rgba(255,255,255,0.06);
-    padding:10px 10px 11px;
     cursor:pointer;
-    transition:var(--transition-med);
-    position:relative;
-    overflow:hidden;
-    min-height:80px;
+    transition:var(--transition-fast);
   }
 
-  .preview-card::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:radial-gradient(circle at top,rgba(242,194,107,0.18),transparent 60%);
-    opacity:0;
-    transition:var(--transition-med);
+  body.theme-dark .category-pill{
+    background:rgba(12,7,5,0.9);
+    border-color:rgba(255,255,255,0.08);
   }
 
-  .preview-card:hover{
-    transform:translateY(-3px) scale(1.01);
-    box-shadow:0 18px 40px rgba(0,0,0,0.9);
+  .category-pill:hover{
     border-color:var(--accent);
+    color:var(--accent-strong);
   }
 
-  .preview-card:hover::after{
-    opacity:1;
+  .category-pill.active{
+    background:linear-gradient(135deg,#f2b45f,#ff9f4f);
+    color:#1b120b;
+    border-color:transparent;
   }
 
-  .preview-tag{
-    font-family:'Aharoni',sans-serif;
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:0.16em;
-    color:var(--text-sub);
-    margin-bottom:4px;
+  body.theme-dark .category-pill.active{
+    background:linear-gradient(135deg,#f2c26b,#ff9f6b);
+    color:#120b07;
   }
 
-  .preview-title{
-    font-family:'Aptos Black',sans-serif;
-    font-size:13px;
-    margin-bottom:2px;
+  .mid-ad-shell{
+    margin-bottom:18px;
   }
 
-  .preview-meta{
-    font-family:'Aharoni',sans-serif;
-    font-size:11px;
-    color:var(--text-sub);
+  .mid-ad{
+    padding:10px 12px;
+    border-radius:14px;
+    background:rgba(255,255,255,0.9);
+    border:1px dashed rgba(242,180,95,0.6);
   }
 
-  .hero-side-footer{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-top:6px;
-    font-family:'Aharoni',sans-serif;
-    font-size:11px;
-    color:var(--text-sub);
-  }
-
-  .hero-side-ad{
-    margin-top:6px;
-    padding:8px 10px;
-    border-radius:12px;
+  body.theme-dark .mid-ad{
     background:rgba(12,7,5,0.96);
-    border:1px dashed rgba(242,194,107,0.4);
+    border-color:rgba(242,194,107,0.4);
   }
 
-  .hero-side-ad-label{
-    font-family:'Aharoni',sans-serif;
+  .mid-ad-label{
     font-size:10px;
     text-transform:uppercase;
     letter-spacing:0.16em;
@@ -905,14 +676,180 @@
     margin-bottom:4px;
   }
 
-  .hero-side-ad-inner{
-    background:rgba(0,0,0,0.4);
+  .mid-ad-inner{
+    background:rgba(0,0,0,0.02);
     border-radius:10px;
     padding:4px;
   }
 
+  body.theme-dark .mid-ad-inner{
+    background:rgba(0,0,0,0.4);
+  }
+
+  .content-shell{
+    background:var(--bg-card-soft);
+    border-radius:var(--radius-card);
+    border:1px solid var(--border-soft);
+    box-shadow:var(--shadow-soft);
+    padding:16px 16px 18px;
+  }
+
+  body.theme-dark .content-shell{
+    background:var(--bg-card);
+    box-shadow:var(--shadow-strong);
+  }
+
+  .section-panel{
+    display:none;
+    opacity:0;
+    transform:translateY(6px);
+    transition:opacity 0.25s ease,transform 0.25s ease;
+  }
+
+  .section-panel.active{
+    display:block;
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  .section-header{
+    margin-bottom:14px;
+  }
+
+  .section-kicker{
+    font-family:'Aharoni',sans-serif;
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--text-sub);
+    margin-bottom:4px;
+  }
+
+  .section-title{
+    font-family:'Aptos Black',sans-serif;
+    font-size:20px;
+    margin-bottom:4px;
+  }
+
+  .section-sub{
+    font-family:'Aharoni',sans-serif;
+    font-size:13px;
+    color:var(--text-sub);
+  }
+
+  .card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:12px;
+  }
+
+  .simple-card{
+    background:var(--bg-elevated);
+    border-radius:var(--radius-card);
+    border:1px solid var(--border-soft);
+    padding:10px 11px 11px;
+    min-height:90px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    gap:4px;
+    transition:transform var(--transition-med),box-shadow var(--transition-med),border-color var(--transition-med),background 0.25s ease;
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .simple-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(circle at top,rgba(242,180,95,0.12),transparent 60%);
+    opacity:0;
+    transition:opacity 0.25s ease;
+    pointer-events:none;
+  }
+
+  .simple-card:hover::before{
+    opacity:1;
+  }
+
+  .simple-card:hover{
+    transform:translateY(-3px);
+    box-shadow:var(--shadow-soft);
+    border-color:var(--accent-soft);
+  }
+
+  body.theme-dark .simple-card:hover{
+    box-shadow:var(--shadow-strong);
+  }
+
+  .simple-card-pill{
+    font-family:'Aharoni',sans-serif;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    color:var(--text-sub);
+  }
+
+  .simple-card-title{
+    font-family:'Aptos Black',sans-serif;
+    font-size:14px;
+  }
+
+  .simple-card-text{
+    font-family:'Aharoni',sans-serif;
+    font-size:12px;
+    color:var(--text-sub);
+  }
+
+  .simple-card-meta{
+    font-family:'Aharoni',sans-serif;
+    font-size:11px;
+    color:var(--accent-strong);
+  }
+
+  footer{
+    margin-top:20px;
+    font-family:'Aharoni',sans-serif;
+    font-size:11px;
+    color:var(--text-sub);
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .footer-ad{
+    padding:8px 10px;
+    border-radius:12px;
+    background:rgba(255,255,255,0.9);
+    border:1px dashed rgba(242,180,95,0.6);
+  }
+
+  body.theme-dark .footer-ad{
+    background:rgba(12,7,5,0.96);
+    border-color:rgba(242,194,107,0.4);
+  }
+
+  .footer-ad-label{
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    color:var(--text-sub);
+    margin-bottom:4px;
+  }
+
+  .footer-ad-inner{
+    background:rgba(0,0,0,0.02);
+    border-radius:10px;
+    padding:4px;
+  }
+
+  body.theme-dark .footer-ad-inner{
+    background:rgba(0,0,0,0.4);
+  }
+
   /* RESPONSIVE */
-  @media(max-width:980px){
+  @media(max-width:960px){
     .banner-inner{
       flex-direction:column;
       align-items:flex-start;
@@ -920,21 +857,18 @@
     .banner-right{
       align-self:center;
     }
-    .hero{
-      grid-template-columns:minmax(0,1fr);
-    }
   }
 
-  @media(max-width:760px){
-    .nav-links{display:none;}
-    .hero-grid-preview{
-      grid-template-columns:minmax(0,1fr);
-    }
+  @media(max-width:720px){
+    .nav-title-sub{display:none;}
   }
 
   @media(max-width:520px){
     .banner-title{
-      font-size:32px;
+      font-size:30px;
+    }
+    .content-shell{
+      padding:14px 12px 16px;
     }
   }
   </style>
@@ -944,48 +878,46 @@
 
   <!-- BANNER AT VERY TOP -->
   <section class="banner">
-    <div class="banner-orb orb-1"></div>
-    <div class="banner-orb orb-2"></div>
-    <div class="banner-orb orb-3"></div>
-
+    <div class="banner-noise"></div>
     <div class="banner-inner max-width">
       <div class="banner-left">
         <div class="banner-kicker">Warm AI Portfolio • ALAEAI</div>
         <h1 class="banner-title">ALAEAI — <span>Build. Learn. Create.</span></h1>
         <p class="banner-sub">
-          A cinematic, warm AI portfolio — tutorials, tools, news, and projects in one calm, premium environment.
-          Every section is designed to feel focused, intentional, and alive.
+          A simple, bright, and organized interface where you can switch between tutorials, news, tools, about, and contact —
+          with smooth animations and a calm, interactive feel.
         </p>
 
         <div class="banner-tags">
-          <span class="banner-tag">Guided AI tutorials</span>
-          <span class="banner-tag">Real projects &amp; experiments</span>
-          <span class="banner-tag">News &amp; tools in one place</span>
+          <span class="banner-tag">Bright main theme</span>
+          <span class="banner-tag">Persistent dark mode</span>
+          <span class="banner-tag">Category switcher</span>
         </div>
 
         <div class="banner-actions">
-          <button class="btn-main" onclick="scrollToId('hero')">Start Journey</button>
-          <button class="btn-ghost" onclick="scrollToId('portfolio')">View Portfolio</button>
+          <button class="btn-main" onclick="scrollToMain()">Start Exploring</button>
+          <button class="btn-ghost" onclick="scrollToMain()">View Categories</button>
         </div>
 
         <div class="banner-meta">
           <div class="banner-meta-item">
             <span class="banner-meta-dot"></span>
-            <span>Warm, minimal, and focused on real progress.</span>
+            <span>Simple, attractive, and organized layout.</span>
           </div>
           <div class="banner-meta-item">
             <span class="banner-meta-dot"></span>
-            <span>Built to grow into a full workspace over time.</span>
+            <span>Dark mode remembers your choice across categories.</span>
           </div>
         </div>
 
+        <!-- HERO AD (ID: 4678697983) -->
         <div class="banner-ad">
-          <div class="banner-ad-label">Sponsored • Banner</div>
+          <div class="banner-ad-label">Sponsored • Hero</div>
           <div class="banner-ad-inner">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-6065282700750014"
-                 data-ad-slot="1234567890"
+                 data-ad-slot="4678697983"
                  data-ad-format="auto"
                  data-full-width-responsive="true"></ins>
           </div>
@@ -994,38 +926,30 @@
 
       <div class="banner-right">
         <div class="logo-orbit">
-          <div class="logo-ring"></div>
           <div class="logo-img">
-            <img src="assets/logo.png" alt="ALAEAI Logo">
+            <!-- Replace with your logo if you want -->
+            <span style="font-family:'Aptos Black';font-size:22px;color:#1b120b;">AL</span>
           </div>
         </div>
 
         <!-- 2D FOLLOW-CURSOR CARD -->
         <div class="banner-card-wrapper">
           <div class="banner-card" id="bannerCard">
-            <div class="banner-card-particles">
-              <div class="banner-card-dot dot-1"></div>
-              <div class="banner-card-dot dot-2"></div>
-              <div class="banner-card-dot dot-3"></div>
-              <div class="banner-card-dot dot-4"></div>
-            </div>
-
             <div class="banner-card-header">
-              <div class="banner-card-pill">Live Workspace Preview</div>
-              <div class="banner-card-status">Active • v1.1</div>
+              <div class="banner-card-pill">Live Interface Preview</div>
+              <div class="banner-card-status">Active • v1.2</div>
             </div>
-            <div class="banner-card-title">ALAEAI Warm Dashboard</div>
+            <div class="banner-card-title">Simple Category Workspace</div>
             <div class="banner-card-sub">
-              Tutorials, news, tools, and portfolio — all flowing into one calm, bright, and focused experience.
+              Switch between Tutorials, News, Tools, About, and Contact — with smooth animations and a persistent theme.
             </div>
-
             <div class="banner-card-row">
               <div class="banner-card-metrics">
-                <div class="banner-card-metric"><strong>Tutorials</strong> • Learn step by step</div>
-                <div class="banner-card-metric"><strong>News</strong> • Stay aware calmly</div>
-                <div class="banner-card-metric"><strong>Tools</strong> • Build faster, smarter</div>
+                <div class="banner-card-metric"><strong>Bright</strong> • Main theme</div>
+                <div class="banner-card-metric"><strong>Dark</strong> • Toggle &amp; save</div>
+                <div class="banner-card-metric"><strong>Simple</strong> • Clean layout</div>
               </div>
-              <div class="banner-card-chip">2D follow cursor • Smooth</div>
+              <div class="banner-card-chip">2D follow cursor</div>
             </div>
           </div>
         </div>
@@ -1033,7 +957,7 @@
     </div>
   </section>
 
-  <!-- NAVBAR BELOW BANNER -->
+  <!-- NAVBAR -->
   <div class="nav-shell">
     <div class="nav max-width">
       <div class="nav-left">
@@ -1043,479 +967,353 @@
           <div class="nav-title-sub">Warm Portfolio • Build. Learn. Create.</div>
         </div>
       </div>
-      <nav class="nav-links">
-        <span class="nav-link active" onclick="scrollToId('hero')">Home</span>
-        <span class="nav-link" onclick="scrollToId('tutorials')">Tutorials</span>
-        <span class="nav-link" onclick="scrollToId('news')">News</span>
-        <span class="nav-link" onclick="scrollToId('tools')">Tools</span>
-        <span class="nav-link" onclick="scrollToId('about')">About</span>
-        <span class="nav-link" onclick="scrollToId('contact')">Contact</span>
-      </nav>
       <div class="nav-right">
-        <button class="nav-cta" onclick="scrollToId('portfolio')">View Portfolio</button>
-        <button class="nav-toggle" id="darkToggle">Dark Mode</button>
+        <button class="nav-cta" onclick="scrollToMain()">Open Workspace</button>
+        <button class="nav-toggle" id="themeToggle">Dark Mode</button>
       </div>
     </div>
   </div>
 
   <!-- MAIN CONTENT -->
-  <main class="main-shell">
+  <main class="main-shell" id="mainShell">
     <div class="max-width">
 
-      <!-- HERO -->
-      <section class="hero" id="hero">
-        <div class="hero-main">
-          <div class="hero-pill">
-            <span class="hero-pill-dot"></span>
-            <span>Warm AI Portfolio • ALAEAI</span>
-          </div>
-          <h2 class="hero-title">
-            A bright, warm space to<br>
-            <span>build, learn, and show</span> your work.
-          </h2>
-          <p class="hero-sub">
-            ALAEAI is your personal warm portfolio and workspace — tutorials, tools, news, and projects in one calm,
-            premium environment. Every section is designed to feel intentional, focused, and alive.
-          </p>
-          <div class="hero-pills-row">
-            <div class="hero-pill-tag">Tutorials • Level-based</div>
-            <div class="hero-pill-tag">News • Curated &amp; calm</div>
-            <div class="hero-pill-tag">Tools • Practical helpers</div>
-            <div class="hero-pill-tag">About &amp; Contact • Human</div>
-          </div>
-          <div class="hero-actions">
-            <button class="btn-main" onclick="scrollToId('tutorials')">Start Tutorials</button>
-            <button class="btn-ghost" onclick="scrollToId('portfolio')">Explore Portfolio</button>
-          </div>
-          <div class="hero-meta">
-            <div class="hero-meta-item">
-              <span class="hero-meta-dot"></span>
-              <span>Brightened portfolio theme for clarity and focus.</span>
-            </div>
-            <div class="hero-meta-item">
-              <span class="hero-meta-dot"></span>
-              <span>Shorter cards, more motion, and a calm layout.</span>
-            </div>
+      <!-- CATEGORY SWITCHER -->
+      <div class="category-bar">
+        <button class="category-pill active" data-section="tutorials">Tutorials</button>
+        <button class="category-pill" data-section="news">News</button>
+        <button class="category-pill" data-section="tools">Tools</button>
+        <button class="category-pill" data-section="about">About</button>
+        <button class="category-pill" data-section="contact">Contact</button>
+      </div>
+
+      <!-- MID-CONTENT AD (ID: 4826976992) -->
+      <div class="mid-ad-shell">
+        <div class="mid-ad">
+          <div class="mid-ad-label">Sponsored • Workspace</div>
+          <div class="mid-ad-inner">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-6065282700750014"
+                 data-ad-slot="4826976992"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
           </div>
         </div>
+      </div>
 
-        <aside class="hero-side">
-          <div class="hero-side-label">Portfolio Snapshot</div>
-          <div class="hero-side-title">A bright grid of what you build.</div>
-          <div class="hero-side-sub">
-            Tutorials, news, tools, and projects — all organized into clear, animated sections.
-          </div>
+      <div class="content-shell">
 
-          <div class="hero-grid-preview">
-            <div class="preview-card" onclick="scrollToId('tutorials')">
-              <div class="preview-tag">Tutorials</div>
-              <div class="preview-title">Level-based learning</div>
-              <div class="preview-meta">From foundations to advanced, step by step.</div>
-            </div>
-            <div class="preview-card" onclick="scrollToId('news')">
-              <div class="preview-tag">News</div>
-              <div class="preview-title">Calm tech awareness</div>
-              <div class="preview-meta">Meaningful updates, no noise.</div>
-            </div>
-            <div class="preview-card" onclick="scrollToId('tools')">
-              <div class="preview-tag">Tools</div>
-              <div class="preview-title">Practical helpers</div>
-              <div class="preview-meta">Utilities that support your builds.</div>
-            </div>
-            <div class="preview-card" onclick="scrollToId('about')">
-              <div class="preview-tag">About</div>
-              <div class="preview-title">The ALAEAI story</div>
-              <div class="preview-meta">Warm, human, and focused.</div>
+        <!-- TUTORIALS PANEL -->
+        <section class="section-panel active" id="panel-tutorials">
+          <div class="section-header">
+            <div class="section-kicker">Tutorials</div>
+            <div class="section-title">Learn step by step.</div>
+            <div class="section-sub">
+              Short, clear, level‑based tutorials — foundations, builder mode, and advanced topics.
             </div>
           </div>
 
-          <div class="hero-side-footer">
-            <div>Tutorials • News • Tools • About • Contact</div>
-            <div style="color:var(--accent);">Live • Bright</div>
+          <div class="card-grid">
+            <article class="simple-card">
+              <div class="simple-card-pill">Level 1</div>
+              <div class="simple-card-title">Foundations</div>
+              <div class="simple-card-text">Start with the basics — simple, clean, and practical.</div>
+              <div class="simple-card-meta">Begin here</div>
+            </article>
+
+            <article class="simple-card">
+              <div class="simple-card-pill">Level 2</div>
+              <div class="simple-card-title">Builder Mode</div>
+              <div class="simple-card-text">Build small real projects with confidence.</div>
+              <div class="simple-card-meta">Hands‑on</div>
+            </article>
+
+            <article class="simple-card">
+              <div class="simple-card-pill">Level 3</div>
+              <div class="simple-card-title">Advanced</div>
+              <div class="simple-card-text">Deep dives into more complex topics.</div>
+              <div class="simple-card-meta">Next level</div>
+            </article>
+
+            <article class="simple-card">
+              <div class="simple-card-pill">More</div>
+              <div class="simple-card-title">Coming Soon</div>
+              <div class="simple-card-text">More levels and interactive lessons.</div>
+              <div class="simple-card-meta">Expanding</div>
+            </article>
+          </div>
+        </section>
+
+        <!-- NEWS PANEL -->
+        <section class="section-panel" id="panel-news">
+          <div class="section-header">
+            <div class="section-kicker">News</div>
+            <div class="section-title">Calm, meaningful updates.</div>
+            <div class="section-sub">
+              AI, science, and tech — summarized in a calm, focused way.
+            </div>
           </div>
 
-          <div class="hero-side-ad">
-            <div class="hero-side-ad-label">Sponsored • Sidebar</div>
-            <div class="hero-side-ad-inner">
+          <div class="card-grid">
+            <article class="simple-card">
+              <div class="simple-card-pill">AI</div>
+              <div class="simple-card-title">Latest AI Trends</div>
+              <div class="simple-card-text">Daily curated updates without noise.</div>
+              <div class="simple-card-meta">Curated</div>
+            </article>
+
+            <article class="simple-card">
+              <div class="simple-card-pill">Science</div>
+              <div class="simple-card-title">Breakthroughs</div>
+              <div class="simple-card-text">Important discoveries simplified.</div>
+              <div class="simple-card-meta">Clear</div>
+            </article>
+
+            <article class="simple-card">
+              <div class="simple-card-pill">Tech</div>
+              <div class="simple-card-title">Industry News</div>
+              <div class="simple-card-text">Calm, focused summaries.</div>
+              <div class="simple-card-meta">Focused</div>
+            </article>
+
+            <article class="simple-card">
+              <div class="simple-card-pill">More</div>
+              <div class="simple-card-title">Coming Soon</div>
+              <div class="simple-card-text">Live API integration in the future.</div>
+              <div class="simple-card-meta">Planned</div>
+            </article>
+          </div>
+        </section>
+
+        <!-- TOOLS PANEL -->
+        <section class="section-panel" id="panel-tools">
+          <div class="section-header">
+            <div class="section-kicker">Tools</div>
+            <div class="section-title">Build smarter.</div>
+            <div class="section-sub">
+              Practical utilities to support your projects.
+            </div>
+          </div>
+
+          <div class="card-grid">
+            <article class="simple-card">
+              <div class="simple-card-pill">Tool</div>
+              <div class="simple-card-title">Text Cleaner</div>
+              <div class="simple-card-text">Remove noise from text instantly.</div>
+              <div class="simple-card-meta">Utility</div>
+            </article>
+
+            <article class="simple-card">
+              <div class="simple-card-pill">Tool</div>
+              <div class="simple-card-title">JSON Formatter</div>
+              <div class="simple-card-text">Clean and format JSON easily.</div>
+              <div class="simple-card-meta">Developer</div>
+            </article>
+
+            <article class="simple-card">
+              <div class="simple-card-pill">Tool</div>
+              <div class="simple-card-title">Color Picker</div>
+              <div class="simple-card-text">Pick and copy colors quickly.</div>
+              <div class="simple-card-meta">Design</div>
+            </article>
+
+            <article class="simple-card">
+              <div class="simple-card-pill">More</div>
+              <div class="simple-card-title">Coming Soon</div>
+              <div class="simple-card-text">More utilities on the way.</div>
+              <div class="simple-card-meta">Growing</div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ABOUT PANEL -->
+        <section class="section-panel" id="panel-about">
+          <div class="section-header">
+            <div class="section-kicker">About</div>
+            <div class="section-title">The ALAEAI Story.</div>
+            <div class="section-sub">
+              Warm, human, and intentional — a calm creative studio.
+            </div>
+          </div>
+
+          <div class="card-grid">
+            <article class="simple-card">
+              <div class="simple-card-pill">Why</div>
+              <div class="simple-card-title">Why ALAEAI?</div>
+              <div class="simple-card-text">
+                A calm, warm space built to help you grow — tutorials, tools, news, and portfolio in harmony.
+              </div>
+              <div class="simple-card-meta">Purpose</div>
+            </article>
+
+            <article class="simple-card">
+              <div class="simple-card-pill">Vision</div>
+              <div class="simple-card-title">Vision</div>
+              <div class="simple-card-text">
+                Evolve into a full creative environment with dashboards, stats, and personalized flows.
+              </div>
+              <div class="simple-card-meta">Future</div>
+            </article>
+          </div>
+        </section>
+
+        <!-- CONTACT PANEL -->
+        <section class="section-panel" id="panel-contact">
+          <div class="section-header">
+            <div class="section-kicker">Contact</div>
+            <div class="section-title">Let’s connect.</div>
+            <div class="section-sub">
+              Reach out anytime — simple and direct.
+            </div>
+          </div>
+
+          <div class="card-grid">
+            <article class="simple-card">
+              <div class="simple-card-pill">Email</div>
+              <div class="simple-card-title">Get in touch</div>
+              <div class="simple-card-text">contact@alaeai.com</div>
+              <div class="simple-card-meta">Primary</div>
+            </article>
+
+            <article class="simple-card">
+              <div class="simple-card-pill">Social</div>
+              <div class="simple-card-title">Instagram</div>
+              <div class="simple-card-text">@alaeai</div>
+              <div class="simple-card-meta">Updates</div>
+            </article>
+
+            <article class="simple-card">
+              <div class="simple-card-pill">Social</div>
+              <div class="simple-card-title">GitHub</div>
+              <div class="simple-card-text">github.com/alaeai</div>
+              <div class="simple-card-meta">Code</div>
+            </article>
+
+            <article class="simple-card">
+              <div class="simple-card-pill">More</div>
+              <div class="simple-card-title">Coming Soon</div>
+              <div class="simple-card-text">More ways to connect.</div>
+              <div class="simple-card-meta">Expanding</div>
+            </article>
+          </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+          © 2026 ALAEAI — Warm Portfolio • Build. Learn. Create.
+          <!-- FOOTER AD (ID: 6794664785) -->
+          <div class="footer-ad">
+            <div class="footer-ad-label">Sponsored • Footer</div>
+            <div class="footer-ad-inner">
               <ins class="adsbygoogle"
                    style="display:block"
                    data-ad-client="ca-pub-6065282700750014"
-                   data-ad-slot="2345678901"
+                   data-ad-slot="6794664785"
                    data-ad-format="auto"
                    data-full-width-responsive="true"></ins>
             </div>
           </div>
-        </aside>
-      </section>
+        </footer>
 
-      <!-- PART 2 WILL CONTINUE: portfolio, tutorials, news, tools, about, contact, footer, scripts -->
-<!-- PORTFOLIO -->
-<section class="section" id="portfolio">
-  <div class="section-header">
-    <div class="section-title-block">
-      <div class="section-kicker">Portfolio</div>
-      <div class="section-title">A bright, organized portfolio.</div>
-      <div class="section-sub">
-        Shorter cards, cleaner layout, and a warm glow — everything designed to feel premium.
       </div>
     </div>
-  </div>
+  </main>
 
-  <div class="portfolio-grid">
-    <div class="portfolio-main-grid">
+  <script>
+  // Smooth scroll to main
+  function scrollToMain(){
+    const el = document.getElementById("mainShell");
+    if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
+  }
 
-      <!-- CARD 1 -->
-      <article class="portfolio-card">
-        <div class="portfolio-tag-row">
-          <div class="portfolio-tag">Tutorials</div>
-          <div class="portfolio-pill">Learning</div>
-        </div>
-        <div class="portfolio-title">Level‑Based Tutorials</div>
-        <div class="portfolio-desc">
-          A structured path from beginner to advanced — short, clear, and practical.
-        </div>
-        <div class="portfolio-meta-row">
-          <div class="portfolio-meta-pill">20+ Levels</div>
-          <div>Step by step</div>
-        </div>
-      </article>
+  // THEME PERSISTENCE
+  const bodyEl = document.body;
+  const themeToggleBtn = document.getElementById("themeToggle");
+  const THEME_KEY = "alaeai-theme";
 
-      <!-- CARD 2 -->
-      <article class="portfolio-card">
-        <div class="portfolio-tag-row">
-          <div class="portfolio-tag">News</div>
-          <div class="portfolio-pill">Live</div>
-        </div>
-        <div class="portfolio-title">Calm Tech News</div>
-        <div class="portfolio-desc">
-          A curated feed of meaningful updates — no noise, no stress.
-        </div>
-        <div class="portfolio-meta-row">
-          <div class="portfolio-meta-pill">Updated Daily</div>
-          <div>AI • Science</div>
-        </div>
-      </article>
+  function applyTheme(theme){
+    if(theme === "dark"){
+      bodyEl.classList.add("theme-dark");
+      if(themeToggleBtn) themeToggleBtn.textContent = "Light Mode";
+    }else{
+      bodyEl.classList.remove("theme-dark");
+      if(themeToggleBtn) themeToggleBtn.textContent = "Dark Mode";
+    }
+  }
 
-      <!-- CARD 3 -->
-      <article class="portfolio-card">
-        <div class="portfolio-tag-row">
-          <div class="portfolio-tag">Tools</div>
-          <div class="portfolio-pill">Utility</div>
-        </div>
-        <div class="portfolio-title">Smart Tools</div>
-        <div class="portfolio-desc">
-          Calculators, generators, and helpers that make building easier.
-        </div>
-        <div class="portfolio-meta-row">
-          <div class="portfolio-meta-pill">Fast</div>
-          <div>Practical</div>
-        </div>
-      </article>
+  (function initTheme(){
+    const saved = localStorage.getItem(THEME_KEY);
+    if(saved === "dark" || saved === "light"){
+      applyTheme(saved);
+    }else{
+      applyTheme("light");
+    }
+  })();
 
-      <!-- CARD 4 -->
-      <article class="portfolio-card">
-        <div class="portfolio-tag-row">
-          <div class="portfolio-tag">About</div>
-          <div class="portfolio-pill">Human</div>
-        </div>
-        <div class="portfolio-title">The ALAEAI Story</div>
-        <div class="portfolio-desc">
-          A warm, personal space built with intention and clarity.
-        </div>
-        <div class="portfolio-meta-row">
-          <div class="portfolio-meta-pill">Warm</div>
-          <div>Minimal</div>
-        </div>
-      </article>
+  if(themeToggleBtn){
+    themeToggleBtn.addEventListener("click", () => {
+      const isDark = bodyEl.classList.contains("theme-dark");
+      const next = isDark ? "light" : "dark";
+      applyTheme(next);
+      localStorage.setItem(THEME_KEY, next);
+    });
+  }
 
-    </div>
+  // CATEGORY SWITCHING
+  const pills = document.querySelectorAll(".category-pill");
+  const panels = document.querySelectorAll(".section-panel");
 
-    <aside class="portfolio-side">
-      <div class="portfolio-side-title">Quick Navigation</div>
-      <div class="portfolio-side-sub">
-        Jump to any section instantly.
-      </div>
+  function showPanel(name){
+    panels.forEach(p => {
+      if(p.id === "panel-" + name){
+        p.classList.add("active");
+      }else{
+        p.classList.remove("active");
+      }
+    });
+  }
 
-      <div class="portfolio-side-list">
-        <div class="portfolio-side-item" onclick="scrollToId('tutorials')">
-          <span>Tutorials</span>
-          <span class="badge">Start</span>
-        </div>
-        <div class="portfolio-side-item" onclick="scrollToId('news')">
-          <span>News</span>
-          <span class="badge">Live</span>
-        </div>
-        <div class="portfolio-side-item" onclick="scrollToId('tools')">
-          <span>Tools</span>
-          <span class="badge">Utility</span>
-        </div>
-        <div class="portfolio-side-item" onclick="scrollToId('about')">
-          <span>About</span>
-          <span class="badge">Story</span>
-        </div>
-        <div class="portfolio-side-item" onclick="scrollToId('contact')">
-          <span>Contact</span>
-          <span class="badge">Reach</span>
-        </div>
-      </div>
-
-      <div class="portfolio-side-ad">
-        <div class="portfolio-side-ad-label">Sponsored • Portfolio</div>
-        <div class="portfolio-side-ad-inner">
-          <ins class="adsbygoogle"
-               style="display:block"
-               data-ad-client="ca-pub-6065282700750014"
-               data-ad-slot="3456789012"
-               data-ad-format="auto"
-               data-full-width-responsive="true"></ins>
-        </div>
-      </div>
-    </aside>
-  </div>
-</section>
-
-<!-- TUTORIALS -->
-<section class="section" id="tutorials">
-  <div class="section-header">
-    <div class="section-title-block">
-      <div class="section-kicker">Tutorials</div>
-      <div class="section-title">Learn step by step.</div>
-      <div class="section-sub">Short, clear, level‑based tutorials.</div>
-    </div>
-  </div>
-
-  <div class="feature-strip">
-    <article class="feature-card">
-      <div class="feature-pill">Level 1</div>
-      <div class="feature-title">Foundations</div>
-      <p>Start with the basics — simple, clean, and practical.</p>
-    </article>
-
-    <article class="feature-card">
-      <div class="feature-pill">Level 2</div>
-      <div class="feature-title">Builder Mode</div>
-      <p>Build small real projects with confidence.</p>
-    </article>
-
-    <article class="feature-card">
-      <div class="feature-pill">Level 3</div>
-      <div class="feature-title">Advanced</div>
-      <p>Deep dives into more complex topics.</p>
-    </article>
-
-    <article class="feature-card">
-      <div class="feature-pill">More</div>
-      <div class="feature-title">Coming Soon</div>
-      <p>More levels and interactive lessons.</p>
-    </article>
-  </div>
-</section>
-
-<!-- NEWS -->
-<section class="section" id="news">
-  <div class="section-header">
-    <div class="section-title-block">
-      <div class="section-kicker">News</div>
-      <div class="section-title">Calm, meaningful updates.</div>
-      <div class="section-sub">AI, science, and innovation — without noise.</div>
-    </div>
-  </div>
-
-  <div class="feature-strip">
-    <article class="feature-card">
-      <div class="feature-pill">AI</div>
-      <div class="feature-title">Latest AI Trends</div>
-      <p>Daily curated updates.</p>
-    </article>
-
-    <article class="feature-card">
-      <div class="feature-pill">Science</div>
-      <div class="feature-title">Breakthroughs</div>
-      <p>Important discoveries simplified.</p>
-    </article>
-
-    <article class="feature-card">
-      <div class="feature-pill">Tech</div>
-      <div class="feature-title">Industry News</div>
-      <p>Calm, focused summaries.</p>
-    </article>
-
-    <article class="feature-card">
-      <div class="feature-pill">More</div>
-      <div class="feature-title">Coming Soon</div>
-      <p>Live API integration.</p>
-    </article>
-  </div>
-</section>
-
-<!-- TOOLS -->
-<section class="section" id="tools">
-  <div class="section-header">
-    <div class="section-title-block">
-      <div class="section-kicker">Tools</div>
-      <div class="section-title">Build smarter.</div>
-      <div class="section-sub">Practical utilities to support your projects.</div>
-    </div>
-  </div>
-
-  <div class="feature-strip">
-    <article class="feature-card">
-      <div class="feature-pill">Tool</div>
-      <div class="feature-title">Text Cleaner</div>
-      <p>Remove noise from text instantly.</p>
-    </article>
-
-    <article class="feature-card">
-      <div class="feature-pill">Tool</div>
-      <div class="feature-title">JSON Formatter</div>
-      <p>Clean and format JSON easily.</p>
-    </article>
-
-    <article class="feature-card">
-      <div class="feature-pill">Tool</div>
-      <div class="feature-title">Color Picker</div>
-      <p>Pick and copy colors quickly.</p>
-    </article>
-
-    <article class="feature-card">
-      <div class="feature-pill">More</div>
-      <div class="feature-title">Coming Soon</div>
-      <p>More utilities on the way.</p>
-    </article>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="section" id="about">
-  <div class="section-header">
-    <div class="section-title-block">
-      <div class="section-kicker">About</div>
-      <div class="section-title">The ALAEAI Story.</div>
-      <div class="section-sub">Warm, human, intentional.</div>
-    </div>
-  </div>
-
-  <div class="roadmap">
-    <div>
-      <div class="roadmap-title">Why ALAEAI?</div>
-      <div class="roadmap-sub">
-        A calm, warm space built to help you grow.
-      </div>
-      <p style="font-family:'Aharoni';font-size:13px;color:var(--text-sub);line-height:1.7;">
-        ALAEAI is designed to feel like a personal creative studio — warm, minimal, and focused.
-        Tutorials, tools, news, and portfolio all live together in harmony.
-      </p>
-    </div>
-
-    <div>
-      <div class="roadmap-title">Vision</div>
-      <div class="roadmap-sub">A complete workspace.</div>
-      <p style="font-family:'Aharoni';font-size:13px;color:var(--text-sub);line-height:1.7;">
-        The goal is to evolve into a full creative environment with dashboards, stats, and personalized flows.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="section" id="contact">
-  <div class="section-header">
-    <div class="section-title-block">
-      <div class="section-kicker">Contact</div>
-      <div class="section-title">Let’s connect.</div>
-      <div class="section-sub">Reach out anytime.</div>
-    </div>
-  </div>
-
-  <div class="feature-strip">
-    <article class="feature-card">
-      <div class="feature-pill">Email</div>
-      <div class="feature-title">Get in touch</div>
-      <p>contact@alaeai.com</p>
-    </article>
-
-    <article class="feature-card">
-      <div class="feature-pill">Social</div>
-      <div class="feature-title">Instagram</div>
-      <p>@alaeai</p>
-    </article>
-
-    <article class="feature-card">
-      <div class="feature-pill">Social</div>
-      <div class="feature-title">GitHub</div>
-      <p>github.com/alaeai</p>
-    </article>
-
-    <article class="feature-card">
-      <div class="feature-pill">More</div>
-      <div class="feature-title">Coming Soon</div>
-      <p>More ways to connect.</p>
-    </article>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  © 2026 <span class="accent">ALAEAI</span> — Warm Portfolio • Build. Learn. Create.
-  <div class="footer-ad">
-    <div class="footer-ad-label">Sponsored • Footer</div>
-    <div class="footer-ad-inner">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-6065282700750014"
-           data-ad-slot="6789012345"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-    </div>
-  </div>
-</footer>
-
-</div>
-</main>
-
-<script>
-/* Smooth scroll */
-function scrollToId(id){
-  const el=document.getElementById(id);
-  if(el) el.scrollIntoView({behavior:"smooth",block:"start"});
-}
-
-/* Dark mode */
-const toggle=document.getElementById("darkToggle");
-toggle.addEventListener("click",()=>{
-  document.body.classList.toggle("dark-mode");
-  toggle.textContent=document.body.classList.contains("dark-mode")
-    ?"Light Mode"
-    :"Dark Mode";
-});
-
-/* 2D follow cursor card */
-const card=document.getElementById("bannerCard");
-if(card){
-  card.addEventListener("mousemove",(e)=>{
-    const rect=card.getBoundingClientRect();
-    const x=(e.clientX-rect.left)/rect.width;
-    const y=(e.clientY-rect.top)/rect.height;
-    const moveX=(x-0.5)*20;
-    const moveY=(y-0.5)*20;
-    card.style.transform=`translate(${moveX}px,${moveY}px)`;
-    card.classList.add("hovered");
+  pills.forEach(pill => {
+    pill.addEventListener("click", () => {
+      const section = pill.getAttribute("data-section");
+      pills.forEach(p => p.classList.remove("active"));
+      pill.classList.add("active");
+      showPanel(section);
+    });
   });
 
-  card.addEventListener("mouseleave",()=>{
-    card.style.transform="translate(0,0)";
-    card.classList.remove("hovered");
+  // 2D FOLLOW-CURSOR CARD
+  const bannerCard = document.getElementById("bannerCard");
+  if(bannerCard){
+    bannerCard.addEventListener("mousemove", (e) => {
+      const rect = bannerCard.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      const moveX = (x - 0.5) * 20;
+      const moveY = (y - 0.5) * 20;
+      bannerCard.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      bannerCard.classList.add("hovered");
+    });
+
+    bannerCard.addEventListener("mouseleave", () => {
+      bannerCard.style.transform = "translate(0, 0)";
+      bannerCard.classList.remove("hovered");
+    });
+  }
+
+  // ADS INITIALIZATION
+  window.addEventListener("load", () => {
+    try{
+      const adSlots = document.querySelectorAll("ins.adsbygoogle");
+      adSlots.forEach(() => {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      });
+    }catch(e){
+      console.warn("Ads init error:", e);
+    }
   });
-}
-
-/* Ads init */
-try{
-  (adsbygoogle=window.adsbygoogle||[]).push({});
-  (adsbygoogle=window.adsbygoogle||[]).push({});
-  (adsbygoogle=window.adsbygoogle||[]).push({});
-}catch(e){}
-</script>
-
+  </script>
 </body>
 </html>
 
