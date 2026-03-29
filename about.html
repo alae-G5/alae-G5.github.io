@@ -316,6 +316,42 @@ body.dark {
   to { transform:translate(-50%, -50%) rotateZ(360deg); }
 }
 
+.sphere-ring {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  border:2px solid rgba(242,194,107,0.25);
+  animation:ringSpin 6s linear infinite;
+  box-shadow:0 0 30px rgba(242,194,107,0.3);
+}
+
+@keyframes ringSpin {
+  0% { transform:translate(-50%, -50%) rotate(0deg); }
+  100% { transform:translate(-50%, -50%) rotate(360deg); }
+}
+
+.sphere-scan {
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255,255,255,0.15) 50%,
+    transparent 100%
+  );
+  mix-blend-mode:screen;
+  animation:scanDown 3s linear infinite;
+}
+
+@keyframes scanDown {
+  0% { transform:translateY(-100%); }
+  100% { transform:translateY(100%); }
+}
+
 .particle {
   position:absolute;
   width:6px;
@@ -390,6 +426,13 @@ body.dark {
   flex-direction:column;
   gap:14px;
   min-height:260px;
+  transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+
+.card:hover {
+  transform:translateY(-6px);
+  box-shadow:0 12px 40px rgba(0,0,0,0.45);
+  border-color:rgba(242,194,107,0.35);
 }
 
 .card-title {
@@ -580,6 +623,42 @@ aside {
   color:var(--muted);
 }
 
+/* animated filler */
+.animated-filler {
+  width:100%;
+  height:220px;
+  border-radius:22px;
+  background:linear-gradient(145deg, #0b0d11, #151821);
+  border:1px solid rgba(255,255,255,0.06);
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.animated-filler .orb {
+  position:absolute;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:radial-gradient(circle, var(--accent3), var(--accent2));
+  opacity:0.35;
+  animation:orbFloat 6s ease-in-out infinite;
+}
+
+.animated-filler .orb:nth-child(1) { top:20%; left:25%; animation-delay:0s; }
+.animated-filler .orb:nth-child(2) { top:60%; left:70%; animation-delay:1s; }
+.animated-filler .orb:nth-child(3) { top:40%; left:45%; animation-delay:2s; }
+.animated-filler .orb:nth-child(4) { top:75%; left:20%; animation-delay:1.5s; }
+
+@keyframes orbFloat {
+  0% { transform:translateY(0) scale(1); opacity:0.3; }
+  50% { transform:translateY(-20px) scale(1.3); opacity:0.6; }
+  100% { transform:translateY(0) scale(1); opacity:0.3; }
+}
+
 /* footer */
 .footer {
   margin-top:40px;
@@ -637,7 +716,6 @@ aside {
     font-size:24px;
   }
 }
-
 </style>
 </head>
 
@@ -676,6 +754,8 @@ aside {
       <div class="sphere">
         <div class="sphere-grid"></div>
         <div class="sphere-core"></div>
+        <div class="sphere-ring"></div>
+        <div class="sphere-scan"></div>
       </div>
       <div class="sphere-glow"></div>
       <div class="particle" style="top:10%; left:20%; animation-delay:0s;"></div>
@@ -914,6 +994,13 @@ aside {
       <span class="pill">Outils IA</span>
     </div>
   </article>
+
+  <div class="animated-filler">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+  </div>
 
 </aside>
 
