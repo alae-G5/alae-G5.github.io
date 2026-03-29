@@ -69,7 +69,6 @@
       text-decoration: none;
     }
 
-    /* GLOBAL LAYOUT */
     .page-shell {
       max-width: 1240px;
       margin: 0 auto;
@@ -77,7 +76,6 @@
       position: relative;
     }
 
-    /* BACKGROUND ORNAMENTS */
     .bg-orb {
       position: fixed;
       border-radius: 50%;
@@ -112,60 +110,42 @@
       left: 60%;
     }
 
-    /* TOP BANNER */
+    /* TOP BANNER (like tutorials) */
     .top-banner {
       width: 100%;
       height: 420px;
       position: relative;
       overflow: hidden;
       margin-bottom: 18px;
-      animation: bannerFadeIn 1.2s ease forwards;
     }
 
-    .top-banner-img-wrap {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      perspective: 1000px;
-    }
-
-    .top-banner-img-wrap img {
+    .top-banner-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transform: scale(1.15);
-      transform-origin: center;
-      animation: bannerZoomIn 2.6s ease forwards;
-      will-change: transform;
+      display: block;
     }
 
     .top-banner-overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(
-        135deg,
-        rgba(0, 0, 0, 0.55),
-        rgba(0, 0, 0, 0.35)
+        rgba(0,0,0,0.45),
+        rgba(0,0,0,0.45)
       );
-      mix-blend-mode: multiply;
-      animation: bannerGlowPulse 4s ease-in-out infinite;
-      pointer-events: none;
     }
 
     .top-banner-content {
       position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       text-align: center;
       color: #ffffff;
       padding: 0 18px;
-      animation: bannerContentIn 1.4s ease forwards;
     }
 
-    .top-banner-title {
+    .top-banner-content h1 {
       font-family: "Poppins", system-ui;
       font-weight: 800;
       font-size: 34px;
@@ -174,18 +154,18 @@
       margin-bottom: 10px;
     }
 
-    .top-banner-sub {
+    .top-banner-content p {
       font-size: 15px;
       max-width: 620px;
       opacity: 0.9;
-      margin-bottom: 18px;
+      margin: 0 auto 18px;
     }
 
-    .top-banner-btn {
+    .top-banner-content button {
       padding: 11px 24px;
       border-radius: var(--radius-pill);
-      border: 1px solid rgba(242, 194, 107, 0.9);
-      background: radial-gradient(circle at 0 0, rgba(242, 194, 107, 0.8), rgba(242, 194, 107, 0.25));
+      border: none;
+      background: var(--accent);
       color: #2b1a0d;
       font-size: 12px;
       font-weight: 600;
@@ -196,20 +176,20 @@
       transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
     }
 
-    .top-banner-btn:hover {
+    .top-banner-content button:hover {
       transform: translateY(-3px) scale(1.04);
       box-shadow: 0 0 28px rgba(242, 194, 107, 1);
-      background: radial-gradient(circle at 0 0, rgba(242, 194, 107, 0.95), rgba(242, 194, 107, 0.3));
+      background: #ffd27f;
     }
 
     @media (max-width: 720px) {
       .top-banner {
         height: 340px;
       }
-      .top-banner-title {
+      .top-banner-content h1 {
         font-size: 26px;
       }
-      .top-banner-sub {
+      .top-banner-content p {
         font-size: 14px;
       }
     }
@@ -242,22 +222,22 @@
       gap: 12px;
     }
 
+    /* NO IMAGE HERE ANYMORE */
     .nav-logo-wrap {
       width: 40px;
       height: 40px;
-      border-radius: 16px;
+      border-radius: 12px;
       background: radial-gradient(circle at 20% 0%, #f2c26b 0, #b8863b 40%, #3a2614 100%);
       box-shadow: 0 0 18px rgba(242, 194, 107, 0.9);
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
-    }
-
-    .nav-logo-wrap img {
-      width: 80%;
-      height: 80%;
-      object-fit: contain;
+      color: #fff;
+      font-family: "Poppins", system-ui;
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .nav-title-block {
@@ -539,7 +519,6 @@
       box-shadow: 0 0 10px rgba(242, 194, 107, 0.9);
     }
 
-    /* HERO SIDE PORTFOLIO PREVIEW */
     .hero-side {
       background: radial-gradient(circle at top, rgba(242, 194, 107, 0.22), rgba(255, 255, 255, 0.96));
       border-radius: var(--radius-lg);
@@ -655,7 +634,6 @@
       border-color: rgba(255, 255, 255, 0.12);
     }
 
-    /* SECTION HEADER */
     .section {
       margin-top: 40px;
     }
@@ -718,7 +696,6 @@
       color: var(--text);
     }
 
-    /* PORTFOLIO GRID */
     .portfolio-grid {
       display: grid;
       grid-template-columns: 1.4fr 1.1fr;
@@ -893,7 +870,6 @@
       color: var(--text);
     }
 
-    /* FEATURE STRIP */
     .feature-strip {
       margin-top: 40px;
       display: grid;
@@ -952,7 +928,6 @@
       color: var(--subtext);
     }
 
-    /* ROADMAP SECTION */
     .roadmap {
       margin-top: 44px;
       background: var(--card);
@@ -1042,7 +1017,6 @@
       border-color: rgba(255, 255, 255, 0.08);
     }
 
-    /* FOOTER */
     footer {
       margin-top: 40px;
       padding: 20px 0 10px;
@@ -1056,7 +1030,6 @@
       font-weight: 500;
     }
 
-    /* RESPONSIVE */
     @media (max-width: 980px) {
       .hero {
         grid-template-columns: minmax(0, 1fr);
@@ -1099,7 +1072,6 @@
       }
     }
 
-    /* ANIMATIONS */
     @keyframes heroIn {
       from { opacity: 0; transform: translateY(26px); }
       to { opacity: 1; transform: translateY(0); }
@@ -1114,27 +1086,6 @@
       from { opacity: 0; transform: translateY(26px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
-    @keyframes bannerFadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes bannerZoomIn {
-      from { transform: scale(1.15); }
-      to { transform: scale(1.02); }
-    }
-
-    @keyframes bannerGlowPulse {
-      0% { opacity: 0.45; }
-      50% { opacity: 0.75; }
-      100% { opacity: 0.45; }
-    }
-
-    @keyframes bannerContentIn {
-      from { opacity: 0; transform: translateY(18px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
   </style>
 </head>
 <body>
@@ -1143,28 +1094,22 @@
   <div class="bg-orb orb-2"></div>
   <div class="bg-orb orb-3"></div>
 
-  <!-- TOP BANNER -->
+  <!-- TOP BANNER (ONLY PLACE WHERE assets/logo.png IS USED) -->
   <section class="top-banner">
-    <div class="top-banner-img-wrap">
-      <img src="assets/logo.png" alt="AlaeAI Banner" id="bannerImage">
-      <div class="top-banner-overlay"></div>
-    </div>
+    <img src="assets/logo.png" alt="AlaeAI Banner" class="top-banner-img">
+    <div class="top-banner-overlay"></div>
     <div class="top-banner-content">
-      <div class="top-banner-title">AlaeAI — Build. Learn. Create.</div>
-      <div class="top-banner-sub">
-        A warm, premium portfolio for your AI journey — tutorials, tools, news, and projects in one calm space.
-      </div>
-      <button class="top-banner-btn" onclick="scrollToId('hero')">Explore the Homepage</button>
+      <h1>AlaeAI — Build. Learn. Create.</h1>
+      <p>A warm, premium portfolio for your AI journey — tutorials, tools, news, and projects in one calm space.</p>
+      <button onclick="scrollToId('hero')">Explore the Homepage</button>
     </div>
   </section>
 
   <div class="page-shell">
-    <!-- NAVBAR -->
+    <!-- NAVBAR (NO IMAGE HERE) -->
     <header class="nav">
       <div class="nav-left">
-        <div class="nav-logo-wrap">
-          <img src="assets/logo.png" alt="ALAEAI Logo">
-        </div>
+        <div class="nav-logo-wrap">A</div>
         <div class="nav-title-block">
           <div class="nav-title-main">ALAEAI</div>
           <div class="nav-title-sub">Warm Portfolio • Build. Learn. Create.</div>
@@ -1482,13 +1427,11 @@
   </div>
 
   <script>
-    // Smooth scroll helper
     function scrollToId(id) {
       const el = document.getElementById(id);
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
-    // Dark mode persistence
     const toggle = document.getElementById("darkToggle");
     const savedMode = localStorage.getItem("alaeai-mode");
 
@@ -1512,10 +1455,7 @@
       };
     }
 
-    // Subtle orb + banner movement on mouse move
     const orbs = document.querySelectorAll(".bg-orb");
-    const bannerImg = document.getElementById("bannerImage");
-
     window.addEventListener("mousemove", (e) => {
       const x = (e.clientX / window.innerWidth - 0.5) * 20;
       const y = (e.clientY / window.innerHeight - 0.5) * 20;
@@ -1523,11 +1463,7 @@
         const factor = (i + 1) * 0.4;
         orb.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
       });
-      if (bannerImg) {
-        bannerImg.style.transform = `scale(1.08) translate(${x * 0.6}px, ${y * 0.6}px)`;
-      }
     });
   </script>
 </body>
 </html>
-
