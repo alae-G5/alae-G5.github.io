@@ -8,17 +8,15 @@
   <style>
     :root {
       --bg: #050608;
-      --bg-elevated: #0b0d11;
-      --bg-soft: #11141b;
+      --bg-soft: #0b0d11;
+      --bg-card: #11141b;
       --accent: #f2c26b;
       --accent-soft: rgba(242,194,107,0.18);
-      --accent-strong: rgba(242,194,107,0.75);
       --text: #f7f3ea;
       --muted: #a7a4a0;
-      --border-subtle: rgba(255,255,255,0.06);
-      --card-radius: 18px;
-      --transition-fast: 0.25s ease;
-      --shadow-soft: 0 18px 45px rgba(0,0,0,0.55);
+      --radius: 20px;
+      --shadow: 0 18px 45px rgba(0,0,0,0.55);
+      --transition: 0.35s ease;
     }
 
     * {
@@ -30,527 +28,274 @@
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
         "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #151824 0, #050608 55%);
+      background: radial-gradient(circle at top, #1a1d27 0, #050608 60%);
       color: var(--text);
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      padding: 32px 16px 48px;
+      padding: 40px 16px 60px;
+      overflow-x: hidden;
     }
 
+    /* Floating background shapes */
+    .shape {
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.25;
+      z-index: -1;
+      animation: float 12s ease-in-out infinite alternate;
+    }
+
+    .shape.one {
+      background: #f2c26b;
+      top: -120px;
+      left: -120px;
+    }
+
+    .shape.two {
+      background: #7a4b2a;
+      bottom: -160px;
+      right: -160px;
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px) translateX(0px); }
+      100% { transform: translateY(40px) translateX(30px); }
+    }
+
+    /* Page container */
     .page {
       width: 100%;
       max-width: 1120px;
+      margin: auto;
+      animation: fadeIn 1.2s ease forwards;
+      opacity: 0;
     }
 
-    /* Banner */
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
 
-    .banner {
-      position: relative;
+    /* Hero / Identity block */
+    .hero {
+      padding: 40px 32px;
+      background: linear-gradient(145deg, #0b0d11, #151821);
       border-radius: 26px;
-      padding: 26px 26px 22px;
-      background: radial-gradient(circle at top left, #2a2220 0, #0b0d11 55%);
       border: 1px solid rgba(255,255,255,0.06);
-      box-shadow: var(--shadow-soft);
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+      position: relative;
       overflow: hidden;
-      margin-bottom: 22px;
     }
 
-    .banner::before {
+    .hero::before {
       content: "";
       position: absolute;
       inset: -40%;
-      background:
-        radial-gradient(circle at 0% 0%, rgba(242,194,107,0.18) 0, transparent 55%),
-        radial-gradient(circle at 100% 0%, rgba(255,255,255,0.06) 0, transparent 55%);
+      background: radial-gradient(circle at 0% 0%, rgba(242,194,107,0.18) 0, transparent 55%);
       opacity: 0.7;
       pointer-events: none;
     }
 
-    .banner-inner {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      z-index: 1;
+    .hero-title {
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      animation: slideDown 0.8s ease forwards;
+      opacity: 0;
+      transform: translateY(-20px);
     }
 
-    .banner-pill {
-      padding: 6px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(5,6,8,0.7);
+    .hero-sub {
+      font-size: 16px;
       color: var(--muted);
-      font-size: 12px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      max-width: 620px;
+      line-height: 1.6;
+      animation: slideUp 0.8s ease forwards;
+      opacity: 0;
+      transform: translateY(20px);
+      animation-delay: 0.2s;
     }
 
-    .banner-pill span {
-      color: var(--accent);
-      font-weight: 600;
+    @keyframes slideDown {
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .banner-title {
-      font-size: 26px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      margin-top: 8px;
-      margin-bottom: 4px;
+    @keyframes slideUp {
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .banner-sub {
-      font-size: 14px;
-      color: var(--muted);
-      max-width: 520px;
-    }
-
-    .banner-right {
-      margin-left: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 6px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .banner-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #3ddc84;
-      box-shadow: 0 0 10px rgba(61,220,132,0.9);
-    }
-
-    .banner-badge {
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(5,6,8,0.7);
-    }
-
-    .banner-bottom-text {
-      position: relative;
-      margin-top: 14px;
-      font-size: 13px;
-      color: var(--muted);
-      padding-top: 10px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      z-index: 1;
-    }
-
-    /* Layout */
-
+    /* Grid layout */
     .grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-      gap: 18px;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 20px;
     }
 
     @media (max-width: 880px) {
       .grid {
-        grid-template-columns: minmax(0, 1fr);
+        grid-template-columns: 1fr;
       }
     }
 
     /* Cards */
-
     .card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 24px 22px;
+      box-shadow: var(--shadow);
       position: relative;
-      border-radius: var(--card-radius);
-      background: linear-gradient(145deg, #0b0d11, #11141b);
-      border: 1px solid var(--border-subtle);
-      padding: 20px 20px 18px;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.55);
       overflow: hidden;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background:
-        radial-gradient(circle at 0% 0%, rgba(242,194,107,0.12) 0, transparent 55%);
+      animation: reveal 1s ease forwards;
       opacity: 0;
-      transition: opacity var(--transition-fast);
-      pointer-events: none;
+      transform: translateY(20px);
     }
 
-    .card:hover::before {
-      opacity: 1;
+    @keyframes reveal {
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .card-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .card-tag {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
+    .card:hover {
+      transform: translateY(-4px);
+      transition: var(--transition);
     }
 
     .card-title {
-      font-size: 18px;
-      font-weight: 600;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
     }
 
-    .card-pill {
-      margin-left: auto;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
-      font-size: 11px;
-      color: var(--muted);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .card-pill span {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-
-    .card-body {
-      font-size: 14px;
+    .card-text {
+      font-size: 15px;
       color: var(--muted);
       line-height: 1.6;
     }
 
-    /* Intro card */
-
-    .intro-card {
-      padding: 22px 20px 20px;
-    }
-
-    .intro-top {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      position: relative;
-    }
-
-    .avatar {
-      width: 52px;
-      height: 52px;
-      border-radius: 18px;
-      background: radial-gradient(circle at 30% 0%, #f2c26b 0, #7a4b2a 40%, #1a1c24 80%);
-      border: 1px solid rgba(255,255,255,0.16);
-      box-shadow: 0 14px 30px rgba(0,0,0,0.7);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .avatar::after {
-      content: "A";
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 24px;
-      color: #fdf7ec;
-    }
-
-    .intro-text {
-      flex: 1;
-      padding-right: 120px;
-    }
-
-    .intro-eyebrow {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-
-    .intro-name {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .intro-role {
-      font-size: 13px;
-      color: var(--accent);
-      margin-bottom: 8px;
-    }
-
-    .intro-desc {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .intro-meta {
+    /* Category chips */
+    .chips {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 14px;
-      font-size: 11px;
-      color: var(--muted);
+      margin-bottom: 14px;
     }
 
-    .intro-chip {
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(5,6,8,0.8);
-    }
-
-    /* Floating audio button */
-
-    .voice-btn-floating {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      padding: 9px 18px;
-      border-radius: 14px;
-      border: 1px solid var(--accent);
-      background: var(--accent-soft);
-      color: var(--text);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition-fast);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
-      backdrop-filter: blur(6px);
-      z-index: 10;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .voice-btn-floating:hover {
-      background: rgba(242,194,107,0.28);
-      transform: translateY(-2px);
-    }
-
-    .voice-btn-floating.speaking {
-      animation: glowPulse 1.6s ease-in-out infinite;
-    }
-
-    @keyframes glowPulse {
-      0% { box-shadow: 0 0 8px rgba(242,194,107,0.35); }
-      50% { box-shadow: 0 0 18px rgba(242,194,107,0.75); }
-      100% { box-shadow: 0 0 8px rgba(242,194,107,0.35); }
-    }
-
-    /* Right column */
-
-    .stack {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .category-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .category-btn {
+    .chip {
       padding: 6px 12px;
       border-radius: 999px;
+      background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(5,6,8,0.9);
-      font-size: 11px;
+      font-size: 12px;
       color: var(--muted);
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
 
-    .category-btn span {
+    .chip span {
       width: 6px;
       height: 6px;
       border-radius: 50%;
       background: var(--accent);
     }
 
+    /* List */
     .list {
       list-style: none;
-      font-size: 13px;
-      color: var(--muted);
       display: grid;
-      gap: 4px;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .list li {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.5;
+      position: relative;
+      padding-left: 16px;
     }
 
     .list li::before {
       content: "•";
+      position: absolute;
+      left: 0;
       color: var(--accent);
-      margin-right: 6px;
-    }
-
-    /* Reveal */
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(12px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
     }
   </style>
 </head>
 
 <body>
+
+  <!-- Floating shapes -->
+  <div class="shape one"></div>
+  <div class="shape two"></div>
+
   <div class="page">
 
-    <!-- Banner -->
-    <header class="banner reveal">
-      <div class="banner-inner">
-        <div>
-          <div class="banner-pill">
-            <span>New</span> Portfolio • AlaeAI
-          </div>
-          <h1 class="banner-title">À propos d’Alaedine</h1>
-          <p class="banner-sub">
-            Créateur curieux, passionné par l’IA, le code, le design et les expériences interactives.
-          </p>
-        </div>
-
-        <div class="banner-right">
-          <div style="display:flex;align-items:center;gap:6px;">
-            <div class="banner-dot"></div>
-            <span>Disponible pour des collaborations</span>
-          </div>
-          <div class="banner-badge">
-            Tangier, Maroc • Build. Learn. Create.
-          </div>
-        </div>
-      </div>
-
-      <p class="banner-bottom-text">
-        Cette page évolue avec chaque projet, chaque idée, chaque ligne de code.
+    <!-- HERO -->
+    <section class="hero">
+      <h1 class="hero-title">Alaedine — Créateur, Bâtisseur, Visionnaire</h1>
+      <p class="hero-sub">
+        Je suis un étudiant passionné par l’IA, le développement web, le design et les expériences interactives.
+        Mon objectif est simple : créer des projets qui respirent la précision, l’identité et l’impact.
       </p>
-    </header>
+    </section>
 
-    <!-- Main grid -->
+    <!-- GRID -->
     <main class="grid">
 
-      <!-- Intro card -->
-      <section class="intro-card card reveal">
-        <div class="intro-top">
-          <div class="avatar"></div>
+      <!-- LEFT COLUMN -->
+      <section class="card">
+        <h2 class="card-title">Mon identité</h2>
 
-          <div class="intro-text">
-            <div class="intro-eyebrow">À propos</div>
-            <div class="intro-name">Alaedine</div>
-            <div class="intro-role">Étudiant, développeur & explorateur d’IA</div>
-
-            <p class="intro-desc">
-              Je construis des expériences numériques qui mélangent logique, créativité et émotion.
-              J’aime transformer des idées abstraites en interfaces concrètes, propres, animées et accessibles.
-            </p>
-
-            <div class="intro-meta">
-              <div class="intro-chip">Tangier, Maroc</div>
-              <div class="intro-chip">IA, Web, Jeux, Interactif</div>
-              <div class="intro-chip">Français • Arabe • Anglais</div>
-            </div>
-          </div>
-
-          <!-- FIXED AUDIO -->
-          <audio id="introAudio" src="https://raw.githubusercontent.com/alae-G5/alae-G5.github.io/main/assets/intro.mp3"></audio>
-
-          <button id="voiceBtn" class="voice-btn-floating">
-            🔊 <span>Écouter</span>
-          </button>
+        <div class="chips">
+          <div class="chip"><span></span> Tangier, Maroc</div>
+          <div class="chip"><span></span> IA & Web</div>
+          <div class="chip"><span></span> Créativité</div>
         </div>
 
-        <div style="margin-top:18px;border-top:1px solid rgba(255,255,255,0.06);padding-top:14px;">
-          <p class="card-body">
-            Cette présentation audio utilise ma vraie voix.  
-            Clique pour écouter une introduction personnelle.
-          </p>
-        </div>
+        <p class="card-text">
+          Je suis quelqu’un qui aime comprendre, construire et améliorer.
+          J’aime les interfaces propres, les animations subtiles, les systèmes intelligents
+          et les projets qui racontent une histoire.
+        </p>
+
+        <ul class="list">
+          <li>Je construis avec intention.</li>
+          <li>Je cherche la cohérence dans chaque détail.</li>
+          <li>Je transforme les idées en expériences concrètes.</li>
+        </ul>
       </section>
 
-      <!-- Right column -->
-      <section class="stack">
+      <!-- RIGHT COLUMN -->
+      <section class="card">
+        <h2 class="card-title">Ce que j’aime créer</h2>
 
-        <!-- Skills -->
-        <article class="card reveal">
-          <div class="card-header">
-            <div>
-              <div class="card-tag">Axes</div>
-              <div class="card-title">Ce que j’aime construire</div>
-            </div>
-            <div class="card-pill"><span></span> En évolution</div>
-          </div>
+        <div class="chips">
+          <div class="chip"><span></span> Interfaces modernes</div>
+          <div class="chip"><span></span> Automatisation IA</div>
+          <div class="chip"><span></span> Jeux interactifs</div>
+        </div>
 
-          <div class="card-body">
-            <div class="category-row">
-              <div class="category-btn"><span></span> Web moderne</div>
-              <div class="category-btn"><span></span> IA & Automatisation</div>
-              <div class="category-btn"><span></span> Jeux interactifs</div>
-            </div>
+        <p class="card-text">
+          Je suis attiré par les projets qui mélangent technique, design et émotion.
+          J’aime créer des systèmes fluides, élégants et utiles.
+        </p>
 
-            <ul class="list">
-              <li>Interfaces propres, animées, cohérentes.</li>
-              <li>Systèmes intelligents qui simplifient la vie.</li>
-              <li>Projets qui mélangent technique et storytelling.</li>
-            </ul>
-          </div>
-        </article>
+        <ul class="list">
+          <li>Sites web premium et animés.</li>
+          <li>Outils intelligents basés sur l’IA.</li>
+          <li>Expériences interactives immersives.</li>
+        </ul>
+      </section>
 
-        <!-- Mindset -->
-        <article class="card reveal">
-          <div class="card-header">
-            <div>
-              <div class="card-tag">Mindset</div>
-              <div class="card-title">Comment je travaille</div>
-            </div>
-            <div class="card-pill"><span></span> Deep focus</div>
-          </div>
+    </main>
 
-          <div class="card-body">
-            <div class="category-row">
-              <div class="category-btn"><span></span> Clarté</div>
-              <div class="category-btn"><span></span> Itération</div>
-              <div class="category-btn"><span></span> Qualité</div>
-            </div>
+  </div>
 
-            <ul class="list">
-              <li>Un projet bien fini > dix idées incomplètes.</li>
-              <li>Je construis par versions successives.</li>
-              <li>Chaque détail doit raconter la même histoire.</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- Vision -->
-        <article class="card reveal">
-          <div class="card-header">
-            <div>
-              <div class="card-tag">Vision</div>
-              <div class="card-title">Ce que je vise</div>
-            </div>
-            <div class="card-pill"><span></span> Long terme</div>
-          </div>
-
-          <div class="card-body">
-            <div class="category-row">
-              <div class="category-btn"><span></span> Impact global</div>
-              <div class="category-btn"><span></span> Accessibilité</div>
-              <div class="category-btn"><span></span> Apprentissage continu</div>
-            </div>
-
-            <ul class="list
+</body>
+</html>
