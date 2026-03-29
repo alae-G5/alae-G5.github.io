@@ -5,47 +5,20 @@
   <title>AlaeAI — À propos d’Alaedine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- FONTS -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet" />
-
   <style>
     :root {
-      --bg: #f5efe6;
-      --bg-soft: #f9f3ea;
-      --bg-deep: #f0e4d4;
-      --text: #1f130b;
-      --subtext: #7a6250;
-      --muted: #a48b76;
-      --card: #ffffff;
+      --bg: #050608;
+      --bg-elevated: #0b0d11;
+      --bg-soft: #11141b;
       --accent: #f2c26b;
       --accent-soft: rgba(242,194,107,0.18);
-      --accent-strong: rgba(242,194,107,0.55);
-      --border: rgba(0,0,0,0.08);
-      --radius-lg: 22px;
-      --radius-md: 16px;
-      --radius-pill: 999px;
-      --shadow-soft: 0 18px 45px rgba(0,0,0,0.16);
-      --shadow-subtle: 0 10px 25px rgba(0,0,0,0.08);
-      --glow: 0 0 22px rgba(242,194,107,0.55);
-      --transition-fast: 0.18s ease-out;
-      --transition-med: 0.28s ease-out;
-    }
-
-    body.dark {
-      --bg: #050304;
-      --bg-soft: #0d0907;
-      --bg-deep: #15100d;
-      --text: #f7f2ec;
-      --subtext: #b9a89a;
-      --muted: #8f7c6c;
-      --card: #15100d;
-      --accent: #f2c26b;
-      --accent-soft: rgba(242,194,107,0.22);
       --accent-strong: rgba(242,194,107,0.75);
-      --border: rgba(255,255,255,0.12);
-      --shadow-soft: 0 24px 60px rgba(0,0,0,0.85);
-      --shadow-subtle: 0 14px 30px rgba(0,0,0,0.7);
-      --glow: 0 0 26px rgba(242,194,107,0.85);
+      --text: #f7f3ea;
+      --muted: #a7a4a0;
+      --border-subtle: rgba(255,255,255,0.06);
+      --card-radius: 18px;
+      --transition-fast: 0.25s ease;
+      --shadow-soft: 0 18px 45px rgba(0,0,0,0.55);
     }
 
     * {
@@ -55,228 +28,153 @@
     }
 
     body {
-      font-family: "Rubik", sans-serif;
-      background: radial-gradient(circle at top, var(--bg-soft), var(--bg-deep));
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #151824 0, #050608 55%);
       color: var(--text);
-      overflow-x: hidden;
-      scroll-behavior: smooth;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 32px 16px 48px;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* BANNER (IMAGE ONLY) */
-    .top-banner {
+    .page {
       width: 100%;
-      height: 260px;
-      background: url("assets/logo.png") center/cover no-repeat;
-      position: relative;
-      animation: fadeIn 1s ease forwards;
-      opacity: 0;
+      max-width: 1120px;
     }
 
-    .top-banner::after {
+    /* Top banner */
+
+    .banner {
+      position: relative;
+      border-radius: 26px;
+      padding: 26px 26px 22px;
+      background: radial-gradient(circle at top left, #2a2220 0, #0b0d11 55%);
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      margin-bottom: 22px;
+    }
+
+    .banner::before {
       content: "";
       position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.35));
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(242,194,107,0.18) 0, transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(255,255,255,0.06) 0, transparent 55%);
+      opacity: 0.7;
+      pointer-events: none;
     }
 
-    /* TITLE BELOW BANNER */
-    .page-title-wrapper {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 22px 18px 10px;
+    .banner-inner {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      z-index: 1;
     }
 
-    .page-title {
-      text-align: center;
-      animation: fadeUp 1s ease forwards;
-      opacity: 0;
-    }
-
-    .page-title h1 {
-      font-family: "Poppins";
-      font-size: 32px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .page-title p {
-      font-size: 14px;
-      color: var(--subtext);
-      margin-top: 6px;
-    }
-
-    .breadcrumb {
-      margin-top: 10px;
-      font-size: 11px;
-      text-align: center;
+    .banner-pill {
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(5,6,8,0.7);
       color: var(--muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    /* NAVBAR */
-    .nav {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 10px 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(255,255,255,0.92);
-      border-radius: 999px;
-      box-shadow: var(--shadow-subtle);
-      position: sticky;
-      top: 10px;
-      z-index: 20;
-      backdrop-filter: blur(14px);
-      animation: fadeDown 0.9s ease forwards;
-      opacity: 0;
-    }
-
-    body.dark .nav {
-      background: rgba(12,8,6,0.96);
-    }
-
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .nav-logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 14px;
-      background: radial-gradient(circle at 20% 0%, #f2c26b, #b8863b, #3a2614);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: "Poppins";
-      font-weight: 800;
-      color: white;
-      font-size: 18px;
-      animation: float 3s ease-in-out infinite;
-      box-shadow: var(--glow);
-    }
-
-    .nav-brand {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-
-    .nav-brand-title {
-      font-family: "Poppins";
-      font-weight: 700;
-      font-size: 15px;
-      letter-spacing: 0.12em;
-    }
-
-    .nav-brand-sub {
-      font-size: 11px;
-      color: var(--subtext);
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 8px;
       font-size: 12px;
-    }
-
-    .nav-link {
-      padding: 7px 14px;
-      border-radius: 999px;
-      cursor: pointer;
-      border: 1px solid transparent;
-      color: var(--subtext);
-      background: transparent;
-      transition: var(--transition-fast);
-      font-weight: 500;
-    }
-
-    .nav-link:hover {
-      background: rgba(0,0,0,0.03);
-      border-color: rgba(0,0,0,0.06);
-      transform: translateY(-1px);
-    }
-
-    .nav-link.active {
-      background: rgba(242,194,107,0.22);
-      border-color: rgba(242,194,107,0.8);
-      color: var(--text);
-      box-shadow: var(--glow);
-    }
-
-    .mode-toggle {
-      padding: 7px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--accent);
-      background: rgba(242,194,107,0.16);
-      color: var(--text);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      cursor: pointer;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: var(--transition-fast);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
     }
 
-    .mode-toggle span {
+    .banner-pill span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .banner-title {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-top: 8px;
+      margin-bottom: 4px;
+    }
+
+    .banner-sub {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 520px;
+    }
+
+    .banner-right {
+      margin-left: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .banner-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #3ddc84;
+      box-shadow: 0 0 10px rgba(61,220,132,0.9);
+    }
+
+    .banner-badge {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(5,6,8,0.7);
+    }
+
+    .banner-bottom-text {
+      position: relative;
+      margin-top: 14px;
       font-size: 13px;
+      color: var(--muted);
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      z-index: 1;
     }
 
-    .mode-toggle:hover {
-      background: rgba(242,194,107,0.28);
-      transform: translateY(-1px);
-      box-shadow: 0 8px 22px rgba(0,0,0,0.16);
-    }
+    /* Layout */
 
-    /* MAIN LAYOUT */
-    .about-wrapper {
-      max-width: 1240px;
-      margin: 26px auto 40px;
-      padding: 0 18px;
+    .grid {
       display: grid;
-      grid-template-columns: 1.5fr 1.1fr;
-      gap: 24px;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 18px;
     }
+
+    @media (max-width: 880px) {
+      .grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Cards */
 
     .card {
-      background: var(--card);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-subtle);
-      padding: 24px 22px;
       position: relative;
+      border-radius: var(--card-radius);
+      background: linear-gradient(145deg, #0b0d11, #11141b);
+      border: 1px solid var(--border-subtle);
+      padding: 20px 20px 18px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.55);
       overflow: hidden;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: var(--transition-med);
     }
 
     .card::before {
       content: "";
       position: absolute;
       inset: -40%;
-      background: radial-gradient(circle at top left, var(--accent-soft), transparent 60%);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(242,194,107,0.12) 0, transparent 55%);
       opacity: 0;
-      transition: 0.4s ease;
+      transition: opacity var(--transition-fast);
       pointer-events: none;
     }
 
@@ -284,612 +182,473 @@
       opacity: 1;
     }
 
-    .card.revealed {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* LEFT COLUMN: INTRO + STATS */
-    .about-title {
-      font-family: "Poppins";
-      font-size: 22px;
-      font-weight: 700;
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       margin-bottom: 10px;
     }
 
-    .about-sub {
-      font-size: 13px;
-      color: var(--muted);
+    .card-tag {
+      font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      margin-bottom: 12px;
-    }
-
-    .about-text {
-      font-size: 15px;
-      line-height: 1.6;
-      color: var(--subtext);
-    }
-
-    .about-text strong {
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    /* VOICE BUTTON */
-    .voice-btn {
-      margin-top: 14px;
-      margin-bottom: 10px;
-      padding: 10px 18px;
-      border-radius: 12px;
-      border: 1px solid var(--accent);
-      background: rgba(242,194,107,0.18);
-      color: var(--text);
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.25s ease;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .voice-btn span {
-      font-size: 16px;
-    }
-
-    .voice-btn:hover {
-      background: rgba(242,194,107,0.28);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-    }
-
-    .speaking {
-      animation: glowPulse 1.4s ease-in-out infinite;
-    }
-
-    @keyframes glowPulse {
-      0% { box-shadow: 0 0 10px rgba(242,194,107,0.4); }
-      50% { box-shadow: 0 0 22px rgba(242,194,107,0.9); }
-      100% { box-shadow: 0 0 10px rgba(242,194,107,0.4); }
-    }
-
-    /* STATS ROW */
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .stat-pill {
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      padding: 10px 12px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      font-size: 12px;
-    }
-
-    body.dark .stat-pill {
-      background: linear-gradient(135deg, rgba(21,16,12,0.95), rgba(12,8,6,0.9));
-    }
-
-    .stat-label {
       color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-size: 10px;
     }
 
-    .stat-value {
-      font-family: "Poppins";
-      font-weight: 700;
-      font-size: 15px;
-    }
-
-    /* RIGHT COLUMN: PROFILE + CATEGORIES */
-    .info-title {
-      font-family: "Poppins";
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .info-sub {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 14px;
-    }
-
-    .info-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      font-size: 14px;
-      color: var(--subtext);
-      margin-bottom: 16px;
-    }
-
-    .info-item span {
+    .card-title {
+      font-size: 18px;
       font-weight: 600;
-      color: var(--text);
     }
 
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 6px;
-    }
-
-    .tag {
-      padding: 6px 10px;
+    .card-pill {
+      margin-left: auto;
+      padding: 4px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
       font-size: 11px;
       color: var(--muted);
-      background: rgba(255,255,255,0.7);
-    }
-
-    body.dark .tag {
-      background: rgba(20,15,10,0.9);
-      border-color: rgba(255,255,255,0.08);
-    }
-
-    /* CATEGORIES CARD */
-    .categories-card {
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px dashed var(--border);
-    }
-
-    .categories-title {
-      font-family: "Poppins";
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 8px;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 6px;
     }
 
-    .categories-title span {
-      font-size: 16px;
+    .card-pill span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
     }
 
-    .categories-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .category-btn {
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(242,194,107,0.45);
-      background: rgba(255,255,255,0.7);
-      color: var(--text);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      cursor: pointer;
-      transition: 0.25s ease;
-      backdrop-filter: blur(6px);
-    }
-
-    body.dark .category-btn {
-      background: rgba(20,15,10,0.8);
-      color: var(--text);
-    }
-
-    .category-btn:hover {
-      background: rgba(242,194,107,0.18);
-      border-color: rgba(242,194,107,0.8);
-      transform: translateY(-2px);
-    }
-
-    .category-btn.active {
-      background: rgba(242,194,107,0.28);
-      border-color: rgba(242,194,107,1);
-      color: var(--text);
-      box-shadow: var(--glow);
-    }
-
-    /* SECOND ROW: SKILLS + TIMELINE */
-    .about-grid-bottom {
-      max-width: 1240px;
-      margin: 0 auto 40px;
-      padding: 0 18px;
-      display: grid;
-      grid-template-columns: 1.2fr 1.2fr;
-      gap: 24px;
-    }
-
-    .section-title {
-      font-family: "Poppins";
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .section-sub {
-      font-size: 13px;
+    .card-body {
+      font-size: 14px;
       color: var(--muted);
-      margin-bottom: 14px;
+      line-height: 1.6;
     }
 
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 10px;
+    /* Intro card specific */
+
+    .intro-card {
+      padding: 22px 20px 20px;
     }
 
-    .skill-pill {
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      padding: 10px 12px;
-      font-size: 13px;
+    .intro-top {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(255,255,255,0.9);
-    }
-
-    body.dark .skill-pill {
-      background: rgba(20,15,10,0.95);
-    }
-
-    .skill-name {
-      color: var(--subtext);
-    }
-
-    .skill-level {
-      font-size: 11px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .timeline {
-      border-left: 1px solid var(--border);
-      padding-left: 16px;
-      margin-top: 4px;
-    }
-
-    .timeline-item {
-      margin-bottom: 12px;
+      align-items: flex-start;
+      gap: 12px;
       position: relative;
     }
 
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      left: -9px;
-      top: 4px;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: var(--glow);
+    .avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      background: radial-gradient(circle at 30% 0%, #f2c26b 0, #7a4b2a 40%, #1a1c24 80%);
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.7);
+      position: relative;
+      overflow: hidden;
     }
 
-    .timeline-year {
+    .avatar::after {
+      content: "A";
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 24px;
+      color: #fdf7ec;
+    }
+
+    .intro-text {
+      flex: 1;
+      padding-right: 120px; /* space for floating button */
+    }
+
+    .intro-eyebrow {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .intro-name {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .intro-role {
+      font-size: 13px;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .intro-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .intro-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
       font-size: 11px;
       color: var(--muted);
+    }
+
+    .intro-chip {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(5,6,8,0.8);
+    }
+
+    /* Floating audio button */
+
+    .voice-btn-floating {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 9px 18px;
+      border-radius: 14px;
+      border: 1px solid var(--accent);
+      background: var(--accent-soft);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+      backdrop-filter: blur(6px);
+      z-index: 10;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .voice-btn-floating:hover {
+      background: rgba(242,194,107,0.28);
+      transform: translateY(-2px);
+    }
+
+    .voice-btn-floating.speaking {
+      animation: glowPulse 1.6s ease-in-out infinite;
+    }
+
+    @keyframes glowPulse {
+      0% { box-shadow: 0 0 8px rgba(242,194,107,0.35); }
+      50% { box-shadow: 0 0 18px rgba(242,194,107,0.75); }
+      100% { box-shadow: 0 0 8px rgba(242,194,107,0.35); }
+    }
+
+    /* Right column cards */
+
+    .stack {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .stack-title {
+      font-size: 13px;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 2px;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 6px;
     }
 
-    .timeline-text {
-      font-size: 14px;
-      color: var(--subtext);
+    .category-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
     }
 
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 12px;
-      color: var(--subtext);
-      margin-top: 10px;
+    .category-btn {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(5,6,8,0.9);
+      font-size: 11px;
+      color: var(--muted);
+      cursor: default;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .category-btn span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
     }
 
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .list {
+      list-style: none;
+      font-size: 13px;
+      color: var(--muted);
+      display: grid;
+      gap: 4px;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    .list li::before {
+      content: "•";
+      color: var(--accent);
+      margin-right: 6px;
     }
 
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
+    /* Subtle scroll reveal */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
-    /* RESPONSIVE */
-    @media (max-width: 980px) {
-      .about-wrapper {
-        grid-template-columns: 1fr;
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive tweaks */
+
+    @media (max-width: 720px) {
+      body {
+        padding: 20px 12px 32px;
       }
-      .about-grid-bottom {
-        grid-template-columns: 1fr;
+
+      .banner {
+        padding: 18px 16px 16px;
       }
-      .nav {
-        border-radius: 18px;
+
+      .banner-inner {
+        flex-direction: column;
+        align-items: flex-start;
       }
-      .nav-links {
-        display: none;
+
+      .banner-right {
+        align-items: flex-start;
+      }
+
+      .intro-text {
+        padding-right: 0;
+      }
+
+      .voice-btn-floating {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin-left: auto;
+        margin-bottom: 8px;
+      }
+
+      .intro-top {
+        flex-direction: column;
       }
     }
   </style>
 </head>
-
 <body>
+  <div class="page">
 
-  <!-- BANNER (IMAGE ONLY) -->
-  <section class="top-banner"></section>
+    <!-- Banner -->
+    <header class="banner reveal">
+      <div class="banner-inner">
+        <div>
+          <div class="banner-pill">
+            <span>New</span> Portfolio • AlaeAI
+          </div>
+          <h1 class="banner-title">À propos d’Alaedine</h1>
+          <p class="banner-sub">
+            Créateur curieux, passionné par l’IA, le code, le design et les expériences interactives qui ont un vrai impact.
+          </p>
+        </div>
+        <div class="banner-right">
+          <div style="display:flex;align-items:center;gap:6px;">
+            <div class="banner-dot"></div>
+            <span>Disponible pour des collaborations</span>
+          </div>
+          <div class="banner-badge">
+            Tangier, Maroc • Build. Learn. Create.
+          </div>
+        </div>
+      </div>
+      <p class="banner-bottom-text">
+        Cette page est plus qu’une bio — c’est une vision. Elle évolue avec chaque projet, chaque idée, chaque ligne de code.
+      </p>
+    </header>
 
-  <!-- TITLE BELOW BANNER -->
-  <div class="page-title-wrapper">
-    <div class="page-title">
-      <h1>À propos d’Alaedine</h1>
-      <p>Créateur passionné par l’IA, le web et les expériences élégantes.</p>
-    </div>
-    <div class="breadcrumb">
-      HOME • ABOUT • ALAEAI PORTFOLIO
-    </div>
+    <!-- Main grid -->
+    <main class="grid">
+
+      <!-- Left: Intro + About -->
+      <section class="intro-card card reveal">
+        <div class="intro-top">
+          <div class="avatar"></div>
+
+          <div class="intro-text">
+            <div class="intro-eyebrow">À propos</div>
+            <div class="intro-name">Alaedine</div>
+            <div class="intro-role">Étudiant, développeur en devenir & explorateur d’IA</div>
+            <p class="intro-desc">
+              Je construis des expériences numériques qui mélangent logique, créativité et émotion.  
+              J’aime transformer des idées abstraites en interfaces concrètes, propres, animées et accessibles à tous.
+            </p>
+
+            <div class="intro-meta">
+              <div class="intro-chip">Tangier, Maroc</div>
+              <div class="intro-chip">Focus : IA, web, jeux, systèmes interactifs</div>
+              <div class="intro-chip">Langues : Français, Arabe, Anglais</div>
+            </div>
+          </div>
+
+          <!-- Floating audio button + audio element -->
+          <audio id="introAudio" src="https://raw.githubusercontent.com/alae-G5/alae-G5.github.io/refs/heads/main/assets/intro.mp3"></audio>
+          <button id="voiceBtn" class="voice-btn-floating">
+            🔊 <span>Écouter</span>
+          </button>
+        </div>
+
+        <div style="margin-top:18px;border-top:1px solid rgba(255,255,255,0.06);padding-top:14px;">
+          <p class="card-body">
+            Cette présentation audio utilise ma vraie voix.  
+            Si tu cliques sur le bouton, tu entends non seulement ce que je fais, mais aussi comment je pense, comment je parle, comment je veux connecter avec les autres.
+          </p>
+        </div>
+      </section>
+
+      <!-- Right: Cards column -->
+      <section class="stack">
+
+        <!-- Skills / Focus -->
+        <article class="card reveal">
+          <div class="card-header">
+            <div>
+              <div class="card-tag">Axes principaux</div>
+              <div class="card-title">Ce que j’aime construire</div>
+            </div>
+            <div class="card-pill">
+              <span></span> En évolution
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="category-row">
+              <div class="category-btn"><span></span> Interfaces web modernes</div>
+              <div class="category-btn"><span></span> IA & automatisation</div>
+              <div class="category-btn"><span></span> Jeux & expériences interactives</div>
+            </div>
+
+            <ul class="list">
+              <li>Pages propres, animées, avec une vraie intention derrière chaque détail.</li>
+              <li>Systèmes qui apprennent, s’adaptent et simplifient la vie des utilisateurs.</li>
+              <li>Projets qui mélangent technique, storytelling et design minimaliste.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Mindset -->
+        <article class="card reveal">
+          <div class="card-header">
+            <div>
+              <div class="card-tag">Mindset</div>
+              <div class="card-title">Comment je travaille</div>
+            </div>
+            <div class="card-pill">
+              <span></span> Deep focus
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="category-row">
+              <div class="category-btn"><span></span> Clarté</div>
+              <div class="category-btn"><span></span> Itération</div>
+              <div class="category-btn"><span></span> Qualité</div>
+            </div>
+
+            <ul class="list">
+              <li>Je préfère un projet bien fini plutôt que dix idées à moitié faites.</li>
+              <li>Je construis par étapes : version 1, version 2, version 3… toujours plus propre.</li>
+              <li>Je cherche la cohérence : code, design, texte, tout doit raconter la même histoire.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Vision -->
+        <article class="card reveal">
+          <div class="card-header">
+            <div>
+              <div class="card-tag">Vision</div>
+              <div class="card-title">Ce que je vise</div>
+            </div>
+            <div class="card-pill">
+              <span></span> Long terme
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="category-row">
+              <div class="category-btn"><span></span> Impact global</div>
+              <div class="category-btn"><span></span> Accessibilité</div>
+              <div class="category-btn"><span></span> Apprentissage continu</div>
+            </div>
+
+            <ul class="list">
+              <li>Créer des outils et des expériences qui peuvent servir au‑delà de mon environnement immédiat.</li>
+              <li>Rendre la technologie plus compréhensible, plus humaine, plus accessible.</li>
+              <li>Ne jamais arrêter d’apprendre : chaque projet est une excuse pour monter de niveau.</li>
+            </ul>
+          </div>
+        </article>
+
+      </section>
+    </main>
   </div>
 
-  <!-- NAV -->
-  <header class="nav">
-    <div class="nav-left">
-      <div class="nav-logo">A</div>
-      <div class="nav-brand">
-        <div class="nav-brand-title">ALAEAI</div>
-        <div class="nav-brand-sub">Warm Portfolio • Build. Learn. Create.</div>
-      </div>
-    </div>
-
-    <div class="nav-right">
-      <nav class="nav-links">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="news.html" class="nav-link">News</a>
-        <a href="tutorials.html" class="nav-link">Tutorials</a>
-        <a href="tools.html" class="nav-link">Tools</a>
-        <a href="about.html" class="nav-link active">About</a>
-      </nav>
-      <button id="darkToggle" class="mode-toggle">
-        <span>☾</span> MODE
-      </button>
-    </div>
-  </header>
-
-  <!-- MAIN GRID -->
-  <section class="about-wrapper">
-
-    <!-- LEFT: INTRO + VOICE + STATS -->
-    <article class="card reveal" id="introCard">
-      <div class="about-sub">PRÉSENTATION</div>
-      <h2 class="about-title">Bonjour, moi c’est Alaedine 👋</h2>
-
-      <!-- VOICE BUTTON -->
-      <button class="voice-btn" id="voiceBtn">
-        <span>🔊</span> Écouter la présentation
-      </button>
-
-      <p class="about-text" id="aboutText">
-        Je suis un créateur du web qui aime transformer des idées en expériences élégantes.
-        J’adore l’IA, le design moderne, les interfaces qui respirent… et tout ce qui mélange logique et créativité.
-        <br><br>
-        Je passe mes journées à apprendre, construire, casser, réparer, améliorer — bref, à créer des choses qui ont une âme ✨
-        <br><br>
-        Je crois profondément que la technologie peut être belle, simple et inspirante.
-        Mon objectif est clair :
-        <strong>concevoir des outils, des interfaces et des projets qui donnent envie d’explorer, d’apprendre et de rêver un peu.</strong>
-        <br><br>
-        AlaeAI est mon terrain de jeu, mon laboratoire, mon espace d’expression.
-        Chaque page, chaque animation, chaque détail est pensé pour être chaleureux, calme et vivant.
-      </p>
-
-      <div class="stats-row">
-        <div class="stat-pill">
-          <div class="stat-label">Projets</div>
-          <div class="stat-value">+12</div>
-        </div>
-        <div class="stat-pill">
-          <div class="stat-label">Focus</div>
-          <div class="stat-value">IA & Web</div>
-        </div>
-        <div class="stat-pill">
-          <div class="stat-label">Mood</div>
-          <div class="stat-value">Créatif</div>
-        </div>
-      </div>
-    </article>
-
-    <!-- RIGHT: PRO PROFILE + CATEGORIES CARD -->
-    <aside class="card reveal" id="profileCard">
-      <h2 class="info-title">À propos de moi</h2>
-      <p class="info-sub">Une vue rapide sur qui je suis, ce que j’aime construire et où je veux aller.</p>
-
-      <div class="info-list">
-        <div class="info-item"><span>Nom :</span> Alaedine</div>
-        <div class="info-item"><span>Rôle :</span> Jeune créateur web & explorateur d’IA</div>
-        <div class="info-item"><span>Passions :</span> IA, Web Design, JavaScript, UI/UX, Animations</div>
-        <div class="info-item"><span>Style :</span> Minimaliste, géométrique, moderne</div>
-        <div class="info-item"><span>Objectif :</span> Devenir un créateur reconnu et utile</div>
-        <div class="info-item"><span>Projet actuel :</span> Construire AlaeAI — une plateforme d’outils, de news et de tutoriels</div>
-      </div>
-
-      <div class="tag-row">
-        <div class="tag">Front‑end</div>
-        <div class="tag">IA créative</div>
-        <div class="tag">Animations UI</div>
-        <div class="tag">Design système</div>
-      </div>
-
-      <!-- CATEGORIES INSIDE CARD -->
-      <div class="categories-card">
-        <div class="categories-title">
-          <span>📂</span> Catégories que j’explore
-        </div>
-        <div class="categories-row">
-          <button class="category-btn active">Tous</button>
-          <button class="category-btn">IA & ML</button>
-          <button class="category-btn">Web Apps</button>
-          <button class="category-btn">UI / UX</button>
-          <button class="category-btn">Animations</button>
-          <button class="category-btn">Outils</button>
-        </div>
-      </div>
-    </aside>
-
-  </section>
-
-  <!-- SECOND ROW: SKILLS + TIMELINE -->
-  <section class="about-grid-bottom">
-
-    <article class="card reveal">
-      <h3 class="section-title">Compétences clés</h3>
-      <p class="section-sub">Ce que j’utilise pour donner vie à mes idées.</p>
-
-      <div class="skills-grid">
-        <div class="skill-pill">
-          <span class="skill-name">HTML • CSS • JS</span>
-          <span class="skill-level">Core</span>
-        </div>
-        <div class="skill-pill">
-          <span class="skill-name">UI / UX</span>
-          <span class="skill-level">Design</span>
-        </div>
-        <div class="skill-pill">
-          <span class="skill-name">Animations web</span>
-          <span class="skill-level">Motion</span>
-        </div>
-        <div class="skill-pill">
-          <span class="skill-name">IA & outils</span>
-          <span class="skill-level">Exploration</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="card reveal">
-      <h3 class="section-title">Parcours & vision</h3>
-      <p class="section-sub">Un chemin qui commence petit, mais qui vise loin.</p>
-
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-year">2024</div>
-          <div class="timeline-text">Je commence à construire AlaeAI, un espace pour apprendre, créer et partager.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2025+</div>
-          <div class="timeline-text">Je veux publier des outils, des tutoriels et des expériences interactives utiles pour d’autres créateurs.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">Vision</div>
-          <div class="timeline-text">Devenir un créateur reconnu, capable de mélanger IA, design et code pour inspirer les autres.</div>
-        </div>
-      </div>
-    </article>
-
-  </section>
-
-  <footer>
-    © 2026 ALAEAI — Warm Portfolio • Build. Learn. Create.
-  </footer>
-
   <script>
-    /* DARK MODE */
-    const toggle = document.getElementById("darkToggle");
+    // Audio toggle system
+    const audio = document.getElementById("introAudio");
+    const btn = document.getElementById("voiceBtn");
 
-    function applyMode() {
-      const mode = localStorage.getItem("mode");
-      if (mode === "dark") {
-        document.body.classList.add("dark");
-        toggle.innerHTML = "<span>☀</span> MODE";
-      } else {
-        document.body.classList.remove("dark");
-        toggle.innerHTML = "<span>☾</span> MODE";
-      }
+    if (audio && btn) {
+      btn.addEventListener("click", () => {
+        if (audio.paused) {
+          audio.play();
+          btn.classList.add("speaking");
+          btn.innerHTML = "⏸ <span>Pause</span>";
+        } else {
+          audio.pause();
+          btn.classList.remove("speaking");
+          btn.innerHTML = "🔊 <span>Écouter</span>";
+        }
+      });
+
+      audio.onended = () => {
+        btn.classList.remove("speaking");
+        btn.innerHTML = "🔊 <span>Écouter</span>";
+      };
     }
 
-    applyMode();
-
-    toggle.addEventListener("click", () => {
-      const isDark = document.body.classList.toggle("dark");
-      localStorage.setItem("mode", isDark ? "dark" : "light");
-      applyMode();
-    });
-
-    /* VOICE READING (FULL INTRO SECTION) */
-    const voiceBtn = document.getElementById("voiceBtn");
-    const aboutTextEl = document.getElementById("aboutText");
-
-    function readAboutSection() {
-      if (!("speechSynthesis" in window)) {
-        alert("La synthèse vocale n’est pas supportée sur ce navigateur.");
-        return;
-      }
-
-      const text = aboutTextEl.innerText.trim();
-      if (!text) return;
-
-      const speech = new SpeechSynthesisUtterance(text);
-      speech.lang = "fr-FR";
-      speech.rate = 1;
-      speech.pitch = 1.05;
-
-      // Stop any previous speech
-      window.speechSynthesis.cancel();
-
-      // Glow on
-      voiceBtn.classList.add("speaking");
-
-      speech.onend = () => {
-        voiceBtn.classList.remove("speaking");
-      };
-
-      speech.onerror = () => {
-        voiceBtn.classList.remove("speaking");
-      };
-
-      window.speechSynthesis.speak(speech);
-    }
-
-    voiceBtn.addEventListener("click", readAboutSection);
-
-    /* SCROLL REVEAL ANIMATIONS */
-    const revealCards = document.querySelectorAll(".card");
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-
-    revealCards.forEach((card) => observer.observe(card));
+    // Simple scroll reveal
+    const reveals = document.querySelectorAll(".reveal");
+    const onScroll = () => {
+      const trigger = window.innerHeight * 0.9;
+      reveals.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < trigger) {
+          el.classList.add("visible");
+        }
+      });
+    };
+    window.addEventListener("scroll", onScroll);
+    window.addEventListener("load", onScroll);
   </script>
-
 </body>
 </html>
