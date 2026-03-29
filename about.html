@@ -19,15 +19,10 @@
       --transition: 0.35s ease;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
       background: radial-gradient(circle at top, #1a1d27 0, #050608 60%);
       color: var(--text);
       min-height: 100vh;
@@ -46,75 +41,100 @@
       z-index: -1;
       animation: float 12s ease-in-out infinite alternate;
     }
-
-    .shape.one {
-      background: #f2c26b;
-      top: -120px;
-      left: -120px;
-    }
-
-    .shape.two {
-      background: #7a4b2a;
-      bottom: -160px;
-      right: -160px;
-      animation-delay: 2s;
-    }
+    .shape.one { background: #f2c26b; top: -120px; left: -120px; }
+    .shape.two { background: #7a4b2a; bottom: -160px; right: -160px; animation-delay: 2s; }
 
     @keyframes float {
       0% { transform: translateY(0px) translateX(0px); }
       100% { transform: translateY(40px) translateX(30px); }
     }
 
-    /* HOLOGRAM OBJECT */
+    /* 3D HOLOGRAM */
     .hologram {
       position: absolute;
       top: 50%;
       right: 40px;
       transform: translateY(-50%);
-      width: 200px;
-      height: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 220px;
+      height: 220px;
+      perspective: 900px;
       pointer-events: none;
     }
 
-    /* Outer holographic ring */
-    .holo-ring {
-      position: absolute;
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      border: 2px solid rgba(242,194,107,0.25);
-      animation: rotateRing 10s linear infinite;
-      box-shadow: 0 0 25px rgba(242,194,107,0.25);
+    .holo-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: rotate3D 12s linear infinite;
     }
 
-    @keyframes rotateRing {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    @keyframes rotate3D {
+      0% { transform: rotateX(0deg) rotateY(0deg); }
+      100% { transform: rotateX(360deg) rotateY(360deg); }
     }
 
-    /* Inner hologram core */
+    /* Core */
     .holo-core {
-      width: 90px;
-      height: 90px;
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90px; height: 90px;
       border-radius: 50%;
       background: radial-gradient(circle, var(--accent) 0%, var(--accent2) 70%);
-      animation: pulse 3s ease-in-out infinite, spinCore 6s linear infinite;
-      box-shadow: 0 0 30px rgba(242,194,107,0.6);
-      filter: brightness(1.3);
+      box-shadow: 0 0 35px rgba(242,194,107,0.7);
+      animation: pulse 3s ease-in-out infinite, morph 6s ease-in-out infinite alternate;
     }
 
     @keyframes pulse {
-      0% { transform: scale(1); opacity: 0.9; }
-      50% { transform: scale(1.15); opacity: 1; }
-      100% { transform: scale(1); opacity: 0.9; }
+      0% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.15); }
+      100% { transform: translate(-50%, -50%) scale(1); }
     }
 
-    @keyframes spinCore {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    @keyframes morph {
+      0% { border-radius: 50%; }
+      50% { border-radius: 40% 60% 55% 45% / 55% 45% 60% 40%; }
+      100% { border-radius: 60% 40% 45% 55% / 45% 55% 40% 60%; }
+    }
+
+    /* Holographic ring */
+    .holo-ring {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) rotateX(70deg);
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      border: 2px solid rgba(242,194,107,0.25);
+      box-shadow: 0 0 25px rgba(242,194,107,0.25);
+      animation: rotateRing 8s linear infinite;
+    }
+
+    @keyframes rotateRing {
+      from { transform: translate(-50%, -50%) rotateX(70deg) rotateZ(0deg); }
+      to { transform: translate(-50%, -50%) rotateX(70deg) rotateZ(360deg); }
+    }
+
+    /* Particles */
+    .particle {
+      position: absolute;
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: floatParticle 4s ease-in-out infinite alternate;
+      filter: blur(1px);
+    }
+
+    @keyframes floatParticle {
+      0% { transform: translateY(0px) scale(1); opacity: 0.6; }
+      100% { transform: translateY(-20px) scale(1.4); opacity: 1; }
+    }
+
+    /* Hover reactive lighting */
+    .banner:hover .holo-core {
+      box-shadow: 0 0 55px rgba(242,194,107,1);
+      filter: brightness(1.4);
     }
 
     /* Page container */
@@ -126,9 +146,7 @@
       opacity: 0;
     }
 
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
+    @keyframes fadeIn { to { opacity: 1; } }
 
     /* Banner */
     .banner {
@@ -140,7 +158,7 @@
       margin-bottom: 28px;
       position: relative;
       overflow: hidden;
-      min-height: 220px;
+      min-height: 240px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -197,12 +215,8 @@
     }
 
     @media (max-width: 880px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-      .hologram {
-        display: none;
-      }
+      .grid { grid-template-columns: 1fr; }
+      .hologram { display: none; }
     }
 
     /* Cards */
@@ -219,14 +233,9 @@
       transform: translateY(20px);
     }
 
-    @keyframes reveal {
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
 
-    .card:hover {
-      transform: translateY(-4px);
-      transition: var(--transition);
-    }
+    .card:hover { transform: translateY(-4px); transition: var(--transition); }
 
     .card-title {
       font-size: 20px;
@@ -302,9 +311,19 @@
 
     <!-- BANNER -->
     <section class="banner">
+
+      <!-- HOLOGRAM -->
       <div class="hologram">
-        <div class="holo-ring"></div>
-        <div class="holo-core"></div>
+        <div class="holo-container">
+          <div class="holo-ring"></div>
+          <div class="holo-core"></div>
+
+          <!-- Particles -->
+          <div class="particle" style="top:20%; left:10%; animation-delay:0s;"></div>
+          <div class="particle" style="top:70%; left:80%; animation-delay:1s;"></div>
+          <div class="particle" style="top:40%; left:60%; animation-delay:2s;"></div>
+          <div class="particle" style="top:80%; left:30%; animation-delay:1.5s;"></div>
+        </div>
       </div>
 
       <h1 class="banner-title">AlaeAI — À propos d’Alaedine</h1>
