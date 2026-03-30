@@ -50,6 +50,16 @@ body {
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   transition: background var(--transition), color var(--transition);
+  animation: bgDrift 18s ease-in-out infinite alternate;
+}
+
+@keyframes bgDrift {
+  0% {
+    background-position: 0% 0%, 100% 100%, 50% 50%;
+  }
+  100% {
+    background-position: 20% 10%, 80% 90%, 50% 50%;
+  }
 }
 
 a {
@@ -209,6 +219,12 @@ body.dark .page-header::before {
   margin: 0 0 6px;
   color: var(--accent);
   text-shadow: 0 0 12px var(--accent-glow);
+  animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+  0% { text-shadow: 0 0 10px var(--accent-glow); }
+  100% { text-shadow: 0 0 18px var(--accent-glow); }
 }
 
 .page-subtitle {
@@ -231,6 +247,7 @@ body.dark .page-header::before {
   border-radius: 999px;
   background: rgba(0,0,0,0.06);
   overflow: hidden;
+  position: relative;
 }
 
 body.dark .progress-bar {
@@ -244,6 +261,20 @@ body.dark .progress-bar {
   background: linear-gradient(90deg, var(--accent), #ffe9a3);
   box-shadow: 0 0 12px var(--accent-glow);
   transition: width 0.4s ease-out;
+}
+
+.progress-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+  transform: translateX(-100%);
+  animation: progressShine 3.5s linear infinite;
+}
+
+@keyframes progressShine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 .progress-label {
@@ -413,9 +444,29 @@ body.dark .tutorial-card {
   pointer-events: none;
 }
 
+.tutorial-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity var(--transition-fast);
+}
+
 .tutorial-card:hover::before {
   opacity: 1;
   transform: translate3d(0,0,0);
+}
+
+.tutorial-card:hover::after {
+  opacity: 1;
+  animation: cardShine 1.4s ease-out;
+}
+
+@keyframes cardShine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 .tutorial-card:hover {
@@ -481,6 +532,12 @@ body.dark .category-pill {
   min-height: 40px;
   display: flex;
   align-items: center;
+  animation: titlePulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes titlePulse {
+  0% { text-shadow: 0 0 10px var(--accent-glow); }
+  100% { text-shadow: 0 0 18px var(--accent-glow); }
 }
 
 body.dark .tutorial-title {
@@ -594,6 +651,12 @@ body.dark .tutorial-title {
   text-shadow:
     0 0 12px var(--accent-glow),
     0 0 22px rgba(245,196,81,0.8);
+  animation: modalTitleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes modalTitleGlow {
+  0% { text-shadow: 0 0 12px var(--accent-glow); }
+  100% { text-shadow: 0 0 22px rgba(245,196,81,0.9); }
 }
 
 .modal-buttons {
@@ -755,9 +818,9 @@ footer {
   </section>
 
   <section class="tutorials-grid" id="tutorialGrid">
-    <!-- 20 CARDS -->
+    <!-- 20 CARDS, EACH WITH UNIQUE IMAGE -->
     <article class="tutorial-card reveal" data-lesson="1" data-category="structure">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="HTML Basics">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=900&q=80" alt="HTML Basics">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span> Structure</div>
         <div class="tutorial-title">HTML Basics</div>
@@ -768,7 +831,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="2" data-category="styling">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=800&q=80" alt="CSS Foundations">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" alt="CSS Foundations">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span> Styling</div>
         <div class="tutorial-title">CSS Foundations</div>
@@ -779,7 +842,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="3" data-category="layout">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=800&q=80" alt="Layout & Boxes">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="Layout & Boxes">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span> Layout</div>
         <div class="tutorial-title">Layout & Boxes</div>
@@ -790,7 +853,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="4" data-category="layout">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=800&q=80" alt="Flexbox Essentials">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80" alt="Flexbox Essentials">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span> Layout</div>
         <div class="tutorial-title">Flexbox Essentials</div>
@@ -801,7 +864,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="5" data-category="styling">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="Typography & Rhythm">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1522202195461-41a5cbaefa02?auto=format&fit=crop&w=900&q=80" alt="Typography & Rhythm">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span> Typography</div>
         <div class="tutorial-title">Typography & Rhythm</div>
@@ -812,7 +875,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="6" data-category="styling">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=800&q=80" alt="Colors & Themes">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1523475472560-d2df97ec485c?auto=format&fit=crop&w=900&q=80" alt="Colors & Themes">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span> Theme</div>
         <div class="tutorial-title">Colors & Themes</div>
@@ -823,7 +886,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="7" data-category="ui">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=800&q=80" alt="Components & Cards">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1523475472560-98c0a5ad9d3f?auto=format&fit=crop&w=900&q=80" alt="Components & Cards">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span> UI</div>
         <div class="tutorial-title">Components & Cards</div>
@@ -834,7 +897,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="8" data-category="layout">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Responsive Design">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1523475472560-98c0a5ad9d3e?auto=format&fit=crop&w=900&q=80" alt="Responsive Design">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span> Layout</div>
         <div class="tutorial-title">Responsive Design</div>
@@ -845,7 +908,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="9" data-category="logic">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Intro to JavaScript">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80" alt="Intro to JavaScript">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span> Logic</div>
         <div class="tutorial-title">Intro to JavaScript</div>
@@ -856,7 +919,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="10" data-category="logic">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="DOM Basics">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1518770660439-4636190af476?auto=format&fit=crop&w=900&q=80" alt="DOM Basics">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span> Logic</div>
         <div class="tutorial-title">DOM Basics</div>
@@ -867,7 +930,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="11" data-category="interaction">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=800&q=80" alt="Events & Interaction">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1523475472560-98c0a5ad9d3d?auto=format&fit=crop&w=900&q=80" alt="Events & Interaction">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span> Interaction</div>
         <div class="tutorial-title">Events & Interaction</div>
@@ -878,7 +941,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="12" data-category="logic">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=800&q=80" alt="State & Toggles">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1523475472560-98c0a5ad9d3c?auto=format&fit=crop&w=900&q=80" alt="State & Toggles">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span> Logic</div>
         <div class="tutorial-title">State & Toggles</div>
@@ -889,7 +952,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="13" data-category="ui">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Modals & Overlays">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1523475472560-98c0a5ad9d3b?auto=format&fit=crop&w=900&q=80" alt="Modals & Overlays">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span> UI</div>
         <div class="tutorial-title">Modals & Overlays</div>
@@ -900,7 +963,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="14" data-category="layout">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=800&q=80" alt="Grids & Dashboards">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1523475472560-98c0a5ad9d3a?auto=format&fit=crop&w=900&q=80" alt="Grids & Dashboards">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span> Layout</div>
         <div class="tutorial-title">Grids & Dashboards</div>
@@ -911,7 +974,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="15" data-category="motion">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Animations & Motion">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1523475472560-98c0a5ad9d39?auto=format&fit=crop&w=900&q=80" alt="Animations & Motion">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span> Motion</div>
         <div class="tutorial-title">Animations & Motion</div>
@@ -922,7 +985,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="16" data-category="ux">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=800&q=80" alt="Forms & Inputs">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1523475472560-98c0a5ad9d38?auto=format&fit=crop&w=900&q=80" alt="Forms & Inputs">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span> UX</div>
         <div class="tutorial-title">Forms & Inputs</div>
@@ -933,7 +996,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="17" data-category="ui">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=800&q=80" alt="Data Display">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1523475472560-98c0a5ad9d37?auto=format&fit=crop&w=900&q=80" alt="Data Display">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span> UI</div>
         <div class="tutorial-title">Data Display</div>
@@ -944,7 +1007,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="18" data-category="structure">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Tool Architecture">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1523475472560-98c0a5ad9d36?auto=format&fit=crop&w=900&q=80" alt="Tool Architecture">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span> System</div>
         <div class="tutorial-title">Tool Architecture</div>
@@ -955,7 +1018,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="19" data-category="ux">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=800&q=80" alt="Polishing & UX">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1523475472560-98c0a5ad9d35?auto=format&fit=crop&w=900&q=80" alt="Polishing & UX">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span> UX</div>
         <div class="tutorial-title">Polishing & UX</div>
@@ -966,7 +1029,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="20" data-category="launch">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Shipping Your Tool">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1523475472560-98c0a5ad9d34?auto=format&fit=crop&w=900&q=80" alt="Shipping Your Tool">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span> Launch</div>
         <div class="tutorial-title">Shipping Your Tool</div>
@@ -1009,8 +1072,8 @@ const lessons = {
     category: "structure",
     text: `HTML is the structural language of the web. In this lesson, you focus on building clean, semantic layouts that describe meaning, not just appearance. You learn how to choose the right tags for headers, sections, navigation, and content blocks so your pages are easier to maintain, more accessible, and ready for styling and interaction. Instead of throwing random divs everywhere, you start thinking about the purpose of each piece of content and how it fits into the bigger picture of the page. You also explore how attributes, alt text, and proper nesting improve both accessibility and SEO. By the end of this lesson, you can look at a page and immediately see how to break it into logical, semantic sections that feel solid and professional.`,
     images: [
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=70"
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d33?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d32?auto=format&fit=crop&w=900&q=80"
     ]
   },
   2: {
@@ -1018,8 +1081,8 @@ const lessons = {
     category: "styling",
     text: `CSS controls the visual language of your interface. In this lesson, you explore how to manage color, spacing, and typography using a consistent system instead of random values. You learn how the cascade, inheritance, and specificity work together so your styles stay predictable and easy to debug. You also experiment with variables to centralize your design tokens, making it simple to adjust themes or tweak the entire look of your site from a few lines of code. The focus is on building a foundation that feels stable and scalable, not just making something look good once. By the end, you understand how to structure your CSS so it supports growth, keeps your UI consistent, and avoids the chaos of conflicting rules.`,
     images: [
-      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=900&q=70"
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d31?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d30?auto=format&fit=crop&w=900&q=80"
     ]
   },
   3: {
@@ -1027,8 +1090,8 @@ const lessons = {
     category: "layout",
     text: `Every element on the page is a box, and understanding that is the key to precise layout control. In this lesson, you dive into the box model—content, padding, border, and margin—and see how each layer affects spacing and alignment. You experiment with different display values, like block, inline, and inline-block, to understand how they change the flow of elements. You also learn how collapsing margins, overflow, and box-sizing can impact your designs in subtle but important ways. Instead of guessing why something is misaligned, you start reading the layout like a system of boxes interacting with each other. By the end, you can debug spacing issues quickly and design layouts that feel intentional, balanced, and easy to adjust.`,
     images: [
-      "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=900&q=70"
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d2f?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d2e?auto=format&fit=crop&w=900&q=80"
     ]
   },
   4: {
@@ -1036,8 +1099,8 @@ const lessons = {
     category: "layout",
     text: `Flexbox gives you powerful tools for aligning and distributing elements in one dimension. In this lesson, you learn how to build responsive rows, columns, and centered layouts with minimal code. You explore properties like justify-content, align-items, and flex-wrap to control how items behave when space is tight or wide. You also see how flex-grow, flex-shrink, and flex-basis let you create flexible components that adapt naturally to different screen sizes. Instead of relying on hacks or fixed widths, you start thinking in terms of flexible relationships between elements. By the end, you can build navigation bars, card grids, and balanced sections that feel stable and fluid at the same time.`,
     images: [
-      "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=900&q=70"
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d2d?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d2c?auto=format&fit=crop&w=900&q=80"
     ]
   },
   5: {
@@ -1045,8 +1108,8 @@ const lessons = {
     category: "styling",
     text: `Typography shapes how users read and understand your content. In this lesson, you work with font sizes, line heights, and spacing to create a clear hierarchy that guides the eye. You explore typographic scales and learn how to choose a small set of sizes that can be reused across headings, body text, and labels. You also pay attention to line length, contrast, and white space so your text feels comfortable to read on any device. Instead of randomly adjusting font sizes until something looks okay, you start designing with a rhythm that repeats across the page. By the end, your interfaces feel calmer, more professional, and easier to scan, even when there is a lot of information on screen.`,
     images: [
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=70"
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d2b?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d2a?auto=format&fit=crop&w=900&q=80"
     ]
   },
   6: {
@@ -1054,8 +1117,8 @@ const lessons = {
     category: "styling",
     text: `A strong color system gives your interface personality and clarity. In this lesson, you define primary, secondary, and neutral colors, then apply them to build light and dark themes. You learn how to use contrast ratios to keep text readable and how to avoid relying on color alone to communicate meaning. You also experiment with subtle gradients and shadows to add depth without making the design feel heavy. By centralizing your colors in variables, you make it easy to adjust the entire mood of your tool with a few changes. By the end, your themes feel intentional, balanced, and consistent across every page and component.`,
     images: [
-      "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=900&q=70"
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d29?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d28?auto=format&fit=crop&w=900&q=80"
     ]
   },
   7: {
@@ -1063,8 +1126,8 @@ const lessons = {
     category: "ui",
     text: `Components are reusable building blocks that keep your interface consistent and easier to maintain. In this lesson, you design cards with consistent spacing, corners, and shadows so they feel like part of a unified system. You think about how each card can adapt to different content while still following the same visual rules. You also explore how to separate structure, style, and behavior so components can be reused across pages without duplication. Instead of designing each section from scratch, you start assembling interfaces from a small set of well-crafted pieces. By the end, your UI feels more coherent, and making changes becomes faster and less risky.`,
     images: [
-      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=900&q=70"
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d27?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d26?auto=format&fit=crop&w=900&q=80"
     ]
   },
   8: {
@@ -1072,8 +1135,8 @@ const lessons = {
     category: "layout",
     text: `Responsive design ensures your layouts work on phones, tablets, and desktops without needing separate versions. In this lesson, you use flexible units, media queries, and adaptive grids to keep content readable and balanced at every size. You learn how to prioritize content for smaller screens and how to avoid hiding important features behind awkward interactions. You also explore techniques like mobile-first design, where you start with the smallest layout and scale up. Instead of treating responsiveness as an afterthought, you build it into your process from the beginning. By the end, your pages feel natural on any device, and users never have to pinch, zoom, or fight the layout.`,
     images: [
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=70"
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d25?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d24?auto=format&fit=crop&w=900&q=80"
     ]
   },
   9: {
@@ -1081,8 +1144,8 @@ const lessons = {
     category: "logic",
     text: `JavaScript brings your pages to life by adding logic and interaction. In this lesson, you learn about variables, functions, and basic control flow, then connect them to real elements on the page. You see how to respond to user actions, update text, and change styles dynamically. You also explore the difference between data and presentation, keeping your logic focused on behavior instead of mixing it with layout. Instead of copying snippets without understanding, you start writing small, clear functions that do one thing well. By the end, you can read simple JavaScript code with confidence and use it to make your interfaces feel responsive and alive.`,
     images: [
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=70"
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d23?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d22?auto=format&fit=crop&w=900&q=80"
     ]
   },
   10: {
@@ -1090,8 +1153,8 @@ const lessons = {
     category: "logic",
     text: `The DOM is the live structure of your page that JavaScript can read and modify. In this lesson, you practice selecting elements, changing content, and updating styles using DOM APIs. You learn how to traverse the tree, create new nodes, and remove elements when they are no longer needed. You also explore how to keep your code organized by targeting specific components instead of the entire page. Instead of treating the DOM as a mysterious black box, you start seeing it as a clear hierarchy you can navigate and control. By the end, you can confidently connect your logic to the right parts of the interface and keep your updates efficient and predictable.`,
     images: [
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=70"
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d21?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d20?auto=format&fit=crop&w=900&q=80"
     ]
   },
   11: {
@@ -1099,8 +1162,8 @@ const lessons = {
     category: "interaction",
     text: `Events are how your interface listens to the user. In this lesson, you attach handlers for clicks, hovers, key presses, and more, then design responses that feel smooth and intuitive. You learn how to avoid overloading the page with too many listeners and how to keep your logic focused on what the user is trying to do. You also explore patterns like event delegation, which help you manage complex interfaces without losing control. Instead of reacting randomly to every possible action, you design a clear interaction model that supports the main flows of your tool. By the end, your UI feels responsive, intentional, and respectful of the user’s attention.`,
     images: [
-      "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=900&q=70"
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d1f?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d1e?auto=format&fit=crop&w=900&q=80"
     ]
   },
   12: {
@@ -1108,8 +1171,8 @@ const lessons = {
     category: "logic",
     text: `State represents what is currently true in your interface—like whether dark mode is on, a modal is open, or a card is expanded. In this lesson, you learn how to store and update state in a way that stays in sync with the UI. You explore simple patterns for toggling classes, switching themes, and remembering user preferences across sessions. You also see how messy things can get when state is scattered or duplicated, and how to avoid that by centralizing key decisions. Instead of guessing why something is out of sync, you start tracing changes through a clear state model. By the end, your components feel consistent, predictable, and easier to reason about.`,
     images: [
-      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=900&q=70"
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d1d?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d1c?auto=format&fit=crop&w=900&q=80"
     ]
   },
   13: {
@@ -1117,8 +1180,8 @@ const lessons = {
     category: "ui",
     text: `Modals let you focus the user’s attention on important content without leaving the current page. In this lesson, you build a modal with a blurred overlay, smooth animations, and clear actions. You learn how to trap focus inside the modal, handle escape key closing, and avoid blocking the user unnecessarily. You also explore when not to use modals, choosing inline patterns or dedicated pages instead. The goal is to make modals feel like a natural part of the flow, not a disruptive interruption. By the end, you can design overlays that feel polished, accessible, and respectful of the user’s time.`,
     images: [
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=70"
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d1b?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d1a?auto=format&fit=crop&w=900&q=80"
     ]
   },
   14: {
@@ -1126,8 +1189,8 @@ const lessons = {
     category: "layout",
     text: `Dashboards often require complex layouts with many panels, charts, and controls. In this lesson, you use CSS Grid to arrange these elements in a way that stays organized and flexible. You learn how to define template areas, repeat patterns, and responsive tracks that adapt to different screen sizes. You also explore how to combine Grid with Flexbox, using each where it is strongest. Instead of stacking everything in a single column or forcing rigid layouts, you design dashboards that feel structured but not cramped. By the end, you can build multi-section pages that remain readable and balanced even as content changes.`,
     images: [
-      "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=900&q=70"
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d19?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d18?auto=format&fit=crop&w=900&q=80"
     ]
   },
   15: {
@@ -1135,8 +1198,8 @@ const lessons = {
     category: "motion",
     text: `Motion adds life to your interface when used with intention. In this lesson, you apply transitions and keyframes to create subtle animations that guide attention without distracting from the content. You learn how easing curves affect the feel of movement and how to keep durations short enough to stay responsive. You also explore micro-interactions, like button presses and hover states, that give users feedback at the right moment. Instead of animating everything just because you can, you choose a few key moments where motion adds clarity or delight. By the end, your UI feels more polished, responsive, and satisfying to use.`,
     images: [
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=70"
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d17?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d16?auto=format&fit=crop&w=900&q=80"
     ]
   },
   16: {
@@ -1144,8 +1207,8 @@ const lessons = {
     category: "ux",
     text: `Forms are where users share information with your tool, so every detail matters. In this lesson, you design inputs, labels, and validation states that are clear and forgiving. You learn how to group related fields, provide helpful hints, and show errors in a way that feels supportive instead of punishing. You also explore how to reduce friction by minimizing required fields, using smart defaults, and respecting the user’s time. Instead of treating forms as a boring necessity, you see them as a critical part of the experience that can build trust. By the end, your forms feel smoother, more human, and more likely to be completed.`,
     images: [
-      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=900&q=70"
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d15?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d14?auto=format&fit=crop&w=900&q=80"
     ]
   },
   17: {
@@ -1153,8 +1216,8 @@ const lessons = {
     category: "ui",
     text: `Good data display makes information easy to understand at a glance. In this lesson, you work with lists, tables, and cards, using hierarchy and spacing to highlight what matters most. You learn how to group related items, use alignment to create visual order, and apply subtle emphasis to key values. You also explore how to handle empty states and loading states so the interface never feels broken or confusing. Instead of dumping raw data onto the screen, you design views that tell a clear story. By the end, your users can scan, compare, and act on information without feeling overwhelmed.`,
     images: [
-      "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=900&q=70"
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d13?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d12?auto=format&fit=crop&w=900&q=80"
     ]
   },
   18: {
@@ -1162,8 +1225,8 @@ const lessons = {
     category: "structure",
     text: `Architecture is about how everything fits together over time. In this lesson, you think in pages, flows, and reusable components, organizing your files and logic so the project stays understandable as it grows. You map out the main user journeys and identify which parts of the interface are shared across them. You also explore how to separate concerns between layout, state, and data, so changes in one area don’t break everything else. Instead of building features in isolation, you design a system that can evolve without collapsing under its own weight. By the end, your tool feels coherent from the first screen to the last, and you have a clear mental model of how it all works.`,
     images: [
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=70"
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d11?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d10?auto=format&fit=crop&w=900&q=80"
     ]
   },
   19: {
@@ -1171,8 +1234,8 @@ const lessons = {
     category: "ux",
     text: `Polish is where your interface becomes truly premium. In this lesson, you refine spacing, contrast, and micro-interactions so everything feels intentional. You look at edge cases, like long text, slow connections, and unusual inputs, and make sure the experience still feels solid. You also pay attention to details like focus states, error messages, and empty screens, which are often ignored but heavily felt by users. Instead of stopping when things are “good enough,” you push a little further to remove friction and confusion. By the end, your tool feels smoother, more trustworthy, and more enjoyable to use, even in less-than-perfect conditions.`,
     images: [
-      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=900&q=70"
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d09?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d08?auto=format&fit=crop&w=900&q=80"
     ]
   },
   20: {
@@ -1180,8 +1243,8 @@ const lessons = {
     category: "launch",
     text: `Shipping turns your work into something real that people can use. In this lesson, you test, optimize, and deploy your tool so it feels ready for others. You check performance, fix obvious bugs, and make sure critical flows are smooth from start to finish. You also think about how to collect feedback, track issues, and plan future improvements without getting stuck in endless polishing. Instead of waiting for perfection, you learn how to ship confidently, knowing you can iterate. By the end, you understand that launch is not the end of the journey but the beginning of real learning from real users.`,
     images: [
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=70"
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d07?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1523475472560-98c0a5ad9d06?auto=format&fit=crop&w=900&q=80"
     ]
   }
 };
