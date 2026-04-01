@@ -13,7 +13,6 @@ If you discover a security vulnerability, please report it responsibly.
 
 ### 📩 How to report
 Send an email to: **alae.security.report@gmail.com**  
-(You can replace this with any email you prefer.)
 
 ### 🕒 Response Time
 You can expect:
