@@ -1,1 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Articles — ALAEAI</title>
 
+    <!-- Link your main site CSS -->
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+        :root {
+            --page-bg: #050712;
+            --page-text: #f5f7ff;
+            --card-bg: #0b0f1f;
+            --card-bg-soft: #101528;
+            --accent: #4f8cff;
+            --accent-soft: rgba(79, 140, 255, 0.12);
+            --danger: #ff4f6a;
+            --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.55);
+            --radius-lg: 18px;
+            --radius-md: 12px;
+            --transition-fast: 0.25s ease;
+        }
+
+        body {
+            background: var(--page-bg);
+            color: var(--page-text);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                "Segoe UI", sans-serif;
+        }
+
+        .articles-shell {
+            max-width: 1120px;
+            margin: 90px auto 80px;
+            padding: 0 18px 40px;
+        }
+
+        .articles-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 26px;
+        }
+
+        .articles-title-block h1 {
+            font-size: 2.2rem;
+            letter-spacing: 0.03em;
+        }
+
+        .articles-title-block p {
+            opacity: 0.8;
+            margin-top: 4px;
+            font-size: 0.95rem;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: var(--card-bg-soft);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        .pill-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #4fdf8f;
+            box-shadow: 0 0 10px rgba(79, 223, 143, 0.7);
+        }
+
+        /* Dark mode toggle */
+        .theme-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: linear-gradient(135deg, #0b0f1f, #151a30);
+            cursor: pointer;
+            font-size: 0.85rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+                background var(--transition-fast);
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 16px 35px rgba(0, 0, 0, 0.6);
+        }
+
+        .theme-toggle-icon {
+            width: 18px;
+            height: 18px;
+            border-radius: 999px;
+            background: radial-gradient(circle at 30% 30%, #ffe66b, #ff9f43);
+        }
+
+        .theme-toggle-label {
+            opacity: 0.9;
+        }
+
+        /* Articles grid */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
+            margin-top: 10px;
+        }
+
+        .article-card {
+            position: relative;
+            background: radial-gradient(circle at top left, #1b2340, #050712);
+            border-radius: var(--radius-lg);
+            padding: 14px 14px 16px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+                border-color var(--transition-fast), background 0.35s ease;
+        }
+
+        .article-card::before {
+            content: "";
+            position: absolute;
+            inset: -40%;
+            background: radial-gradient(circle at top, rgba(79, 140, 255, 0.12), transparent);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+
+        .article-card:hover::before {
+            opacity: 1;
+        }
+
+        .article-card:hover {
+            transform: translateY(-6px) translateZ(0);
+            box-shadow: 0 22px 45px rgba(0, 0, 0, 0.75);
+            border-color: rgba(79, 140, 255, 0.55);
+        }
+
+        .article-thumb {
+            width: 100%;
+            border-radius: var(--radius-md);
+            margin-bottom: 10px;
+            object-fit: cover;
+            height: 150px;
+            background: #111525;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.78rem;
+            opacity: 0.8;
+            margin-bottom: 4px;
+        }
+
+        .article-tag {
+            padding: 3px 9px;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-size: 0.75rem;
+        }
+
+        .article-title {
+            font-size: 1.05rem;
+            margin: 4px 0 6px;
+        }
+
+        .article-excerpt {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            line-height: 1.5;
+        }
+
+        .article-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .article-read {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .article-read span {
+            font-size: 0.9rem;
+        }
+
+        .article-read-arrow {
+            font-size: 1rem;
+            transform: translateY(1px);
+        }
+
+        /* Keyword hover */
+        .keyword {
+            font-weight: 600;
+            color: var(--accent);
+            border-bottom: 1px dashed var(--accent);
+            cursor: pointer;
+            position: relative;
+            transition: color var(--transition-fast), background var(--transition-fast);
+        }
+
+        .keyword:hover {
+            color: #ffe66b;
+            background: rgba(79, 140, 255, 0.12);
+            border-radius: 4px;
+        }
+
+        .keyword-explain {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 120%;
+            z-index: 20;
+            min-width: 220px;
+            max-width: 260px;
+            background: #050712;
+            border-radius: 10px;
+            padding: 8px 10px;
+            font-size: 0.78rem;
+            line-height: 1.4;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 16px 35px rgba(0, 0, 0, 0.8);
+        }
+
+        .keyword:hover .keyword-explain {
+            display: block;
+        }
+
+        /* Modal */
+        .article-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.78);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+        }
+
+        .article-modal {
+            width: min(780px, 94vw);
+            max-height: 88vh;
+            background: #050712;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 26px 60px rgba(0, 0, 0, 0.9);
+            padding: 18px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transform: translateY(18px);
+            opacity: 0;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .article-modal.open {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .article-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .article-modal-title {
+            font-size: 1.3rem;
+        }
+
+        .article-modal-tag {
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-size: 0.75rem;
+        }
+
+        .article-modal-close {
+            border: none;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 999px;
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #fff;
+            transition: background var(--transition-fast), transform var(--transition-fast);
+        }
+
+        .article-modal-close:hover {
+            background: rgba(255, 79, 106, 0.9);
+            transform: translateY(-1px);
+        }
+
+        .article-modal-body {
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .article-modal-body img {
+            width: 100%;
+            border-radius: 14px;
+            margin: 10px 0 14px;
+            object-fit: cover;
+            max-height: 260px;
+        }
+
+        .article-modal-body p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .article-meta-inline {
+            font-size: 0.8rem;
+            opacity: 0.75;
+            margin-bottom: 4px;
+        }
+
+        /* Light mode */
+        body.light-mode {
+            --page-bg: #f5f7ff;
+            --page-text: #050712;
+            --card-bg: #ffffff;
+            --card-bg-soft: #f0f2ff;
+            --accent-soft: rgba(79, 140, 255, 0.12);
+            --shadow-soft: 0 14px 30px rgba(15, 23, 42, 0.18);
+        }
+
+        body.light-mode .article-modal {
+            background: #ffffff;
+        }
+
+        body.light-mode .keyword-explain {
+            background: #ffffff;
+        }
+
+        @media (max-width: 640px) {
+            .articles-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="articles-shell">
+
+        <!-- HEADER -->
+        <div class="articles-header">
+            <div class="articles-title-block">
+                <div class="pill">
+                    <span class="pill-dot"></span>
+                    <span>AI & Technology Insights</span>
+                </div>
+
+                <h1>Articles</h1>
+                <p>Curated, clean articles about AI, technology companies, and the tools shaping the future.</p>
+            </div>
+
+            <!-- DARK MODE BUTTON -->
+            <button class="theme-toggle" id="themeToggle">
+                <div class="theme-toggle-icon"></div>
+                <span class="theme-toggle-label">Toggle dark / light</span>
+            </button>
+        </div>
+
+        <!-- ARTICLES GRID -->
+        <div class="articles-grid">
+
+            <!-- ARTICLE 1 — OPENAI -->
+            <article class="article-card" data-article="openai">
+                <img src="assets/images/openai-lab.jpg" class="article-thumb" alt="OpenAI Lab">
+                <div class="article-meta">
+                    <span class="article-tag">AI Company</span>
+                    <span>4 min read</span>
+                </div>
+
+                <h2 class="article-title">How OpenAI Turned Models into Platforms</h2>
+
+                <p class="article-excerpt">
+                    OpenAI transformed large
+                    <span class="keyword">foundation models
+                        <span class="keyword-explain">
+                            Foundation models are large AI systems trained on broad data that can be adapted to many tasks.
+                        </span>
+                    </span>
+                    into a platform powering thousands of tools and applications.
+                </p>
+
+                <div class="article-footer">
+                    <div>Updated this week</div>
+                    <div class="article-read">
+                        <span>Read article</span>
+                        <span class="article-read-arrow">↗</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ARTICLE 2 — NVIDIA -->
+            <article class="article-card" data-article="nvidia">
+                <img src="assets/images/nvidia-gpu.jpg" class="article-thumb" alt="NVIDIA GPUs">
+                <div class="article-meta">
+                    <span class="article-tag">Hardware</span>
+                    <span>5 min read</span>
+                </div>
+
+                <h2 class="article-title">Why NVIDIA Became the Engine of the AI Boom</h2>
+
+                <p class="article-excerpt">
+                    NVIDIA’s GPUs became the backbone of
+                    <span class="keyword">deep learning
+                        <span class="keyword-explain">
+                            Deep learning uses multi-layer neural networks to learn complex patterns from data.
+                        </span>
+                    </span>
+                    research and production systems worldwide.
+                </p>
+
+                <div class="article-footer">
+                    <div>Industry spotlight</div>
+                    <div class="article-read">
+                        <span>Read article</span>
+                        <span class="article-read-arrow">↗</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ARTICLE 3 — DEEPMIND -->
+            <article class="article-card" data-article="deepmind">
+                <img src="assets/images/deepmind-lab.jpg" class="article-thumb" alt="DeepMind Research">
+                <div class="article-meta">
+                    <span class="article-tag">Research</span>
+                    <span>4 min read</span>
+                </div>
+
+                <h2 class="article-title">DeepMind and the Race for General Intelligence</h2>
+
+                <p class="article-excerpt">
+                    DeepMind explores
+                    <span class="keyword">general-purpose agents
+                        <span class="keyword-explain">
+                            General-purpose agents can learn and adapt across many different tasks.
+                        </span>
+                    </span>
+                    capable of reasoning, planning, and transferring knowledge.
+                </p>
+
+                <div class="article-footer">
+                    <div>Research focus</div>
+                    <div class="article-read">
+                        <span>Read article</span>
+                        <span class="article-read-arrow">↗</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ARTICLE 4 — ANTHROPIC -->
+            <article class="article-card" data-article="anthropic">
+                <img src="assets/images/anthropic-team.jpg" class="article-thumb" alt="Anthropic Team">
+                <div class="article-meta">
+                    <span class="article-tag">Safety</span>
+                    <span>3 min read</span>
+                </div>
+
+                <h2 class="article-title">Anthropic and the Idea of Constitutional AI</h2>
+
+                <p class="article-excerpt">
+                    Anthropic introduced
+                    <span class="keyword">constitutional AI
+                        <span class="keyword-explain">
+                            Constitutional AI trains models using a written set of principles instead of only human feedback.
+                        </span>
+                    </span>
+                    to make AI systems more predictable and aligned.
+                </p>
+
+                <div class="article-footer">
+                    <div>Safety & alignment</div>
+                    <div class="article-read">
+                        <span>Read article</span>
+                        <span class="article-read-arrow">↗</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ARTICLE 5 — AI STARTUPS -->
+            <article class="article-card" data-article="startups">
+                <img src="assets/images/ai-startup.jpg" class="article-thumb" alt="AI Startup">
+                <div class="article-meta">
+                    <span class="article-tag">Startups</span>
+                    <span>4 min read</span>
+                </div>
+
+                <h2 class="article-title">What Makes an AI Startup Actually Useful?</h2>
+
+                <p class="article-excerpt">
+                    The best AI startups design around real
+                    <span class="keyword">workflows
+                        <span class="keyword-explain">
+                            A workflow is the sequence of steps a user takes to complete a task; great products remove friction.
+                        </span>
+                    </span>
+                    instead of adding random chatbots.
+                </p>
+
+                <div class="article-footer">
+                    <div>Product thinking</div>
+                    <div class="article-read">
+                        <span>Read article</span>
+                        <span class="article-read-arrow">↗</span>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </div>
+
+    <!-- MODAL BACKDROP -->
+    <div class="article-modal-backdrop" id="articleModalBackdrop">
+        <div class="article-modal" id="articleModal">
+
+            <div class="article-modal-header">
+                <div>
+                    <div class="article-modal-tag" id="modalTag"></div>
+                    <div class="article-modal-title" id="modalTitle"></div>
+                </div>
+
+                <button class="article-modal-close" id="modalCloseBtn">✕</button>
+            </div>
+
+            <div class="article-meta-inline" id="modalMeta"></div>
+
+            <div class="article-modal-body" id="modalBody"></div>
+
+        </div>
+    </div>
+<script>
+    // DARK / LIGHT MODE TOGGLE
+    const themeToggle = document.getElementById("themeToggle");
+    themeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("light-mode");
+    });
+
+    // FULL ARTICLE DATA
+    const articleData = {
+        openai: {
+            tag: "AI Company",
+            title: "How OpenAI Turned Models into Platforms",
+            meta: "OpenAI • Platform strategy • 4 min read",
+            img: "assets/images/openai-lab.jpg",
+            paragraphs: [
+                "OpenAI started as a research lab focused on pushing the boundaries of large-scale models. Over time, it shifted from publishing isolated breakthroughs to building a platform that other developers and companies can build on top of.",
+                "Instead of treating each model as a one-off experiment, OpenAI turned its systems into stable APIs. That move allowed thousands of products to plug into the same core intelligence, from chat assistants to coding tools and creative apps.",
+                "The key idea is that foundation models are not just demos—they are infrastructure. When a model becomes reliable enough, it stops being a toy and starts behaving like a new kind of operating system for language, reasoning, and interaction.",
+                "This platform mindset is what makes OpenAI important for the broader ecosystem. It lowers the barrier for small teams to ship powerful AI features without training their own models, and it accelerates how quickly new ideas can reach real users."
+            ]
+        },
+
+        nvidia: {
+            tag: "Hardware",
+            title: "Why NVIDIA Became the Engine of the AI Boom",
+            meta: "NVIDIA • GPUs • 5 min read",
+            img: "assets/images/nvidia-gpu.jpg",
+            paragraphs: [
+                "NVIDIA did not start as an AI company. It built graphics cards for games, visual effects, and 3D rendering. But the same parallel hardware that made games smooth turned out to be perfect for training neural networks.",
+                "As deep learning took off, researchers discovered that GPUs could train models orders of magnitude faster than traditional CPUs. NVIDIA leaned into this shift, optimizing its hardware and software stack specifically for AI workloads.",
+                "Today, NVIDIA’s ecosystem includes CUDA, libraries, and specialized chips that make it the default choice for training and deploying large models. Cloud providers, labs, and startups all rely on its hardware to keep experiments moving.",
+                "The result is that NVIDIA quietly became a core part of the AI infrastructure layer. When people talk about the cost of training a model, they are often talking about how many GPU hours they can afford—and that usually means NVIDIA."
+            ]
+        },
+
+        deepmind: {
+            tag: "Research",
+            title: "DeepMind and the Race for General Intelligence",
+            meta: "Google DeepMind • Research • 4 min read",
+            img: "assets/images/deepmind-lab.jpg",
+            paragraphs: [
+                "DeepMind is known for high-profile milestones like AlphaGo and AlphaFold, but its real focus is broader: building general-purpose learning systems that can adapt across many tasks.",
+                "Instead of training a separate model for every problem, DeepMind explores agents that can learn strategies, reason about new situations, and transfer knowledge from one domain to another.",
+                "This approach is closer to how humans learn. We do not retrain from scratch every time we see a new game or puzzle—we reuse patterns and intuitions. DeepMind’s work tries to capture that flexibility in algorithms.",
+                "While true general intelligence is still far away, the research coming out of DeepMind shapes how the field thinks about long-term AI capabilities, safety, and the balance between raw scale and smarter architectures."
+            ]
+        },
+
+        anthropic: {
+            tag: "Safety",
+            title: "Anthropic and the Idea of Constitutional AI",
+            meta: "Anthropic • Safety & alignment • 3 min read",
+            img: "assets/images/anthropic-team.jpg",
+            paragraphs: [
+                "Anthropic was founded with a strong focus on AI safety and reliability. Instead of only scaling models, the team spends a lot of effort on how those models behave and how they can be guided.",
+                "Constitutional AI is one of their key ideas. Rather than relying purely on human feedback, the model is trained to follow a written set of principles—a kind of mini-constitution that defines what is acceptable and what is not.",
+                "This approach makes the training process more transparent. You can inspect the rules, adjust them, and reason about why the model behaves in a certain way, instead of treating its behavior as a black box.",
+                "As AI systems become more capable, these kinds of safety techniques will matter more. Anthropic’s work is an early attempt to make powerful models both useful and predictable at the same time."
+            ]
+        },
+
+        startups: {
+            tag: "Startups",
+            title: "What Makes an AI Startup Actually Useful?",
+            meta: "AI Startups • Product thinking • 4 min read",
+            img: "assets/images/ai-startup.jpg",
+            paragraphs: [
+                "Many AI startups launch with a flashy demo, but the ones that last usually start from a simple question: what painful workflow can we remove for the user?",
+                "Instead of adding a chatbot to everything, strong teams map the real steps people take to complete a task. They look for the slow, repetitive, or confusing parts and design AI features that quietly handle those pieces.",
+                "Useful AI products often feel boring on the surface. They send the right summary at the right time, fill in the right field automatically, or prevent a mistake before it happens. The magic is in the reduction of friction, not in the spectacle.",
+                "When an AI startup aligns its technology with a real workflow, it becomes hard to replace. Users stop thinking about the model and start trusting the tool, because it consistently saves them time and mental energy."
+            ]
+        }
+    };
+
+    // MODAL ELEMENTS
+    const backdrop = document.getElementById("articleModalBackdrop");
+    const modal = document.getElementById("articleModal");
+    const modalTag = document.getElementById("modalTag");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalMeta = document.getElementById("modalMeta");
+    const modalBody = document.getElementById("modalBody");
+    const modalCloseBtn = document.getElementById("modalCloseBtn");
+
+    // OPEN MODAL
+    function openArticleModal(key) {
+        const data = articleData[key];
+        if (!data) return;
+
+        modalTag.textContent = data.tag;
+        modalTitle.textContent = data.title;
+        modalMeta.textContent = data.meta;
+
+        modalBody.innerHTML = "";
+        const img = document.createElement("img");
+        img.src = data.img;
+        img.alt = data.title;
+        modalBody.appendChild(img);
+
+        data.paragraphs.forEach((p) => {
+            const el = document.createElement("p");
+            el.textContent = p;
+            modalBody.appendChild(el);
+        });
+
+        backdrop.style.display = "flex";
+        requestAnimationFrame(() => {
+            modal.classList.add("open");
+        });
+    }
+
+    // CLOSE MODAL
+    function closeArticleModal() {
+        modal.classList.remove("open");
+        setTimeout(() => {
+            backdrop.style.display = "none";
+        }, 200);
+    }
+
+    // CLICK ARTICLE CARD → OPEN MODAL
+    document.querySelectorAll(".article-card").forEach((card) => {
+        card.addEventListener("click", () => {
+            const key = card.getAttribute("data-article");
+            openArticleModal(key);
+        });
+    });
+
+    // CLOSE BUTTON
+    modalCloseBtn.addEventListener("click", closeArticleModal);
+
+    // CLICK OUTSIDE MODAL
+    backdrop.addEventListener("click", (e) => {
+        if (e.target === backdrop) closeArticleModal();
+    });
+
+    // ESC KEY CLOSE
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeArticleModal();
+    });
+</script>
+
+</body>
+</html>
